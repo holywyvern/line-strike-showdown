@@ -1,0 +1,43 @@
+:root {
+  font-family: 'Courier New', Courier, monospace;
+  --app-background-color: black;
+  --window-font-color: white;
+  --window-text-shadow-color: black;
+  --window-border-color: rgb(107, 225, 255);
+  --window-background-color: rgba(38, 47, 51, 0.85);
+  --window-shadow-color: rgba(0, 0, 0, 0.1);
+  --window-header-color-gradient1: rgba(37, 121, 148, 0);
+  --window-header-color-gradient2: rgba(37, 121, 148, 0.8);
+  --window-header-color-gradient3: rgba(37, 121, 148, 1);
+  --window-header-base-color1: #14669d;
+  --window-header-base-color2: #22c4b7;
+  --window-body-background-color: rgba(70, 82, 119, 0.72);
+  --window-body-shadow-color: rgba(0, 0, 0, 0.1);
+  --window-body-font-color: white;
+  --button-font-color: white;
+  --button-shadow-color: black;
+  --button-background-color: rgba(38, 47, 51, 0.85);
+  --button-active-background-color: rgb(8, 71, 99);
+  --button-active-border-color: #22c4b7;
+  --box-light-border-color: lightgray;
+  --component-border-color: darkgray;
+  --tab-active-background-color: rgb(8, 71, 99);
+  --input-font-color: black;
+  --input-background-color: white;
+  --input-border-color: rgb(8, 71, 99);
+  --input-border-active-color: #22c4b7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+span,
+ul,
+ol,
+li {
+  color: inherit;
+}

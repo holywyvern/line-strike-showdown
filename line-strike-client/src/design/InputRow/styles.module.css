@@ -1,0 +1,7 @@
+.row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: baseline;
+  justify-content: center;
+}

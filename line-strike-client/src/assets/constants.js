@@ -1,0 +1,30 @@
+export const PLAYMATS = [
+  "blue_basic.webp",
+  "red_basic.webp",
+  "fire.webp",
+  "ice.webp",
+  "wind.webp",
+  "lightning.webp",
+  "light.webp",
+  "dark.webp",
+  "lillipans.webp",
+  "rappy.webp",
+  "aina_manon.png",
+  "dolls.webp",
+]
+
+export const SLEEVES = [
+  "blue_basic.webp",
+  "red_basic.webp",
+  "rappy.webp",
+  "lillipan.webp",
+  "card.webp",
+  "tcg.webp",
+  "aina.webp",
+  "manon.webp",
+  "nadereh.webp",
+  "meri.webp",
+  "kanui.webp",
+  "glen.webp",
+  "hariette.webp",
+]

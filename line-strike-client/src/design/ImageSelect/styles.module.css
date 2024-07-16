@@ -1,0 +1,28 @@
+.select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.preview {
+  display: grid;
+  place-items: center;
+  max-width: 48px;
+  min-height: 48px;
+  padding: 4px;
+  border: 1px solid var(--component-border-color);
+}
+
+.preview img {
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 12px;
+}
+
+.option {
+  max-width: 100px;
+}

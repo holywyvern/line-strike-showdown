@@ -1,0 +1,23 @@
+import PropTypes from "prop-types";
+
+const stringToColour = (str) => {
+  let hash = 0;
+  str.split("").forEach((char) => {
+    hash = char.charCodeAt(0) + ((hash << 5) - hash);
+  });
+  let colour = "";
+  for (let i = 0; i < 3; i++) {
+    const value = (hash >> (i * 8)) & 0xff;
+    colour += value.toString(16).padStart(2, "0");
+  }
+  return `hsl(${Math.floor((parseInt(colour, 16) % 36000) / 100)}, 100%, 75%)`;
+};
+
+export function Name({ id, name }) {
+  return <span style={{ color: stringToColour(`${name}@${id}`) }}>{name}</span>;
+}
+
+Name.propTypes = {
+  id: PropTypes.any,
+  name: PropTypes.string,
+};

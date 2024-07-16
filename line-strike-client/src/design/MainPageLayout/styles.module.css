@@ -1,0 +1,16 @@
+.page {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  inset: 0;
+  color: var(--window-font-color);
+  text-shadow: var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px;
+  -webkit-font-smoothing: antialiased;
+  background: var(--window-header-base-color1);
+}

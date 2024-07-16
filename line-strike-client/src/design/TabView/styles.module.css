@@ -1,0 +1,11 @@
+.view {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+  overflow: auto;
+  background: var(--app-background-color);
+}
+
+.hidden {
+  display: none;
+}

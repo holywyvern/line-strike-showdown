@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+}
+
+.wrapper input {
+  flex: 1;
+}
+
+.value {
+  min-width: 32px;
+  text-align: center;
+  padding: 4px;
+  border: 1px solid var(--component-border-color);
+}

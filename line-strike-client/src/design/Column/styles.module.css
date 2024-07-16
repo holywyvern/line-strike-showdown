@@ -1,0 +1,13 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.flex {
+  flex: 1;
+}
+
+.stretch {
+  align-self: stretch;
+}

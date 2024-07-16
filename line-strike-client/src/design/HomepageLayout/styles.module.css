@@ -1,0 +1,9 @@
+.page {
+  flex: 1;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 12px;
+  overflow: hidden;
+  padding: 8px;
+}
