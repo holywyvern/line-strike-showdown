@@ -1,0 +1,60 @@
+.wrapper {
+  width: 64px;
+  height: 64px;
+  font-size: 16px;
+  position: relative;
+}
+
+.diamond1 {
+  width: 0;
+  height: 0;
+  border: 32px solid transparent;
+  border-bottom-color: rgb(255, 255, 255);
+  position: absolute;
+  top: -32px;
+}
+
+.diamond1::after {
+  content: "";
+  position: absolute;
+  left: -32px;
+  top: 32px;
+  width: 0;
+  height: 0;
+  border: 32px solid transparent;
+  border-top-color: rgb(255, 255, 255);
+}
+
+.diamond2 {
+  width: 0;
+  height: 0;
+  border: 30px solid transparent;
+  border-bottom-color: rgb(9, 61, 21);
+  position: absolute;
+  top: -28px;
+  right: 2px;
+}
+
+.diamond2::after {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 28px;
+  width: 0;
+  height: 0;
+  border: 30px solid transparent;
+  border-top-color: rgb(9, 61, 21);
+}
+
+.amount {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  left: -2px;
+  top: -2px;
+}
+
+.max .amount {
+  color: rgb(223, 223, 161);
+}

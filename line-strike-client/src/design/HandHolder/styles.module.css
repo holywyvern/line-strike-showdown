@@ -1,0 +1,4 @@
+.holder {
+  display: flex;
+  min-height: 128px;
+}

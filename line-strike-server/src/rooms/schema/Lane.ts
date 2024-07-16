@@ -13,11 +13,15 @@ export class Lane extends Schema {
   @type("uint8")
   hp: number;
 
+  @type("uint8")
+  maxHp: number;
+
   constructor(player: Player) {
     super();
     this.player = player;
     const format = this.format;
     this.hp = format.laneHP;
+    this.maxHp = format.laneHP;
     this.cards = new ArraySchema();
     while (this.cards.length < format.laneLength) {
       this.cards.push(new PlayedCard(player, this, this.cards.length));

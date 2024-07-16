@@ -9,6 +9,8 @@ import { Row } from "../../design/Row";
 import { BattleLanes } from "./BattleLanes";
 import { FaceDownHand } from "./FaceDownHand";
 import { PlayerDeck } from "./PlayerDeck";
+import { PlayerPP } from "./PlayerPP";
+import { PlayerHand } from "./PlayerHand";
 
 const PHASES = {
   intro: IntroPhase,
@@ -30,19 +32,25 @@ export function PlayArea() {
     <>
       <BattleLanes playerA={opponent} playerB={me} />
       <Column stretch spaceItems>
-        <Row>
-          <FaceDownHand player={state.playerA} />
-          <PlayerDeck player={state.playerA} />
-        </Row>
+        <Column>
+          <FaceDownHand player={opponent} />
+          <Row spaceItems>
+            <PlayerPP player={opponent} />
+            <PlayerDeck player={opponent} />
+          </Row>
+        </Column>
         <Row spaceItems>
-          <span>{state.playerA?.name}</span>
+          <span>{opponent?.name}</span>
           <strong>Vs</strong>
-          <span>{state.playerB?.name}</span>
+          <span>{me?.name}</span>
         </Row>
-        <Row>
-          <FaceDownHand player={state.playerB} />
-          <PlayerDeck player={state.playerB} />
-        </Row>
+        <Column>
+          <Row spaceItems>
+            <PlayerPP player={me} />
+            <PlayerDeck player={me} />
+          </Row>
+          <PlayerHand player={me} />
+        </Column>
       </Column>
       <Component />
     </>

@@ -5,6 +5,7 @@ import { BattleLanes } from "./BattleLanes";
 import { useRoomState } from "./context";
 import { FaceDownHand } from "./FaceDownHand";
 import { PlayerDeck } from "./PlayerDeck";
+import { PlayerPP } from "./PlayerPP";
 
 export function BattleView() {
   const state = useRoomState();
@@ -12,19 +13,25 @@ export function BattleView() {
     <>
       <BattleLanes playerA={state.playerA} playerB={state.playerB} />
       <Column stretch spaceItems>
-        <Row>
+        <Column>
           <FaceDownHand player={state.playerA} />
-          <PlayerDeck player={state.playerA} />
-        </Row>
+          <Row spaceItems>
+            <PlayerPP player={state.playerA} />
+            <PlayerDeck player={state.playerA} />
+          </Row>
+        </Column>
         <Row spaceItems>
           <span>{state.playerA?.name}</span>
           <strong>Vs</strong>
           <span>{state.playerB?.name}</span>
         </Row>
-        <Row>
+        <Column>
+          <Row spaceItems>
+            <PlayerPP player={state.playerB} />
+            <PlayerDeck player={state.playerB} />
+          </Row>
           <FaceDownHand player={state.playerB} />
-          <PlayerDeck player={state.playerB} />
-        </Row>
+        </Column>
       </Column>
     </>
   );

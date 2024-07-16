@@ -26,6 +26,12 @@
   --input-background-color: white;
   --input-border-color: rgb(8, 71, 99);
   --input-border-active-color: #22c4b7;
+  --fire-element-color: firebrick;
+  --ice-element-color: dodgerblue;
+  --wind-element-color: mediumaquamarine;
+  --lightning-element-color: orange;
+  --light-element-color: beige;
+  --darkness-element-color: purple;
 }
 
 h1,

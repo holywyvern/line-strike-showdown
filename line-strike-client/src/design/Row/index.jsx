@@ -3,11 +3,12 @@ import cx from "classnames";
 
 import styles from "./styles.module.css";
 
-export function Row({ children, center, spaceItems, end }) {
+export function Row({ children, center, centerChildren, spaceItems, end }) {
   const className = cx(styles.row, {
     [styles.center]: center,
     [styles.end]: end,
     [styles["space-items"]]: spaceItems,
+    [styles["center-children"]]: centerChildren,
   });
   return <div className={className}>{children}</div>;
 }
@@ -17,4 +18,5 @@ Row.propTypes = {
   center: PropTypes.bool,
   end: PropTypes.bool,
   spaceItems: PropTypes.bool,
+  centerChildren: PropTypes.bool,
 };

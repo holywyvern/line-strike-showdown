@@ -8,11 +8,11 @@ export function DeckCard({ id, onRemove }) {
   const db = useCards();
   return (
     <>
-      <Card card={db.cards[id]} scale="25%">
+      <Card card={db.cards[id]} scale={0.25} hiddenInfo>
         <button
           style={{
             appearance: "none",
-            fontSize: "60px",
+            fontSize: "42px",
             border: 0,
             background: "transparent",
             color: "inherit",

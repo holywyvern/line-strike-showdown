@@ -17,6 +17,7 @@ export class PlayerBoard extends Schema {
     while (this.lanes.length < format.lanes) {
       this.lanes.push(new Lane(player));
     }
+    console.log("format lanes", ...this.lanes);
   }
 
   get format() {
