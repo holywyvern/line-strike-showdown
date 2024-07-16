@@ -5,6 +5,7 @@ import { StartTurn } from "../turn/StartTurn";
 export class CheckAllSelected extends Command<LineStrikeRoom> {
   async execute() {
     if (this.state.players.every((i) => i.selected)) {
+      console.log("All players picked their decks, starting combat.");
       return [new StartTurn()];
     }
   }

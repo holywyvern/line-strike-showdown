@@ -12,6 +12,7 @@ export class DrawFirstHand extends Command<LineStrikeRoom, FirstHandProps> {
     while (player.handSize < format.initialHandSize) {
       player.handIDs.push(player.deckIDs.pop());
       player.handSize++;
+      player.deckSize--;
     }
   }
 }

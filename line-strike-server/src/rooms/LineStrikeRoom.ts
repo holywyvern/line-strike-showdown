@@ -5,7 +5,9 @@ import { LineStrikeState } from "./schema/LineStrikeState";
 import { SafeDispatcher } from "./SafeDispatcher";
 
 import { SECRET_LINE_STRIKE_KEY } from "../utils/keys";
+
 import { Format } from "./schema/Format";
+
 import { SendMessage } from "./commands/chat/SendMessage";
 import { SelectDeck } from "./commands/intro/SelectDeck";
 import { Auth } from "./commands/user/Auth";
@@ -81,8 +83,14 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
     });
   };
 
-  onDeckSelect = async (client: Client, deck: number[]) => {
-    await this.dispatcher.safeDispatch(new SelectDeck(), { client, deck });
+  onDeckSelect = async (client: Client, options: any) => {
+    await this.dispatcher.safeDispatch(new SelectDeck(), {
+      client,
+      cards: options?.cards,
+      sleeve: options?.sleeve,
+      playmat: options?.playmat,
+      playmatOpacity: options?.playmatOpacity
+    });
   };
 
   async onAuth(client: Client, options: any) {

@@ -11,6 +11,8 @@ export class DrawFirstHandBack extends Command<LineStrikeRoom, FirstHandProps> {
   async execute({ player }: FirstHandProps) {
     while (player.handIDs.length > 0) {
       player.deckIDs.push(player.handIDs.pop());
+      player.deckSize++;
+      player.handSize--;
     }
     return [
       new ShuffleDeck().setPayload({ player }),

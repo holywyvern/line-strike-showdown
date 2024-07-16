@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 export function LaneAttack({ playerA, playerB }) {
   if (!playerA || !playerB) return null;
 
-  return <div>Lane Attack</div>;
+  return null;
 }
 
 LaneAttack.propTypes = {

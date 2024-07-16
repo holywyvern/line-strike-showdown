@@ -20,7 +20,7 @@ export function IntroPhase() {
             key={index}
             disabled={selected >= 0}
             onClick={() => {
-              room.send("deck", deck.cards);
+              room.send("deck", deck);
               setSelected(index);
             }}
           >

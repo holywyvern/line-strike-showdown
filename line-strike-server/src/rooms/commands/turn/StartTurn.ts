@@ -3,6 +3,7 @@ import { Command } from "@colyseus/command";
 import { LineStrikeRoom } from "../../LineStrikeRoom";
 
 import { ResetTurn } from "./ResetTurn";
+import { IncrementTurnCounter } from "./IncrementTurnCounter";
 
 export class StartTurn extends Command<LineStrikeRoom> {
   async execute() {
@@ -13,6 +14,7 @@ export class StartTurn extends Command<LineStrikeRoom> {
     return [
       new ResetTurn().setPayload({ player: this.state.playerA }),
       new ResetTurn().setPayload({ player: this.state.playerB }),
+      new IncrementTurnCounter(),
     ];
   }
 }

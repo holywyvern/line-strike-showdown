@@ -1,12 +1,20 @@
 import PropTypes from "prop-types";
 
-export function PlayerArea({ mirror, player }) {
-  if (!player) return null;
+import { usePlayerBoard } from "./context";
+import { Playmat } from "../../design/Playmat";
 
+export function PlayerArea({ mirror, player }) {
+  const { lanes } = usePlayerBoard(player, mirror);
+
+  if (!player) return null;
   return (
-    <div>
+    <Playmat
+      mirror={mirror}
+      name={player.playmat}
+      opacity={player.playmatOpacity}
+    >
       {player.name} {mirror ? "UP" : "DOWN"}
-    </div>
+    </Playmat>
   );
 }
 

@@ -1,0 +1,23 @@
+.container {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: calc(var(--h) * 16 / 18 * 1px);
+  max-height: calc(1px * var(--h) / 2);
+}
+
+.mirror .img {
+  transform: scaleY(-1);
+}
+
+.img {
+  transform-origin: center;
+  opacity: calc(var(--opacity, 100) / 100);
+  width: 100%;
+}
+
+.lanes {
+  position: absolute;
+  inset: 0;
+}

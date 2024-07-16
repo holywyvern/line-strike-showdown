@@ -14,7 +14,7 @@ const OnlySeenByOwner = (player: Player, client: Client) =>
 export class Player extends Schema {
   @type("string")
   sessionID: string;
-  
+
   client: Client;
 
   deckIDs: ArraySchema<number>;
@@ -47,6 +47,18 @@ export class Player extends Schema {
   @type("uint16")
   handSize: number;
 
+  @type("string")
+  sleeve: string;
+
+  @type("string")
+  playmat: string;
+
+  @type("number")
+  playmatOpacity: number;
+
+  @type("uint8")
+  deckSize: number;
+
   state: LineStrikeState;
 
   mirrored: boolean;
@@ -73,6 +85,10 @@ export class Player extends Schema {
     this.mirrored = mirrored;
     this.selected = false;
     this.handSize = 0;
+    this.sleeve = "blue_basic.webp";
+    this.playmat = "blue_basic.webp";
+    this.playmatOpacity = 0.1;
+    this.deckSize = 0;
   }
 
   get hand() {

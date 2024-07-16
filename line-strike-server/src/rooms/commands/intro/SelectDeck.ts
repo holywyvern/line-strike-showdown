@@ -8,32 +8,48 @@ import { StartMulliganPhase } from "./StartMulliganPhase";
 
 export interface SelectDeckPayload {
   client: Client;
-  deck: number[];
+  sleeve: string;
+  playmat: string;
+  playmatOpacity: number;
+  cards: number[];
 }
 
 export class SelectDeck extends Command<LineStrikeRoom, SelectDeckPayload> {
-  async execute({ client, deck }: SelectDeckPayload) {
+  async execute({
+    client,
+    cards,
+    sleeve,
+    playmat,
+    playmatOpacity,
+  }: SelectDeckPayload) {
     const player = this.state.findPlayer(client);
     if (!player) return;
     if (player.selected) return;
-    if (!Array.isArray(deck)) return;
+    if (!Array.isArray(cards)) return;
     if (this.state.phase !== "intro") return;
+    if (typeof sleeve !== "string") return;
+    if (typeof playmat !== "string") return;
+    if (typeof playmatOpacity !== "number") return;
 
-    const cards = deck.map((i) => Card.COLLECTION[i]).filter(Boolean);
+    const cardObjects = cards.map((i) => Card.COLLECTION[i]).filter(Boolean);
     const format = this.state.format;
-    if (deck.length < format.minCards) return false;
-    if (deck.length > format.maxCards) return false;
+    if (cards.length < format.minCards) return false;
+    if (cards.length > format.maxCards) return false;
 
-    const allLegal = cards.every((card) =>
-      format.isLegal(card, cards.filter((i) => i.id === card.id).length)
+    const allLegal = cardObjects.every((card) =>
+      format.isLegal(card, cardObjects.filter((i) => i.id === card.id).length)
     );
     if (!allLegal) return false;
 
-    const elements = new Set(cards.map((i) => i.element));
+    const elements = new Set(cardObjects.map((i) => i.element));
     if (elements.size > format.maxElements) return false;
 
-    player.deckIDs.push(...deck);
+    player.deckIDs.push(...cards);
+    player.deckSize = cards.length;
     player.selected = true;
+    player.sleeve = sleeve;
+    player.playmat = playmat;
+    player.playmatOpacity = playmatOpacity;
 
     console.log(`Player ${player.name} selected a deck.`);
     this.state.chat.push(

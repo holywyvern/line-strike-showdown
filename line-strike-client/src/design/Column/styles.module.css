@@ -4,6 +4,10 @@
   gap: 8px;
 }
 
+.space-items {
+  justify-content: space-between;
+}
+
 .flex {
   flex: 1;
 }

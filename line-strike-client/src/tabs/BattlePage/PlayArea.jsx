@@ -2,9 +2,13 @@ import { useRoom, useRoomState } from "./context";
 
 import { IntroPhase } from "./phases/IntroPhase";
 import { FirstDrawPhase } from "./phases/FirstDrawPhase";
+
 import { Column } from "../../design/Column";
-import { PlayerArea } from "./PlayerArea";
-import { LaneAttack } from "./LaneAttack";
+import { Row } from "../../design/Row";
+
+import { BattleLanes } from "./BattleLanes";
+import { FaceDownHand } from "./FaceDownHand";
+import { PlayerDeck } from "./PlayerDeck";
 
 const PHASES = {
   intro: IntroPhase,
@@ -24,10 +28,21 @@ export function PlayArea() {
   const Component = PHASES[state?.phase] || NoView;
   return (
     <>
-      <Column flex>
-        <PlayerArea mirror player={opponent} />
-        <LaneAttack playerA={opponent} playerB={me} />
-        <PlayerArea player={me} />
+      <BattleLanes playerA={opponent} playerB={me} />
+      <Column stretch spaceItems>
+        <Row>
+          <FaceDownHand player={state.playerA} />
+          <PlayerDeck player={state.playerA} />
+        </Row>
+        <Row spaceItems>
+          <span>{state.playerA?.name}</span>
+          <strong>Vs</strong>
+          <span>{state.playerB?.name}</span>
+        </Row>
+        <Row>
+          <FaceDownHand player={state.playerB} />
+          <PlayerDeck player={state.playerB} />
+        </Row>
       </Column>
       <Component />
     </>

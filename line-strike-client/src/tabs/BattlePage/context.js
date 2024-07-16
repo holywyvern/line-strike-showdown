@@ -16,3 +16,15 @@ export function useRoomState() {
   }, [room?.state]);
   return state;
 }
+
+export function usePlayerBoard(player, mirror) {
+  const [board, setBoard] = useState({ ...player.board });
+  useEffect(() => {
+    if (!player?.board) return;
+
+    player.board.onChange(() => setBoard({ ...player.board }));
+  }, [player?.board]);
+  return {
+    board,
+  };
+}
