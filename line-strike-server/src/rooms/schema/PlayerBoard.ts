@@ -15,7 +15,7 @@ export class PlayerBoard extends Schema {
     const format = this.format;
     this.lanes = new ArraySchema();
     while (this.lanes.length < format.lanes) {
-      this.lanes.push(new Lane(player));
+      this.lanes.push(new Lane(player, this.lanes.length));
     }
     console.log("format lanes", ...this.lanes);
   }
@@ -43,5 +43,9 @@ export class PlayerBoard extends Schema {
       }
     }
     return result;
+  }
+
+  get reversedCards() {
+    return this.cards.reverse();
   }
 }

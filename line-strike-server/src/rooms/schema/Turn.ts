@@ -4,7 +4,7 @@ import { Card } from "./Card";
 
 export class TurnAction extends Schema {
   player: Player;
-  
+
   @type("uint64")
   cardID: number;
 
@@ -12,18 +12,18 @@ export class TurnAction extends Schema {
   position: number;
 
   @type("uint8")
-  ppUsed: number;
+  usedPP: number;
 
-  constructor(player: Player, id: number, position: number, ppUsed: number) {
+  constructor(player: Player, id: number, position: number, usedPP: number) {
     super();
     this.player = player;
     this.cardID = id;
     this.position = position;
-    this.ppUsed = ppUsed;
+    this.usedPP = usedPP;
   }
 
   get card() {
-    return Card.COLLECTION[this.cardID]
+    return Card.COLLECTION[this.cardID];
   }
 
   get priority() {
@@ -37,11 +37,11 @@ export class Turn extends Schema {
   @type("boolean")
   locked: boolean;
 
-  @type("number")
-  usedPP: number;
-
   @type(["uint64"])
-  usedHand: number[];
+  usedHand: ArraySchema<number>;
+
+  @type("uint64")
+  usedPP: number;
 
   @type([TurnAction])
   actions: ArraySchema<TurnAction>;
@@ -49,6 +49,10 @@ export class Turn extends Schema {
   constructor(player: Player) {
     super();
     this.player = player;
+    this.locked = false;
+    this.usedPP = 0;
+    this.usedHand = new ArraySchema();
+    this.actions = new ArraySchema();
   }
 
   get remainingPP() {

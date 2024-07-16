@@ -28,6 +28,9 @@ export class PlayedCard extends Schema {
   @type("boolean")
   incapacitated: boolean;
 
+  @type("uint64")
+  unitedFront: number;
+
   position: number;
 
   constructor(player: Player, lane: Lane, position: number) {
@@ -41,6 +44,11 @@ export class PlayedCard extends Schema {
     this.stunned = false;
     this.incapacitated = false;
     this.position = position;
+    this.unitedFront = 0;
+  }
+
+  get cardIndex() {
+    return this.position + this.lane.position * this.lane.cards.length;
   }
 
   get card() {

@@ -16,9 +16,13 @@ export class Lane extends Schema {
   @type("uint8")
   maxHp: number;
 
-  constructor(player: Player) {
+  @type("uint8")
+  position: number;
+
+  constructor(player: Player, position: number) {
     super();
     this.player = player;
+    this.position = position;
     const format = this.format;
     this.hp = format.laneHP;
     this.maxHp = format.laneHP;
@@ -37,7 +41,7 @@ export class Lane extends Schema {
   }
 
   get allies() {
-    return this.cards.length;
+    return this.cards.filter((i) => i.cardID > 0).length;
   }
 
   get attack() {

@@ -9,5 +9,13 @@ export interface ResetTurnProps {
 }
 
 export class ResetTurn extends Command<LineStrikeRoom, ResetTurnProps> {
-  async execute({ player }: ResetTurnProps) {}
+  async execute({ player }: ResetTurnProps) {
+    player.turn.actions.clear();
+    player.turn.locked = false;
+    player.turn.usedHand.clear();
+    player.turn.usedPP = 0;
+    for (const card of player.board.cards) {
+      card.stunned = false;
+    }
+  }
 }

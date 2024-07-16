@@ -15,6 +15,7 @@ import { Join } from "./commands/user/Join";
 import { Leave } from "./commands/user/Leave";
 import { SwapCards } from "./commands/mulligan/SwapCards";
 import { KeepCards } from "./commands/mulligan/KeepCards";
+import { PlayCard } from "./commands/turn/PlayCard";
 
 export class LineStrikeRoom extends Room<LineStrikeState> {
   dispatcher = new SafeDispatcher(this);
@@ -59,9 +60,8 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
     this.dispatcher.safeDispatch(new SwapCards(), { client });
   };
 
-  onCardPlayed = (client: Client) => {
-    const player = this.state.findPlayer(client);
-    if (!player) return;
+  onCardPlayed = (client: Client, options: any) => {
+    this.dispatcher.safeDispatch(new PlayCard(), { ...options, client });
   };
 
   onUndo = (client: Client) => {
@@ -89,7 +89,7 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
       cards: options?.cards,
       sleeve: options?.sleeve,
       playmat: options?.playmat,
-      playmatOpacity: options?.playmatOpacity
+      playmatOpacity: options?.playmatOpacity,
     });
   };
 
