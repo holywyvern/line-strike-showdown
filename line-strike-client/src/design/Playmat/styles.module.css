@@ -19,6 +19,9 @@
 }
 
 .lanes {
+  display: flex;
   position: absolute;
   inset: 0;
+  --correction: calc(var(--h) - 16);
+  margin: calc(var(--correction) / 32 * 1px) calc(var(--correction) / 6 * 1px);
 }

@@ -9,7 +9,15 @@ export function FaceDownHand({ player }) {
   return (
     <Row>
       {new Array(handSize).fill(null).map((_, i) => (
-        <img key={i} src={`sleeves/${sleeve}`} style={{ maxWidth: "32px" }} />
+        <img
+          key={i}
+          src={`sleeves/${sleeve || "blue_basic.webp"}`}
+          style={{
+            maxWidth: "48px",
+            position: "relative",
+            left: `-${i * 24}px`,
+          }}
+        />
       ))}
     </Row>
   );

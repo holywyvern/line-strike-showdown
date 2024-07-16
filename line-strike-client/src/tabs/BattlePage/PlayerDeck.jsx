@@ -16,7 +16,7 @@ export function PlayerDeck({ player }) {
     <Row centerChildren>
       <div
         style={{
-          width: "32px",
+          width: "48px",
           height: `${44 + 3 * (format.maxCards - 1)}px`,
           position: "relative",
         }}
@@ -26,18 +26,17 @@ export function PlayerDeck({ player }) {
           return (
             <img
               key={index}
-              src={`sleeves/${sleeve}`}
+              src={`sleeves/${sleeve || "blue_basic.webp"}`}
               style={{
-                maxWidth: "32px",
+                maxWidth: "48px",
                 position: "absolute",
-                top: `${index * 3}px`,
+                top: `${Math.floor(index * 2 / 4)}px`,
                 zIndex: j,
               }}
             />
           );
         })}
       </div>
-      {deckSize}
     </Row>
   );
 }

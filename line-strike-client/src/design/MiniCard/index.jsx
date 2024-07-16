@@ -4,7 +4,14 @@ import cx from "classnames";
 import styles from "./styles.module.css";
 import { useState } from "react";
 
-export function MiniCard({ card, onHover, buffed, debuffed, index = 0 }) {
+export function MiniCard({
+  card,
+  onHover,
+  buffed,
+  debuffed,
+  index = 0,
+  size = 0,
+}) {
   const [hovered, setHovered] = useState(false);
   const className = cx(styles.card, styles[card.element], {
     [styles.hovered]: hovered,
@@ -13,7 +20,7 @@ export function MiniCard({ card, onHover, buffed, debuffed, index = 0 }) {
   return (
     <div
       className={className}
-      style={{ "--index": index }}
+      style={{ "--index": index, "--size": size }}
       onMouseEnter={() => {
         setHovered(true);
         onHover?.();
@@ -46,4 +53,5 @@ MiniCard.propTypes = {
   onHover: PropTypes.func,
   card: PropTypes.any,
   index: PropTypes.number,
+  size: PropTypes.number,
 };

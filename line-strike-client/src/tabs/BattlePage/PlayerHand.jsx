@@ -6,6 +6,7 @@ import { MiniCard } from "../../design/MiniCard";
 import { HandHolder } from "../../design/HandHolder";
 
 export function PlayerHand({ player }) {
+  // eslint-disable-next-line no-unused-vars
   const [_, setCard] = useHoveredCard();
   const { cards } = useCards();
   const { handIDs } = usePlayerState(player);
@@ -17,6 +18,7 @@ export function PlayerHand({ player }) {
           key={index}
           card={card}
           index={index}
+          size={hand.length}
           onHover={() => setCard(card)}
         />
       ))}

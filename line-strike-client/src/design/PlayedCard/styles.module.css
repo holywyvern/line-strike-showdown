@@ -1,0 +1,11 @@
+.card {
+  background: blue;
+  border: 1px solid lightblue;
+  width: 64px;
+  height: 64px;
+}
+
+.mirror {
+  background: red;
+  border: 1px solid lightcoral;
+}
