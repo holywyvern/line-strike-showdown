@@ -9,7 +9,7 @@ export function useElementSize() {
 
     const onResize = () => {
       setWidth(ref.clientWidth);
-      setHeight(ref.parentNode.clientHeight - 16);
+      setHeight(ref.parentNode.clientHeight - 24);
     };
 
     window.addEventListener("resize", onResize);

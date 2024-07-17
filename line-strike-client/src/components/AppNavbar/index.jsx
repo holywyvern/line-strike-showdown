@@ -1,6 +1,7 @@
 import { Button } from "../../design/Button";
 import { Navbar } from "../../design/Navbar";
 import { useProfile } from "../../hooks/useProfile";
+import { AppTabs } from "../AppTabs";
 
 export function AppNavbar() {
   const profile = useProfile();
@@ -8,9 +9,9 @@ export function AppNavbar() {
     <Navbar>
       <Navbar.Title>
         <img src="icon.webp" alt="Line Strike Logo" />
-        &nbsp;
-        LINE STRIKE SHOWDOWN
+        &nbsp; LINE STRIKE SHOWDOWN
       </Navbar.Title>
+      <AppTabs />
       <Navbar.User>
         <span>
           Hey there, <strong>{profile.name}</strong>!

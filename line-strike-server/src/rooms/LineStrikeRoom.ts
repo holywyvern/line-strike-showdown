@@ -17,6 +17,7 @@ import { SwapCards } from "./commands/mulligan/SwapCards";
 import { KeepCards } from "./commands/mulligan/KeepCards";
 import { PlayCard } from "./commands/turn/PlayCard";
 import { UndoAction } from "./commands/turn/UndoAction";
+import { LockTurn } from "./commands/turn/LockTurn";
 
 export class LineStrikeRoom extends Room<LineStrikeState> {
   dispatcher = new SafeDispatcher(this);
@@ -70,10 +71,7 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
   };
 
   onTurnDone = (client: Client) => {
-    const player = this.state.findPlayer(client);
-    if (!player) return;
-
-    // this.dispatcher.safeDispatch(new EndTurn(), { player });
+    this.dispatcher.safeDispatch(new LockTurn(), { client });
   };
 
   onChat = async (client: Client, message: string) => {

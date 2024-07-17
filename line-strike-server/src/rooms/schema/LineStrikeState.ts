@@ -36,7 +36,11 @@ export class LineStrikeState extends Schema {
   @type([ChatLog])
   chat: ArraySchema<ChatLog>;
 
+  @type("uint64")
+  turnTimeLeft: number;
+
   delayed: Delayed | null;
+
 
   constructor(formatID: number) {
     super();
@@ -48,6 +52,7 @@ export class LineStrikeState extends Schema {
     this.playerA = null;
     this.playerB = null;
     this.phase = "intro";
+    this.turnTimeLeft = 0;
     this.chat = new ArraySchema();
   }
 

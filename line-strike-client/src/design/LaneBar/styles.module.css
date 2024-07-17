@@ -11,7 +11,7 @@
 .hp {
   --correction: calc(var(--h) - 64 * 5);
   --w: calc(var(--correction) * 16 / 18 / var(--max) * 1px);
-  width:  var(--w);
+  width: var(--w);
   height: var(--w);
   background: gray;
   border: 1px solid white;
@@ -19,6 +19,10 @@
 
 .hp.fill {
   background: red;
+}
+
+.blue .hp.fill {
+  background: blue;
 }
 
 .hp:first-child {

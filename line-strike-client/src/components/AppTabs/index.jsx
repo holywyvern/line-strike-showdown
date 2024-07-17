@@ -4,7 +4,7 @@ import { useTabs } from "../../hooks/useTabs";
 export function AppTabs() {
   const { tabs, active, changeTab, removeTab } = useTabs();
   return (
-    <Tabs>
+    <Tabs main>
       {tabs.map(({ id, name, closable }, index) => (
         <Tabs.Tab
           key={id}

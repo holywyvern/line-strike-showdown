@@ -1,9 +1,9 @@
 .lane {
-  color: blue;
+  color: lightcoral;
 }
 
 .main {
-  color: red;
+  color: lightblue;
 }
 
 .dead {
@@ -11,5 +11,10 @@
 }
 
 .strong {
+  color: tomato;
   font-weight: bolder;
+}
+
+.main.strong {
+  color: dodgerblue;
 }

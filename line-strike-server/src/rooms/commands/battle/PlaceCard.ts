@@ -25,6 +25,7 @@ export class PlaceCard extends Command<LineStrikeRoom, PlaceCardProps> {
     spot.baseGuard = spot.card.includes("baseGuard");
     spot.stunned = false;
     spot.incapacitated = false;
+    spot.justPlaced = true;
     return [
       new CalculateUnitedFront().setPayload({ board }),
       new CalculateLaneAttack().setPayload({ board }),

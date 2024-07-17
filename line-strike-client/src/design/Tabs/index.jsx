@@ -26,9 +26,10 @@ Tab.propTypes = {
   active: PropTypes.bool,
 };
 
-export function Tabs({ children }) {
+export function Tabs({ children, main }) {
+  const className = cx(styles.container, { [styles.main]: main });
   return (
-    <nav className={styles.container}>
+    <nav className={className}>
       <ul>{children}</ul>
     </nav>
   );
@@ -36,6 +37,7 @@ export function Tabs({ children }) {
 
 Tabs.propTypes = {
   children: PropTypes.node,
+  main: PropTypes.bool,
 };
 
 Tabs.Tab = Tab;

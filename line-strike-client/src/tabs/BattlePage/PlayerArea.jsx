@@ -28,7 +28,7 @@ export function PlayerArea({ mirror, player, useTurn }) {
         />
         {useTurn && <UndoButton turn={player.turn} />}
       </Playmat>
-      {!mirror && <LaneLife lanes={lanes} />}
+      {!mirror && <LaneLife lanes={lanes} blue />}
     </Column>
   );
 }

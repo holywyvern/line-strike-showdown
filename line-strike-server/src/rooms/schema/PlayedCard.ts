@@ -37,6 +37,9 @@ export class PlayedCard extends Schema {
   @type("uint32")
   attack: number;
 
+  @type("boolean")
+  justPlaced: boolean;
+
   constructor(player: Player, lane: Lane, position: number) {
     super();
     this.player = player;
@@ -48,6 +51,7 @@ export class PlayedCard extends Schema {
     this.baseGuard = false;
     this.stunned = false;
     this.incapacitated = false;
+    this.justPlaced = false;
     this.position = position;
     this.unitedFront = 0;
   }

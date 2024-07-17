@@ -38,7 +38,6 @@ export function usePlayerBoard(player, mirror, useTurn) {
     usedBoard.onChange(() => {
       setBoard((board) => {
         const result = { ...board, ...usedBoard };
-        console.log("board", result);
         return result;
       });
     });
@@ -49,6 +48,7 @@ export function usePlayerBoard(player, mirror, useTurn) {
   }
   return {
     board,
+    locked: board?.locked || false,
     lanes,
   };
 }
@@ -62,7 +62,6 @@ export function usePlayerState(player) {
     player.onChange(() =>
       setState((state) => {
         const result = { ...state, ...player };
-        console.log(result);
         return result;
       })
     );

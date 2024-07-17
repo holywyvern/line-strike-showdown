@@ -11,6 +11,7 @@ import { FaceDownHand } from "./FaceDownHand";
 import { PlayerDeck } from "./PlayerDeck";
 import { PlayerPP } from "./PlayerPP";
 import { PlayerHand } from "./PlayerHand";
+import { TurnButton } from "../TurnButton";
 
 const PHASES = {
   intro: IntroPhase,
@@ -39,11 +40,11 @@ export function PlayArea() {
             <PlayerDeck player={opponent} />
           </Row>
         </Column>
-        <Row spaceItems>
+        <Column centerChildren>
           <span>{opponent?.name}</span>
-          <strong>Vs</strong>
+          <TurnButton player={me} />
           <span>{me?.name}</span>
-        </Row>
+        </Column>
         <Column>
           <Row spaceItems>
             <PlayerPP player={me} useTurn />

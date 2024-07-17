@@ -39,3 +39,7 @@
 .tab.active {
   background: var(--tab-active-background-color);
 }
+
+.main {
+  border-bottom: 0;
+}

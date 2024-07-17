@@ -1,5 +1,6 @@
 import { Column } from "../../design/Column";
 import { Row } from "../../design/Row";
+import { TurnButton } from "../TurnButton";
 import { BattleLanes } from "./BattleLanes";
 
 import { useRoomState } from "./context";
@@ -20,11 +21,11 @@ export function BattleView() {
             <PlayerDeck player={state.playerA} />
           </Row>
         </Column>
-        <Row spaceItems>
+        <Column centerChildren>
           <span>{state.playerA?.name}</span>
-          <strong>Vs</strong>
+          <TurnButton disabled />
           <span>{state.playerB?.name}</span>
-        </Row>
+        </Column>
         <Column>
           <Row spaceItems>
             <PlayerPP player={state.playerB} />

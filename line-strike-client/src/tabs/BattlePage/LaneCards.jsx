@@ -26,6 +26,8 @@ function calculatePpCost(card, status, skills, cards) {
 }
 
 function canPlaceCard(card, status, skills, cards, player, pp) {
+  if (status.justPlaced) return false;
+
   const ppLeft = player.pp - player.turn.usedPP;
   if (pp > ppLeft) return false;
 
@@ -93,10 +95,13 @@ AvailableCards.propTypes = {
 };
 
 function PlayedCardState({ lanePosition, size, player, card, play, mirror }) {
+  const { phase } = useRoomState();
   const status = usePlayerState(play);
   const [visible, setVisible] = useState(false);
+  const { locked } = usePlayerState(player?.turn);
   const position = status.position * size + lanePosition;
   const onClose = () => setVisible(false);
+  const canPlay = phase === "planning" && !locked;
   return (
     <>
       <PlayedCard
@@ -104,7 +109,7 @@ function PlayedCardState({ lanePosition, size, player, card, play, mirror }) {
         card={card}
         mirror={mirror}
         onClick={
-          player
+          player && canPlay
             ? () => {
                 setVisible(true);
               }
