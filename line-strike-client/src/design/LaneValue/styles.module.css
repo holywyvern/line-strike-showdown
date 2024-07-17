@@ -1,0 +1,15 @@
+.lane {
+  color: blue;
+}
+
+.main {
+  color: red;
+}
+
+.dead {
+  color: gray;
+}
+
+.strong {
+  font-weight: bolder;
+}

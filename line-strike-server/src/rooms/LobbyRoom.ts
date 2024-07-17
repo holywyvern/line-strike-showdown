@@ -71,7 +71,6 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     if (options?.__secret_lobby_key__ !== SECRET_LOBBY_KEY) {
       throw new Error("Failed to create lobby, missing key!");
     }
-    console.log(`Creating lobby #${this.roomId}...`);
     this.autoDispose = false;
     this.setState(new LobbyRoomState());
     this.onMessage("free", this.onFreePlay);
@@ -90,10 +89,6 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     const format = Format.COLLECTION[options.formatID];
     if (!challenged || !challenger || !format) return;
     if (challenged.challenges.has(client.sessionId)) return;
-
-    console.log(
-      `${challenger.name} (#${client.sessionId}) challenges ${challenged.name} (#${client.sessionId}) on a battle of ${format.name}`
-    );
 
     challenged.challenges.set(
       client.sessionId,
@@ -151,9 +146,6 @@ export class LobbyRoom extends Room<LobbyRoomState> {
       formatID,
       spectator: false,
     });
-    console.log(
-      `${challenged.name} (#${challenged.sessionID}) accepted ${challenger.name} ${challenger.sessionID} and went to room #${room.roomId}`
-    );
   };
 
   onChallengeRejected = async (client: Client, clientId: any) => {
@@ -161,9 +153,6 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     if (!challenged?.challenges.has(clientId)) return;
 
     const challenger = challenged.challenges.get(clientId);
-    console.log(
-      `${challenged.name} (#${challenged.sessionID}) rejected ${challenger.name} (#${clientId}})...`
-    );
     challenged.challenges.delete(clientId);
   };
 
@@ -191,9 +180,7 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     });
   };
 
-  async onDispose() {
-    console.log(`Removing lobby #${this.roomId}...`);
-  }
+  async onDispose() {}
 
   async onAuth(client: Client, options: any) {
     if (typeof options?.name !== "string")
@@ -205,9 +192,6 @@ export class LobbyRoom extends Room<LobbyRoomState> {
   }
 
   async onJoin(client: Client, options: JoinOptions) {
-    console.log(
-      `${options.name} joined the lobby with id #${client.sessionId}!`
-    );
     this.state.players.set(
       client.sessionId,
       new LobbyPlayer(client.sessionId, options.name)
@@ -215,17 +199,10 @@ export class LobbyRoom extends Room<LobbyRoomState> {
   }
 
   async onLeave(client: Client, consented: boolean) {
-    if (consented) {
-      console.log(`client #${client.sessionId} left!`);
-    } else {
+    if (!consented) {
       try {
-        console.log(
-          `client #${client.sessionId} disconected... Reconnection attempted.`
-        );
         await this.allowReconnection(client, 2);
-        console.log(`client #${client.sessionId} connected back...`);
       } catch (error) {
-        console.log(`client #${client.sessionId} did not come back...`);
       }
     }
     this.state.players.delete(client.sessionId);

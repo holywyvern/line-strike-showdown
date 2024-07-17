@@ -6,7 +6,11 @@ import { MiniCard } from "../MiniCard";
 import { useHoveredCard } from "../../tabs/BattlePage/context";
 
 function processCard(status, card) {
-  return card;
+  if (!card) return null;
+
+  const { ppCost, artwork, element, id, skill } = card;
+
+  return { ...status, ppCost, artwork, element, id, skill };
 }
 
 export function PlayedCard({ status, card, mirror, onClick }) {

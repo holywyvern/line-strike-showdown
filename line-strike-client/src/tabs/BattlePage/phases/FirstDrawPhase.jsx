@@ -5,22 +5,23 @@ import { Card } from "../../../design/Card";
 import { Button } from "../../../design/Button";
 import { Row } from "../../../design/Row";
 
-import { useRoom } from "../context";
+import { useRoom, useRoomState } from "../context";
 
 import { useCards } from "../../../hooks/useCards";
 import { Column } from "../../../design/Column";
 
 export function FirstDrawPhase() {
   const db = useCards();
-  const [hand, setHand] = useState([]);
   const room = useRoom();
+  const [hand, setHand] = useState([]);
+  const { playerA, playerB, formatID } = useRoomState();
   const [selected, setSelected] = useState(false);
   const id = room?.sessionId;
   const me =
-    room.state.playerA.sessionID === id
-      ? room.state.playerA
-      : room.state.playerB;
-  const format = db.formats[room.state.formatID];
+  playerA?.sessionID === id
+      ? playerA
+      : playerB;
+  const format = db.formats[formatID];
   useEffect(() => {
     if (!me) return;
 

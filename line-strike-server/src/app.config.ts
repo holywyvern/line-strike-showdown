@@ -51,7 +51,7 @@ export default config({
         return {
           ...card,
           skill: {
-            id: card.skill.name,
+            id: card.skill.id,
             name: card.skill.name,
             description: card.skill.description,
           },

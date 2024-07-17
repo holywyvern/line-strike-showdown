@@ -9,6 +9,8 @@ import { Card } from "../../schema/Card";
 import { PlayedCard } from "../../schema/PlayedCard";
 import { SaveAction } from "./SaveAction";
 import { PlaceCard } from "../battle/PlaceCard";
+import { CalculateUnitedFront } from "./CalculateUnitedFront";
+import { CalculateLaneAttack } from "./CalculateLaneAttack";
 
 export interface PlayCardProps {
   client: Client;
@@ -21,9 +23,10 @@ export class PlayCard extends Command<LineStrikeRoom, PlayCardProps> {
     const player = this.state.findPlayer(client);
     if (!player) throw new Error("Player not found");
     const turn = player.turn;
-    const cards = player.board.cards;
+    const cards = player.turn.cards;
     const newCard = player.hand[handIndex];
     const spot = cards[position];
+    if (turn.locked) throw new Error("Can't play card on locked turn");
     if (player.turn.usedHand.includes(handIndex))
       throw new Error("Card already played this turn.");
     if (!newCard) throw new Error("Card not found");
@@ -45,11 +48,12 @@ export class PlayCard extends Command<LineStrikeRoom, PlayCardProps> {
           handIndex,
           position,
         }),
+        new CalculateUnitedFront().setPayload({ board: turn }),
+        new CalculateLaneAttack().setPayload({ board: turn }),
       ];
     }
 
     const pp = this.calculatePlacementPpCost(spot, newCard);
-    console.log(pp, turn.remainingPP);
     if (turn.remainingPP < pp) throw new Error("Unable to place card");
 
     return [

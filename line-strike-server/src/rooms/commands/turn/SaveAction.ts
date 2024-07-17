@@ -18,6 +18,6 @@ export class SaveAction extends Command<LineStrikeRoom, SaveProps> {
   async execute({ player, turn, spot, handIndex, pp }: SaveProps) {
     turn.usedHand.push(handIndex);
     turn.usedPP += pp;
-    turn.actions.push(new TurnAction(player, handIndex, spot.cardIndex, pp));
+    turn.actions.push(new TurnAction(player, handIndex, spot.cardIndex, pp, spot.clone()));
   }
 }

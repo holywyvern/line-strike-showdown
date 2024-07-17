@@ -16,6 +16,7 @@ import { Leave } from "./commands/user/Leave";
 import { SwapCards } from "./commands/mulligan/SwapCards";
 import { KeepCards } from "./commands/mulligan/KeepCards";
 import { PlayCard } from "./commands/turn/PlayCard";
+import { UndoAction } from "./commands/turn/UndoAction";
 
 export class LineStrikeRoom extends Room<LineStrikeState> {
   dispatcher = new SafeDispatcher(this);
@@ -65,8 +66,7 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
   };
 
   onUndo = (client: Client) => {
-    const player = this.state.findPlayer(client);
-    if (!player) return;
+    this.dispatcher.safeDispatch(new UndoAction(), { client });
   };
 
   onTurnDone = (client: Client) => {

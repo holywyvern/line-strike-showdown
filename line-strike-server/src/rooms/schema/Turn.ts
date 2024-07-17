@@ -2,6 +2,7 @@ import { Schema, ArraySchema, type } from "@colyseus/schema";
 import { Player } from "./Player";
 import { Card } from "./Card";
 import { PlayerBoard } from "./PlayerBoard";
+import { PlayedCard } from "./PlayedCard";
 
 export class TurnAction extends Schema {
   player: Player;
@@ -15,12 +16,15 @@ export class TurnAction extends Schema {
   @type("uint8")
   usedPP: number;
 
-  constructor(player: Player, id: number, position: number, usedPP: number) {
+  oldSpot: PlayedCard;
+
+  constructor(player: Player, id: number, position: number, usedPP: number, oldSpot: PlayedCard) {
     super();
     this.player = player;
     this.cardID = id;
     this.position = position;
     this.usedPP = usedPP;
+    this.oldSpot = oldSpot;
   }
 
   get card() {

@@ -5,6 +5,7 @@ import { Playmat } from "../../design/Playmat";
 import { Column } from "../../design/Column";
 import { LaneLife } from "./LaneLife";
 import { LaneCards } from "./LaneCards";
+import { UndoButton } from "./UndoButton";
 
 export function PlayerArea({ mirror, player, useTurn }) {
   const { lanes } = usePlayerBoard(player, mirror, useTurn);
@@ -25,6 +26,7 @@ export function PlayerArea({ mirror, player, useTurn }) {
           allowClick={useTurn}
           player={useTurn && player}
         />
+        {useTurn && <UndoButton turn={player.turn} />}
       </Playmat>
       {!mirror && <LaneLife lanes={lanes} />}
     </Column>

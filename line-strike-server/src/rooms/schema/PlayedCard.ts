@@ -13,11 +13,11 @@ export class PlayedCard extends Schema {
   @type("uint64")
   cardID: number;
 
-  @type("int32")
-  buffs: number;
-
   @type("boolean")
   baseBuster: boolean;
+
+  @type("uint32")
+  buffs: number;
 
   @type("boolean")
   baseGuard: boolean;
@@ -34,11 +34,15 @@ export class PlayedCard extends Schema {
   @type("uint8")
   position: number;
 
+  @type("uint32")
+  attack: number;
+
   constructor(player: Player, lane: Lane, position: number) {
     super();
     this.player = player;
     this.lane = lane;
     this.cardID = 0;
+    this.attack = 0;
     this.buffs = 0;
     this.baseBuster = false;
     this.baseGuard = false;
@@ -49,22 +53,16 @@ export class PlayedCard extends Schema {
   }
 
   get cardIndex() {
-    return this.position + this.lane.position * this.lane.cards.length;
+    return this.position * this.lane.cards.length + this.lane.position;
+  }
+
+  get canAct() {
+    if (this.stunned || this.incapacitated) return false;
+    return this.attack > 0;
   }
 
   get card() {
     return Card.COLLECTION[this.cardID];
-  }
-
-  get attack() {
-    if (this.cardID == 0) return 0;
-    if (this.stunned || this.incapacitated) return 0;
-
-    let result = this.card.attack + this.buffs;
-    if (this.card.includes("unitedFront")) {
-      result += this.player.board.allies - 1;
-    }
-    return result;
   }
 
   includes(tag: SkillTag) {

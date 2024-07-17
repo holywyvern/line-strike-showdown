@@ -2,6 +2,7 @@ import { Schema, ArraySchema, type } from "@colyseus/schema";
 
 import type { Player } from "./Player";
 import { Lane } from "./Lane";
+import { PlayedCard } from "./PlayedCard";
 
 export class PlayerBoard extends Schema {
   player: Player;
@@ -43,7 +44,7 @@ export class PlayerBoard extends Schema {
         result[x + y * size] = lane.cards[y];
       }
     }
-    return result;
+    return result as PlayedCard[];
   }
 
   get reversedCards() {

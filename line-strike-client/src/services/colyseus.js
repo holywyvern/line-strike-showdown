@@ -38,9 +38,21 @@ export default {
   async joinLobby(name) {
     lobby = await client.joinOrCreate("lobby");
 
-    return client.join("showdown_lobby", { name });
+    const room = await client.join("showdown_lobby", { name });
+    return new Promise((resolve) => {
+      room.onStateChange.once(() => resolve(room));
+    });
   },
-  joinBattle(seat) {
-    return client.consumeSeatReservation(seat);
+  async joinBattle(seat) {
+    const room = await client.consumeSeatReservation(seat);
+    return new Promise((resolve) => {
+      const onAllJoin = (state) => {
+        if (state.playerA && state.playerB) {
+          room.onStateChange.remove(onAllJoin);
+          resolve(room);
+        }
+      };
+      room.onStateChange(onAllJoin);
+    });
   },
 };

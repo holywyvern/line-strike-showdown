@@ -7,8 +7,6 @@ export async function main(options: Options) {
         // your join options here...
     });
 
-    console.log("joined successfully!");
-
     room.onMessage("message-type", (payload) => {
         // logic
     });

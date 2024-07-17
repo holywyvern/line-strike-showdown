@@ -4,6 +4,8 @@ import { LineStrikeRoom } from "../../LineStrikeRoom";
 
 import { Player } from "../../schema/Player";
 import { PlayerBoard } from "../../schema/PlayerBoard";
+import { CalculateUnitedFront } from "../turn/CalculateUnitedFront";
+import { CalculateLaneAttack } from "../turn/CalculateLaneAttack";
 
 export interface PlaceCardProps {
   player: Player;
@@ -23,8 +25,9 @@ export class PlaceCard extends Command<LineStrikeRoom, PlaceCardProps> {
     spot.baseGuard = spot.card.includes("baseGuard");
     spot.stunned = false;
     spot.incapacitated = false;
-    for (const card of board.cards) {
-      card.unitedFront = board.allies - 1;
-    }
+    return [
+      new CalculateUnitedFront().setPayload({ board }),
+      new CalculateLaneAttack().setPayload({ board }),
+    ];
   }
 }

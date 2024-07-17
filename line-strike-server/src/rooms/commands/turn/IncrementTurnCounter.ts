@@ -8,7 +8,6 @@ export class IncrementTurnCounter extends Command<LineStrikeRoom> {
   async execute() {
     this.state.turn++;
     this.state.phase = "planning";
-    console.log(`Starting turn ${this.state.turn}`);
     this.state.chat.push(new ChatLog({ type: "turn", turn: this.state.turn }));
     this.state.delayed = this.clock.setTimeout(
       this.endPlanning,

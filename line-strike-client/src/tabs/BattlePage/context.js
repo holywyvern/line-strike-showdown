@@ -13,13 +13,18 @@ export function useRoom() {
 }
 
 export function useRoomState() {
+  /** @type {import("colyseus.js").Room} */
   const room = useRoom();
-  const [state, setState] = useState({ ...room.state });
+  const [state, setState] = useState({ ...(room?.state || {}) });
   useEffect(() => {
-    room.state.onChange(() => {
-      setState({ ...room.state });
-    });
-  }, [room?.state]);
+    const onUpdate = (newState) => {
+      setState((state) => ({ ...state, ...newState }));
+    };
+    room.onStateChange(onUpdate);
+    return () => {
+      room.onStateChange.remove(onUpdate);
+    };
+  }, [room]);
   return state;
 }
 
@@ -29,7 +34,14 @@ export function usePlayerBoard(player, mirror, useTurn) {
   useEffect(() => {
     if (!usedBoard) return;
 
-    usedBoard.onChange(() => setBoard((board) => ({ ...board, ...usedBoard })));
+    setBoard((board) => ({ ...board, ...usedBoard }));
+    usedBoard.onChange(() => {
+      setBoard((board) => {
+        const result = { ...board, ...usedBoard };
+        console.log("board", result);
+        return result;
+      });
+    });
   }, [usedBoard]);
   let lanes = [...(board.lanes || [])];
   if (mirror) {
@@ -47,7 +59,13 @@ export function usePlayerState(player) {
     if (!player) return;
 
     setState((state) => ({ ...state, ...player }));
-    player.onChange(() => setState((state) => ({ ...state, ...player })));
+    player.onChange(() =>
+      setState((state) => {
+        const result = { ...state, ...player };
+        console.log(result);
+        return result;
+      })
+    );
   }, [player]);
   return state;
 }

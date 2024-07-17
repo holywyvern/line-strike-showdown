@@ -51,7 +51,6 @@ export class SelectDeck extends Command<LineStrikeRoom, SelectDeckPayload> {
     player.playmat = playmat;
     player.playmatOpacity = playmatOpacity;
 
-    console.log(`Player ${player.name} selected a deck.`);
     this.state.chat.push(
       new ChatLog({
         playerID: player.sessionID,
@@ -60,7 +59,6 @@ export class SelectDeck extends Command<LineStrikeRoom, SelectDeckPayload> {
       })
     );
     if (this.state.players.every((i) => i.selected)) {
-      console.log(`All players selected their decks!`);
       return [new StartMulliganPhase()];
     }
   }

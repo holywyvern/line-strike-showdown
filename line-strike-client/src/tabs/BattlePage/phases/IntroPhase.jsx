@@ -5,13 +5,14 @@ import { Modal } from "../../../design/Modal";
 
 import { useProfile } from "../../../hooks/useProfile";
 
-import { useRoom } from "../context";
+import { useRoom, useRoomState } from "../context";
 
 export function IntroPhase() {
   const profile = useProfile();
   const room = useRoom();
+  const { formatID } = useRoomState();
   const [selected, setSelected] = useState(-1);
-  const decks = profile.allDecks[String(room.state.formatID)];
+  const decks = profile.allDecks[formatID];
   return (
     <Modal open title="Select a Deck">
       <Column>

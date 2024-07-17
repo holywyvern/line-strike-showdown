@@ -9,7 +9,7 @@ export function BattleLanes({ playerA, playerB, useTurn }) {
   return (
     <LaneHolder>
       <PlayerArea mirror player={playerA} />
-      <LaneAttack playerA={playerA} playerB={playerB} />
+      <LaneAttack playerA={playerA} playerB={playerB} useTurn={useTurn} />
       <PlayerArea player={playerB} useTurn={useTurn} />
     </LaneHolder>
   );

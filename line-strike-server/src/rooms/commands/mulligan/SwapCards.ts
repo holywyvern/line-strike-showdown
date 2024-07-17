@@ -19,8 +19,6 @@ export class SwapCards extends Command<LineStrikeRoom, SwapCardsPayload> {
     if (player.selected) return;
     if (this.state.phase !== "firstDraw") return;
 
-    console.log(`${player.name} swaps their hand`);
-
     player.selected = true;
     this.state.chat.push(
       new ChatLog({

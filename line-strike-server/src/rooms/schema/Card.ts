@@ -102,7 +102,7 @@ export class Card extends Schema {
   }
 
   canOverride(card: Card) {
-    if (card.ppCost > this.ppCost) return false;
+    if (this.ppCost <= card.ppCost) return false;
     if (card.element === this.element) return true;
 
     return card.includes("wildcard");

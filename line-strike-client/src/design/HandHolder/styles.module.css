@@ -1,4 +1,6 @@
 .holder {
   display: flex;
   min-height: 128px;
+  min-width: 250px;
+  max-width: 250px;
 }

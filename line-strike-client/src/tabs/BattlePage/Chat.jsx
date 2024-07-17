@@ -112,7 +112,6 @@ export function Chat() {
     setText("");
   };
   useState(() => {
-    console.log(room);
     if (!room?.state?.chat) return;
 
     room?.state?.chat?.onAdd((item) => {

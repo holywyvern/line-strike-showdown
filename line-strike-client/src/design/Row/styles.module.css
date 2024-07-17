@@ -22,3 +22,7 @@
 .space-items {
   justify-content: space-between;
 }
+
+.stretch-self {
+  justify-self: stretch;
+}

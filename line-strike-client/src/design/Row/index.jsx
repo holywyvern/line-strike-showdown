@@ -8,6 +8,7 @@ export function Row({
   center,
   centerChildren,
   spaceItems,
+  stetchSelf,
   end,
   flex,
 }) {
@@ -17,6 +18,7 @@ export function Row({
     [styles["space-items"]]: spaceItems,
     [styles["center-children"]]: centerChildren,
     [styles.flex]: flex,
+    [styles["stretch-self"]]: stetchSelf,
   });
   return <div className={className}>{children}</div>;
 }
@@ -27,5 +29,6 @@ Row.propTypes = {
   end: PropTypes.bool,
   spaceItems: PropTypes.bool,
   centerChildren: PropTypes.bool,
-  flex: PropTypes.bool, 
+  flex: PropTypes.bool,
+  stetchSelf: PropTypes.bool,
 };

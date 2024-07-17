@@ -1,7 +1,12 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-import { usePlayerState, useRoom, useRoomState } from "./context";
+import {
+  useHoveredCard,
+  usePlayerState,
+  useRoom,
+  useRoomState,
+} from "./context";
 
 import { useCards } from "../../hooks/useCards";
 
@@ -12,18 +17,32 @@ import { Row } from "../../design/Row";
 import { Button } from "../../design/Button";
 
 function calculatePpCost(card, status, skills, cards) {
-  return card.ppCost;
+  let cost = card.ppCost;
+  const oldCard = cards[status.cardID];
+  if (oldCard) {
+    cost -= oldCard.ppCost;
+  }
+  return Math.max(0, cost);
 }
 
 function canPlaceCard(card, status, skills, cards, player, pp) {
   const ppLeft = player.pp - player.turn.usedPP;
   if (pp > ppLeft) return false;
 
-  return true;
+  const oldCard = cards[status.cardID];
+  if (!oldCard) return true;
+  if (oldCard.ppCost >= card.ppCost) return false;
+  if (card.element === oldCard.element) return true;
+
+  const skill = skills[oldCard.skill.id];
+  if (!skill) return false;
+
+  return skill.tags.includes("wildcard");
 }
 
 function AvailableCards({ position, player, status, onClose }) {
   const room = useRoom();
+  const [_, setHoveredCard] = useHoveredCard();
   const { cards, skills } = useCards();
   const { handIDs } = usePlayerState(player);
   const { usedHand } = usePlayerState(player?.turn);
@@ -38,20 +57,27 @@ function AvailableCards({ position, player, status, onClose }) {
         const canPlace = canPlaceCard(card, status, skills, cards, player, pp);
         return (
           <List.Item key={index}>
-            <Button
-              flex
-              disabled={!canPlace}
-              onClick={() => {
-                room.send("play", { handIndex: index, position });
-                onClose?.();
-              }}
+            <div
+              style={{ display: "flex", flexDirection: "column", flex: 1 }}
+              onMouseEnter={() => setHoveredCard(card)}
             >
-              <Row flex>
-                <img src={`elements/${card.element}.webp`} />
-                <span style={{ flex: 1, textAlign: "start" }}>{card.name}</span>
-                <span>- PP: {pp}</span>
-              </Row>
-            </Button>
+              <Button
+                flex
+                disabled={!canPlace}
+                onClick={() => {
+                  room.send("play", { handIndex: index, position });
+                  onClose?.();
+                }}
+              >
+                <Row flex>
+                  <img src={`elements/${card.element}.webp`} />
+                  <span style={{ flex: 1, textAlign: "start" }}>
+                    {card.name}
+                  </span>
+                  <span>- PP: {pp}</span>
+                </Row>
+              </Button>
+            </div>
           </List.Item>
         );
       })}

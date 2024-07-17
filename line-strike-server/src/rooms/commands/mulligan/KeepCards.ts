@@ -17,8 +17,6 @@ export class KeepCards extends Command<LineStrikeRoom, KeepCardsPayload> {
     if (player.selected) return;
     if (this.state.phase !== "firstDraw") return;
 
-    console.log(`${player.name} keeps their hand`);
-
     player.selected = true;
     this.state.chat.push(
       new ChatLog({

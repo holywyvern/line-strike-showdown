@@ -19,16 +19,18 @@ export function PlayerHand({ player }) {
     hand.onChange(() => setUsedHand([...hand]));
   }, [player.turn?.usedHand]);
   const hand = (handIDs || []).map((i) => cards[i]).filter(Boolean);
+  let virtualIndex = 0;
   return (
     <HandHolder>
       {hand.map((card, index) => {
         if (usedHand.includes(index)) return null;
 
+        virtualIndex++;
         return (
           <MiniCard
             key={index}
             card={card}
-            index={index}
+            index={virtualIndex}
             size={hand.length}
             onHover={() => setCard(card)}
           />
