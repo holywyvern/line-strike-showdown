@@ -16,12 +16,21 @@ export class TurnAction extends Schema {
   @type("uint8")
   usedPP: number;
 
+  cardID: number;
+
   oldSpot: PlayedCard;
 
-  constructor(player: Player, handIndex: number, position: number, usedPP: number, oldSpot: PlayedCard) {
+  constructor(
+    player: Player,
+    handIndex: number,
+    position: number,
+    usedPP: number,
+    oldSpot: PlayedCard
+  ) {
     super();
     this.player = player;
     this.handIndex = handIndex;
+    this.cardID = player.handIDs[handIndex] || 0;
     this.position = position;
     this.usedPP = usedPP;
     this.oldSpot = oldSpot;

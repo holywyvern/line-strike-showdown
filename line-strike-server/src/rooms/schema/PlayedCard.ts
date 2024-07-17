@@ -73,9 +73,9 @@ export class PlayedCard extends Schema {
   }
 
   includes(tag: SkillTag) {
-    if (this.cardID === 0) return false;
+    if (!this.cardID) return false;
     if (this.stunned || this.incapacitated) return false;
 
-    return this.card.includes(tag);
+    return this.card?.includes(tag) || false;
   }
 }

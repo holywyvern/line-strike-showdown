@@ -50,6 +50,7 @@ export function usePlayerBoard(player, mirror, useTurn) {
     board,
     locked: board?.locked || false,
     lanes,
+    usedPP: board?.usedPP || 0,
   };
 }
 

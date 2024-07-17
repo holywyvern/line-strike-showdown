@@ -31,8 +31,8 @@ export class PlaceCard extends Command<LineStrikeRoom, PlaceCardProps> {
 
     spot.cardID = player.handIDs[handIndex];
     spot.buffs = 0;
-    spot.baseBuster = spot.card.includes("baseBuster");
-    spot.baseGuard = spot.card.includes("baseGuard");
+    spot.baseBuster = spot.includes("baseBuster");
+    spot.baseGuard = spot.includes("baseGuard");
     spot.stunned = false;
     spot.incapacitated = false;
     spot.justPlaced = true;

@@ -8,6 +8,7 @@ import { PlaceCard } from "./PlaceCard";
 import { GainPP } from "../user/GainPP";
 import { ResetTurn } from "../turn/ResetTurn";
 import { ActivateSupports } from "./ActivateSupports";
+import { RemoveHand } from "./RemoveHand";
 
 export interface PerformActionsProps {
   player: Player;
@@ -35,7 +36,6 @@ export class PerformActions extends Command<
     for (const action of player.lastTurn) {
       const { handIndex, position, usedPP } = action;
       placements.push(
-        new ResetTurn().setPayload({ player }),
         new GainPP().setPayload({ player, pp: -usedPP }),
         new PlaceCard().setPayload({
           player,
@@ -48,6 +48,10 @@ export class PerformActions extends Command<
       );
       placeIndex++;
     }
-    return placements;
+    return [
+      ...placements,
+      new RemoveHand().setPayload({ player }),
+      new ResetTurn().setPayload({ player }),
+    ];
   }
 }

@@ -11,9 +11,7 @@ export function PlayerPP({ player, useTurn }) {
   const format = formats[formatID];
   if (!format) return;
 
-  let pp = turn?.usedPP ? state.pp - turn.usedPP : state.pp;
-
-  return <PpDiamond format={format} pp={pp} />;
+  return <PpDiamond format={format} pp={state.pp - turn.usedPP} />;
 }
 
 PlayerPP.propTypes = {
