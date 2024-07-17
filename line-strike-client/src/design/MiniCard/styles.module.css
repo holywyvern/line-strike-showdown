@@ -9,9 +9,18 @@
   transition: top 0.1s ease-in;
 }
 
+.fixed {
+  left: -8px;
+  top: -2px;
+}
+
 .hovered {
   z-index: 10;
   top: 0;
+}
+
+.fixed.hovered {
+  top: -2px;
 }
 
 .img {

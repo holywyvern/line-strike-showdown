@@ -1,6 +1,7 @@
 import { Schema, ArraySchema, type } from "@colyseus/schema";
 import { Player } from "./Player";
 import { Card } from "./Card";
+import { PlayerBoard } from "./PlayerBoard";
 
 export class TurnAction extends Schema {
   player: Player;
@@ -31,9 +32,7 @@ export class TurnAction extends Schema {
   }
 }
 
-export class Turn extends Schema {
-  player: Player;
-
+export class Turn extends PlayerBoard {
   @type("boolean")
   locked: boolean;
 
@@ -47,7 +46,7 @@ export class Turn extends Schema {
   actions: ArraySchema<TurnAction>;
 
   constructor(player: Player) {
-    super();
+    super(player);
     this.player = player;
     this.locked = false;
     this.usedPP = 0;

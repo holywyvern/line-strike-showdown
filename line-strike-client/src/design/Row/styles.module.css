@@ -3,6 +3,10 @@
   gap: 8px;
 }
 
+.flex {
+  flex: 1;
+}
+
 .center {
   align-self: center;
 }

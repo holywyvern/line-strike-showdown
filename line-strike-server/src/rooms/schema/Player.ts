@@ -33,14 +33,6 @@ export class Player extends Schema {
   @type("uint8")
   pp: number;
 
-  @filter(OnlySeenByOwner)
-  @type(["uint64"])
-  handIDs: ArraySchema<number>;
-
-  @filter(OnlySeenByOwner)
-  @type(Turn)
-  turn: Turn;
-
   @type("boolean")
   selected: boolean;
 
@@ -58,6 +50,15 @@ export class Player extends Schema {
 
   @type("uint8")
   deckSize: number;
+
+  @filter(OnlySeenByOwner)
+  @type(["uint64"])
+  handIDs: ArraySchema<number>;
+
+  @filter(OnlySeenByOwner)
+  @type(Turn)
+  turn: Turn;
+
 
   state: LineStrikeState;
 

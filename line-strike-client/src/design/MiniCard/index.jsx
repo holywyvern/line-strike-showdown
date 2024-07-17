@@ -11,10 +11,12 @@ export function MiniCard({
   debuffed,
   index = 0,
   size = 0,
+  fixed
 }) {
   const [hovered, setHovered] = useState(false);
   const className = cx(styles.card, styles[card.element], {
     [styles.hovered]: hovered,
+    [styles.fixed]: fixed
   });
 
   return (
@@ -54,4 +56,5 @@ MiniCard.propTypes = {
   card: PropTypes.any,
   index: PropTypes.number,
   size: PropTypes.number,
+  fixed: PropTypes.number
 };

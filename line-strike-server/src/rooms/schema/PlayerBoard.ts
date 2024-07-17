@@ -17,7 +17,6 @@ export class PlayerBoard extends Schema {
     while (this.lanes.length < format.lanes) {
       this.lanes.push(new Lane(player, this.lanes.length));
     }
-    console.log("format lanes", ...this.lanes);
   }
 
   get format() {
@@ -36,10 +35,12 @@ export class PlayerBoard extends Schema {
   }
 
   get cards() {
-    const result = [];
-    for (const lane of this.lanes) {
-      for (const card of lane.cards) {
-        result.push(card);
+    const result = new Array(this.lanes.length * this.lanes[0].cards.length);
+    for (let x = 0; x < this.lanes.length; ++x) {
+      const lane = this.lanes[x];
+      const size = lane.cards.length;
+      for (let y = 0; y < size; ++y) {
+        result[x + y * size] = lane.cards[y];
       }
     }
     return result;

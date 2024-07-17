@@ -9,15 +9,29 @@ function processCard(status, card) {
   return card;
 }
 
-export function PlayedCard({ status, card, mirror }) {
+export function PlayedCard({ status, card, mirror, onClick }) {
   // eslint-disable-next-line no-unused-vars
   const [_, setHoveredCard] = useHoveredCard();
-  const className = cx(styles.card, { [styles.mirror]: mirror });
+  const className = cx(styles.card, {
+    [styles.mirror]: mirror,
+    [styles.active]: onClick,
+  });
   const processedCard = processCard(status, card);
   return (
-    <div className={className}>
-      {processedCard && <MiniCard card={processedCard} onHover={() => setHoveredCard(card)} />}
-    </div>
+    <button
+      disabled={!onClick}
+      type="button"
+      className={className}
+      onClick={onClick}
+    >
+      {processedCard && (
+        <MiniCard
+          fixed
+          card={processedCard}
+          onHover={() => card && setHoveredCard(card)}
+        />
+      )}
+    </button>
   );
 }
 
@@ -25,4 +39,5 @@ PlayedCard.propTypes = {
   status: PropTypes.any,
   card: PropTypes.any,
   mirror: PropTypes.bool,
+  onClick: PropTypes.func,
 };

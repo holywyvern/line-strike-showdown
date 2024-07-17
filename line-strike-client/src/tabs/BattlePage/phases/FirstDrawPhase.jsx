@@ -29,7 +29,8 @@ export function FirstDrawPhase() {
       setHand([...me.handIDs]);
     });
   }, [me]);
-  const cards = hand.map((i) => db.cards[i]);
+  const cards = hand
+    .map((i) => db.cards[i]);
   return (
     <Modal open title="STARTING HAND">
       <Column>

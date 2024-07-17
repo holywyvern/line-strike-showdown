@@ -6,8 +6,8 @@ import { Column } from "../../design/Column";
 import { LaneLife } from "./LaneLife";
 import { LaneCards } from "./LaneCards";
 
-export function PlayerArea({ mirror, player }) {
-  const { lanes } = usePlayerBoard(player, mirror);
+export function PlayerArea({ mirror, player, useTurn }) {
+  const { lanes } = usePlayerBoard(player, mirror, useTurn);
 
   if (!player) return null;
 
@@ -19,7 +19,12 @@ export function PlayerArea({ mirror, player }) {
         name={player.playmat}
         opacity={player.playmatOpacity}
       >
-        <LaneCards lanes={lanes} mirror={mirror} />
+        <LaneCards
+          lanes={lanes}
+          mirror={mirror}
+          allowClick={useTurn}
+          player={useTurn && player}
+        />
       </Playmat>
       {!mirror && <LaneLife lanes={lanes} />}
     </Column>
@@ -29,4 +34,5 @@ export function PlayerArea({ mirror, player }) {
 PlayerArea.propTypes = {
   mirror: PropTypes.bool,
   player: PropTypes.any,
+  useTurn: PropTypes.bool,
 };

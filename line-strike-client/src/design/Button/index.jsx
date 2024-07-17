@@ -14,10 +14,12 @@ export function Button({
   children,
   link,
   monospace,
+  flex,
 }) {
   const className = cx(styles.button, {
     [styles.link]: link,
     [styles.monospace]: monospace,
+    [styles.flex]: flex,
   });
   return (
     <button
@@ -46,4 +48,5 @@ Button.propTypes = {
   onBlur: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
+  flex: PropTypes.bool,
 };

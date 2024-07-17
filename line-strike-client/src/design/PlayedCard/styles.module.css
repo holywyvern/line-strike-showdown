@@ -1,8 +1,18 @@
 .card {
+  appearance: none;
+  outline: 0;
   background: blue;
   border: 1px solid lightblue;
-  width: 64px;
-  height: 64px;
+  width: 66px;
+  height: 66px;
+}
+
+.card:disabled {
+  opacity: 1;
+}
+
+.card.active {
+  cursor: pointer;
 }
 
 .mirror {

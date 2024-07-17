@@ -7,8 +7,7 @@ export function PpDiamond({ pp, format }) {
   const className = cx(styles.wrapper, { [styles.max]: pp >= format.maxPP });
   return (
     <div className={className}>
-      <div className={styles.diamond1} />
-      <div className={styles.diamond2} />
+      <div className={styles.diamond} />
       <div className={styles.amount}>{pp}</div>
     </div>
   );

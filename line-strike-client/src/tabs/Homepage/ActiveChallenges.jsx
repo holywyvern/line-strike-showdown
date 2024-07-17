@@ -27,7 +27,7 @@ export function ActiveChallenges() {
               };
               return (
                 <List.Item key={id}>
-                  <Box light>
+                  <Box light flex>
                     <Column>
                       <Row spaceItems>
                         <h3 style={{ fontSize: "1em", margin: 0 }}>{name}</h3>

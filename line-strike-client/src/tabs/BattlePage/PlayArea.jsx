@@ -30,7 +30,7 @@ export function PlayArea() {
   const Component = PHASES[state?.phase] || NoView;
   return (
     <>
-      <BattleLanes playerA={opponent} playerB={me} />
+      <BattleLanes playerA={opponent} playerB={me} useTurn />
       <Column stretch spaceItems>
         <Column>
           <FaceDownHand player={opponent} />
@@ -46,7 +46,7 @@ export function PlayArea() {
         </Row>
         <Column>
           <Row spaceItems>
-            <PlayerPP player={me} />
+            <PlayerPP player={me} useTurn />
             <PlayerDeck player={me} />
           </Row>
           <PlayerHand player={me} />

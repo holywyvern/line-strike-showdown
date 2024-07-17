@@ -8,11 +8,19 @@
   padding: 4px;
   display: flex;
   color: var(--button-font-color);
-  text-shadow: var(--button-shadow-color) 0px 0px 1px, var(--button-shadow-color) 0px 0px 1px, var(--button-shadow-color) 0px 0px 1px,
-  var(--button-shadow-color) 0px 0px 1px, var(--button-shadow-color) 0px 0px 1px, var(--button-shadow-color) 0px 0px 1px;
+  text-shadow: var(--button-shadow-color) 0px 0px 1px,
+    var(--button-shadow-color) 0px 0px 1px,
+    var(--button-shadow-color) 0px 0px 1px,
+    var(--button-shadow-color) 0px 0px 1px,
+    var(--button-shadow-color) 0px 0px 1px,
+    var(--button-shadow-color) 0px 0px 1px;
   -webkit-font-smoothing: antialiased;
   cursor: pointer;
   align-items: stretch;
+}
+
+.flex {
+  flex: 1;
 }
 
 .button:active,
@@ -25,7 +33,6 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
-
 
 .monospace {
   font-family: monospace;

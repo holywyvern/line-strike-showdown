@@ -25,7 +25,7 @@ export function ActiveMatches() {
             }
             return (
               <List.Item key={room.roomId}>
-                <Box light>
+                <Box light flex>
                   <Row spaceItems>
                     <span>
                       <strong>{room.metadata.challenger.name}</strong>

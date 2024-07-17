@@ -17,5 +17,8 @@ export class ResetTurn extends Command<LineStrikeRoom, ResetTurnProps> {
     for (const card of player.board.cards) {
       card.stunned = false;
     }
+    for (const card of player.turn.cards) {
+      card.stunned = false;
+    }
   }
 }

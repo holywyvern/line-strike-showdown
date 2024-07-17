@@ -87,6 +87,7 @@ const WRAPPERS = {
     return (
       <h2
         style={{
+          flex: 1,
           fontSize: "1em",
           padding: 0,
           margin: 0,
@@ -131,7 +132,7 @@ export function Chat() {
             return (
               <List.Item key={index}>
                 <Wrapper>
-                  <Row spaceItems>
+                  <Row spaceItems flex>
                     <span>
                       <Component {...props} />
                     </span>

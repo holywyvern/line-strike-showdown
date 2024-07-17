@@ -31,6 +31,7 @@ export class PlayedCard extends Schema {
   @type("uint64")
   unitedFront: number;
 
+  @type("uint8")
   position: number;
 
   constructor(player: Player, lane: Lane, position: number) {

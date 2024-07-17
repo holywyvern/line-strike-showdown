@@ -8,3 +8,7 @@
   border: 1px solid var(--component-border-color);
   gap: 4px;
 }
+
+.list > li {
+  display: flex;
+}
