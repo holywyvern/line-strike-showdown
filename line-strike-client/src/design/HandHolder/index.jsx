@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./styles.module.css";
 
 export function HandHolder({ children }) {
-  return <div className={styles.holder}>{children}</div>;
+  return <div className={styles.holder}><div className={styles.contents}>{children}</div></div>;
 }
 
 HandHolder.propTypes = {

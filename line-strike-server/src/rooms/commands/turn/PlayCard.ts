@@ -31,7 +31,8 @@ export class PlayCard extends Command<LineStrikeRoom, PlayCardProps> {
       throw new Error("Card already played this turn.");
     if (!newCard) throw new Error("Card not found");
     if (!spot) throw new Error("Bad position for play");
-    if (spot.justPlaced) throw new Error("Can't override a card on its first turn");
+    if (spot.justPlaced)
+      throw new Error("Can't override a card on its first turn");
 
     const currentCard = spot.card;
     if (currentCard) {
@@ -48,6 +49,7 @@ export class PlayCard extends Command<LineStrikeRoom, PlayCardProps> {
           board: player.turn,
           handIndex,
           position,
+          placeIndex: player.turn.actions.length,
         }),
         new CalculateUnitedFront().setPayload({ board: turn }),
         new CalculateLaneAttack().setPayload({ board: turn }),
@@ -64,6 +66,7 @@ export class PlayCard extends Command<LineStrikeRoom, PlayCardProps> {
         board: player.turn,
         handIndex,
         position,
+        placeIndex: player.turn.actions.length,
       }),
     ];
   }

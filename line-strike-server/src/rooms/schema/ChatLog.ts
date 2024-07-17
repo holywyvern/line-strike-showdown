@@ -10,7 +10,11 @@ export type ChatLogType =
   | "turn"
   | "win"
   | "draw"
-  | "place";
+  | "drawCard"
+  | "place"
+  | "battleStart"
+  | "lock"
+  | "stay";
 
 export type ChatLogProps = Partial<ChatLog> & {
   type: ChatLogType;

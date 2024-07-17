@@ -18,11 +18,11 @@
 }
 
 .hp.fill {
-  background: red;
+  background: var(--player1-color);
 }
 
 .blue .hp.fill {
-  background: blue;
+  background: var(--player2-color);
 }
 
 .hp:first-child {

@@ -2,9 +2,10 @@
   position: relative;
   width: 64px;
   height: 64px;
-  left: calc(var(--index, 0) * var(--size, 0) * -4px);
+  left: calc(var(--index, 0) * (16 + 36 * var(--size, 0) / 15) * -1px);
   top: 8px;
   border: 1px solid white;
+  color: white;
   z-index: 0;
   transition: top 0.1s ease-in;
 }

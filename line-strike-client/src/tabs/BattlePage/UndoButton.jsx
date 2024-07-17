@@ -2,10 +2,11 @@ import PropTypes from "prop-types";
 
 import { Button } from "../../design/Button";
 
-import { usePlayerState, useRoom } from "./context";
+import { usePlayerState, useRoom, useRoomState } from "./context";
 
 export function UndoButton({ turn }) {
-  const { actions } = usePlayerState(turn);
+  const { phase } = useRoomState();
+  const { actions, locked } = usePlayerState(turn);
   const room = useRoom();
   return (
     <div
@@ -17,7 +18,9 @@ export function UndoButton({ turn }) {
       }}
     >
       <Button
-        disabled={!actions || actions.length < 1}
+        disabled={
+          phase !== "planning" || locked || !actions || actions.length < 1
+        }
         onClick={() => room.send("undo")}
       >
         UNDO

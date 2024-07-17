@@ -8,7 +8,7 @@ export class TurnAction extends Schema {
   player: Player;
 
   @type("uint64")
-  cardID: number;
+  handIndex: number;
 
   @type("uint8")
   position: number;
@@ -18,21 +18,13 @@ export class TurnAction extends Schema {
 
   oldSpot: PlayedCard;
 
-  constructor(player: Player, id: number, position: number, usedPP: number, oldSpot: PlayedCard) {
+  constructor(player: Player, handIndex: number, position: number, usedPP: number, oldSpot: PlayedCard) {
     super();
     this.player = player;
-    this.cardID = id;
+    this.handIndex = handIndex;
     this.position = position;
     this.usedPP = usedPP;
     this.oldSpot = oldSpot;
-  }
-
-  get card() {
-    return Card.COLLECTION[this.cardID];
-  }
-
-  get priority() {
-    return this.card?.priority || 0;
   }
 }
 

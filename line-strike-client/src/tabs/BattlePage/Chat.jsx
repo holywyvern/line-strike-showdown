@@ -7,7 +7,15 @@ import { TextInput } from "../../design/TextInput";
 import { Button } from "../../design/Button";
 
 import { Name } from "./Name";
-import { useRoom } from "./context";
+import { useHoveredCard, useRoom } from "./context";
+import { useCards } from "../../hooks/useCards";
+
+// prettier-ignore
+const POSITION_NAME = [
+  "A1", "A2", "A3",
+  "B1", "B2", "B3",
+  "C1", "C2", "C3"
+]
 
 const COMPONENTS = {
   join({ playerID, name }) {
@@ -61,6 +69,9 @@ const COMPONENTS = {
   turn({ turn }) {
     return <Row>TURN {turn}</Row>;
   },
+  battleStart() {
+    return <Row>PLACING CARDS</Row>;
+  },
   win({ playerID, name }) {
     return (
       <i>
@@ -72,11 +83,49 @@ const COMPONENTS = {
   draw() {
     return <i>The match ended in a draw...</i>;
   },
-  place({ playerID, name }) {
+  place({ playerID, name, cardID, position }) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { cards } = useCards();
+    // eslint-disable-next-line react-hooks/rules-of-hooks, no-unused-vars
+    const [_, setHoveredCard] = useHoveredCard();
+    const card = cards[cardID];
     return (
       <i>
         *<Name id={playerID} name={name} />
-        &nbsp; places card*
+        &nbsp; plays{" "}
+        <a
+          href="#"
+          style={{ color: "dodgerblue", textDecoration: "none" }}
+          onClick={(e) => e.preventDefault()}
+          onMouseEnter={() => setHoveredCard(card)}
+        >
+          {card?.name}
+        </a>{" "}
+        at {POSITION_NAME[position]}*
+      </i>
+    );
+  },
+  lock({ playerID, name }) {
+    return (
+      <i>
+        *<Name id={playerID} name={name} />
+        &nbsp; ends their turn*
+      </i>
+    );
+  },
+  stay({ playerID, name }) {
+    return (
+      <i>
+        *<Name id={playerID} name={name} />
+        &nbsp; stayed*
+      </i>
+    );
+  },
+  drawCard({ playerID, name }) {
+    return (
+      <i>
+        *<Name id={playerID} name={name} />
+        &nbsp; draws a card*
       </i>
     );
   },
@@ -88,7 +137,7 @@ const WRAPPERS = {
       <h2
         style={{
           flex: 1,
-          fontSize: "1em",
+          fontSize: "1.2em",
           padding: 0,
           margin: 0,
           background: "var(--tab-active-background-color)",
@@ -98,6 +147,23 @@ const WRAPPERS = {
       >
         {children}
       </h2>
+    );
+  },
+  battleStart({ children }) {
+    return (
+      <h3
+        style={{
+          flex: 1,
+          fontSize: "1em",
+          padding: 0,
+          margin: 0,
+          background: "var(--tab-active-background-color)",
+          borderBottom: "1px solid var(--window-border-color)",
+          borderTop: "1px solid var(--window-border-color)",
+        }}
+      >
+        {children}
+      </h3>
     );
   },
 };

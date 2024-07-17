@@ -3,7 +3,7 @@ import { Schema, ArraySchema, type, filter } from "@colyseus/schema";
 import type { Client } from "colyseus";
 
 import { Card } from "./Card";
-import { Turn } from "./Turn";
+import { Turn, TurnAction } from "./Turn";
 
 import { PlayerBoard } from "./PlayerBoard";
 import { LineStrikeState } from "./LineStrikeState";
@@ -59,6 +59,7 @@ export class Player extends Schema {
   @type(Turn)
   turn: Turn;
 
+  lastTurn: ArraySchema<TurnAction>;
 
   state: LineStrikeState;
 
@@ -80,6 +81,7 @@ export class Player extends Schema {
     this.turn = new Turn(this);
     this.deckIDs = new ArraySchema();
     this.handIDs = new ArraySchema();
+    this.lastTurn = new ArraySchema();
     this.board = new PlayerBoard(this);
     this.pp = 0;
     this.sessionID = client.sessionId;
