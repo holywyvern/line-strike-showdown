@@ -59,7 +59,7 @@ function useLobby() {
             closable: true,
             warning: spectator ? null : (
               <>
-                Closing this tab will count as a <strong>defeat</strong> when
+                Closing this tab will count as a <strong>defeat</strong> while
                 the match is still ongoing.
                 <br />
                 Are you sure you want to close this tab?
