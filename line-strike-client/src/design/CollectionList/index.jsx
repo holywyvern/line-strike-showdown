@@ -8,6 +8,7 @@ import { Modal } from "../Modal";
 import { Card } from "../Card";
 import { isAllowedInFormat } from "../../utils/isAllowedInFormat";
 import { Badge } from "../Badge";
+import { MiniCard } from "../MiniCard";
 
 function CollectionListItem({
   size = 0,
@@ -41,9 +42,8 @@ function CollectionListItem({
             type="button"
             onClick={() => setVisible(true)}
           >
-            <img src={`cards/${card.artwork}`} alt={`${card.name}'s Artwork`} />
+            <MiniCard collection card={card} />
           </button>
-          <div>{card.ppCost} PP</div>
           <div>
             <div className={styles.title}>
               <img src={`elements/${card.element}.webp`} />

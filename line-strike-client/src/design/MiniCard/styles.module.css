@@ -28,6 +28,11 @@
   top: -2px;
 }
 
+.collection, .collection.hovered {
+  top: 0;
+  left: 0;
+}
+
 .img {
   position: absolute;
   inset: 0;
@@ -49,6 +54,22 @@
 
 .ice .border {
   background-image: url("minis/ice.png");
+}
+
+.wind .border {
+  background-image: url("minis/wind.png");
+}
+
+.lightning .border {
+  background-image: url("minis/lightning.png");
+}
+
+.light .border {
+  background-image: url("minis/light.png");
+}
+
+.darkness .border {
+  background-image: url("minis/darkness.png");
 }
 
 .pp {

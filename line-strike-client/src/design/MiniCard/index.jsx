@@ -11,6 +11,7 @@ export function MiniCard({
   debuffed,
   index = 0,
   size = 0,
+  collection,
   fixed,
 }) {
   const [hovered, setHovered] = useState(false);
@@ -18,6 +19,7 @@ export function MiniCard({
     [styles.hovered]: hovered,
     [styles.fixed]: fixed,
     [styles.inactive]: card.stunned || card.incapacitated,
+    [styles.collection]: collection,
   });
 
   return (
@@ -62,4 +64,5 @@ MiniCard.propTypes = {
   index: PropTypes.number,
   size: PropTypes.number,
   fixed: PropTypes.bool,
+  collection: PropTypes.bool,
 };
