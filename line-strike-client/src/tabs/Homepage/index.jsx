@@ -7,6 +7,7 @@ import { DeckSelector } from "./DeckSelector";
 import { OnlinePlayers } from "./OnlinePlayers";
 import { MatchFinder } from "./MatchFinder";
 import { FormatSelector } from "./FormatSelector";
+import { Disclaimers } from "../../components/Disclaimers";
 
 export function Homepage() {
   return (
@@ -16,7 +17,10 @@ export function Homepage() {
         <MatchFinder />
         <DeckSelector />
       </Column>
-      <ActiveChallenges />
+      <Column>
+        <Disclaimers />
+        <ActiveChallenges />
+      </Column>
       <Column stretch>
         <OnlinePlayers />
         <ActiveMatches />

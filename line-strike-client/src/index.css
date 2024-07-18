@@ -3,6 +3,7 @@
   --app-background-color: black;
   --window-font-color: white;
   --window-text-shadow-color: black;
+  --link-text-shadow-color: blue;
   --window-border-color: rgb(107, 225, 255);
   --window-background-color: rgba(38, 47, 51, 0.85);
   --window-shadow-color: rgba(0, 0, 0, 0.1);
@@ -49,4 +50,14 @@ ul,
 ol,
 li {
   color: inherit;
+}
+
+a {
+  color: dodgerblue;
+  text-shadow: var(--link-text-shadow-color) 0px 0px 1px,
+    var(--link-text-shadow-color) 0px 0px 1px,
+    var(--link-text-shadow-color) 0px 0px 1px,
+    var(--link-text-shadow-color) 0px 0px 1px,
+    var(--link-text-shadow-color) 0px 0px 1px,
+    var(--link-text-shadow-color) 0px 0px 1px;
 }
