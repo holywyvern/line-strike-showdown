@@ -46,6 +46,10 @@ export function MiniCard({
       >
         {card.attack}
       </div>
+      <div className={styles.icons}>
+        {card.baseGuard && <img src="flags/base_guard.webp" />}
+        {card.baseBuster && <img src="flags/base_buster.webp" />}
+      </div>
     </div>
   );
 }

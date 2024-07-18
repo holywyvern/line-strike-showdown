@@ -17,11 +17,13 @@ export class LaneAttack extends Command<LineStrikeRoom, LaneAttackProps> {
     let damage = attackedCards.length;
     let blocks = 0;
     let busters = 0;
+    let attacks = damage;
     for (const card of attackedCards) {
       if (card.baseBuster) {
         card.baseBuster = false;
         busters++;
         damage++;
+        attacks++;
       }
     }
     for (const card of defenderCards) {
@@ -31,9 +33,6 @@ export class LaneAttack extends Command<LineStrikeRoom, LaneAttackProps> {
         blocks++;
       }
     }
-    if (damage < 1) return;
-
-    defender.hp = Math.max(0, defender.hp - damage);
     this.state.chat.push(
       new ChatLog({
         type: "attack",
@@ -45,6 +44,10 @@ export class LaneAttack extends Command<LineStrikeRoom, LaneAttackProps> {
         lane: index,
       })
     );
+    if (damage < 1) return;
+
+    defender.hp = Math.max(0, defender.hp - damage);
+
     if (defender.broken) {
       attacker.victory = true;
       this.state.chat.push(

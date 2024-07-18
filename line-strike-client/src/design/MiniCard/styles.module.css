@@ -76,3 +76,17 @@
   padding: 4px;
   margin: 0;
 }
+
+.icons {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.icons img {
+  width: 100%;
+  max-width: 16px;
+}

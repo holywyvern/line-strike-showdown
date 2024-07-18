@@ -21,7 +21,7 @@ export class RefreshTurn extends Command<LineStrikeRoom, RefreshTurnProps> {
       for (let j = 0; j < cardCount; ++j) {
         const card = player.board.cards[j];
         const turnCard = player.turn.cards[j];
-        turnCard.baseGuard = card.baseBuster;
+        turnCard.baseBuster = card.baseBuster;
         turnCard.baseGuard = card.baseGuard;
         turnCard.attack = card.attack;
         turnCard.cardID = card.cardID;
