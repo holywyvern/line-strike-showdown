@@ -17,7 +17,7 @@ export function Homepage() {
         <MatchFinder />
         <DeckSelector />
       </Column>
-      <Column>
+      <Column flex stretch>
         <Disclaimers />
         <ActiveChallenges />
       </Column>
