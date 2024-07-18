@@ -981,8 +981,8 @@ Card.COLLECTION.push(
         id: 61,
         name: "ARKS Trainee Rubert",
         artwork: "robert.webp",
-        attack: 2,
-        ppCost: 1,
+        attack: 13,
+        ppCost: 3,
         skillId: 9,
         // prettier-ignore
         area: [
@@ -1365,7 +1365,7 @@ Card.COLLECTION.push(
       {
         id: 87,
         name: "Power Seeker Theodore",
-        artwork: "theodore2.webp",
+        artwork: "theodore.webp",
         attack: 20,
         ppCost: 4,
         skillId: 5,
@@ -1569,7 +1569,7 @@ Card.COLLECTION.push(
       {
         id: 99,
         name: "Latent Talent Theodore",
-        artwork: "theodore.webp",
+        artwork: "theodore2.webp",
         attack: 5,
         ppCost: 2,
         skillId: 15,
