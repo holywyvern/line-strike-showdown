@@ -140,6 +140,14 @@ const COMPONENTS = {
       </i>
     );
   },
+  pp({ playerID, name }) {
+    return (
+      <i>
+        <Name id={playerID} name={name} />
+        &nbsp; gains PP
+      </i>
+    );
+  },
   attack({ playerID, name, lane, damage, busters, blocks }) {
     return (
       <i>
@@ -160,8 +168,7 @@ const COMPONENTS = {
   skill({ playerID, name, cardID }) {
     return (
       <i>
-        <Name id={playerID} name={name} />{' '}
-        activates <Card cardID={cardID} />
+        <Name id={playerID} name={name} /> activates <Card cardID={cardID} />
         &apos;s skill!
       </i>
     );
@@ -180,6 +187,14 @@ const COMPONENTS = {
         <Name id={playerID} name={name} />
         &apos;s disrupts
       </>
+    );
+  },
+  buff({ position, cardID, damage }) {
+    return (
+      <i>
+        <Card cardID={cardID} /> {damage < 0 ? "debuffs" : "buffs"} at{" "}
+        {POSITION_NAME[position]} by {Math.abs(damage)}!
+      </i>
     );
   },
 };

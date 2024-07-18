@@ -7,8 +7,9 @@ import { ChatLog } from "../../schema/ChatLog";
 import { PlaceCard } from "./PlaceCard";
 import { GainPP } from "../user/GainPP";
 import { ResetTurn } from "../turn/ResetTurn";
-import { ActivateSupports } from "./ActivateSupports";
+
 import { RemoveHand } from "./RemoveHand";
+import { Wait } from "../utils/Wait";
 
 export interface PerformActionsProps {
   player: Player;
@@ -44,7 +45,8 @@ export class PerformActions extends Command<
           position,
           placeIndex,
           log: true,
-        })
+        }),
+        new Wait().setPayload({ time: 500 })
       );
       placeIndex++;
     }

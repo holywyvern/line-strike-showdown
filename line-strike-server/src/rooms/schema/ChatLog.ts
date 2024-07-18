@@ -20,7 +20,9 @@ export type ChatLogType =
   | "battle"
   | "skill"
   | "supports"
-  | "disrupts";
+  | "disrupts"
+  | "pp"
+  | "buff";
 
 export type ChatLogProps = Partial<ChatLog> & {
   type: ChatLogType;
@@ -54,7 +56,7 @@ export class ChatLog extends Schema {
   @type("uint8")
   blocks: number;
 
-  @type("uint8")
+  @type("int8")
   damage: number;
 
   @type("uint8")

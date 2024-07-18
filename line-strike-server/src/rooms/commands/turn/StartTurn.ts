@@ -7,6 +7,7 @@ import { IncrementTurnCounter } from "./IncrementTurnCounter";
 import { GainPP } from "../user/GainPP";
 import { ResetPlays } from "./ResetPlays";
 import { DrawCard } from "./DrawCard";
+import { Wait } from "../utils/Wait";
 
 export interface StartTurnProps {
   draw?: boolean;
@@ -35,6 +36,7 @@ export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
       new ResetTurn().setPayload({ player: this.state.playerB }),
       new ResetPlays().setPayload({ player: this.state.playerA }),
       new ResetPlays().setPayload({ player: this.state.playerB }),
+      new Wait().setPayload({ time: 200 }),
       new GainPP().setPayload({
         player: this.state.playerA,
         pp: format.ppPerTurn,

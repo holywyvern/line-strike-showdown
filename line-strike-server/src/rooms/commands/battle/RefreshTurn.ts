@@ -16,6 +16,7 @@ export class RefreshTurn extends Command<LineStrikeRoom, RefreshTurnProps> {
       const turnLane = player.turn.lanes[i];
       turnLane.hp = lane.hp;
       turnLane.victory = lane.victory;
+      turnLane.attack = lane.attack;
       const cardCount = player.board.cards.length;
       for (let j = 0; j < cardCount; ++j) {
         const card = player.board.cards[j];
@@ -26,6 +27,7 @@ export class RefreshTurn extends Command<LineStrikeRoom, RefreshTurnProps> {
         turnCard.cardID = card.cardID;
         turnCard.incapacitated = card.incapacitated;
         turnCard.stunned = card.stunned;
+        turnCard.buffs = card.buffs;
       }
     }
   }

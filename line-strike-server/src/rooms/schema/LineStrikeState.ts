@@ -62,6 +62,14 @@ export class LineStrikeState extends Schema {
     return [this.playerA, this.playerB].filter(Boolean);
   }
 
+  findTarget(player: Player, reverse = false) {
+    let target = player;
+    if (reverse) {
+      target = player === this.playerA ? this.playerB : this.playerA;
+    }
+    return target;
+  }
+
   findPlayer(client: Client) {
     return this.players.find((i) => i.sessionID === client.sessionId);
   }

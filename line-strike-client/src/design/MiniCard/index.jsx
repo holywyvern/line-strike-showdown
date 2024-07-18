@@ -17,6 +17,7 @@ export function MiniCard({
   const className = cx(styles.card, styles[card.element], {
     [styles.hovered]: hovered,
     [styles.fixed]: fixed,
+    [styles.inactive]: card.stunned || card.incapacitated,
   });
 
   return (

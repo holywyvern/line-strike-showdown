@@ -29,6 +29,8 @@ export class UndoAction extends Command<LineStrikeRoom, UndoPayload> {
     spot.attack = action.oldSpot.attack;
     spot.justPlaced = action.oldSpot.justPlaced;
     spot.placeIndex = action.oldSpot.placeIndex;
+    spot.incapacitated = action.oldSpot.incapacitated;
+    spot.stunned = action.oldSpot.stunned;
 
     return [
       new CalculateUnitedFront().setPayload({ board: turn }),

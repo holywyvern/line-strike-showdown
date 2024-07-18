@@ -40,6 +40,10 @@ export class TurnAction extends Schema {
     this.turnIndex = turnIndex;
   }
 
+  get spot() {
+    return this.player.board.cards[this.position];
+  }
+
   get card() {
     return Card.COLLECTION[this.cardID];
   }

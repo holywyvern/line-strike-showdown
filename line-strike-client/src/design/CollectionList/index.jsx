@@ -21,7 +21,7 @@ function CollectionListItem({
   const [visible, setVisible] = useState(false);
   const incorrectElement =
     !deckElements.includes(card.element) &&
-    deckElements.length >= format.maxElements;
+    deckElements.length > format.maxElements;
   const isIllegal = !isAllowedInFormat(format, card);
   const isDeckFull = size >= format.maxCards;
   const limited = format.limitedCards[String(card.id)];

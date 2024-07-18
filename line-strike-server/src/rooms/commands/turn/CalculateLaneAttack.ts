@@ -12,7 +12,7 @@ export class CalculateLaneAttack extends Command<
 > {
   async execute({ board }: CalculateLaneAttackProps) {
     for (const card of board.cards) {
-      if (card.cardID > 0) {
+      if (card.cardID > 0 && !card.incapacitated && !card.stunned) {
         card.attack = Math.max(0, card.card.attack + card.buffs);
         if (card.attack < 1) {
           card.incapacitated = true;
