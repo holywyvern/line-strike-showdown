@@ -41,14 +41,12 @@ export function PlayArea() {
           </Row>
         </Column>
         <Column centerChildren>
-          <span>{opponent?.name}</span>
           <TurnButton player={me} />
-          <span>{me?.name}</span>
         </Column>
         <Column>
           <Row spaceItems>
-            <PlayerPP player={me} useTurn />
-            <PlayerDeck player={me} />
+            <PlayerPP player={me} useTurn main />
+            <PlayerDeck player={me} main />
           </Row>
           <PlayerHand player={me} />
         </Column>

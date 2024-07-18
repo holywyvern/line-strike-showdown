@@ -1,9 +1,11 @@
 .lane {
   color: lightcoral;
+  transform: translateY(-2px);
 }
 
 .main {
   color: lightblue;
+  transform: translateY(2px);
 }
 
 .dead {

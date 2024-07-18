@@ -1,6 +1,6 @@
 import { Schema, ArraySchema, type } from "@colyseus/schema";
 
-export type SkillCategory = "none" | "passive" | "support" | "disrupt";
+export type SkillCategory = "passive" | "support" | "disrupt";
 
 export type SkillTag =
   | "unitedFront"
@@ -24,7 +24,6 @@ export type SkillProps = {
   description: string;
   category: SkillCategory;
   tags?: SkillTag[];
-  priority?: number;
 };
 
 export class Skill extends Schema {
@@ -45,24 +44,27 @@ export class Skill extends Schema {
   @type(["string"])
   tags: ArraySchema<SkillTag>;
 
-  @type("int32")
-  priority: number;
-
-  constructor({ id, name, description, category, tags, priority }: SkillProps) {
+  constructor({ id, name, description, category, tags }: SkillProps) {
     super();
     this.id = id;
     this.name = name;
     this.description = description;
     this.category = category;
     this.tags = new ArraySchema(...(tags || []));
-    this.priority = priority || 0;
+  }
+
+  get priority() {
+    if (this.category === "passive") return 300_000;
+    if (this.category === "support") return 200_000;
+
+    return 100_000;
   }
 }
 
 Skill.COLLECTION.push(
   ...(
     [
-      { id: 0, name: "No Skill", description: "", category: "none" },
+      { id: 0, name: "No Skill", description: "", category: "passive" },
       {
         id: 1,
         name: "United Front",
@@ -83,7 +85,7 @@ Skill.COLLECTION.push(
         id: 3,
         name: "Draw Card",
         description: "Draw 1 Card.",
-        category: "none",
+        category: "support",
         tags: ["drawCard"],
       },
       {
@@ -165,7 +167,7 @@ Skill.COLLECTION.push(
         name: "Ally Debuff",
         description:
           "Decrease target allies' Attack.\nNote: Cannot target itself.",
-        category: "none",
+        category: "support",
         tags: ["buff"],
       },
       {

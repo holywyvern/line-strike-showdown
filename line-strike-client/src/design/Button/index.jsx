@@ -15,11 +15,13 @@ export function Button({
   link,
   monospace,
   flex,
+  round,
 }) {
   const className = cx(styles.button, {
     [styles.link]: link,
     [styles.monospace]: monospace,
     [styles.flex]: flex,
+    [styles.round]: round,
   });
   return (
     <button
@@ -49,4 +51,5 @@ Button.propTypes = {
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   flex: PropTypes.bool,
+  round: PropTypes.bool,
 };

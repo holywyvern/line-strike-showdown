@@ -3,6 +3,7 @@
   height: 64px;
   font-size: 16px;
   position: relative;
+  align-self: flex-end;
 }
 
 .diamond {
@@ -27,4 +28,8 @@
 
 .max .amount {
   color: rgb(223, 223, 161);
+}
+
+.main {
+  align-self: flex-start;
 }

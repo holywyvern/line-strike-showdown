@@ -41,7 +41,6 @@ function LaneAttackState({ playerA, playerB, useTurn }) {
               <LaneAttackWrapper key={index}>
                 <Row>
                   <LaneValueState lane={a} other={b} />
-                  /
                   <LaneValueState lane={b} other={a} main />
                 </Row>
               </LaneAttackWrapper>

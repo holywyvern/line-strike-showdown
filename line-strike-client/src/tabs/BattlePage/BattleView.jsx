@@ -22,14 +22,12 @@ export function BattleView() {
           </Row>
         </Column>
         <Column centerChildren>
-          <span>{state.playerA?.name}</span>
           <TurnButton disabled />
-          <span>{state.playerB?.name}</span>
         </Column>
         <Column>
           <Row spaceItems>
-            <PlayerPP player={state.playerB} />
-            <PlayerDeck player={state.playerB} />
+            <PlayerPP main player={state.playerB} />
+            <PlayerDeck player={state.playerB} main />
           </Row>
           <FaceDownHand player={state.playerB} />
         </Column>

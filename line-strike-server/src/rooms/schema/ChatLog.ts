@@ -17,7 +17,10 @@ export type ChatLogType =
   | "stay"
   | "attack"
   | "break"
-  | "battle";
+  | "battle"
+  | "skill"
+  | "supports"
+  | "disrupts";
 
 export type ChatLogProps = Partial<ChatLog> & {
   type: ChatLogType;

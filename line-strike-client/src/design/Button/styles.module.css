@@ -37,3 +37,12 @@
 .monospace {
   font-family: monospace;
 }
+
+.round {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

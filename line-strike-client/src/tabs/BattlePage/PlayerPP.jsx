@@ -3,7 +3,7 @@ import { usePlayerBoard, usePlayerState, useRoomState } from "./context";
 import { useCards } from "../../hooks/useCards";
 import { PpDiamond } from "../../design/PpDiamond";
 
-export function PlayerPP({ player, useTurn }) {
+export function PlayerPP({ player, useTurn, main }) {
   const { formats } = useCards();
   const { formatID } = useRoomState();
   const turn = usePlayerBoard(player, false, useTurn);
@@ -11,10 +11,11 @@ export function PlayerPP({ player, useTurn }) {
   const format = formats[formatID];
   if (!format) return;
 
-  return <PpDiamond format={format} pp={state.pp - turn.usedPP} />;
+  return <PpDiamond format={format} pp={state.pp - turn.usedPP} main={main} />;
 }
 
 PlayerPP.propTypes = {
   player: PropTypes.any,
   useTurn: PropTypes.bool,
+  main: PropTypes.bool,
 };

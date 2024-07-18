@@ -20,12 +20,15 @@ export class TurnAction extends Schema {
 
   oldSpot: PlayedCard;
 
+  turnIndex: number;
+
   constructor(
     player: Player,
     handIndex: number,
     position: number,
     usedPP: number,
-    oldSpot: PlayedCard
+    oldSpot: PlayedCard,
+    turnIndex: number
   ) {
     super();
     this.player = player;
@@ -34,6 +37,15 @@ export class TurnAction extends Schema {
     this.position = position;
     this.usedPP = usedPP;
     this.oldSpot = oldSpot;
+    this.turnIndex = turnIndex;
+  }
+
+  get card() {
+    return Card.COLLECTION[this.cardID];
+  }
+
+  get category() {
+    return this.card?.category || "passive";
   }
 }
 

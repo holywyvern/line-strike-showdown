@@ -3,6 +3,7 @@ import { usePlayerBoard, useRoom, useRoomState } from "./BattlePage/context";
 import { useCards } from "../hooks/useCards";
 import { Column } from "../design/Column";
 import { Button } from "../design/Button";
+import { CircularProgress } from "../design/CircularProgress";
 
 export function TurnButton({ disabled, player }) {
   const room = useRoom();
@@ -14,19 +15,37 @@ export function TurnButton({ disabled, player }) {
   if (!format) return null;
 
   const rate = turnTimeLeft / (format.turnSeconds * 1000);
-  console.log("rate", rate, turnTimeLeft, format.turnSeconds * 1000);
   const onClick = () => {
     room.send("ready");
   };
   return (
     <Column centerChildren>
-      <Button
-        onClick={onClick}
-        disabled={disabled || phase !== "planning" || turn.locked}
+      <div
+        style={{
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
+          alignSelf: "start",
+        }}
       >
-        Battle!
-      </Button>
-      <progress value={rate} max={1} />
+        <CircularProgress rate={1 - rate} />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <Button
+            round
+            onClick={onClick}
+            disabled={disabled || phase !== "planning" || turn.locked}
+          >
+            Battle!
+          </Button>
+        </div>
+      </div>
     </Column>
   );
 }

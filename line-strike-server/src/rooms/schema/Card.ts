@@ -97,6 +97,10 @@ export class Card extends Schema {
     return this.skill?.priority || 0;
   }
 
+  get category() {
+    return this.skill?.category || "passive";
+  }
+
   includes(tag: SkillTag) {
     return this.skill?.tags.includes(tag);
   }
