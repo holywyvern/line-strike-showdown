@@ -20,8 +20,8 @@ function CollectionListItem({
 }) {
   const [visible, setVisible] = useState(false);
   const incorrectElement =
-    !deckElements.includes(card.element) &&
-    deckElements.length > format.maxElements;
+    deckElements.length >= format.maxElements &&
+    !deckElements.includes(card.element);
   const isIllegal = !isAllowedInFormat(format, card);
   const isDeckFull = size >= format.maxCards;
   const limited = format.limitedCards[String(card.id)];
@@ -31,6 +31,7 @@ function CollectionListItem({
       : format.maxRepeats;
   const isLimited = maxRepeats < format.maxRepeats && maxRepeats > 0;
   const allowRepeat = count >= maxRepeats;
+  const disabled = incorrectElement || isIllegal || allowRepeat || isDeckFull;
   return (
     <>
       <li>
@@ -60,13 +61,7 @@ function CollectionListItem({
             <Button monospace onClick={onRemove} disabled={count < 1}>
               -
             </Button>
-            <Button
-              monospace
-              onClick={onAdd}
-              disabled={
-                incorrectElement || isIllegal || allowRepeat || isDeckFull
-              }
-            >
+            <Button monospace onClick={onAdd} disabled={disabled}>
               +
             </Button>
           </div>

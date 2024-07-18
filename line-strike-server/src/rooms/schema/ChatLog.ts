@@ -22,7 +22,10 @@ export type ChatLogType =
   | "supports"
   | "disrupts"
   | "pp"
-  | "buff";
+  | "buff"
+  | "stun"
+  | "move"
+  | "swap";
 
 export type ChatLogProps = Partial<ChatLog> & {
   type: ChatLogType;
@@ -49,6 +52,9 @@ export class ChatLog extends Schema {
 
   @type("uint64")
   position: number;
+
+  @type("uint64")
+  newPosition: number;
 
   @type("uint64")
   cardID: number;

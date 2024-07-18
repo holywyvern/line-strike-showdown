@@ -48,7 +48,7 @@ export function useDeckEditorState({ formatID, deck, index }) {
       return newCards;
     });
   };
-  const cardElements = cards.map((i) => db.cards[i].element);
+  const cardElements = [...new Set(cards.map((i) => db.cards[i].element))];
   const format = db.formats[formatID];
   const isValid =
     format.minCards <= cards.length &&

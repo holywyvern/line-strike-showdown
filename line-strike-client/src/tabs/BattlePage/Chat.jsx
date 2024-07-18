@@ -197,6 +197,29 @@ const COMPONENTS = {
       </i>
     );
   },
+  move({ position, newPosition, cardID }) {
+    return (
+      <i>
+        <Card cardID={cardID} /> moves {POSITION_NAME[position]} to{" "}
+        {POSITION_NAME[newPosition]}!
+      </i>
+    );
+  },
+  swap({ position, newPosition, cardID }) {
+    return (
+      <i>
+        <Card cardID={cardID} /> swaps between {POSITION_NAME[position]} and{" "}
+        {POSITION_NAME[newPosition]}!
+      </i>
+    );
+  },
+  stun({ position, cardID }) {
+    return (
+      <i>
+        <Card cardID={cardID} /> stuns {POSITION_NAME[position]}!
+      </i>
+    );
+  },
 };
 
 function Section({ children }) {
