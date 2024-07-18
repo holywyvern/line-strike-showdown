@@ -5,4 +5,5 @@
   max-width: calc(var(--h) * 16 / 18 * 1px);
   max-height: calc(var(--h) * 1px);
   overflow: hidden;
+  align-self: center;
 }
