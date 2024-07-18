@@ -40,13 +40,14 @@ export function TabContext({ children }) {
 
         const newTabs = [...tabs];
         newTabs.push({
+          ...options,
           id:
             options?.id ||
             `${name}-${Date.now()}-${tabs.length}-${Math.random()}`,
           name,
           element,
           closable: options?.closable || false,
-          ...options,
+          warning: options?.warning || null,
         });
         setActive(tabs.length);
         return newTabs;

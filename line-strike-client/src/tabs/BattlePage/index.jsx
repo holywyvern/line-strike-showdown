@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { BattleView } from "./BattleView";
@@ -11,7 +11,21 @@ import { Context, HoveredCard } from "./context";
 import { BattleLayout } from "../../design/BattleLayout";
 
 export function BattlePage({ room, spectator }) {
+  const [ready, setReady] = useState(false);
   const state = useState(null);
+
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!room) return;
+    if (!ready) return;
+
+    return () => {
+      room.leave();
+    };
+  }, [ready, room]);
   return (
     <HoveredCard.Provider value={state}>
       <Context.Provider value={room}>

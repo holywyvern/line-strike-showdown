@@ -54,7 +54,18 @@ function useLobby() {
           } (${BATTLE_TYPES[type] || "Free Battle"}) [${
             formats[formatID].name
           }]`,
-          <BattlePage room={room} spectator={spectator} />
+          <BattlePage room={room} spectator={spectator} />,
+          {
+            closable: true,
+            warning: spectator ? null : (
+              <>
+                Closing this tab will count as a <strong>defeat</strong> when
+                the match is still ongoing.
+                <br />
+                Are you sure you want to close this tab?
+              </>
+            ),
+          }
         );
       }
     );

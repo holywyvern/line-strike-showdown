@@ -20,8 +20,25 @@ export class Leave extends Command<LineStrikeRoom, LeaveProps> {
       })
     );
     this.state.spectators.delete(client.sessionId);
+    if (this.state.phase === "finished") return;
+
     await this.room.updateMetaPlayers();
     if (!player) return;
-    // TODO: Mark as win for abandonment
+
+    if (this.state.delayed) {
+      this.state.delayed.clear();
+      this.state.delayed = null;
+    }
+    this.state.phase = "finished";
+
+    const winner =
+      this.state.playerA === player ? this.state.playerB : this.state.playerA;
+    this.state.chat.push(
+      new ChatLog({
+        type: "win",
+        playerID: winner.sessionID,
+        name: winner.name,
+      })
+    );
   }
 }
