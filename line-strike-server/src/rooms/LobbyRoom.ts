@@ -13,37 +13,6 @@ import { Format } from "./schema/Format";
 const OnlySeenByOwner = (player: LobbyPlayer, client: Client) =>
   client.sessionId === player.sessionID;
 
-class LineStrikeRoom extends Schema {
-  @type("string")
-  roomID: string;
-
-  @type("uint64")
-  formatID: number;
-
-  @type("string")
-  playerA: string;
-
-  @type("string")
-  playerB: string;
-
-  @type("uint64")
-  created: number;
-
-  constructor(
-    roomID: string,
-    playerA: string,
-    playerB: string,
-    formatID: number
-  ) {
-    super();
-    this.roomID = roomID;
-    this.formatID = formatID;
-    this.playerA = playerA;
-    this.playerB = playerB;
-    this.created = Date.now();
-  }
-}
-
 class LineStrikeChallenger extends Schema {
   @type("string")
   name: string;

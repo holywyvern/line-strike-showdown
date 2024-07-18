@@ -4,40 +4,45 @@ import { useEffect, useState } from "react";
 
 export const client = new Client("/api");
 
-let lobby = null;
-
 export function useBattleRooms() {
+  const [lobby, setLobby] = useState(null);
   const [ready, setReady] = useState(false);
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
-    if (ready) return;
-    if (!lobby) return;
+    if (lobby || ready) return;
 
-    lobby.onMessage("+", ([roomId, room]) => {
-      setRooms((rooms) => {
-        const allRooms = [...rooms];
-        const roomIndex = allRooms.findIndex((room) => room.roomId === roomId);
-        if (roomIndex !== -1) {
-          allRooms[roomIndex] = { ...room };
-        } else {
-          allRooms.push(room);
-        }
-        return allRooms;
+    client.joinOrCreate("lobby").then((lobby) => {
+      setLobby(lobby);
+      lobby.onMessage("rooms", (rooms) => {
+        setRooms([...rooms]);
       });
-    });
 
-    lobby.onMessage("-", (roomId) => {
-      setRooms((rooms) => rooms.filter((room) => room.roomId !== roomId));
+      lobby.onMessage("+", ([roomId, room]) => {
+        setRooms((rooms) => {
+          const allRooms = [...rooms];
+          const roomIndex = allRooms.findIndex(
+            (room) => room.roomId === roomId
+          );
+          if (roomIndex !== -1) {
+            allRooms[roomIndex] = { ...room };
+          } else {
+            allRooms.push(room);
+          }
+          return allRooms;
+        });
+      });
+
+      lobby.onMessage("-", (roomId) => {
+        setRooms((rooms) => rooms.filter((room) => room.roomId !== roomId));
+      });
+      setReady(true);
     });
-    setReady(true);
-  }, [ready]);
-  return rooms;
+  }, [lobby, ready]);
+  return rooms.filter((i) => Boolean(i.metadata));
 }
 
 export default {
   async joinLobby(name) {
-    lobby = await client.joinOrCreate("lobby");
-
     const room = await client.join("showdown_lobby", { name });
     return new Promise((resolve) => {
       room.onStateChange.once(() => resolve(room));
