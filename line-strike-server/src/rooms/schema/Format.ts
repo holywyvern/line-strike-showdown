@@ -25,6 +25,7 @@ export interface FormatProps {
   turnSeconds?: number;
   mulliganSeconds?: number;
   initialHandSize?: number;
+  official?: boolean;
 }
 
 export class Format extends Schema {
@@ -104,6 +105,9 @@ export class Format extends Schema {
   @type("uint64")
   initialHandSize: number;
 
+  @type("boolean")
+  official: boolean;
+
   constructor({
     id,
     name,
@@ -127,6 +131,7 @@ export class Format extends Schema {
     turnSeconds,
     mulliganSeconds,
     initialHandSize,
+    official,
   }: FormatProps) {
     super();
     this.id = id;
@@ -161,6 +166,7 @@ export class Format extends Schema {
     this.turnSeconds = turnSeconds || 60;
     this.mulliganSeconds = mulliganSeconds || 30;
     this.initialHandSize = initialHandSize || 5;
+    this.official = official || false;
   }
 
   isLegal(card: Card, count: number) {
@@ -191,6 +197,7 @@ Format.COLLECTION.push(
           16, 17, 17,  2,  2,
           32,  8, 19,  4, 21
         ],
+        official: true,
       },
     ] satisfies FormatProps[]
   ).map((i) => new Format(i))

@@ -9,6 +9,13 @@ export function FormatSelector() {
   const { formatID, setFormatID } = useProfile();
   const format = formats[formatID];
   const standardFormat = formats[standardFormatID];
+  const customFormats = formats
+    .filter((i) => i && !i.official)
+    .map((format) => (
+      <Select.Option key={format.id} value={format.id}>
+        {format.name}
+      </Select.Option>
+    ));
   return (
     <Box>
       <Box.Header>
@@ -26,16 +33,25 @@ export function FormatSelector() {
                 Standard ({standardFormat.name})
               </Select.Option>
             </Select.Group>
-            <Select.Group label="All Formats">
-              {formats.filter(Boolean).map((format) => (
-                <Select.Option key={format.id} value={format.id}>
-                  {format.name}
-                </Select.Option>
-              ))}
+            <Select.Group label="Official Formats">
+              {formats
+                .filter((i) => i?.official)
+                .map((format) => (
+                  <Select.Option key={format.id} value={format.id}>
+                    {format.name}
+                  </Select.Option>
+                ))}
             </Select.Group>
+            {customFormats.length > 0 && (
+              <Select.Group label="Custom Formats">
+                {customFormats}
+              </Select.Group>
+            )}
           </Select>
           <p style={{ padding: 0, margin: 0, whiteSpace: "pre-line" }}>
-            {format?.description}
+            {formatID === standardFormatID
+              ? "Latest version of LINE STRIKE\navailable to play on NGS: PSO2."
+              : format?.description}
           </p>
         </form>
       </Box.Body>
