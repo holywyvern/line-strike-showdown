@@ -73,11 +73,28 @@ export class PlayCard extends Command<LineStrikeRoom, PlayCardProps> {
 
   calculatePlacementPpCost(spot: PlayedCard, newCard: Card) {
     let cost = newCard.ppCost;
+    if (newCard.includes("reinforcement") && this.isReinforced(spot, newCard)) {
+      cost -= 1;
+    }
     return cost;
   }
 
   calculateOverridePpCost(spot: PlayedCard, newCard: Card, oldCard: Card) {
     let cost = newCard.ppCost - oldCard.ppCost;
+    if (newCard.includes("reinforcement") && this.isReinforced(spot, newCard)) {
+      cost -= 1;
+    }
     return cost;
+  }
+
+  isReinforced(spot: PlayedCard, card: Card) {
+    const lane = spot.lane;
+    const rival =
+      spot.player === this.state.playerA
+        ? this.state.playerB
+        : this.state.playerA;
+    const enemyLanes = [...rival.board.lanes].reverse();
+    const rivalLane = enemyLanes[lane.position];
+    return rivalLane.attack > lane.attack;
   }
 }

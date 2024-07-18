@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import {
   useHoveredCard,
+  usePlayerBoard,
   usePlayerState,
   useRoom,
   useRoomState,
@@ -16,11 +17,22 @@ import { List } from "../../design/List";
 import { Row } from "../../design/Row";
 import { Button } from "../../design/Button";
 
-function calculatePpCost(card, status, skills, cards) {
+function calculatePpCost(card, status, skills, cards, lanes, position) {
   let cost = card.ppCost;
   const oldCard = cards[status.cardID];
   if (oldCard) {
     cost -= oldCard.ppCost;
+  }
+  const skill = skills[card.skill.id];
+  if (skill?.tags?.includes("reinforcement")) {
+    const i = position % 3;
+    const [a, b] = lanes;
+    console.log("lanes", a, b);
+    const laneA = a[i];
+    const laneB = b[i];
+    if (laneB.attack > laneA.attack) {
+      cost -= 1;
+    }
   }
   return Math.max(0, cost);
 }
@@ -42,12 +54,26 @@ function canPlaceCard(card, status, skills, cards, player, pp) {
   return skill.tags.includes("wildcard");
 }
 
+function useLanes(player) {
+  const { playerA, playerB } = useRoomState();
+
+  const playerAisMe = player.sessionID === playerA.sessionID;
+  const { lanes: a } = usePlayerBoard(playerA, !playerAisMe, playerAisMe);
+  const { lanes: b } = usePlayerBoard(playerB, playerAisMe, !playerAisMe);
+  if (playerAisMe) {
+    return [a, b];
+  }
+  return [b, a];
+}
+
 function AvailableCards({ position, player, status, onClose }) {
   const room = useRoom();
+  // eslint-disable-next-line no-unused-vars
   const [_, setHoveredCard] = useHoveredCard();
   const { cards, skills } = useCards();
   const { handIDs } = usePlayerState(player);
   const { usedHand } = usePlayerState(player?.turn);
+  const lanes = useLanes(player);
 
   const hand = (handIDs || []).map((i) => cards[i]).filter(Boolean);
   return (
@@ -55,7 +81,14 @@ function AvailableCards({ position, player, status, onClose }) {
       {hand.map((card, index) => {
         if (usedHand.includes(index)) return null;
 
-        const pp = calculatePpCost(card, status, skills, cards);
+        const pp = calculatePpCost(
+          card,
+          status,
+          skills,
+          cards,
+          lanes,
+          position
+        );
         const canPlace = canPlaceCard(card, status, skills, cards, player, pp);
         return (
           <List.Item key={index}>

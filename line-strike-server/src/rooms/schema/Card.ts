@@ -599,6 +599,7 @@ Card.COLLECTION.push(
         attack: 6,
         ppCost: 2,
         skillId: 3,
+        amount: 1,
         element: "wind",
         set: "Version 1",
       },
@@ -1286,6 +1287,315 @@ Card.COLLECTION.push(
           0,  0, 0,
         ],
         element: "light",
+        set: "Version 1",
+      },
+      {
+        id: 82,
+        name: "Dark Falz [Elder]",
+        artwork: "dark_falz_elder.webp",
+        attack: 30,
+        ppCost: 5,
+        skillId: 0,
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 83,
+        name: "El Dagan",
+        artwork: "el_dagan.webp",
+        attack: 4,
+        ppCost: 1,
+        skillId: 0,
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 84,
+        name: "Sorcerer Phaleg",
+        artwork: "phaleg.webp",
+        attack: 25,
+        ppCost: 4,
+        skillId: 14,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          -3,  -3, -3,
+          -3,  -3, -3,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 85,
+        name: "ARKS Member Helen",
+        artwork: "helen.webp",
+        attack: 7,
+        ppCost: 2,
+        skillId: 9,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          RIGHT,  0, 0,
+          0,  0, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 86,
+        name: "Dekor Maryuda",
+        artwork: "dekor_maryuda.webp",
+        attack: 22,
+        ppCost: 4,
+        skillId: 9,
+        // prettier-ignore
+        area: [
+          0, 0, 0,
+          UP,  RIGHT, 0,
+          0,  0, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 87,
+        name: "Power Seeker Theodore",
+        artwork: "theodore2.webp",
+        attack: 20,
+        ppCost: 4,
+        skillId: 5,
+        // prettier-ignore
+        area: [
+          -5,  0, 0,
+          0,  0, 0,
+          0,  0, -4,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 88,
+        name: "ARKS Member Niels",
+        artwork: "niels.webp",
+        attack: 2,
+        ppCost: 1,
+        skillId: 5,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          0,  0, 0,
+          -2,  -1, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 89,
+        name: "ARKS Member Belyak",
+        artwork: "belyak.webp",
+        attack: 19,
+        ppCost: 4,
+        skillId: 5,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          -2,  -1, 0,
+          -2,  -2, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 90,
+        name: "El Arda",
+        artwork: "el_arda.webp",
+        attack: 19,
+        ppCost: 4,
+        skillId: 5,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          -2,  -1, 0,
+          -2,  -2, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 91,
+        name: "Dagan",
+        artwork: "dagan.webp",
+        attack: 2,
+        ppCost: 1,
+        skillId: 5,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          0,  -1, 0,
+          0,  0, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 92,
+        name: "Item Lab Employee Dudu",
+        artwork: "dudu.webp",
+        attack: 3,
+        ppCost: 1,
+        skillId: 6,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          0,  0, 0,
+          0,  LEFT, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 93,
+        name: "Combat Instructor Barbara",
+        artwork: "barbara.webp",
+        attack: 8,
+        ppCost: 2,
+        skillId: 6,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          RIGHT,  0, UP,
+          0,  0, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 94,
+        name: "Cychronahda",
+        artwork: "cychronahda.webp",
+        attack: 15,
+        ppCost: 3,
+        skillId: 6,
+        // prettier-ignore
+        area: [
+          0,  DOWN, 0,
+          0,  0, 0,
+          0,  0, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 95,
+        name: "Cuchronahda",
+        artwork: "cuchronahda.webp",
+        attack: 15,
+        ppCost: 3,
+        skillId: 6,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          0,  0, 0,
+          0,  UP, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 96,
+        name: "The Girl Who Wove the Past Matoi",
+        artwork: "matoi_dark.webp",
+        attack: 26,
+        ppCost: 5,
+        skillId: 15,
+        // prettier-ignore
+        area: [
+          0,  0, 1,
+          0,  0, 0,
+          1,  0, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 97,
+        name: "Raging Dragon Haddred",
+        artwork: "haddred.webp",
+        attack: 26,
+        ppCost: 5,
+        skillId: 15,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          0,  0, 0,
+          0,  1, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 98,
+        name: "Xiaokin Sarah",
+        artwork: "sarah.webp",
+        attack: 14,
+        ppCost: 3,
+        skillId: 15,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          0,  1, 0,
+          0,  0, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+
+      {
+        id: 99,
+        name: "Latent Talent Theodore",
+        artwork: "theodore.webp",
+        attack: 5,
+        ppCost: 2,
+        skillId: 15,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          0,  1, 0,
+          0,  0, 0,
+        ],
+        element: "darkness",
+        set: "Version 1",
+      },
+      {
+        id: 100,
+        name: "Dark Falz [Persona]",
+        artwork: "dark_falz_persona.webp",
+        attack: 27,
+        ppCost: 5,
+        skillId: 15,
+        // prettier-ignore
+        area: [
+          0,  0, 0,
+          0,  0, 1,
+          0,  0, 0,
+        ],
+        element: "darkness",
         set: "Version 1",
       },
     ] satisfies CardProps[]
