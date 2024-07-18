@@ -6,12 +6,18 @@ import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 
 function AnimatedCounter({ value }) {
-  const [amount, setAmount] = useState(value);
-  const [target, setTarget] = useState(value);
+  const [amount, setAmount] = useState(() => (isNaN(value) ? 0 : value));
+  const [target, setTarget] = useState(() => (isNaN(value) ? 0 : value));
   const [delta, setDelta] = useState(0);
   useEffect(() => {
-    setTarget(value);
-    setDelta(Math.max(1, Math.abs(value - amount) / 2));
+    const v = isNaN(value) ? 0 : value;
+    setTarget(v);
+    let dt = Math.max(1, Math.abs(v - amount) / 2);
+    if (isNaN(dt)) {
+      setDelta(v > amount ? 1 : -1);
+    } else {
+      setDelta(dt);
+    }
   }, [value, amount]);
   useEffect(() => {
     if (amount === target) return;

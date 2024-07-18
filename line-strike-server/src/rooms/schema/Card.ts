@@ -18,6 +18,8 @@ export enum CardAreaDirection {
   DOWN = 2,
 }
 
+const { UP, DOWN, LEFT, RIGHT } = CardAreaDirection;
+
 export interface CardProps {
   id: number;
   name: string;
@@ -296,9 +298,9 @@ Card.COLLECTION.push(
         skillId: 6,
         // prettier-ignore
         area: [
-          0,                        0, 0,
-          0,  CardAreaDirection.RIGHT, 0,
-          0,  CardAreaDirection.RIGHT, 0,
+          0,      0, 0,
+          0,  RIGHT, 0,
+          0,  RIGHT, 0,
         ],
         element: "fire",
         set: "Version 1",
@@ -312,9 +314,9 @@ Card.COLLECTION.push(
         skillId: 6,
         // prettier-ignore
         area: [
-          0,                        CardAreaDirection.LEFT, 0,
-          CardAreaDirection.RIGHT,                       0, 0,
-          0,                                             0, 0,
+              0, LEFT, 0,
+          RIGHT,    0, 0,
+              0,    0, 0,
         ],
         element: "fire",
         set: "Version 1",
@@ -328,9 +330,9 @@ Card.COLLECTION.push(
         skillId: 6,
         // prettier-ignore
         area: [
-          0, CardAreaDirection.RIGHT, 0,
-          0,                       0, 0,
-          0,                       0, 0,
+          0, RIGHT, 0,
+          0,     0, 0,
+          0,     0, 0,
         ],
         element: "fire",
         set: "Version 1",
@@ -541,9 +543,9 @@ Card.COLLECTION.push(
         skillId: 6,
         // prettier-ignore
         area: [
-           0,                     0,                     0,
-           0,                     0,                     0,
-           0,  CardAreaDirection.UP,  CardAreaDirection.UP,
+           0,   0,   0,
+           0,   0,   0,
+           0,  UP,  UP,
         ],
         element: "ice",
         set: "Version 1",
@@ -557,9 +559,9 @@ Card.COLLECTION.push(
         skillId: 6,
         // prettier-ignore
         area: [
-                             0,  0,                       0,
-          CardAreaDirection.UP,  0,                       0,
-                             0,  0,  CardAreaDirection.LEFT,
+           0,  0,    0,
+          UP,  0,    0,
+           0,  0, LEFT,
         ],
         element: "ice",
         set: "Version 1",
@@ -573,9 +575,9 @@ Card.COLLECTION.push(
         skillId: 6,
         // prettier-ignore
         area: [
-          0,  CardAreaDirection.LEFT,  0,
-          0,                       0,  0,
-          0,                       0,  0,
+          0, LEFT,  0,
+          0,    0,  0,
+          0,    0,  0,
         ],
         element: "ice",
         set: "Version 1",
