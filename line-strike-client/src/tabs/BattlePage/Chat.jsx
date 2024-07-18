@@ -89,13 +89,13 @@ const COMPONENTS = {
     );
   },
   turn({ turn }) {
-    return <Row>TURN {turn}</Row>;
+    return <Row>Turn #{turn}</Row>;
   },
   battleStart() {
-    return <Row>PLACING</Row>;
+    return <Row>Placing cards</Row>;
   },
   battle() {
-    return <Row>ATTACKS</Row>;
+    return <Row>Attacks</Row>;
   },
   win({ playerID, name }) {
     return (
@@ -160,7 +160,7 @@ const COMPONENTS = {
   skill({ playerID, name, cardID }) {
     return (
       <i>
-        <Name id={playerID} name={name} />
+        <Name id={playerID} name={name} />{' '}
         activates <Card cardID={cardID} />
         &apos;s skill!
       </i>
@@ -168,18 +168,18 @@ const COMPONENTS = {
   },
   supports({ playerID, name }) {
     return (
-      <i>
+      <>
         <Name id={playerID} name={name} />
         &apos;s supports
-      </i>
+      </>
     );
   },
   disrupts({ playerID, name }) {
     return (
-      <i>
+      <>
         <Name id={playerID} name={name} />
         &apos;s disrupts
-      </i>
+      </>
     );
   },
 };

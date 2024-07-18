@@ -9,7 +9,6 @@ export class PerformAttacks extends Command<LineStrikeRoom> {
     const attacks: Command[] = [];
     const lanesA = this.state.playerA.board.sortedLanes;
     const lanesB = this.state.playerB.board.sortedLanes;
-    this.state.chat.push(new ChatLog({ type: "battle" }));
     for (let i = 0; i < lanesA.length; ++i) {
       const laneA = lanesA[i];
       const laneB = lanesB[i];
@@ -53,6 +52,9 @@ export class PerformAttacks extends Command<LineStrikeRoom> {
           })
         );
       }
+    }
+    if (attacks.length > 0) {
+      this.state.chat.push(new ChatLog({ type: "battle" }));
     }
     return [
       ...attacks,

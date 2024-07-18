@@ -28,6 +28,8 @@ export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
         new DrawCard().setPayload({ player: this.state.playerB })
       );
     }
+    this.state.playerA.lastTurn.clear();
+    this.state.playerB.lastTurn.clear();
     return [
       new ResetTurn().setPayload({ player: this.state.playerA }),
       new ResetTurn().setPayload({ player: this.state.playerB }),
