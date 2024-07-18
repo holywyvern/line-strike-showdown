@@ -43,6 +43,14 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
     this.onMessage("undo", this.onUndo);
     this.onMessage("ready", this.onTurnDone);
     this.onMessage("chat", this.onChat);
+    this.clock.setInterval(() => {
+      if (this.state.turnTimeLeft <= 0) return;
+
+      this.state.turnTimeLeft = Math.max(
+        0,
+        60_000 - (Date.now() - this.state.turnTimestamp)
+      );
+    }, 1000);
     const { challenged, challenger, type } = options || {};
     await this.setMetadata({
       challenged,

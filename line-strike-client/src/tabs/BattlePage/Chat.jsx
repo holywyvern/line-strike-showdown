@@ -70,7 +70,10 @@ const COMPONENTS = {
     return <Row>TURN {turn}</Row>;
   },
   battleStart() {
-    return <Row>PLACING CARDS</Row>;
+    return <Row>PLACING</Row>;
+  },
+  battle() {
+    return <Row>ATTACKS</Row>;
   },
   win({ playerID, name }) {
     return (
@@ -129,6 +132,23 @@ const COMPONENTS = {
       </i>
     );
   },
+  attack({ playerID, name, lane, damage, busters, blocks }) {
+    return (
+      <i>
+        *<Name id={playerID} name={name} /> attacks Lane #{lane + 1} dealing{" "}
+        {damage} point{damage !== 1 ? "s" : ""} of damage!*
+        {busters ? ` (Base Busters: ${busters})` : null}
+        {blocks ? ` (Base Guards: ${blocks})` : null}
+      </i>
+    );
+  },
+  break({ playerID, name, lane }) {
+    return (
+      <i>
+        *<Name id={playerID} name={name} /> breaks Lane #{lane + 1}*
+      </i>
+    );
+  },
 };
 
 const WRAPPERS = {
@@ -138,7 +158,7 @@ const WRAPPERS = {
         style={{
           flex: 1,
           fontSize: "1.2em",
-          padding: 0,
+          padding: "2px",
           margin: 0,
           background: "var(--tab-active-background-color)",
           borderBottom: "1px solid var(--window-border-color)",
@@ -155,7 +175,24 @@ const WRAPPERS = {
         style={{
           flex: 1,
           fontSize: "1em",
-          padding: 0,
+          padding: "1px",
+          margin: 0,
+          background: "var(--tab-active-background-color)",
+          borderBottom: "1px solid var(--window-border-color)",
+          borderTop: "1px solid var(--window-border-color)",
+        }}
+      >
+        {children}
+      </h3>
+    );
+  },
+  battle({ children }) {
+    return (
+      <h3
+        style={{
+          flex: 1,
+          fontSize: "1em",
+          padding: "1px",
           margin: 0,
           background: "var(--tab-active-background-color)",
           borderBottom: "1px solid var(--window-border-color)",

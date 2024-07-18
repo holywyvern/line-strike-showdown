@@ -15,7 +15,7 @@ export interface StartTurnProps {
 export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
   async execute(props: StartTurnProps) {
     const { draw } = props || {};
-    
+
     if (this.state.delayed) {
       this.state.delayed.clear();
       this.state.delayed = null;
@@ -29,7 +29,6 @@ export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
       );
     }
     return [
-      ...draws,
       new ResetTurn().setPayload({ player: this.state.playerA }),
       new ResetTurn().setPayload({ player: this.state.playerB }),
       new ResetPlays().setPayload({ player: this.state.playerA }),
@@ -43,6 +42,7 @@ export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
         pp: format.ppPerTurn,
       }),
       new IncrementTurnCounter(),
+      ...draws,
     ];
   }
 }

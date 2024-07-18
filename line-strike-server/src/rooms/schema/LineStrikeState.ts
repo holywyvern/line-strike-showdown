@@ -39,8 +39,9 @@ export class LineStrikeState extends Schema {
   @type("uint64")
   turnTimeLeft: number;
 
-  delayed: Delayed | null;
+  turnTimestamp: number;
 
+  delayed: Delayed | null;
 
   constructor(formatID: number) {
     super();
@@ -53,6 +54,7 @@ export class LineStrikeState extends Schema {
     this.playerB = null;
     this.phase = "intro";
     this.turnTimeLeft = 0;
+    this.turnTimestamp = Date.now();
     this.chat = new ArraySchema();
   }
 

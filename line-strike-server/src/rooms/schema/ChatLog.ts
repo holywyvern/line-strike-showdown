@@ -14,7 +14,10 @@ export type ChatLogType =
   | "place"
   | "battleStart"
   | "lock"
-  | "stay";
+  | "stay"
+  | "attack"
+  | "break"
+  | "battle";
 
 export type ChatLogProps = Partial<ChatLog> & {
   type: ChatLogType;
@@ -44,6 +47,18 @@ export class ChatLog extends Schema {
 
   @type("uint64")
   cardID: number;
+
+  @type("uint8")
+  blocks: number;
+
+  @type("uint8")
+  damage: number;
+
+  @type("uint8")
+  busters: number;
+
+  @type("uint8")
+  lane: number;
 
   constructor(data: ChatLogProps) {
     super();

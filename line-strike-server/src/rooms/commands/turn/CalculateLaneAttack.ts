@@ -24,6 +24,8 @@ export class CalculateLaneAttack extends Command<
       }
     }
     for (const lane of board.lanes) {
+      if (lane.broken || lane.victory) continue;
+
       lane.attack = lane.cards
         .filter((i) => i.canAct)
         .reduce((total, card) => total + card.attack, 0);

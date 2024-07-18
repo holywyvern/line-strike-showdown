@@ -13,9 +13,8 @@ export function TurnButton({ disabled, player }) {
 
   if (!format) return null;
 
-  console.log(turn, turn.locked);
-
-  const rate = turnTimeLeft / format.turnSeconds;
+  const rate = turnTimeLeft / (format.turnSeconds * 1000);
+  console.log("rate", rate, turnTimeLeft, format.turnSeconds * 1000);
   const onClick = () => {
     room.send("ready");
   };

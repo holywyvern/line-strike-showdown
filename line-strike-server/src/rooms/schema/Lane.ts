@@ -22,6 +22,8 @@ export class Lane extends Schema {
   @type("uint32")
   attack: number;
 
+  victory: boolean;
+
   constructor(player: Player, position: number) {
     super();
     this.player = player;
@@ -31,6 +33,7 @@ export class Lane extends Schema {
     this.maxHp = format.laneHP;
     this.cards = new ArraySchema();
     this.attack = 0;
+    this.victory = false;
     while (this.cards.length < format.laneLength) {
       this.cards.push(new PlayedCard(player, this, this.cards.length));
     }
@@ -48,8 +51,8 @@ export class Lane extends Schema {
     return this.cards.filter((i) => i.cardID > 0).length;
   }
 
-  get attackCount() {
-    return this.cards.filter((i) => i.attack > 0).length;
+  get activeCards() {
+    return this.cards.filter((i) => i.canAct);
   }
 
   includes(tag: SkillTag) {

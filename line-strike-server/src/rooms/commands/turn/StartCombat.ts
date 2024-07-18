@@ -15,6 +15,7 @@ export class StartCombat extends Command<LineStrikeRoom> {
       this.state.delayed.clear();
       this.state.delayed = null;
     }
+    this.state.turnTimeLeft = 0;
     this.state.chat.push(new ChatLog({ type: "battleStart" }));
     return [
       new PerformActions().setPayload({ player: this.state.playerA }),
