@@ -12,13 +12,6 @@ export class PerformAttacks extends Command<LineStrikeRoom> {
     for (let i = 0; i < lanesA.length; ++i) {
       const laneA = lanesA[i];
       const laneB = lanesB[i];
-      console.log(
-        "checking",
-        laneA.broken,
-        laneB.broken,
-        laneA.attack,
-        laneB.attack
-      );
       if (laneA.broken || laneB.broken) continue;
       if (laneA.attack === 0 && laneB.attack === 0) continue;
 

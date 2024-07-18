@@ -85,8 +85,8 @@ export default config({
     app.use("/colyseus", monitor());
   },
 
-  beforeListen: () => {
-    matchMaker.createRoom("showdown_lobby", {
+  async beforeListen() {
+    LobbyRoom.instance = await matchMaker.createRoom("showdown_lobby", {
       __secret_lobby_key__: SECRET_LOBBY_KEY,
     });
   },

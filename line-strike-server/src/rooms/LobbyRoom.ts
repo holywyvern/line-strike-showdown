@@ -1,11 +1,48 @@
 import { Schema, MapSchema, type, filter } from "@colyseus/schema";
 
-import { Client, matchMaker, Room, ServerError } from "colyseus";
+import {
+  Client,
+  matchMaker,
+  Room,
+  RoomListingData,
+  ServerError,
+} from "colyseus";
 import { SECRET_LINE_STRIKE_KEY, SECRET_LOBBY_KEY } from "../utils/keys";
 import { Format } from "./schema/Format";
 
 const OnlySeenByOwner = (player: LobbyPlayer, client: Client) =>
   client.sessionId === player.sessionID;
+
+class LineStrikeRoom extends Schema {
+  @type("string")
+  roomID: string;
+
+  @type("uint64")
+  formatID: number;
+
+  @type("string")
+  playerA: string;
+
+  @type("string")
+  playerB: string;
+
+  @type("uint64")
+  created: number;
+
+  constructor(
+    roomID: string,
+    playerA: string,
+    playerB: string,
+    formatID: number
+  ) {
+    super();
+    this.roomID = roomID;
+    this.formatID = formatID;
+    this.playerA = playerA;
+    this.playerB = playerB;
+    this.created = Date.now();
+  }
+}
 
 class LineStrikeChallenger extends Schema {
   @type("string")
@@ -67,6 +104,8 @@ export type JoinOptions = {
 };
 
 export class LobbyRoom extends Room<LobbyRoomState> {
+  static instance: RoomListingData = null;
+
   async onCreate(options: any) {
     if (options?.__secret_lobby_key__ !== SECRET_LOBBY_KEY) {
       throw new Error("Failed to create lobby, missing key!");
@@ -202,8 +241,7 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     if (!consented) {
       try {
         await this.allowReconnection(client, 2);
-      } catch (error) {
-      }
+      } catch (error) {}
     }
     this.state.players.delete(client.sessionId);
   }
