@@ -8,8 +8,8 @@ export function FaceDownHand({ player }) {
     <div
       style={{
         flex: 1,
-        minWidth: "250px",
-        maxWidth: "250px",
+        minWidth: "calc(var(--lane-scale, 1) * 250px)",
+        maxWidth: "calc(var(--lane-scale, 1) * 250px)",
         minHeight: "96px",
         position: "relative",
       }}
@@ -20,9 +20,9 @@ export function FaceDownHand({ player }) {
             key={i}
             src={`sleeves/${sleeve || "blue_basic.webp"}`}
             style={{
-              maxWidth: "48px",
+              maxWidth: "calc(var(--lane-scale, 1) * 48px)",
               position: "relative",
-              left: `-${i * (24 + Math.floor(22 * (handSize / 15))) }px`,
+              left: `calc(var(--lane-scale, 1) * -${i * (24 + Math.floor(22 * (handSize / 15))) }px)`,
             }}
           />
         ))}

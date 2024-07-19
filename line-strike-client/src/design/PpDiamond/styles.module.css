@@ -3,7 +3,7 @@
   height: 64px;
   font-size: 16px;
   position: relative;
-  align-self: flex-end;
+  align-self: center;
 }
 
 .diamond {
@@ -14,6 +14,8 @@
   background: url("pp.png");
   background-size: cover;
   position: absolute;
+  transform-origin: center;
+  transform: scale(var(--lane-scale, 1), var(--lane-scale, 1));
 }
 
 .amount {
@@ -24,6 +26,8 @@
   font-size: 20px;
   left: -2px;
   top: -2px;
+  transform-origin: center;
+  transform: scale(var(--lane-scale, 1), var(--lane-scale, 1));
 }
 
 .max .amount {
@@ -31,5 +35,5 @@
 }
 
 .main {
-  align-self: flex-start;
+  align-self: center;
 }

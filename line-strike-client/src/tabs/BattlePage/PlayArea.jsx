@@ -12,6 +12,7 @@ import { PlayerDeck } from "./PlayerDeck";
 import { PlayerPP } from "./PlayerPP";
 import { PlayerHand } from "./PlayerHand";
 import { TurnButton } from "../TurnButton";
+import { SizeChecker } from "./SizeChecker";
 
 const PHASES = {
   intro: IntroPhase,
@@ -32,26 +33,28 @@ export function PlayArea() {
   return (
     <>
       <BattleLanes playerA={opponent} playerB={me} useTurn />
-      <Column stretch spaceItems>
-        <Column>
-          <FaceDownHand player={opponent} />
-          <Row spaceItems>
-            <PlayerPP player={opponent} />
-            <PlayerDeck player={opponent} />
-          </Row>
+      <SizeChecker>
+        <Column stretch spaceItems>
+          <Column>
+            <FaceDownHand player={opponent} />
+            <Row spaceItems>
+              <PlayerPP player={opponent} />
+              <PlayerDeck player={opponent} />
+            </Row>
+          </Column>
+          <Column centerChildren>
+            <TurnButton player={me} />
+          </Column>
+          <Column>
+            <Row spaceItems>
+              <PlayerPP player={me} useTurn main />
+              <PlayerDeck player={me} main />
+            </Row>
+            <PlayerHand player={me} />
+          </Column>
         </Column>
-        <Column centerChildren>
-          <TurnButton player={me} />
-        </Column>
-        <Column>
-          <Row spaceItems>
-            <PlayerPP player={me} useTurn main />
-            <PlayerDeck player={me} main />
-          </Row>
-          <PlayerHand player={me} />
-        </Column>
-      </Column>
-      <Component />
+        <Component />
+      </SizeChecker>
     </>
   );
 }

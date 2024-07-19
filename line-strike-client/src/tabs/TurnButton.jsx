@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
+
 import { usePlayerBoard, useRoom, useRoomState } from "./BattlePage/context";
+
 import { useCards } from "../hooks/useCards";
+
 import { Column } from "../design/Column";
 import { Button } from "../design/Button";
 import { CircularProgress } from "../design/CircularProgress";
@@ -26,6 +29,9 @@ export function TurnButton({ disabled, player }) {
           display: "flex",
           justifyContent: "center",
           alignSelf: "start",
+          transformOrigin: "center",
+          "--x": "calc(var(--lane-scale, 1) * 2)",
+          transform: `scale(var(--x), var(--x))`,
         }}
       >
         <CircularProgress rate={1 - rate} />
