@@ -37,7 +37,7 @@ export function PlayerDeck({ player, main }) {
   return (
     <Column centerChildren>
       {main && <Name player={player} />}
-      <Row centerChildren>
+      <Row endItems>
         <div
           style={{
             width: "64px",
