@@ -46,7 +46,13 @@ export function MiniCard({
           [styles.debuffed]: debuffed,
         })}
       >
-        {card.attack}
+        {card.attack < 10 ? (
+          <span style={{ position: "relative", left: "-25%" }}>
+            &nbsp;{card.attack}
+          </span>
+        ) : (
+          card.attack
+        )}
       </div>
       <div className={styles.icons}>
         {card.baseGuard && <img src="flags/base_guard.webp" />}
