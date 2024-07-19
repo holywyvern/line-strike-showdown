@@ -2,8 +2,10 @@
   flex: 1;
   display: grid;
   grid-template-rows: 1fr auto 1fr;
-  max-width: calc(var(--h) * 16 / 18 * 1px);
+  max-width: calc(var(--lane-scale, 1) * var(--h) * 16 / 18 * 1px);
   max-height: calc(var(--h) * 1px);
   overflow: hidden;
   align-self: center;
+  transform-origin: left center;
+  transform: scale(var(--lane-scale, 1), var(--lane-scale, 1));
 }
