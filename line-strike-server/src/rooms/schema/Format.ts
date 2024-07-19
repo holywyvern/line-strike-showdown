@@ -27,6 +27,7 @@ export interface FormatProps {
   initialHandSize?: number;
   official?: boolean;
   showMulligan?: boolean;
+  startingPP?: number;
 }
 
 export class Format extends Schema {
@@ -79,7 +80,7 @@ export class Format extends Schema {
   @type("uint8")
   maxPP: number;
 
-  @type("uint8")
+  @type("int16")
   ppPerTurn: number;
 
   @type("uint8")
@@ -96,6 +97,9 @@ export class Format extends Schema {
 
   @type("uint8")
   cardsDrawnOnLineDestroy: number;
+
+  @type("uint16")
+  startingPP: number;
 
   @type("boolean")
   standard: boolean;
@@ -137,6 +141,7 @@ export class Format extends Schema {
     initialHandSize,
     official,
     showMulligan,
+    startingPP,
   }: FormatProps) {
     super();
     this.id = id;
@@ -173,6 +178,7 @@ export class Format extends Schema {
     this.initialHandSize = initialHandSize || 5;
     this.official = official || false;
     this.showMulligan = showMulligan || false;
+    this.startingPP = startingPP || 0;
   }
 
   isLegal(card: Card, count: number) {

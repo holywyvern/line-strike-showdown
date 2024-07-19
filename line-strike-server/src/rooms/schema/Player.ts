@@ -83,7 +83,7 @@ export class Player extends Schema {
     this.handIDs = new ArraySchema();
     this.lastTurn = new ArraySchema();
     this.board = new PlayerBoard(this);
-    this.pp = 0;
+    this.pp = this.state.format.startingPP;
     this.sessionID = client.sessionId;
     this.mirrored = mirrored;
     this.selected = false;
