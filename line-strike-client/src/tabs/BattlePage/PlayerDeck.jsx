@@ -43,6 +43,7 @@ export function PlayerDeck({ player, main }) {
             width: "64px",
             height: `${60 + 3 * (format.maxCards - 1)}px`,
             position: "relative",
+            alignSelf: "flex-end"
           }}
         >
           {new Array(deckSize).fill(null).map((_, index) => {
