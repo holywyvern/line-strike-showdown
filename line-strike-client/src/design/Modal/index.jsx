@@ -1,15 +1,19 @@
+import { useContext } from "react";
+import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import cx from "classnames";
 
 import styles from "./styles.module.css";
 import { Box } from "../Box";
-import { createPortal } from "react-dom";
+
+import { Context } from "./context";
 
 export function Modal({ open, onClose, children, title }) {
+  const node = useContext(Context);
   const className = cx(styles.modal, { [styles.open]: open });
   return createPortal(
-    <div className={className}>
-      <div className={styles.window}>
+    <div className={className} onClick={onClose}>
+      <div className={styles.window} onClick={(e) => e.stopPropagation()}>
         <Box>
           <Box.Header>
             <div className={styles.title}>
@@ -27,7 +31,7 @@ export function Modal({ open, onClose, children, title }) {
         </Box>
       </div>
     </div>,
-    document.getElementById("modals")
+    node
   );
 }
 

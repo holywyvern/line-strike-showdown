@@ -125,8 +125,13 @@ function useLobby() {
     room,
     players,
     challenges,
-    cancelQueue() {
-      queue?.match?.leave();
+    async cancelQueue() {
+      try {
+        queue?.match?.leave();
+      } catch (error) {
+        console.error(error);
+      }
+      setQueue(null);
     },
     id,
     isLoading: state === "pending" || state === "joining",

@@ -50,7 +50,7 @@ export function FormatSelector() {
           </Select>
           <p style={{ padding: 0, margin: 0, whiteSpace: "pre-line" }}>
             {formatID === standardFormatID
-              ? "Latest version of LINE STRIKE\navailable to play on NGS: PSO2."
+              ? "Latest version of LINE STRIKE\navailable to play on NGS."
               : format?.description}
           </p>
         </form>

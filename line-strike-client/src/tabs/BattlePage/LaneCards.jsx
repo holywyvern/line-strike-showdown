@@ -27,7 +27,6 @@ function calculatePpCost(card, status, skills, cards, lanes, position) {
   if (skill?.tags?.includes("reinforcement")) {
     const i = position % 3;
     const [a, b] = lanes;
-    console.log("lanes", a, b);
     const laneA = a[i];
     const laneB = b[i];
     if (laneB.attack > laneA.attack) {

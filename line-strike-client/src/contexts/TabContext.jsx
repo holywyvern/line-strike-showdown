@@ -70,6 +70,17 @@ export function TabContext({ children }) {
         return newTabs;
       });
     },
+    removeWarning(index) {
+      setTabs((tabs) => {
+        const newTabs = [...tabs];
+        if (newTabs[index]) {
+          const newTab = { ...newTabs[index] };
+          newTab.warning = null;
+          newTabs[index] = newTab;
+        }
+        return newTabs;
+      });
+    },
   };
   return <Context.Provider value={api}>{children}</Context.Provider>;
 }

@@ -1,33 +1,41 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
-
-import { Card } from "../../design/Card";
 
 import { useCards } from "../../hooks/useCards";
 
+import { Modal } from "../../design/Modal";
+import { Card } from "../../design/Card";
+import { CardCollectionActions } from "../../design/CardCollectionActions";
+
 export function DeckCard({ id, onRemove }) {
   const db = useCards();
+  const [details, setDetails] = useState(false);
+
+  const card = db.cards[id];
+  if (!card) return null;
+
   return (
     <>
-      <Card card={db.cards[id]} scale={0.25} hiddenInfo>
-        <button
-          style={{
-            appearance: "none",
-            fontSize: "42px",
-            border: 0,
-            background: "transparent",
-            color: "inherit",
-            cursor: "pointer",
-          }}
-          onClick={onRemove}
-        >
-          <h4>Remove</h4>
-        </button>
-      </Card>
+      <div style={{ position: "relative", inset: 0 }}>
+        <img src={`cards/${card.artwork}`} style={{ width: "100%" }} />
+        <CardCollectionActions
+          onDetails={() => setDetails(true)}
+          onRemove={onRemove}
+        />
+      </div>
+      <Modal
+        open={details}
+        title="Card Details"
+        onClose={() => setDetails(false)}
+      >
+        <Card card={card} />
+      </Modal>
     </>
   );
 }
 
 DeckCard.propTypes = {
   id: PropTypes.any,
+  onDetails: PropTypes.func,
   onRemove: PropTypes.func,
 };

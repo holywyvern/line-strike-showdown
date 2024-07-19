@@ -27,7 +27,7 @@ export function DeckBox() {
     setNoChanges(false);
   };
   return (
-    <Box>
+    <Box flex>
       <Box.Header>
         <h2>Deck Listing</h2>
       </Box.Header>

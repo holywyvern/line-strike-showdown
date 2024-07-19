@@ -49,7 +49,7 @@ export function Disclaimers() {
         <p style={{ margin: 0, padding: 0 }}>
           Do you want to play the real deal?{" "}
           <a href="https://pso2.com/players/" target="_blank">
-            Download New Genesis: Phantasy Star Online 2 version 2
+            Download Phantasy Star Online 2 New Genesis Version 2
           </a>
         </p>
       </Box.Body>
