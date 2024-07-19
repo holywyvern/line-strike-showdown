@@ -20,13 +20,15 @@ export class SwapCards extends Command<LineStrikeRoom, SwapCardsPayload> {
     if (this.state.phase !== "firstDraw") return;
 
     player.selected = true;
-    this.state.chat.push(
-      new ChatLog({
-        playerID: player.sessionID,
-        name: player.name,
-        type: "mulligan",
-      })
-    );
+    if (this.state.format?.showMulligan) {
+      this.state.chat.push(
+        new ChatLog({
+          playerID: player.sessionID,
+          name: player.name,
+          type: "mulligan",
+        })
+      );
+    }
     return [
       new DrawFirstHandBack().setPayload({ player }),
       new CheckAllSelected(),

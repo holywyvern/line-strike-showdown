@@ -18,13 +18,15 @@ export class KeepCards extends Command<LineStrikeRoom, KeepCardsPayload> {
     if (this.state.phase !== "firstDraw") return;
 
     player.selected = true;
-    this.state.chat.push(
-      new ChatLog({
-        type: "keep",
-        playerID: player.sessionID,
-        name: player.name,
-      })
-    );
+    if (this.state.format?.showMulligan) {
+      this.state.chat.push(
+        new ChatLog({
+          type: "keep",
+          playerID: player.sessionID,
+          name: player.name,
+        })
+      );
+    }
     return [new CheckAllSelected()];
   }
 }
