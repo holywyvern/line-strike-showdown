@@ -60,4 +60,8 @@ export default {
       room.onStateChange(onAllJoin);
     });
   },
+
+  queue(seat) {
+    return client.consumeSeatReservation(seat);
+  },
 };

@@ -12,6 +12,7 @@ import { matchMaker, LobbyRoom as ColyseusLobbyRoom } from "colyseus";
 import { SECRET_LOBBY_KEY } from "./utils/keys";
 import { Skill } from "./rooms/schema/Skill";
 import { Format } from "./rooms/schema/Format";
+import { UnrankedMatcherRoom } from "./rooms/UnrankedMatcherRoom";
 
 interface Comparable {
   name: string;
@@ -41,6 +42,7 @@ export default config({
       .define("free_line_strike", LineStrikeRoom)
       .enableRealtimeListing();
     gameServer.define("showdown_lobby", LobbyRoom);
+    gameServer.define("unranked", UnrankedMatcherRoom).filterBy(["formatID"]);
   },
 
   initializeExpress: (app) => {

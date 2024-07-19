@@ -49,10 +49,18 @@ class LobbyPlayer extends Schema {
   @type({ map: LineStrikeChallenger })
   challenges: MapSchema<LineStrikeChallenger>;
 
+  @type("boolean")
+  matching: boolean;
+
+  @type("uint64")
+  matchingSince: number;
+
   constructor(sessionID: string, name: string) {
     super();
     this.sessionID = sessionID;
     this.challenges = new MapSchema();
+    this.matching = false;
+    this.matchingSince = 0;
     this.name = name;
     this.room = null;
   }
@@ -81,7 +89,8 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     }
     this.autoDispose = false;
     this.setState(new LobbyRoomState());
-    this.onMessage("free", this.onFreePlay);
+
+    this.onMessage("unranked", this.onUnranked);
     this.onMessage("challenge", this.onChallenge);
     this.onMessage("accept", this.onChallengeAccepted);
     this.onMessage("reject", this.onChallengeRejected);
@@ -89,7 +98,22 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     this.onMessage("spectate", this.onSpectate);
   }
 
-  onFreePlay = async (client: Client) => {};
+  onUnranked = async (client: Client, formatID: any) => {
+    const player = this.state.players.get(client.sessionId);
+    if (!player) return;
+    if (player.matching) return;
+    if (!Format.COLLECTION[formatID]) return;
+
+    player.matching = true;
+    const seat = await matchMaker.joinOrCreate("unranked", {
+      formatID,
+      name: player.name,
+      playerID: player.sessionID,
+      __secret_lobby_key__: SECRET_LOBBY_KEY,
+    });
+    const since = Date.now();
+    client.send("queue", { seat, since, type: "Unranked" });
+  };
 
   onChallenge = async (client: Client, options: any) => {
     const challenger = this.state.players.get(client.sessionId);
@@ -116,44 +140,8 @@ export class LobbyRoom extends Room<LobbyRoomState> {
 
     const { formatID } = challenged.challenges.get(clientId);
     challenged.challenges.delete(clientId);
-    const room = await matchMaker.createRoom("free_line_strike", {
-      __secret_line_strike_key__: SECRET_LINE_STRIKE_KEY,
-      formatID,
-      challenger: {
-        name: challenger.name,
-        id: challenged.sessionID,
-      },
-      challenged: {
-        name: challenged.name,
-        id: challenged.sessionID,
-      },
-      type: "free",
-    });
-    const [a, b] = await Promise.all([
-      matchMaker.joinById(room.roomId, {
-        name: challenged.name,
-        id: challenged.sessionID,
-      }),
-      matchMaker.joinById(room.roomId, {
-        name: challenger.name,
-        id: challenger.sessionID,
-      }),
-    ]);
-    client.send("battle", {
-      seat: a,
-      opponent: challenger.name,
-      type: "free",
-      formatID,
-      specatator: false,
-    });
-    const client2 = this.clients.getById(clientId);
-    client2.send("battle", {
-      seat: b,
-      opponent: challenged.name,
-      type: "free",
-      formatID,
-      spectator: false,
-    });
+
+    return this.onMatchmakeFound(client.sessionId, clientId, formatID);
   };
 
   onChallengeRejected = async (client: Client, clientId: any) => {
@@ -213,5 +201,78 @@ export class LobbyRoom extends Room<LobbyRoomState> {
       } catch (error) {}
     }
     this.state.players.delete(client.sessionId);
+  }
+
+  async onMatchmakeFound(
+    id1: string,
+    id2: string,
+    formatID: number,
+    type = "free"
+  ) {
+    const challenged = this.state.players.get(id1);
+    const challenger = this.state.players.get(id2);
+    if (!challenged) return;
+    if (!challenger) return;
+
+    if (type !== "free") {
+      challenged.matching = false;
+      challenger.matching = false;
+    }
+
+    const room = await matchMaker.createRoom("free_line_strike", {
+      __secret_line_strike_key__: SECRET_LINE_STRIKE_KEY,
+      formatID,
+      challenger: {
+        name: challenger.name,
+        id: challenged.sessionID,
+      },
+      challenged: {
+        name: challenged.name,
+        id: challenged.sessionID,
+      },
+      type,
+    });
+    const [a, b] = await Promise.all([
+      matchMaker.joinById(room.roomId, {
+        name: challenged.name,
+        id: challenged.sessionID,
+      }),
+      matchMaker.joinById(room.roomId, {
+        name: challenger.name,
+        id: challenger.sessionID,
+      }),
+    ]);
+    const client = this.clients.getById(id1);
+    client.send("battle", {
+      seat: a,
+      opponent: challenger.name,
+      type,
+      formatID,
+      specatator: false,
+    });
+    const client2 = this.clients.getById(id2);
+    client2.send("battle", {
+      seat: b,
+      opponent: challenged.name,
+      type,
+      formatID,
+      spectator: false,
+    });
+    if (type !== "free") {
+      client.send("queue", null);
+      client2.send("queue", null);
+    }
+  }
+
+  onCancelQueue(playerID: string) {
+    const player = this.state.players.get(playerID);
+    if (!player) return;
+    if (!player.matching) return;
+
+    player.matching = false;
+    const client = this.clients.getById(player.sessionID);
+
+    if (!client) return;
+    client.send("queue", null);
   }
 }

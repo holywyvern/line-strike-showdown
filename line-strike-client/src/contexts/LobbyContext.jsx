@@ -16,6 +16,7 @@ function useLobby() {
   const [state, setState] = useState("pending");
   const [room, setRoom] = useState(null);
   const [players, setPlayers] = useState({});
+  const [queue, setQueue] = useState(null);
   const [challenges, setChallenges] = useState({});
   const { addTab } = useTabs();
   const { name } = useProfile();
@@ -33,6 +34,16 @@ function useLobby() {
   }, [name]);
   useEffect(() => {
     if (!room) return;
+
+    room.onMessage("queue", async (data) => {
+      if (!data) {
+        setQueue(null);
+        return;
+      }
+      const { seat, since, type } = data;
+      const match = await colyseus.queue(seat);
+      setQueue({ match, seat, since, type });
+    });
 
     room.onMessage(
       "battle",
@@ -109,10 +120,14 @@ function useLobby() {
   }, [me, me?.challenges]);
   return {
     state,
+    queue,
     me,
     room,
     players,
     challenges,
+    cancelQueue() {
+      queue?.match?.leave();
+    },
     id,
     isLoading: state === "pending" || state === "joining",
     isLoaded: state === "loaded",
