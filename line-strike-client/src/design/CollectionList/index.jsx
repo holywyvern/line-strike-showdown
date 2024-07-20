@@ -18,11 +18,11 @@ const SWAPS = ["moveEnemy", "moveAlly", "swapEnemy", "swapAlly"];
 const AREA_EFFECTS = [...BUFFS, ...SWAPS, "stun"];
 
 const ARROWS = {
-  2: '🠋',
-  4: '🠈',
-  6: '🠊',
-  8: '🠉'
-}
+  2: "🠋",
+  4: "🠈",
+  6: "🠊",
+  8: "🠉",
+};
 
 function hasArea(skill) {
   return AREA_EFFECTS.some((i) => skill.tags.includes(i));
@@ -34,9 +34,30 @@ function value(skill, area) {
   if (BUFFS.some((i) => skill.tags.includes(i)))
     return (area < 0 ? "" : "+") + area;
 
-  if (SWAPS.some((i) => skill.tags.includes(i))) return ARROWS[area]
-    return null;
+  if (SWAPS.some((i) => skill.tags.includes(i))) return ARROWS[area];
+  return null;
 }
+
+export function CardArea({ skill, card }) {
+  const showArea = hasArea(skill);
+  return (
+    <div className={cx(styles.grid, { [styles[skill?.category]]: showArea })}>
+      {showArea &&
+        card.displayArea.map((i, index) => {
+          return (
+            <div key={index} className={styles.area}>
+              {value(skill, i)}
+            </div>
+          );
+        })}
+    </div>
+  );
+}
+
+CardArea.propTypes = {
+  skill: PropTypes.any,
+  card: PropTypes.any,
+};
 
 function CollectionListItem({
   size = 0,
@@ -63,7 +84,7 @@ function CollectionListItem({
   const isLimited = maxRepeats < format.maxRepeats && maxRepeats > 0;
   const allowRepeat = count >= maxRepeats;
   const disabled = incorrectElement || isIllegal || allowRepeat || isDeckFull;
-  const showArea = hasArea(skill);
+
   return (
     <>
       <li>
@@ -75,18 +96,7 @@ function CollectionListItem({
           >
             <MiniCard played card={card} scale={0.5} />
           </button>
-          <div
-            className={cx(styles.grid, { [styles[skill?.category]]: showArea })}
-          >
-            {showArea &&
-              card.displayArea.map((i, index) => {
-                return (
-                  <div key={index} className={styles.area}>
-                    {value(skill, i)}
-                  </div>
-                );
-              })}
-          </div>
+          <CardArea skill={skill} card={card} />
           <div>
             <div className={styles.title}>
               <img src={`elements/${card.element}.webp`} />

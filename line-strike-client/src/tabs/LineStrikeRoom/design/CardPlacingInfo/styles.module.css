@@ -3,6 +3,12 @@
   height: 64px;
 }
 
+.area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .info {
   display: flex;
   gap: 8px;
