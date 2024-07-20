@@ -15,8 +15,8 @@ function App() {
   return (
     <>
       <CardContext>
-        <ProfileContext>
-          <AssetContext>
+        <AssetContext>
+          <ProfileContext>
             <Loader>
               <NameEnforcer>
                 <TabContext>
@@ -26,8 +26,8 @@ function App() {
                 </TabContext>
               </NameEnforcer>
             </Loader>
-          </AssetContext>
-        </ProfileContext>
+          </ProfileContext>
+        </AssetContext>
       </CardContext>
     </>
   );

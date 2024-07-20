@@ -49,6 +49,7 @@ export class LaneAttack extends Command<LineStrikeRoom, LaneAttackProps> {
     defender.hp = Math.max(0, defender.hp - damage);
 
     if (defender.broken) {
+      this.state.musicName = "phase2";
       attacker.victory = true;
       this.state.chat.push(
         new ChatLog({

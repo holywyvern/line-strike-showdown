@@ -1,9 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { PLAYMATS, SLEEVES } from "../assets/constants";
 
 import { useCards } from "../hooks/useCards";
+import { Context } from "../hooks/useAssets";
 
 function loadImage(folder, name) {
   return new Promise((resolve, reject) => {
@@ -37,7 +38,6 @@ function useAssetState() {
       setState("error");
       setAssets({ error });
     };
-
     Promise.all([playmats, sleeves, cards]).then(onLoad, onError);
   }, [cardState.isLoaded, cardState.cards]);
   return {
@@ -49,18 +49,10 @@ function useAssetState() {
   };
 }
 
-const Context = createContext();
-
-function useAssets() {
-  return useContext(Context);
-}
-
 export function AssetContext({ children }) {
   const state = useAssetState();
   return <Context.Provider value={state}>{children}</Context.Provider>;
 }
-
-AssetContext.hook = useAssets;
 
 AssetContext.propTypes = {
   children: PropTypes.node,

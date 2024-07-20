@@ -1,3 +1,7 @@
-import { ProfileContext } from "../contexts/ProfileContext";
+import { createContext, useContext } from "react";
 
-export const useProfile = ProfileContext.hook;
+export const Context = createContext();
+
+export function useProfile() {
+  return useContext(Context);
+}

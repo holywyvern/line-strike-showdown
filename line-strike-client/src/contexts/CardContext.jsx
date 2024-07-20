@@ -1,14 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import cards from "../services/cards";
-
-const DEFAULT_STATE = { cards: [], skills: [], status: "pending" };
-
-const Context = createContext(DEFAULT_STATE);
-
-function useCards() {
-  return useContext(Context);
-}
+import { Context, DEFAULT_STATE } from "../hooks/useCards";
 
 export function CardContext({ children }) {
   const [state, setState] = useState(DEFAULT_STATE);
@@ -34,8 +27,6 @@ export function CardContext({ children }) {
     </Context.Provider>
   );
 }
-
-CardContext.hook = useCards;
 
 CardContext.propTypes = {
   children: PropTypes.node,

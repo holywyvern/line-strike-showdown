@@ -21,6 +21,9 @@ export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
       this.state.delayed.clear();
       this.state.delayed = null;
     }
+    if (!draw) {
+      this.state.musicName = "phase1";
+    }
     const format = this.state.format;
     const draws: DrawCard[] = [];
     if (draw) {

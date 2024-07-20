@@ -30,6 +30,7 @@ export class Leave extends Command<LineStrikeRoom, LeaveProps> {
       this.state.delayed = null;
     }
     this.state.phase = "finished";
+    this.state.musicName = "begin";
 
     const winner =
       this.state.playerA === player ? this.state.playerB : this.state.playerA;

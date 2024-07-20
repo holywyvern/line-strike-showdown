@@ -1,3 +1,7 @@
-import { AssetContext } from "../contexts/AssetContext";
+import { createContext, useContext } from "react";
 
-export const useAssets = AssetContext.hook;
+export const Context = createContext();
+
+export function useAssets() {
+  return useContext(Context);
+}

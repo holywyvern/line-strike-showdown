@@ -1,12 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+
 import { useCards } from "../hooks/useCards";
 
-const Context = createContext();
-
-function useProfile() {
-  return useContext(Context);
-}
+import { AudioManager } from "../utils/AudioManager";
+import { WebAudio } from "../utils/WebAudio";
+import { Context } from "../hooks/useProfile";
 
 const LAST_NAME_KEY = "line-strike.lastPlayer";
 const LOCAL_STORAGE_KEY = "line-strike.profile.decks";
@@ -20,12 +19,27 @@ export function ProfileContext({ children }) {
   const [deckStatus, setDeckStatus] = useState("formatting");
   const [formatID, setFormatID] = useState(DEFAULT_FORMAT);
   const [decks, setDecks] = useState({});
+  const [music, setMusic] = useState(false);
+  const [volume, setVolume] = useState(100);
   const api = {
     name,
+    music,
     format: db.formats?.[formatID],
     decks: decks[formatID] || [],
     allDecks: decks,
     status,
+    volume,
+    setVolume(value) {
+      const v = value / 100;
+      WebAudio.masterVolume = v * v;
+      setVolume(value);
+    },
+    toggleMusic() {
+      setMusic((v) => {
+        AudioManager.bgmVolume = v ? 0 : 100;
+        return !v;
+      });
+    },
     changeName(name) {
       setName(name);
     },
@@ -79,8 +93,10 @@ export function ProfileContext({ children }) {
     const saved = JSON.parse(json);
     setName(lastName);
     setDecks(saved.decks || {});
-    setFormatID(json.formatID || DEFAULT_FORMAT);
+    setMusic(saved.music || false);
+    api.setVolume(saved.volume || 0);
     setStatus("loaded");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // Saves the profile on changes for future visits
   useEffect(() => {
@@ -89,13 +105,11 @@ export function ProfileContext({ children }) {
     localStorage.setItem(LAST_NAME_KEY, name);
     localStorage.setItem(
       `${LOCAL_STORAGE_KEY}.${name}`,
-      JSON.stringify({ name, decks, formatID })
+      JSON.stringify({ name, decks, formatID, music, volume })
     );
-  }, [name, decks, status, formatID]);
+  }, [name, decks, status, music, volume, formatID]);
   return <Context.Provider value={api}>{children}</Context.Provider>;
 }
-
-ProfileContext.hook = useProfile;
 
 ProfileContext.propTypes = {
   children: PropTypes.node,

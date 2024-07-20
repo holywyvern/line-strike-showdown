@@ -29,7 +29,7 @@ export function PhaseChecker({ spectator, index }) {
   const [finished, setFinished] = useState(false);
   const { formats } = useCards();
   const room = useBattleRoom();
-  const { phase, turnTimeLeft, formatID } = useBattleRoomState();
+  const { phase, musicName, turnTimeLeft, formatID } = useBattleRoomState();
   const { bottom } = usePlayers();
   const { locked } = useBoard(bottom, false, !spectator);
   const format = formats[formatID];
@@ -42,6 +42,10 @@ export function PhaseChecker({ spectator, index }) {
     setFinished(true);
     tabs.removeWarning(index);
   }, [phase, index, tabs, finished]);
+
+  useEffect(() => {
+    tabs.changeMusic(index, musicName);
+  }, [tabs, index, musicName]);
 
   if (phase === "intro") {
     if (spectator) {

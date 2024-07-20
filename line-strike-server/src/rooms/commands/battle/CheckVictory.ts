@@ -32,6 +32,7 @@ export class CheckVictory extends Command<LineStrikeRoom> {
     }
     if (finish) {
       this.state.phase = "finished";
+      this.state.musicName = "begin";
       return;
     }
     return [new StartTurn().setPayload({ draw: true })];

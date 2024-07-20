@@ -24,5 +24,5 @@ export function PlayerPP({ value, top, max }) {
 PlayerPP.propTypes = {
   value: PropTypes.number,
   top: PropTypes.bool,
-  max: PropTypes.bool,
+  max: PropTypes.number,
 };

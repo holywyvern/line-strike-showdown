@@ -5,6 +5,7 @@ import { Context } from "../hooks/useTabs";
 
 import { Homepage } from "../tabs/Homepage";
 import { Library } from "../tabs/Library";
+import { AudioManager } from "../utils/AudioManager";
 
 const DEFAULT_TABS = [
   {
@@ -56,6 +57,12 @@ export function TabContext({ children }) {
     changeTab(index) {
       if (index < 0 || index >= tabs.length) return;
 
+      const tab = tabs[index];
+      if (tab.music) {
+        AudioManager.playBgm({ name: tab.music, volume: 100 });
+      } else {
+        AudioManager.stopBgm();
+      }
       setActive(index);
     },
     removeTab(index) {
@@ -67,7 +74,23 @@ export function TabContext({ children }) {
         tab?.onClose?.();
         newTabs.splice(index, 1);
         if (active >= index) {
-          setActive(active - 1);
+          api.changeTab(active - 1);
+        }
+        return newTabs;
+      });
+    },
+    changeMusic(index, music) {
+      setTabs((tabs) => {
+        if (tabs[index].music === music) return tabs;
+
+        const newTabs = [...tabs];
+        if (newTabs[index]) {
+          const newTab = { ...newTabs[index] };
+          newTab.music = music;
+          newTabs[index] = newTab;
+          if (music && active === index) {
+            AudioManager.playBgm({ name: music, volume: 100 });
+          }
         }
         return newTabs;
       });
