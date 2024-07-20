@@ -735,6 +735,12 @@ Card.COLLECTION.push(
           0,  0, 0,
           0,  RIGHT, LEFT,
         ],
+        // prettier-ignore
+        displayArea: [
+          0,  0, 0,
+          0,  0, 0,
+          0,  0, LEFT,
+        ],
         element: "wind",
         set: "Version 1",
       },
@@ -748,6 +754,12 @@ Card.COLLECTION.push(
         skillId: 10,
         // prettier-ignore
         area: [
+          0,  0, 0,
+          0,  0, LEFT,
+          0,  0, 0,
+        ],
+        // prettier-ignore
+        displayArea: [
           0,  0, 0,
           0,  RIGHT, LEFT,
           0,  0, 0,
