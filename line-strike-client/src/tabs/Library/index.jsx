@@ -27,10 +27,13 @@ const DEFAULT_ELEMENTS = new Set([
 const DEFAULT_COSTS = new Set([1, 2, 3, 4, 5]);
 
 export function Library() {
-  const { cards, collection, formats } = useCards();
+  const { cards, collection, formats, skills } = useCards();
   const [elements, setElements] = useState(DEFAULT_ELEMENTS);
   const [costs, setCosts] = useState(DEFAULT_COSTS);
   const [name, setName] = useState("");
+  const [selectedSkills, setSelectedSkills] = useState(
+    () => new Set(skills.filter(Boolean).map((i) => i.id))
+  );
   const [selectedFormats, setSelectedFormats] = useState(
     () => new Set(formats.filter(Boolean).map((i) => i.id))
   );
@@ -40,6 +43,7 @@ export function Library() {
       (i) =>
         costs.has(i.ppCost) &&
         elements.has(i.element) &&
+        selectedSkills.has(i.skill?.id) &&
         [...selectedFormats.values()]
           .map((j) => formats[j])
           .some((j) => isAllowedInFormat(j, i))
@@ -50,7 +54,16 @@ export function Library() {
       );
     }
     return library;
-  }, [cards, collection, elements, costs, name, formats, selectedFormats]);
+  }, [
+    cards,
+    collection,
+    elements,
+    costs,
+    name,
+    formats,
+    selectedFormats,
+    selectedSkills,
+  ]);
   return (
     <LibraryLayout>
       <CardList>
@@ -111,6 +124,29 @@ export function Library() {
                 {format.name} {format.standard && "(Standard)"}
               </Checkbox>
             ))}
+            <h3>Filter by Skill</h3>
+            {skills
+              .filter(Boolean)
+              .sort((a, b) => String(a.name).localeCompare(b.name))
+              .map((skill) => (
+                <Checkbox
+                  key={`skill-${skill.id}`}
+                  checked={selectedSkills.has(skill.id)}
+                  onChange={(e) =>
+                    setSelectedSkills((skills) => {
+                      const newSkills = new Set(skills);
+                      if (e.target.checked) {
+                        newSkills.add(skill.id);
+                      } else {
+                        newSkills.delete(skill.id);
+                      }
+                      return newSkills;
+                    })
+                  }
+                >
+                  {skill.name}
+                </Checkbox>
+              ))}
           </Column>
         </form>
       </Sidenav>

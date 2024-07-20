@@ -1,0 +1,17 @@
+.holder {
+  width: 125px;
+  height: 125px;
+  background-image: url('lanes_bottom.png');
+  background-size: 200% 100%;
+  background-position: 0 0;
+  display: grid;
+  place-items: center;
+}
+.holder:hover,
+.active {
+  background-position: -100% 0;
+}
+
+.top {
+  background-image: url('lanes_top.png');
+}

@@ -195,11 +195,6 @@ export class LobbyRoom extends Room<LobbyRoomState> {
   }
 
   async onLeave(client: Client, consented: boolean) {
-    if (!consented) {
-      try {
-        await this.allowReconnection(client, 2);
-      } catch (error) {}
-    }
     this.state.players.delete(client.sessionId);
   }
 

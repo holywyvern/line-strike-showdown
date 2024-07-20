@@ -9,6 +9,7 @@ import { CenterView } from "../design/CenterView";
 import { useTabs } from "../hooks/useTabs";
 import { BattlePage } from "../tabs/BattlePage";
 import { useCards } from "../hooks/useCards";
+import { LineStrikeRoom } from "../tabs/LineStrikeRoom";
 
 const BATTLE_TYPES = {};
 
@@ -65,7 +66,7 @@ function useLobby() {
           } (${BATTLE_TYPES[type] || "Free Battle"}) [${
             formats[formatID].name
           }]`,
-          <BattlePage room={room} spectator={spectator} />,
+          <LineStrikeRoom room={room} spectator={spectator} />,
           {
             closable: true,
             warning: spectator ? null : (

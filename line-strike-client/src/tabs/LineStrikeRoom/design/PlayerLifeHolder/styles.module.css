@@ -1,0 +1,12 @@
+.holder {
+  position: absolute;
+  width: 500px;
+  left: 660px;
+  top: 1022px;
+  display: flex;
+  gap: 24px;
+}
+
+.top {
+  top: 28px;
+}

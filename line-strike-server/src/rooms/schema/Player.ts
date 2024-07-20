@@ -90,7 +90,7 @@ export class Player extends Schema {
     this.handSize = 0;
     this.sleeve = "blue_basic.webp";
     this.playmat = "blue_basic.webp";
-    this.playmatOpacity = 0.1;
+    this.playmatOpacity = 1;
     this.deckSize = 0;
   }
 

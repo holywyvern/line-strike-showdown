@@ -31,6 +31,8 @@ export interface CardProps {
   amount?: number;
   ppCost: number;
   set: CardSet;
+  miniLeft?: number;
+  miniTop?: number;
 }
 
 export class Card extends Schema {
@@ -63,6 +65,12 @@ export class Card extends Schema {
   @type("uint8")
   ppCost: number;
 
+  @type("int8")
+  miniLeft: number;
+
+  @type("int8")
+  miniTop: number;
+
   @type("string")
   set: CardSet;
 
@@ -77,6 +85,8 @@ export class Card extends Schema {
     amount,
     ppCost,
     set,
+    miniLeft,
+    miniTop,
   }: CardProps) {
     super();
     this.id = id;
@@ -89,6 +99,8 @@ export class Card extends Schema {
     this.amount = amount || 0;
     this.ppCost = ppCost;
     this.set = set;
+    this.miniLeft = typeof miniLeft === "number" ? miniLeft : 15;
+    this.miniTop = typeof miniTop === "number" ? miniTop : 30;
   }
 
   get skill() {

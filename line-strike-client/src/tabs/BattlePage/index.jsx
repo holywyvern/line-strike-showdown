@@ -18,7 +18,6 @@ function PhaseChecker({ children }) {
   const tabs = useTabs();
   const index = useContext(Index);
   useEffect(() => {
-    console.log(phase, "AHHHHHHH")
     if (phase !== "finished") return;
 
     tabs.removeWarning(index);

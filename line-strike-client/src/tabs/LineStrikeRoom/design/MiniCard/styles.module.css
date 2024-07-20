@@ -1,0 +1,57 @@
+.mini {
+  width: 128px;
+  height: 128px;
+  position: absolute;
+  left: calc(var(--index, 0) * (60 - 40 * var(--size, 0) / 15) * 1px);
+  top: 0;
+  z-index: var(--index, 0);
+  transition: all 0.2s ease-in-out;
+}
+
+.played {
+  position: fixed;
+  left: unset;
+  top: unset;
+}
+
+.mini:hover {
+  top: calc(var(--displacement, 0) * -40px);
+  z-index: calc(var(--displacement, 0) * (1 + var(--index, 0)) * 10);
+}
+
+.border {
+  position: absolute;
+  inset: 0;
+}
+
+.fire .border {
+  background: url("minis/fire.png");
+}
+
+.ice .border {
+  background: url("minis/ice.png");
+}
+
+.wind .border {
+  background: url("minis/wind.png");
+}
+
+.lightning .border {
+  background: url("minis/lightning.png");
+}
+
+.light .border {
+  background: url("minis/light.png");
+}
+
+.darkness .border {
+  background: url("minis/darkness.png");
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  background-image: var(--img);
+  background-size: 185px 256px;
+  background-position: calc(var(--left, 0) * -1px) calc(var(--top, 0) * -1px);
+}

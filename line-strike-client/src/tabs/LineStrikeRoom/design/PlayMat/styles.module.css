@@ -1,0 +1,12 @@
+.mat {
+  position: absolute;
+  left: 475px;
+  bottom: 45px;
+  width: 870px;
+}
+
+.mirror {
+  transform-origin: center;
+  transform: scale(-1, -1);
+  top: 45px;
+}

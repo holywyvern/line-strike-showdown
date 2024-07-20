@@ -92,7 +92,7 @@ const COMPONENTS = {
     return <Row>Turn #{turn}</Row>;
   },
   battleStart() {
-    return <Row>Placing cards</Row>;
+    return <Row>Card Opening</Row>;
   },
   battle() {
     return <Row>Attacks</Row>;

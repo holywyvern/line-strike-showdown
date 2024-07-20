@@ -5,6 +5,7 @@ import { LineStrikeRoom } from "../../LineStrikeRoom";
 import { ChatLog } from "../../schema/ChatLog";
 import { StartCombat } from "./StartCombat";
 import { Delayed } from "colyseus";
+import { Wait } from "../utils/Wait";
 
 export class IncrementTurnCounter extends Command<LineStrikeRoom> {
   delayed: Delayed;
@@ -17,8 +18,10 @@ export class IncrementTurnCounter extends Command<LineStrikeRoom> {
       this.endPlanning,
       this.state.format.turnSeconds * 1_000
     );
-    this.state.turnTimestamp = Date.now()
-    this.state.turnTimeLeft = this.state.format.turnSeconds * 1_000;
+    this.state.turnTimestamp = Date.now();
+    this.state.turnTimeLeft = (1 + this.state.format.turnSeconds) * 1_000;
+    this.room.broadcast("start-turn", this.state.turn);
+    return [new Wait().setPayload({ time: 1000 })];
   }
 
   endPlanning = () => {

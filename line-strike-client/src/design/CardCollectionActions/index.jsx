@@ -7,7 +7,7 @@ export function CardCollectionActions({ onDetails, onRemove }) {
   return (
     <div type="button" className={styles.actions}>
       <Button onClick={onDetails}>Details</Button>
-      <Button onClick={onRemove}>Remove</Button>
+      {onRemove && <Button onClick={onRemove}>Remove</Button>}
     </div>
   );
 }

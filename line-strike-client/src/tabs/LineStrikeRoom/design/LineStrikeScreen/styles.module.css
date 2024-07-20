@@ -1,0 +1,5 @@
+.screen {
+  flex: 1;
+  align-self: stretch;
+  overflow: visible;
+}

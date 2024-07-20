@@ -1,0 +1,32 @@
+.button {
+  appearance: none;
+  position: absolute;
+  top: 410px;
+  left: 1315px;
+  border-radius: 50%;
+  width: 255px;
+  height: 255px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  font-size: 48px;
+  background: radial-gradient(navy 50%, rgb(1, 1, 36));
+  background-color: navy;
+  color: white;
+  transition: all 0.2s ease-in;
+}
+
+.button:active,
+.button:hover {
+  outline: 0;
+  text-shadow: 0px 0px 30px #e6e4d6;
+  background: radial-gradient(darkcyan 50%, rgb(1, 78, 78));
+}
+
+.button:disabled,
+.button:active:disabled,
+.button:hover:disabled {
+  background: rgb(0, 0, 19);
+  color: lightgray;
+  text-shadow: none;
+}
