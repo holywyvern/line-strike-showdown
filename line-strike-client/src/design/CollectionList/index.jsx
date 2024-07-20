@@ -8,7 +8,7 @@ import { Modal } from "../Modal";
 import { Card } from "../Card";
 import { isAllowedInFormat } from "../../utils/isAllowedInFormat";
 import { Badge } from "../Badge";
-import { MiniCard } from "../MiniCard";
+import { MiniCard } from "../../tabs/LineStrikeRoom/design/MiniCard";
 
 function CollectionListItem({
   size = 0,
@@ -42,7 +42,7 @@ function CollectionListItem({
             type="button"
             onClick={() => setVisible(true)}
           >
-            <MiniCard collection card={card} />
+            <MiniCard played card={card} scale={0.5} />
           </button>
           <div>
             <div className={styles.title}>

@@ -14,19 +14,19 @@ export function PlayerHand() {
   const hand = handIDs.map((i) => cards[i]).filter(Boolean);
   return (
     <HandContainer>
-      {hand.map((card, index) => {
-        if (handIndexes.includes(index)) return null;
-
-        return (
-          <MiniCard
-            key={index}
-            card={card}
-            index={index}
-            size={hand.length}
-            displacement={1}
-          />
-        );
-      })}
+      {hand
+        .filter((_, index) => !handIndexes.includes(index))
+        .map((card, index) => {
+          return (
+            <MiniCard
+              key={index}
+              card={card}
+              index={index}
+              size={hand.length}
+              displacement={1}
+            />
+          );
+        })}
     </HandContainer>
   );
 }

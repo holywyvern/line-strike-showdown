@@ -61,3 +61,45 @@
   background-size: 185px 256px;
   background-position: calc(var(--left, 0) * -1px) calc(var(--top, 0) * -1px);
 }
+
+.pp,
+.atk {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+}
+.pp {
+  left: -8px;
+  top: -8px;
+}
+
+.atk {
+  right: -8px;
+}
+
+.pp img,
+.atk img {
+  width: 100%;
+}
+
+.ppv,
+.atkv {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  top: 0;
+  color: white;
+  font-size: 24px;
+  display: grid;
+  place-items: center;
+  font-weight: bolder;
+}
+
+.ppv {
+  top: 3px;
+}
+
+.atkv {
+  right: 1px;
+  top: 2px;
+}

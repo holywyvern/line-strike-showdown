@@ -8,7 +8,6 @@ import { LaneLife } from "./LaneLife";
 
 export function PlayerLife({ player, top, playing }) {
   const { lanes } = useBoard(player, top, playing);
-  console.log("lane", top, lanes.map((i) => i.hp));
   return (
     <PlayerLifeHolder top={top}>
       {lanes.map((lane, index) => (

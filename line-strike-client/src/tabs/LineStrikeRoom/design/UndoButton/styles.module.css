@@ -14,6 +14,7 @@
   background: navy;
   cursor: pointer;
   border: 0;
+  overflow: hidden;
 }
 
 .button:disabled {

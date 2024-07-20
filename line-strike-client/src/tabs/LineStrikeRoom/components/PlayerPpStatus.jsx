@@ -2,15 +2,18 @@ import PropTypes from "prop-types";
 
 import { PlayerPP } from "../design/PlayerPP";
 
-import { useBattleRoomState, useSchema } from "../context";
+import { useBattleRoomState, useBoard, useSchema } from "../context";
 import { useCards } from "../../../hooks/useCards";
 
 export function PlayerPpStatus({ player, top, playing }) {
   const { formats } = useCards();
   const { formatID } = useBattleRoomState();
-  const { pp } = useSchema(player);
+  let { pp } = useSchema(player);
+  const { usedPP } = useBoard(player, top, playing);
   const format = formats[formatID];
-
+  if (playing) {
+    pp -= usedPP;
+  }
   return <PlayerPP value={pp} top={top} max={format.maxPP} />;
 }
 

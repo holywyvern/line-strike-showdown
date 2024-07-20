@@ -26,6 +26,14 @@ export function MiniCard({ card, index, size, displacement, played, scale }) {
         }}
       />
       <div className={styles.border} />
+      <div className={styles.pp}>
+        <img src="pp_small.png" />
+      </div>
+      <div className={styles.atk}>
+        <img src="attack_small.png" />
+      </div>
+      <div className={styles.ppv}>{card.ppCost}</div>
+      <div className={styles.atkv}>{card.attack}</div>
     </div>
   );
 }
