@@ -5,7 +5,7 @@ import { useCards } from "../../../hooks/useCards";
 import { useHoveredCard } from "../context/HoveredCardContext";
 import { Name } from "./Name";
 import { Row } from "../../../design/Row";
-import { useArraySchema, useBattleRoomState } from "../context";
+import { useArraySchema, useBattleRoom, useBattleRoomState } from "../context";
 import { Fragment, useState } from "react";
 import { Box } from "../../../design/Box";
 import { List } from "../../../design/List";
@@ -270,8 +270,9 @@ const WRAPPERS = {
 };
 
 export function Chat() {
-  const room = useBattleRoomState();
-  const messages = useArraySchema(room.chat);
+  const room = useBattleRoom();
+  const state = useBattleRoomState();
+  const messages = useArraySchema(state.chat);
   const [text, setText] = useState("");
   const onMessageSent = (e) => {
     e.preventDefault();
