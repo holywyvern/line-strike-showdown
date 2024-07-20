@@ -22,5 +22,10 @@ export function useComponentScale() {
       window.removeEventListener("resize", onResize);
     };
   }, [ref]);
-  return { setRef, scale, width: VIEW_WIDTH, height: VIEW_HEIGHT };
+  return {
+    setRef,
+    scale,
+    width: VIEW_WIDTH,
+    height: VIEW_HEIGHT,
+  };
 }

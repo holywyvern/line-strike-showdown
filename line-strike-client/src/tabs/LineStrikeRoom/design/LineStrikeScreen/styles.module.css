@@ -1,5 +1,21 @@
 .screen {
   flex: 1;
   align-self: stretch;
-  overflow: visible;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--scaled-width) * 1px);
+  height: calc(var(--scaled-height) * 1px);
+  max-width: calc(var(--scaled-width) * 1px);
+  max-height: calc(var(--scaled-height) * 1px);
 }

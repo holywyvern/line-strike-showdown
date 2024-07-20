@@ -12,9 +12,11 @@ function Screen({ children, scale, width, height }, ref) {
         "--scale": scale,
         "--width": width,
         "--height": height,
+        "--scaled-width": width * scale,
+        "--scaled-height": height * scale,
       }}
     >
-      {children}
+      <div className={styles.wrapper}>{children}</div>
     </div>
   );
 }
