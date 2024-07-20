@@ -63,6 +63,8 @@ export function TabContext({ children }) {
         if (index < 0 || index >= tabs.length) return tabs;
 
         const newTabs = [...tabs];
+        const tab = newTabs[index];
+        tab?.onClose?.();
         newTabs.splice(index, 1);
         if (active >= index) {
           setActive(active - 1);

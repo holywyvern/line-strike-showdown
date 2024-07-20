@@ -69,6 +69,7 @@ function useLobby() {
           <LineStrikeRoom room={room} spectator={spectator} />,
           {
             closable: true,
+            onClose: () => room.leave(),
             warning: spectator ? null : (
               <>
                 Closing this tab will count as a <strong>defeat</strong> while

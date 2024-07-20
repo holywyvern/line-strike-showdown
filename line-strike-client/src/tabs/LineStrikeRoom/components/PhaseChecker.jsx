@@ -21,9 +21,12 @@ import { UndoActionButton } from "./UndoActionButton";
 
 import { useCards } from "../../../hooks/useCards";
 import { HoveredCard } from "./HoveredCard";
+import { useTabs } from "../../../hooks/useTabs";
+import { useEffect, useState } from "react";
 
-
-export function PhaseChecker({ spectator }) {
+export function PhaseChecker({ spectator, index }) {
+  const tabs = useTabs();
+  const [finished, setFinished] = useState(false);
   const { formats } = useCards();
   const room = useBattleRoom();
   const { phase, turnTimeLeft, formatID } = useBattleRoomState();
@@ -31,6 +34,14 @@ export function PhaseChecker({ spectator }) {
   const { locked } = useBoard(bottom, false, !spectator);
   const format = formats[formatID];
   const rate = turnTimeLeft / (format.turnSeconds * 1000);
+
+  useEffect(() => {
+    if (phase !== "finished") return;
+    if (finished) return;
+
+    setFinished(true);
+    tabs.removeWarning(index);
+  }, [phase, index, tabs, finished]);
 
   if (phase === "intro") {
     if (spectator) {
@@ -77,4 +88,5 @@ export function PhaseChecker({ spectator }) {
 
 PhaseChecker.propTypes = {
   spectator: PropTypes.bool,
+  index: PropTypes.number,
 };

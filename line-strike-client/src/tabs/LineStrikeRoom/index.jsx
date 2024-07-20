@@ -6,12 +6,12 @@ import { PhaseChecker } from "./components/PhaseChecker";
 import { HoveredContext } from "./context/HoveredCardContext";
 import { useState } from "react";
 
-export function LineStrikeRoom({ room, spectator }) {
+export function LineStrikeRoom({ room, spectator, tabIndex }) {
   const hovered = useState(null);
   return (
     <HoveredContext.Provider value={hovered}>
       <LineStrikeRoomContext.Provider value={room}>
-        <PhaseChecker spectator={spectator} />
+        <PhaseChecker spectator={spectator} index={tabIndex} />
       </LineStrikeRoomContext.Provider>
     </HoveredContext.Provider>
   );
@@ -20,4 +20,5 @@ export function LineStrikeRoom({ room, spectator }) {
 LineStrikeRoom.propTypes = {
   room: PropTypes.any,
   spectator: PropTypes.bool,
+  tabIndex: PropTypes.number,
 };
