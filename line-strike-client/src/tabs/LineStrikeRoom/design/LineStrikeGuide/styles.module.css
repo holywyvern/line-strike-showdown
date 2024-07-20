@@ -6,6 +6,7 @@
   transform: scale(var(--scale), var(--scale));
   transform-origin: top left;
   background: url("bg.png");
+  background-size: contain;
   font-size: 2em;
   inset: 0;
 }
