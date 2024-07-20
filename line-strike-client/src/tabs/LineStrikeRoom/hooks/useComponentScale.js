@@ -14,10 +14,6 @@ export function useComponentScale() {
         ref.clientWidth / VIEW_WIDTH,
         ref.clientHeight / VIEW_HEIGHT,
       ];
-      if (v1 > 1 && v2 > 1) {
-        setScale(Math.max(v1, v2));
-        return;
-      }
       setScale(Math.min(v1, v2));
     };
     onResize();
