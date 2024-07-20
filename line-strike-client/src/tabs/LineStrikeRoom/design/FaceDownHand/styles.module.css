@@ -1,11 +1,11 @@
 .hand {
   position: absolute;
   left: 1400px;
-  top: 850px;
+  top: 900px;
 }
 
 .card {
-  width: 150px;
+  width: 120px;
   position: absolute;
   left: calc(var(--index, 0) * (50 - 25 * (var(--size, 0) / 15)) * 1px);
 }
