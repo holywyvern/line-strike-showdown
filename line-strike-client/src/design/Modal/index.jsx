@@ -8,9 +8,12 @@ import { Box } from "../Box";
 
 import { Context } from "./context";
 
-export function Modal({ open, onClose, children, title }) {
+export function Modal({ open, onClose, children, title, fake }) {
   const node = useContext(Context);
-  const className = cx(styles.modal, { [styles.open]: open });
+  const className = cx(styles.modal, {
+    [styles.open]: open,
+    [styles.fake]: fake,
+  });
   return createPortal(
     <div className={className} onClick={onClose}>
       <div className={styles.window} onClick={(e) => e.stopPropagation()}>
@@ -40,4 +43,5 @@ Modal.propTypes = {
   onClose: PropTypes.func,
   children: PropTypes.node,
   title: PropTypes.string,
+  fake: PropTypes.bool,
 };

@@ -43,6 +43,14 @@ export function DeckBox() {
           <Button disabled={noChanges} onClick={onReset}>
             Reset Deck
           </Button>
+          <Button
+            onClick={() => {
+              setCards([]);
+              setNoChanges(false);
+            }}
+          >
+            Remove All Cards
+          </Button>
         </Row>
       </Box.Body>
     </Box>

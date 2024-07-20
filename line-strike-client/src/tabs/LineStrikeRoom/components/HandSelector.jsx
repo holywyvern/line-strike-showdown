@@ -28,7 +28,7 @@ export function HandSelector() {
   const format = formats[formatID];
 
   return (
-    <Modal open title="FIRST HAND">
+    <Modal open title="FIRST HAND" fake>
       <Column>
         <Row center>
           <p style={{ margin: 0, padding: 0 }}>

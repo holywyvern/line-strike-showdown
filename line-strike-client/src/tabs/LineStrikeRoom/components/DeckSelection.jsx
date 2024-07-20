@@ -20,7 +20,7 @@ export function DeckSelection() {
   const [cards, setCards] = useState(decks[0]?.cards || []);
 
   return (
-    <Modal open title="SELECT DECK">
+    <Modal open title="SELECT DECK" fake>
       <Row centerChildren>
         <Column>
           {decks.map((deck, index) => {

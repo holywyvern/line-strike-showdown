@@ -5,6 +5,7 @@ import { LineStrikeRoomContext } from "./context";
 import { PhaseChecker } from "./components/PhaseChecker";
 import { HoveredContext } from "./context/HoveredCardContext";
 import { useState } from "react";
+import { ChatDrawer } from "./components/ChatDrawer";
 
 export function LineStrikeRoom({ room, spectator, tabIndex }) {
   const hovered = useState(null);
@@ -12,6 +13,7 @@ export function LineStrikeRoom({ room, spectator, tabIndex }) {
     <HoveredContext.Provider value={hovered}>
       <LineStrikeRoomContext.Provider value={room}>
         <PhaseChecker spectator={spectator} index={tabIndex} />
+        <ChatDrawer />
       </LineStrikeRoomContext.Provider>
     </HoveredContext.Provider>
   );
