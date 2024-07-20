@@ -1,0 +1,14 @@
+import PropTypes from "prop-types";
+
+import { useSchema } from "../context";
+import { DeckHolder } from "../design/DeckHolder";
+
+export function PlayerDeck({ player, top }) {
+  const { deckSize, sleeve } = useSchema(player);
+  return <DeckHolder top={top} count={deckSize} sleeve={sleeve} />;
+}
+
+PlayerDeck.propTypes = {
+  player: PropTypes.any,
+  top: PropTypes.bool,
+};

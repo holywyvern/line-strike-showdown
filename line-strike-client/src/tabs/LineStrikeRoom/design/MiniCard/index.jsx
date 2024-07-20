@@ -3,7 +3,7 @@ import cx from "classnames";
 
 import styles from "./styles.module.css";
 
-export function MiniCard({ card, index, size, displacement, played }) {
+export function MiniCard({ card, index, size, displacement, played, scale }) {
   const className = cx(styles.mini, styles[card.element], {
     [styles.played]: played,
   });
@@ -14,6 +14,7 @@ export function MiniCard({ card, index, size, displacement, played }) {
         "--index": index,
         "--size": size,
         "--displacement": displacement,
+        "--mini-scale": scale,
       }}
     >
       <div
@@ -35,4 +36,5 @@ MiniCard.propTypes = {
   size: PropTypes.number,
   displacement: PropTypes.number,
   played: PropTypes.bool,
+  scale: PropTypes.number,
 };

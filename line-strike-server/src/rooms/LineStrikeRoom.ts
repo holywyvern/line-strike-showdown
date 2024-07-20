@@ -71,7 +71,11 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
   };
 
   onCardPlayed = (client: Client, options: any) => {
-    this.dispatcher.safeDispatch(new PlayCard(), { ...options, client });
+    console.log(options);
+    this.dispatcher.safeDispatch(new PlayCard(), {
+      ...(options || {}),
+      client,
+    });
   };
 
   onUndo = (client: Client) => {

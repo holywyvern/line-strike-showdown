@@ -1,17 +1,26 @@
 .holder {
-  width: 125px;
-  height: 125px;
-  background-image: url('lanes_bottom.png');
+  appearance: none;
+  border: 0;
+  width: 144px;
+  height: 144px;
+  background-image: url("lanes_bottom.png");
   background-size: 200% 100%;
   background-position: 0 0;
   display: grid;
   place-items: center;
 }
+
 .holder:hover,
+.holder:active,
 .active {
+  outline: 0;
   background-position: -100% 0;
 }
 
+.holder:disabled:not(.active) {
+  background-position: 0 0 !important;
+}
+
 .top {
-  background-image: url('lanes_top.png');
+  background-image: url("lanes_top.png");
 }

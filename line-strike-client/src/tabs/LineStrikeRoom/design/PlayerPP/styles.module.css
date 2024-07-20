@@ -1,0 +1,43 @@
+.pp {
+  position: absolute;
+  left: 1550px;
+  top: 650px;
+}
+
+.wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.icon {
+  position: absolute;
+  inset: 0;
+  background: url("pp.png");
+  background-size: 100%;
+}
+
+.value {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+  font-weight: bolder;
+}
+
+.top {
+  top: 300px;
+}
+
+.empty {
+  color: lightgray;
+}
+
+.high {
+  color: burlywood;
+}
+
+.max {
+  color: coral;
+}

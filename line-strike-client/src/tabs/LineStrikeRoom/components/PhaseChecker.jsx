@@ -11,12 +11,14 @@ import { BattleLayout } from "../../../design/BattleLayout";
 import { BattleButton } from "../design/BattleButton";
 import { CircularProgress } from "../design/CircularProgress";
 import { LineStrikeGuide } from "../design/LineStrikeGuide";
+import { Waiting } from "../design/Waiting";
 
 import { Board } from "./Board";
 import { DeckSelection } from "./DeckSelection";
 import { Viewport } from "./Viewport";
-import { Waiting } from "../design/Waiting";
 import { HandSelector } from "./HandSelector";
+import { UndoActionButton } from "./UndoActionButton";
+
 import { useCards } from "../../../hooks/useCards";
 
 export function PhaseChecker({ spectator }) {
@@ -63,6 +65,7 @@ export function PhaseChecker({ spectator }) {
             onClick={onTurnLock}
             disabled={locked || phase !== "planning"}
           />
+          {!spectator && <UndoActionButton />}
         </LineStrikeGuide>
       </Viewport>
     </BattleLayout>

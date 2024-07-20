@@ -19,7 +19,7 @@ export function PlayArea({ player, mirror, playing }) {
         name={playmat}
         opacity={(playmatOpacity || 0) / 100}
       />
-      <BattleLanes lanes={board.lanes} top={mirror} />
+      <BattleLanes lanes={board.lanes} top={mirror} playing={playing} />
       {playing ? (
         <PlayerHand />
       ) : (

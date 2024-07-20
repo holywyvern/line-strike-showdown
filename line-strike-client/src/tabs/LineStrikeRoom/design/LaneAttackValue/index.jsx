@@ -25,9 +25,9 @@ export function LaneAttackValue({ value, won, lost, top }) {
 
     setTimeout(() => {
       if (current > target) {
-        setCurrent(Math.max(target, current - delta));
+        setCurrent(Math.floor(Math.max(target, current - delta)));
       } else {
-        setCurrent(Math.min(target, current + delta));
+        setCurrent(Math.floor(Math.min(target, current + delta)));
       }
     }, 100);
   }, [current, target, delta]);
