@@ -16,8 +16,15 @@
   align-items: start;
 }
 
-.details h4 {
+.details h3 {
   font-size: 1em;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
+.details h4 {
+  font-size: 1.4em;
   font-weight: bold;
   padding: 0;
   margin: 0;

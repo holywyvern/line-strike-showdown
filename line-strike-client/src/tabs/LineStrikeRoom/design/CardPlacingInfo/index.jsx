@@ -16,6 +16,7 @@ export function CardPlacingInfo({ card, pp, canPlace }) {
         <MiniCard played card={card} scale={0.5} onHover={onHover} />
       </div>
       <div className={styles.details}>
+        <h3>{card.title}</h3>
         <h4>{card.name}</h4>
         <h5>{card.skill.name}</h5>
       </div>
