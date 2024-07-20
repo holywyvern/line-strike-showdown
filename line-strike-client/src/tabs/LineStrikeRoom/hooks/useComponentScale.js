@@ -10,12 +10,15 @@ export function useComponentScale() {
     if (!ref) return;
 
     const onResize = () => {
-      const newScale = Math.min(
+      const [v1, v2] = [
         ref.clientWidth / VIEW_WIDTH,
-        ref.clientHeight / VIEW_HEIGHT
-      );
-
-      setScale(newScale);
+        ref.clientHeight / VIEW_HEIGHT,
+      ];
+      if (v1 > 1 && v2 > 1) {
+        setScale(Math.max(v1, v2));
+        return;
+      }
+      setScale(Math.min(v1, v2));
     };
     onResize();
     window.addEventListener("resize", onResize);

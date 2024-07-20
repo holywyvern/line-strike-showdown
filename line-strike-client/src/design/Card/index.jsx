@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 
 export function Card({ card, scale = 1, children, hiddenInfo, noHover }) {
   return (
-    <div className={styles.card} style={{ "--scale": scale }}>
+    <div className={styles.card} style={{ "--card-scale": scale }}>
       <img src={`cards/${card.artwork}`} />
       <div className={styles.main}>
         {!hiddenInfo && <span className={styles.name}>{card.name}</span>}

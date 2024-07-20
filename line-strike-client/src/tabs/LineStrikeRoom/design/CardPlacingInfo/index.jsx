@@ -2,14 +2,18 @@ import PropTypes from "prop-types";
 
 import styles from "./styles.module.css";
 import { MiniCard } from "../MiniCard";
+import { useHoveredCard } from "../../context/HoveredCardContext";
 
 export function CardPlacingInfo({ card, pp, canPlace }) {
+  // eslint-disable-next-line no-unused-vars
+  const [_, setHoveredCard] = useHoveredCard();
   if (!card) return null;
 
+  const onHover = () => setHoveredCard(card);
   return (
     <div className={styles.info}>
       <div className={styles.mini}>
-        <MiniCard played card={card} scale={0.5} />
+        <MiniCard played card={card} scale={0.5} onHover={onHover} />
       </div>
       <div className={styles.details}>
         <h4>{card.name}</h4>

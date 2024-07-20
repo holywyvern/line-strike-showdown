@@ -20,6 +20,8 @@ import { HandSelector } from "./HandSelector";
 import { UndoActionButton } from "./UndoActionButton";
 
 import { useCards } from "../../../hooks/useCards";
+import { HoveredCard } from "./HoveredCard";
+import { Chat } from "./Chat";
 
 export function PhaseChecker({ spectator }) {
   const { formats } = useCards();
@@ -59,6 +61,7 @@ export function PhaseChecker({ spectator }) {
     <BattleLayout>
       <Viewport>
         <LineStrikeGuide>
+          <HoveredCard />
           <Board />
           <CircularProgress rate={1 - rate} />
           <BattleButton
@@ -68,6 +71,7 @@ export function PhaseChecker({ spectator }) {
           {!spectator && <UndoActionButton />}
         </LineStrikeGuide>
       </Viewport>
+      <Chat />
     </BattleLayout>
   );
 }

@@ -10,8 +10,11 @@ import { useState } from "react";
 import { Modal } from "../../../design/Modal";
 import { Column } from "../../../design/Column";
 import { CardPlacer } from "./CardPlacer";
+import { useHoveredCard } from "../context/HoveredCardContext";
 
 export function LaneCard({ card, top, playing, lane }) {
+  // eslint-disable-next-line no-unused-vars
+  const [_, setHoveredCard] = useHoveredCard();
   const [open, setOpen] = useState(false);
   const { phase } = useBattleRoomState();
   const { cards } = useCards();
@@ -30,6 +33,9 @@ export function LaneCard({ card, top, playing, lane }) {
   const onPlaceCard = () => {
     setOpen(true);
   };
+  const onHover = () => {
+    if (data) setHoveredCard(data);
+  };
   return (
     <>
       <LaneCardContainer
@@ -37,7 +43,7 @@ export function LaneCard({ card, top, playing, lane }) {
         disabled={!playing || phase !== "planning"}
         onClick={onPlaceCard}
       >
-        {cardID > 0 && <MiniCard card={processedCard} played />}
+        {cardID > 0 && <MiniCard card={processedCard} played onHover={onHover} />}
       </LaneCardContainer>
       {playing && (
         <Modal open={open} title="Place Card" onClose={() => setOpen(false)}>
@@ -58,5 +64,5 @@ LaneCard.propTypes = {
   card: PropTypes.any,
   top: PropTypes.bool,
   playing: PropTypes.bool,
-  lane: PropTypes.bool,
+  lane: PropTypes.number,
 };

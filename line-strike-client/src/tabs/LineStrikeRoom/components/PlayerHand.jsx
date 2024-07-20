@@ -1,11 +1,15 @@
 import { useCards } from "../../../hooks/useCards";
 
 import { useArraySchema, useBoard, usePlayers } from "../context";
+import { useHoveredCard } from "../context/HoveredCardContext";
 
 import { HandContainer } from "../design/HandContainer";
 import { MiniCard } from "../design/MiniCard";
 
 export function PlayerHand() {
+  // eslint-disable-next-line no-unused-vars
+  const [_, setHoveredCard] = useHoveredCard();
+
   const { cards } = useCards();
   const { bottom } = usePlayers();
   const handIDs = useArraySchema(bottom.handIDs);
@@ -24,6 +28,7 @@ export function PlayerHand() {
               index={index}
               size={hand.length}
               displacement={1}
+              onHover={() => setHoveredCard(card)}
             />
           );
         })}

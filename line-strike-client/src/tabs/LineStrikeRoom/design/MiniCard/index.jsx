@@ -3,7 +3,15 @@ import cx from "classnames";
 
 import styles from "./styles.module.css";
 
-export function MiniCard({ card, index, size, displacement, played, scale }) {
+export function MiniCard({
+  card,
+  index,
+  size,
+  displacement,
+  played,
+  scale,
+  onHover,
+}) {
   const buffs = card.normalAttack && card.normalAttack < card.attack;
   const debuffs = card.normalAttack && card.normalAttack > card.attack;
   const className = cx(styles.mini, styles[card.element], {
@@ -14,6 +22,7 @@ export function MiniCard({ card, index, size, displacement, played, scale }) {
   });
   return (
     <div
+      onMouseEnter={onHover}
       className={className}
       style={{
         "--index": index,
@@ -55,4 +64,5 @@ MiniCard.propTypes = {
   played: PropTypes.bool,
   scale: PropTypes.number,
   normalAttack: PropTypes.number,
+  onHover: PropTypes.func,
 };

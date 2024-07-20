@@ -1,7 +1,7 @@
 .card {
   position: relative;
-  width: calc(var(--scale, 1) * 370px);
-  height: calc(var(--scale, 1) * 512px);
+  width: calc(var(--card-scale, 1) * 370px);
+  height: calc(var(--card-scale, 1) * 512px);
 }
 
 .card > img {
@@ -18,18 +18,18 @@
 
 .main .name {
   position: absolute;
-  left: calc(var(--scale, 1) * 185px);
-  top: calc(var(--scale, 1) * 22px);
+  left: calc(var(--card-scale, 1) * 185px);
+  top: calc(var(--card-scale, 1) * 22px);
   transform: translateX(-50%);
-  font-size: calc(var(--scale) * 12px);
+  font-size: calc(var(--card-scale, 1) * 12px);
   white-space: nowrap;
 }
 
 .main .skill {
   position: absolute;
-  left: calc(var(--scale, 1) * 185px);
-  top: calc(var(--scale, 1) * 483px);
-  font-size: calc(var(--scale) * 0.9em);
+  left: calc(var(--card-scale, 1) * 185px);
+  top: calc(var(--card-scale, 1) * 483px);
+  font-size: calc(var(--card-scale) * 16px);
   transform: translateX(-50%);
 }
 
