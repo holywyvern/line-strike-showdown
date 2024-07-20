@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import styles from "./styles.module.css";
 
+// eslint-disable-next-line react/prop-types
 function Screen({ children, scale, width, height }, ref) {
   return (
     <div
@@ -21,11 +22,11 @@ function Screen({ children, scale, width, height }, ref) {
   );
 }
 
-Screen.propTypes = {
+export const LineStrikeScreen = forwardRef(Screen);
+
+LineStrikeScreen.propTypes = {
   children: PropTypes.node,
   scale: PropTypes.number,
   width: PropTypes.number,
   height: PropTypes.number,
 };
-
-export const LineStrikeScreen = forwardRef(Screen);
