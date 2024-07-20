@@ -21,7 +21,7 @@
   left: calc(var(--card-scale, 1) * 185px);
   top: calc(var(--card-scale, 1) * 22px);
   transform: translateX(-50%);
-  font-size: calc(var(--card-scale, 1) * 12px);
+  font-size: calc(var(--card-scale, 1) * 16px);
   white-space: nowrap;
 }
 
@@ -60,4 +60,13 @@
 
 .card:hover .info {
   opacity: 1;
+}
+
+.title {
+  position: absolute;
+  left: calc(var(--card-scale, 1) * 185px);
+  top: calc(var(--card-scale, 1) * 8px);
+  transform: translateX(-50%);
+  font-size: calc(var(--card-scale, 1) * 12px);
+  white-space: nowrap;
 }

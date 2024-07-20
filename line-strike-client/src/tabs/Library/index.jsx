@@ -49,8 +49,12 @@ export function Library() {
           .some((j) => isAllowedInFormat(j, i))
     );
     if (name) {
-      library = library.filter((i) =>
-        String(i.name).toLocaleLowerCase().includes(name.toLocaleLowerCase())
+      library = library.filter(
+        (i) =>
+          String(i.name)
+            .toLocaleLowerCase()
+            .includes(name.toLocaleLowerCase()) ||
+          String(i.title).toLocaleLowerCase().includes(name.toLocaleLowerCase())
       );
     }
     return library;

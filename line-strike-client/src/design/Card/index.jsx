@@ -6,6 +6,9 @@ export function Card({ card, scale = 1, children, hiddenInfo, noHover }) {
     <div className={styles.card} style={{ "--card-scale": scale }}>
       <img src={`cards/${card.artwork}`} />
       <div className={styles.main}>
+        {!hiddenInfo && card.title && (
+          <span className={styles.title}>{card.title}</span>
+        )}
         {!hiddenInfo && <span className={styles.name}>{card.name}</span>}
         {!hiddenInfo && <span className={styles.skill}>{card.skill.name}</span>}
       </div>

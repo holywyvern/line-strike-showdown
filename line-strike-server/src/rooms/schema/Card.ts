@@ -23,6 +23,7 @@ const { UP, DOWN, LEFT, RIGHT } = CardAreaDirection;
 export interface CardProps {
   id: number;
   name: string;
+  title?: string;
   artwork: string;
   skillId: number;
   element: CardElement;
@@ -40,6 +41,9 @@ export class Card extends Schema {
 
   @type("uint64")
   id: number;
+
+  @type("string")
+  title: string;
 
   @type("string")
   name: string;
@@ -87,9 +91,11 @@ export class Card extends Schema {
     set,
     miniLeft,
     miniTop,
+    title,
   }: CardProps) {
     super();
     this.id = id;
+    this.title = title;
     this.name = name;
     this.artwork = artwork;
     this.skillID = skillId;
@@ -136,7 +142,8 @@ Card.COLLECTION.push(
     [
       {
         id: 1,
-        name: "ARKS Member Ellison",
+        title: "ARKS Member",
+        name: "Ellison",
         artwork: "ellison.webp",
         element: "fire",
         skillId: 0,
@@ -146,7 +153,8 @@ Card.COLLECTION.push(
       },
       {
         id: 2,
-        name: "Seasoned Warrior Zeno",
+        title: "Seasoned Warrior",
+        name: "Zeno",
         artwork: "zeno.webp",
         attack: 14,
         ppCost: 3,
@@ -156,7 +164,8 @@ Card.COLLECTION.push(
       },
       {
         id: 3,
-        name: "Klariskrays Clone",
+        title: "Klariskrays",
+        name: "Clone",
         artwork: "klariskrays_clone.webp",
         attack: 20,
         ppCost: 4,
@@ -166,7 +175,8 @@ Card.COLLECTION.push(
       },
       {
         id: 4,
-        name: "Council of Six - Six Huey",
+        title: "Council of Six - Six",
+        name: "Huey",
         artwork: "huey.webp",
         attack: 28,
         ppCost: 5,
@@ -176,7 +186,8 @@ Card.COLLECTION.push(
       },
       {
         id: 5,
-        name: "Instructor Jann",
+        title: "Instructor",
+        name: "Jann",
         artwork: "jean.webp",
         attack: 1,
         ppCost: 1,
@@ -186,7 +197,8 @@ Card.COLLECTION.push(
       },
       {
         id: 6,
-        name: "Council of Six - Five Klariskrays",
+        title: "Council of Six - Five",
+        name: "Klariskrays",
         artwork: "klariskrays.webp",
         attack: 27,
         ppCost: 5,
@@ -196,7 +208,8 @@ Card.COLLECTION.push(
       },
       {
         id: 7,
-        name: "Twin Intel Team Pati",
+        title: "Twin Intel Team",
+        name: "Pati",
         artwork: "pati.webp",
         attack: 14,
         ppCost: 3,
@@ -207,7 +220,8 @@ Card.COLLECTION.push(
       },
       {
         id: 8,
-        name: "Phantasm Slasher Hitsugi",
+        title: "Phantasm Slasher",
+        name: "Hitsugi",
         artwork: "hitsugi.webp",
         attack: 22,
         ppCost: 4,
@@ -223,7 +237,8 @@ Card.COLLECTION.push(
       },
       {
         id: 9,
-        name: "ARKS Member Visar",
+        title: "ARKS Member",
+        name: "Visar",
         artwork: "visar.webp",
         attack: 14,
         ppCost: 3,
@@ -319,7 +334,7 @@ Card.COLLECTION.push(
       },
       {
         id: 15,
-        name: "Elder Lillipan",
+        name: "Lillipan Elder",
         artwork: "elder_lillipan.webp",
         attack: 2,
         ppCost: 1,
@@ -335,7 +350,8 @@ Card.COLLECTION.push(
       },
       {
         id: 16,
-        name: "ARKS Member Rukias",
+        title: "ARKS Member",
+        name: "Rukias",
         artwork: "lucian.webp",
         attack: 8,
         ppCost: 2,
@@ -351,7 +367,8 @@ Card.COLLECTION.push(
       },
       {
         id: 17,
-        name: "Harboror of Hatred Lavere",
+        title: "Harboror of Hatred",
+        name: "Lavere",
         artwork: "lavere.webp",
         attack: 10,
         ppCost: 2,
@@ -361,7 +378,8 @@ Card.COLLECTION.push(
       },
       {
         id: 18,
-        name: "Twin Intel Team Tia",
+        title: "Twin Intel Team",
+        name: "Tia",
         artwork: "tia.webp",
         attack: 13,
         ppCost: 3,
@@ -372,7 +390,8 @@ Card.COLLECTION.push(
       },
       {
         id: 19,
-        name: "Neophyte Echo",
+        title: "Neophyte",
+        name: "Echo",
         artwork: "echo.webp",
         attack: 21,
         ppCost: 4,
@@ -388,7 +407,8 @@ Card.COLLECTION.push(
       },
       {
         id: 20,
-        name: "ARKS Member Lacuna",
+        title: "ARKS Member",
+        name: "Lacuna",
         artwork: "lacuna.webp",
         attack: 2,
         ppCost: 1,
@@ -404,7 +424,8 @@ Card.COLLECTION.push(
       },
       {
         id: 21,
-        name: "Council of Six - Two Maria",
+        title: "Council of Six - Two",
+        name: "Maria",
         artwork: "maria.webp",
         attack: 28,
         ppCost: 5,
@@ -420,7 +441,8 @@ Card.COLLECTION.push(
       },
       {
         id: 22,
-        name: "Suppression Client Hans",
+        title: "Suppression Client",
+        name: "Hans",
         artwork: "hans.webp",
         attack: 2,
         ppCost: 1,
@@ -436,7 +458,8 @@ Card.COLLECTION.push(
       },
       {
         id: 23,
-        name: "ARKS Recruit Reda",
+        title: "ARKS Recruit",
+        name: "Reda",
         artwork: "reda.webp",
         attack: 1,
         ppCost: 1,
@@ -452,7 +475,8 @@ Card.COLLECTION.push(
       },
       {
         id: 24,
-        name: "Deuman Girl Io",
+        title: "Deuman Girl",
+        name: "Io",
         artwork: "io.webp",
         attack: 20,
         ppCost: 4,
@@ -468,7 +492,8 @@ Card.COLLECTION.push(
       },
       {
         id: 25,
-        name: "Laboratory Dragon Chaser Quna",
+        title: "Laboratory Dragon Chaser",
+        name: "Quna",
         artwork: "zelsius_quna.webp",
         attack: 26,
         ppCost: 5,
@@ -484,7 +509,8 @@ Card.COLLECTION.push(
       },
       {
         id: 26,
-        name: "ARKS Trainee Lottie",
+        title: "ARKS Trainee",
+        name: "Lottie",
         artwork: "lottie.webp",
         attack: 13,
         ppCost: 3,
@@ -500,7 +526,8 @@ Card.COLLECTION.push(
       },
       {
         id: 27,
-        name: "ARKS Member Shiro",
+        title: "ARKS Member",
+        name: "Shiro",
         artwork: "shiro.webp",
         attack: 21,
         ppCost: 4,
@@ -548,7 +575,8 @@ Card.COLLECTION.push(
       },
       {
         id: 30,
-        name: "Infirmary Officer Filia",
+        title: "Infirmary Officer",
+        name: "Filia",
         artwork: "filia.webp",
         attack: 3,
         ppCost: 1,
@@ -564,7 +592,8 @@ Card.COLLECTION.push(
       },
       {
         id: 31,
-        name: "Officer Cofy",
+        title: "Officer",
+        name: "Cofy",
         artwork: "cofy.webp",
         attack: 8,
         ppCost: 2,
@@ -580,7 +609,8 @@ Card.COLLECTION.push(
       },
       {
         id: 32,
-        name: "ARKS Member Adderley",
+        title: "ARKS Member",
+        name: "Adderley",
         artwork: "adderley.webp",
         attack: 14,
         ppCost: 3,
@@ -596,7 +626,8 @@ Card.COLLECTION.push(
       },
       {
         id: 33,
-        name: "Melee Vanguard Oza",
+        title: "Melee Vanguard",
+        name: "Oza",
         artwork: "oza.webp",
         attack: 4,
         ppCost: 1,
@@ -606,7 +637,8 @@ Card.COLLECTION.push(
       },
       {
         id: 34,
-        name: "ARKS Officer Seraphy",
+        title: "ARKS Officer",
+        name: "Seraphy",
         artwork: "seraphy.webp",
         attack: 6,
         ppCost: 2,
@@ -617,7 +649,8 @@ Card.COLLECTION.push(
       },
       {
         id: 35,
-        name: "Torch Bearer Echo",
+        title: "Torch Bearer",
+        name: "Echo",
         artwork: "echo2.webp",
         attack: 21,
         ppCost: 4,
@@ -633,7 +666,8 @@ Card.COLLECTION.push(
       },
       {
         id: 36,
-        name: "Distant Song Quna",
+        title: "Distant Song",
+        name: "Quna",
         artwork: "quna.webp",
         attack: 15,
         ppCost: 3,
@@ -649,7 +683,8 @@ Card.COLLECTION.push(
       },
       {
         id: 37,
-        name: "Xion’s Little Brother Xiao",
+        title: "Xion’s Little Brother",
+        name: "Xiao",
         artwork: "xiao.webp",
         attack: 21,
         ppCost: 4,
@@ -665,7 +700,8 @@ Card.COLLECTION.push(
       },
       {
         id: 38,
-        name: "ARKS Member Burrows",
+        title: "ARKS Member",
+        name: "Burrows",
         artwork: "burrows.webp",
         attack: 2,
         ppCost: 1,
@@ -681,7 +717,8 @@ Card.COLLECTION.push(
       },
       {
         id: 39,
-        name: "Council of Six - Three Casra",
+        title: "Council of Six - Three",
+        name: "Casra",
         artwork: "casra.webp",
         attack: 26,
         ppCost: 5,
@@ -697,7 +734,8 @@ Card.COLLECTION.push(
       },
       {
         id: 40,
-        name: "Striver Ulku",
+        title: "Striver",
+        name: "Ulku",
         artwork: "ulku.webp",
         attack: 6,
         ppCost: 2,
@@ -713,7 +751,8 @@ Card.COLLECTION.push(
       },
       {
         id: 41,
-        name: "Bouncer Test Proxy Katori",
+        title: "Bouncer Test Proxy",
+        name: "Katori",
         artwork: "katori.webp",
         attack: 20,
         ppCost: 4,
@@ -729,7 +768,8 @@ Card.COLLECTION.push(
       },
       {
         id: 42,
-        name: "ARKS Member Makoto",
+        title: "ARKS Member",
+        name: "Makoto",
         artwork: "makoto.webp",
         attack: 13,
         ppCost: 3,
@@ -745,7 +785,8 @@ Card.COLLECTION.push(
       },
       {
         id: 43,
-        name: "Civilian Henri",
+        title: "Civilian",
+        name: "Henri",
         artwork: "henri.webp",
         attack: 1,
         ppCost: 1,
@@ -761,7 +802,8 @@ Card.COLLECTION.push(
       },
       {
         id: 44,
-        name: "Void Leader Luther",
+        title: "Void Leader",
+        name: "Luther",
         artwork: "luther.webp",
         attack: 26,
         ppCost: 5,
@@ -777,7 +819,8 @@ Card.COLLECTION.push(
       },
       {
         id: 45,
-        name: "Loyal Retainer Melfonseana",
+        title: "Loyal Retainer",
+        name: "Melfonseana",
         artwork: "melfonseana.webp",
         attack: 13,
         ppCost: 3,
@@ -793,7 +836,8 @@ Card.COLLECTION.push(
       },
       {
         id: 46,
-        name: "Geologist Logio",
+        title: "Geologist",
+        name: "Rogio",
         artwork: "logio.webp",
         attack: 11,
         ppCost: 1,
@@ -809,7 +853,8 @@ Card.COLLECTION.push(
       },
       {
         id: 47,
-        name: "ARKS Member Sherry",
+        title: "ARKS Member",
+        name: "Sherry",
         artwork: "sherry.webp",
         attack: 20,
         ppCost: 4,
@@ -825,7 +870,8 @@ Card.COLLECTION.push(
       },
       {
         id: 48,
-        name: "Crimson Gunner Chroto",
+        title: "Crimson Gunner",
+        name: "Chroto",
         artwork: "chroto.webp",
         attack: 8,
         ppCost: 2,
@@ -841,7 +887,8 @@ Card.COLLECTION.push(
       },
       {
         id: 49,
-        name: "Steel Master Joseph",
+        title: "Steel Master",
+        name: "Joseph",
         artwork: "joseph.webp",
         attack: 23,
         ppCost: 4,
@@ -851,7 +898,8 @@ Card.COLLECTION.push(
       },
       {
         id: 50,
-        name: "ARKS Member Velge",
+        title: "ARKS Member",
+        name: "Velge",
         artwork: "belge.webp",
         attack: 9,
         ppCost: 2,
@@ -871,7 +919,8 @@ Card.COLLECTION.push(
       },
       {
         id: 52,
-        name: "Hateful Warrior Gettemhult",
+        title: "Hateful Warrior",
+        name: "Gettemhult",
         artwork: "gettemhult.webp",
         attack: 20,
         ppCost: 4,
@@ -881,7 +930,8 @@ Card.COLLECTION.push(
       },
       {
         id: 53,
-        name: "Council of Six - One Regius",
+        title: "Council of Six - One",
+        name: "Regius",
         artwork: "regius.webp",
         attack: 26,
         ppCost: 5,
@@ -891,7 +941,8 @@ Card.COLLECTION.push(
       },
       {
         id: 54,
-        name: "Momentous Encounter Fourie",
+        title: "Momentous Encounter",
+        name: "Fourie",
         artwork: "fourie.webp",
         attack: 5,
         ppCost: 2,
@@ -911,7 +962,8 @@ Card.COLLECTION.push(
       },
       {
         id: 56,
-        name: "ARKS Ship Operator Xiera",
+        title: "ARKS Ship Operator",
+        name: "Xiera",
         artwork: "xiera.webp",
         attack: 7,
         ppCost: 2,
@@ -927,7 +979,8 @@ Card.COLLECTION.push(
       },
       {
         id: 57,
-        name: "Bladesmith Zig",
+        title: "Bladesmith",
+        name: "Zig",
         artwork: "zig.webp",
         attack: 8,
         ppCost: 2,
@@ -943,7 +996,8 @@ Card.COLLECTION.push(
       },
       {
         id: 58,
-        name: "Council of Six - Four Zeno",
+        title: "Council of Six - Four",
+        name: "Zeno",
         artwork: "zeno_yellow.webp",
         attack: 29,
         ppCost: 5,
@@ -959,7 +1013,8 @@ Card.COLLECTION.push(
       },
       {
         id: 59,
-        name: "ARKS Member Clark",
+        title: "ARKS Member",
+        name: "Clark",
         artwork: "clerk.webp",
         attack: 14,
         ppCost: 3,
@@ -975,7 +1030,8 @@ Card.COLLECTION.push(
       },
       {
         id: 60,
-        name: "Small Shadow Lilipan",
+        title: "Small Shadow",
+        name: "Lilipan",
         artwork: "lillipan.webp",
         attack: 2,
         ppCost: 1,
@@ -991,7 +1047,8 @@ Card.COLLECTION.push(
       },
       {
         id: 61,
-        name: "ARKS Trainee Rubert",
+        title: "ARKS Trainee",
+        name: "Rubert",
         artwork: "robert.webp",
         attack: 13,
         ppCost: 3,
@@ -1023,7 +1080,8 @@ Card.COLLECTION.push(
       },
       {
         id: 63,
-        name: "Explorer Afin",
+        title: "Explorer",
+        name: "Afin",
         artwork: "afin.webp",
         attack: 2,
         ppCost: 1,
@@ -1039,7 +1097,8 @@ Card.COLLECTION.push(
       },
       {
         id: 64,
-        name: "Ranged Vanguard Risa",
+        title: "Ranged Vanguard",
+        name: "Risa",
         artwork: "risa.webp",
         attack: 14,
         ppCost: 3,
@@ -1055,7 +1114,8 @@ Card.COLLECTION.push(
       },
       {
         id: 65,
-        name: "ARKS Member Sandor",
+        title: "ARKS Member",
+        name: "Sandor",
         artwork: "sandor.png",
         attack: 2,
         ppCost: 1,
@@ -1071,7 +1131,8 @@ Card.COLLECTION.push(
       },
       {
         id: 66,
-        name: "ARKS Member Isaac",
+        title: "ARKS Member",
+        name: "Isaac",
         artwork: "isaac.webp",
         attack: 9,
         ppCost: 2,
@@ -1081,7 +1142,8 @@ Card.COLLECTION.push(
       },
       {
         id: 67,
-        name: "Ashmaiden Sukunahime",
+        title: "Ashmaiden",
+        name: "Sukunahime",
         artwork: "sukunahime.webp",
         attack: 20,
         ppCost: 4,
@@ -1091,7 +1153,8 @@ Card.COLLECTION.push(
       },
       {
         id: 68,
-        name: "Observer Xion",
+        title: "Observer",
+        name: "Xion",
         artwork: "xion.webp",
         attack: 1,
         ppCost: 1,
@@ -1127,7 +1190,8 @@ Card.COLLECTION.push(
       },
       {
         id: 71,
-        name: "The Girl With No Past Matoi",
+        title: "The Girl With No Past",
+        name: "Matoi",
         artwork: "matoi.webp",
         attack: 20,
         ppCost: 4,
@@ -1143,7 +1207,8 @@ Card.COLLECTION.push(
       },
       {
         id: 72,
-        name: "Technique Vanguard Marlu",
+        title: "Technique Vanguard",
+        name: "Marlu",
         artwork: "marlu.webp",
         attack: 13,
         ppCost: 3,
@@ -1159,7 +1224,8 @@ Card.COLLECTION.push(
       },
       {
         id: 73,
-        name: "Research Lab Assistant Wright",
+        title: "Research Lab Assistant",
+        name: "Wright",
         artwork: "wright.webp",
         attack: 2,
         ppCost: 1,
@@ -1175,7 +1241,8 @@ Card.COLLECTION.push(
       },
       {
         id: 74,
-        name: "Aether Matriarch Mother",
+        title: "Aether Matriarch",
+        name: "Mother",
         artwork: "mother.webp",
         attack: 27,
         ppCost: 5,
@@ -1191,7 +1258,8 @@ Card.COLLECTION.push(
       },
       {
         id: 75,
-        name: "Divine Queen of Epyk Margareta",
+        title: "Divine Queen of Epyk",
+        name: "Margareta",
         artwork: "margareta.webp",
         attack: 8,
         ppCost: 2,
@@ -1207,7 +1275,8 @@ Card.COLLECTION.push(
       },
       {
         id: 76,
-        name: "ARKS Member Garrus",
+        title: "ARKS Member",
+        name: "Garrus",
         artwork: "garrus.webp",
         attack: 14,
         ppCost: 3,
@@ -1223,7 +1292,8 @@ Card.COLLECTION.push(
       },
       {
         id: 77,
-        name: "Braver Founder Azanami",
+        title: "Braver Founder",
+        name: "Azanami",
         artwork: "azanami.webp",
         attack: 13,
         ppCost: 3,
@@ -1239,7 +1309,8 @@ Card.COLLECTION.push(
       },
       {
         id: 78,
-        name: "Researcher Aki",
+        title: "Researcher",
+        name: "Aki",
         artwork: "aki.webp",
         attack: 8,
         ppCost: 2,
@@ -1271,7 +1342,8 @@ Card.COLLECTION.push(
       },
       {
         id: 80,
-        name: "Queen of Cuento Hariette",
+        title: "Queen of Cuento",
+        name: "Hariette",
         artwork: "hariette.webp",
         attack: 21,
         ppCost: 4,
@@ -1287,7 +1359,8 @@ Card.COLLECTION.push(
       },
       {
         id: 81,
-        name: "ARKS Member Rudis",
+        title: "ARKS Member",
+        name: "Rudis",
         artwork: "rudis.webp",
         attack: 2,
         ppCost: 1,
@@ -1325,7 +1398,8 @@ Card.COLLECTION.push(
 
       {
         id: 84,
-        name: "Sorcerer Phaleg",
+        title: "Sorcerer",
+        name: "Phaleg",
         artwork: "phaleg.webp",
         attack: 25,
         ppCost: 4,
@@ -1342,7 +1416,8 @@ Card.COLLECTION.push(
 
       {
         id: 85,
-        name: "ARKS Member Helen",
+        title: "ARKS Member",
+        name: "Helen",
         artwork: "helen.webp",
         attack: 7,
         ppCost: 2,
@@ -1356,7 +1431,6 @@ Card.COLLECTION.push(
         element: "darkness",
         set: "Version 1",
       },
-
       {
         id: 86,
         name: "Dekor Maryuda",
@@ -1373,10 +1447,10 @@ Card.COLLECTION.push(
         element: "darkness",
         set: "Version 1",
       },
-
       {
         id: 87,
-        name: "Power Seeker Theodore",
+        title: "Power Seeker",
+        name: "Theodore",
         artwork: "theodore.webp",
         attack: 20,
         ppCost: 4,
@@ -1393,7 +1467,8 @@ Card.COLLECTION.push(
 
       {
         id: 88,
-        name: "ARKS Member Niels",
+        title: "ARKS Member",
+        name: "Niels",
         artwork: "niels.webp",
         attack: 2,
         ppCost: 1,
@@ -1410,7 +1485,8 @@ Card.COLLECTION.push(
 
       {
         id: 89,
-        name: "ARKS Member Belyak",
+        title: "ARKS Member",
+        name: "Belyak",
         artwork: "belyak.webp",
         attack: 19,
         ppCost: 4,
@@ -1461,7 +1537,8 @@ Card.COLLECTION.push(
 
       {
         id: 92,
-        name: "Item Lab Employee Dudu",
+        title: "Item Lab Employee",
+        name: "Dudu",
         artwork: "dudu.webp",
         attack: 3,
         ppCost: 1,
@@ -1478,7 +1555,8 @@ Card.COLLECTION.push(
 
       {
         id: 93,
-        name: "Combat Instructor Barbara",
+        title: "Combat Instructor",
+        name: "Barbara",
         artwork: "barbara.webp",
         attack: 8,
         ppCost: 2,
@@ -1529,7 +1607,8 @@ Card.COLLECTION.push(
 
       {
         id: 96,
-        name: "The Girl Who Wove the Past Matoi",
+        title: "The Girl Who Wove the Past",
+        name: "Matoi",
         artwork: "matoi_dark.webp",
         attack: 26,
         ppCost: 5,
@@ -1546,7 +1625,8 @@ Card.COLLECTION.push(
 
       {
         id: 97,
-        name: "Raging Dragon Haddred",
+        title: "Raging Dragon",
+        name: "Haddred",
         artwork: "haddred.webp",
         attack: 26,
         ppCost: 5,
@@ -1563,7 +1643,8 @@ Card.COLLECTION.push(
 
       {
         id: 98,
-        name: "Xiaokin Sarah",
+        title: "Xiaokin",
+        name: "Sarah",
         artwork: "sarah.webp",
         attack: 14,
         ppCost: 3,
@@ -1580,7 +1661,8 @@ Card.COLLECTION.push(
 
       {
         id: 99,
-        name: "Latent Talent Theodore",
+        title: "Latent Talent",
+        name: "Theodore",
         artwork: "theodore2.webp",
         attack: 5,
         ppCost: 2,

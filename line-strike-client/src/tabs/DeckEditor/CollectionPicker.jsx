@@ -35,8 +35,12 @@ export function CollectionPicker() {
       cards = cards.filter((i) => i.element === element);
     }
     if (name) {
-      cards = cards.filter((i) =>
-        String(i.name).toLocaleLowerCase().includes(name.toLocaleLowerCase())
+      cards = cards.filter(
+        (i) =>
+          String(i.name)
+            .toLocaleLowerCase()
+            .includes(name.toLocaleLowerCase()) ||
+          String(i.title).toLocaleLowerCase().includes(name.toLocaleLowerCase())
       );
     }
     return cards;

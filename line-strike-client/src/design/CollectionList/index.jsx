@@ -48,7 +48,7 @@ function CollectionListItem({
             <div className={styles.title}>
               <img src={`elements/${card.element}.webp`} />
               <h3>
-                {card.name} {isIllegal && <Badge>ILLEGAL</Badge>}
+                {card.title} {card.name} {isIllegal && <Badge>ILLEGAL</Badge>}
                 {isLimited && <Badge>LIMITED TO {maxRepeats}</Badge>}
               </h3>
             </div>
