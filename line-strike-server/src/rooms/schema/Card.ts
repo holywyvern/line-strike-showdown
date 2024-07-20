@@ -733,13 +733,13 @@ Card.COLLECTION.push(
         area: [
           0,  0, 0,
           0,  0, 0,
-          0,  RIGHT, LEFT,
+          0,  0, LEFT,
         ],
         // prettier-ignore
         displayArea: [
           0,  0, 0,
           0,  0, 0,
-          0,  0, LEFT,
+          0,  RIGHT, LEFT,
         ],
         element: "wind",
         set: "Version 1",
