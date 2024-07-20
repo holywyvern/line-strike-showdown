@@ -27,8 +27,8 @@ export class LaneAttack extends Command<LineStrikeRoom, LaneAttackProps> {
       }
     }
     for (const card of defenderCards) {
-      if (card.baseGuard && damage > 0) {
-        damage--;
+      if (card.baseGuard) {
+        if (damage > 0) damage--;
         card.baseGuard = false;
         blocks++;
       }

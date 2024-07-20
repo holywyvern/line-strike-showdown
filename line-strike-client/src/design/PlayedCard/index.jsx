@@ -10,7 +10,7 @@ function processCard(status, card) {
 
   const { ppCost, artwork, element, id, skill } = card;
 
-  return { ...status, ppCost, artwork, element, id, skill };
+  return { ...status, ppCost, artwork, element, id, skill, normalAttack: card.attack };
 }
 
 export function PlayedCard({ status, card, mirror, onClick }) {

@@ -32,10 +32,10 @@ export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
     this.state.playerA.lastTurn.clear();
     this.state.playerB.lastTurn.clear();
     return [
-      new ResetTurn().setPayload({ player: this.state.playerA }),
-      new ResetTurn().setPayload({ player: this.state.playerB }),
       new ResetPlays().setPayload({ player: this.state.playerA }),
       new ResetPlays().setPayload({ player: this.state.playerB }),
+      new ResetTurn().setPayload({ player: this.state.playerA }),
+      new ResetTurn().setPayload({ player: this.state.playerB }),
       new Wait().setPayload({ time: 200 }),
       new GainPP().setPayload({
         player: this.state.playerA,

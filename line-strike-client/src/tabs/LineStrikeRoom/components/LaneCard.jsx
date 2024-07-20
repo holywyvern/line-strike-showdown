@@ -25,7 +25,7 @@ export function LaneCard({ card, top, playing, lane }) {
     baseGuard,
     incapacitated,
     stunned,
-    normalAttack: attack,
+    normalAttack: data.attack,
   };
   const onPlaceCard = () => {
     setOpen(true);

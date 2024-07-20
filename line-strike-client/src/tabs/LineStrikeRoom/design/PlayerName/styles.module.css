@@ -1,0 +1,17 @@
+.name {
+  position: absolute;
+  right: 48px;
+  width: 300px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  font-size: 48px;
+  font-weight: bold;
+  color: dodgerblue;
+  top: 560px;
+}
+
+.top {
+  top: 500px;
+  color: lightcoral;
+}

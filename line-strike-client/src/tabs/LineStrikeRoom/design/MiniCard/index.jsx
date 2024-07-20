@@ -4,8 +4,13 @@ import cx from "classnames";
 import styles from "./styles.module.css";
 
 export function MiniCard({ card, index, size, displacement, played, scale }) {
+  const buffs = card.normalAttack && card.normalAttack < card.attack;
+  const debuffs = card.normalAttack && card.normalAttack > card.attack;
   const className = cx(styles.mini, styles[card.element], {
     [styles.played]: played,
+    [styles.buff]: buffs,
+    [styles.debuff]: debuffs,
+    [styles.dead]: card.attack < 1 || card.stunned || card.incapacitated,
   });
   return (
     <div
@@ -34,6 +39,10 @@ export function MiniCard({ card, index, size, displacement, played, scale }) {
       </div>
       <div className={styles.ppv}>{card.ppCost}</div>
       <div className={styles.atkv}>{card.attack}</div>
+      <div className={styles.icons}>
+        {card.baseGuard && <img src="flags/base_guard.webp" />}
+        {card.baseBuster && <img src="flags/base_buster.webp" />}
+      </div>
     </div>
   );
 }
@@ -45,4 +54,5 @@ MiniCard.propTypes = {
   displacement: PropTypes.number,
   played: PropTypes.bool,
   scale: PropTypes.number,
+  normalAttack: PropTypes.number,
 };
