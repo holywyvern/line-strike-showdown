@@ -8,7 +8,7 @@ import { MiniCard } from "../design/MiniCard";
 export function PlayerHand() {
   const { cards } = useCards();
   const { bottom } = usePlayers();
-  const handIDs = useArraySchema(bottom?.handIDs);
+  const handIDs = useArraySchema(bottom.handIDs);
   const { usedHand } = useBoard(bottom, false, true);
   const handIndexes = useArraySchema(usedHand);
   const hand = handIDs.map((i) => cards[i]).filter(Boolean);

@@ -65,20 +65,12 @@ export function useArraySchema(array) {
   useEffect(() => {
     if (!array) return;
 
-    array.onAdd((item, index) => {
-      setState((list) => {
-        const newList = [...list];
-        newList[index] = item;
-        return newList;
-      });
+    array.onAdd(() => {
+      setState(() => [...array]);
     });
 
-    array.onRemove((_, index) => {
-      setState((list) => {
-        const newList = [...list];
-        newList.splice(index, 1);
-        return newList;
-      });
+    array.onRemove(() => {
+      setState(() => [...array]);
     });
   }, [array]);
   return state;
