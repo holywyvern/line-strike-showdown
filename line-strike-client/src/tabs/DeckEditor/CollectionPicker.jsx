@@ -94,6 +94,7 @@ export function CollectionPicker() {
                 format={format}
                 onAdd={onAdd}
                 onRemove={onRemove}
+                skills={db.skills}
               />
             );
           })}

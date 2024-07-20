@@ -29,6 +29,7 @@ export interface CardProps {
   element: CardElement;
   attack: number;
   area?: number[];
+  displayArea?: number[];
   amount?: number;
   ppCost: number;
   set: CardSet;
@@ -63,6 +64,9 @@ export class Card extends Schema {
   @type(["int8"])
   area: ArraySchema<number>;
 
+  @type(["int8"])
+  displayArea: ArraySchema<number>;
+
   @type("uint8")
   amount: number;
 
@@ -86,6 +90,7 @@ export class Card extends Schema {
     element,
     attack,
     area,
+    displayArea,
     amount,
     ppCost,
     set,
@@ -102,6 +107,7 @@ export class Card extends Schema {
     this.element = element;
     this.attack = attack;
     this.area = new ArraySchema(...(area || []));
+    this.displayArea = new ArraySchema(...(displayArea || area || []));
     this.amount = amount || 0;
     this.ppCost = ppCost;
     this.set = set;
@@ -814,6 +820,12 @@ Card.COLLECTION.push(
           RIGHT, 0, 0,
               0, 0, 0,
         ],
+        // prettier-ignore
+        displayArea: [
+          RIGHT, LEFT, 0,
+          RIGHT, LEFT, 0,
+              0, 0, 0,
+        ],
         element: "wind",
         set: "Version 1",
       },
@@ -829,6 +841,12 @@ Card.COLLECTION.push(
         area: [
               0, 0, 0,
           RIGHT, 0, 0,
+              0, 0, 0,
+        ],
+        // prettier-ignore
+        displayArea: [
+              0, 0, 0,
+          RIGHT, LEFT, 0,
               0, 0, 0,
         ],
         element: "wind",

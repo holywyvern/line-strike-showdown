@@ -66,3 +66,27 @@
   display: flex;
   gap: 4px;
 }
+
+.grid {
+  display: grid;
+  width: 63px;
+  height: 63px;
+  grid-template-columns: repeat(3, 21px);
+  grid-template-rows: repeat(3, 21px);
+  font-size: 12px;
+}
+
+.support {
+  background-color: dodgerblue;
+}
+
+.disrupt {
+  background-color: lightcoral;
+}
+
+.area {
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
