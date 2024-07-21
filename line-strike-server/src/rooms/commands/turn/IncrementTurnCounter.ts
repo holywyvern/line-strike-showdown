@@ -20,8 +20,8 @@ export class IncrementTurnCounter extends Command<LineStrikeRoom> {
     );
     this.state.turnTimestamp = Date.now();
     this.state.turnTimeLeft = (1 + this.state.format.turnSeconds) * 1_000;
-    this.room.broadcast("start-turn", this.state.turn);
-    return [new Wait().setPayload({ time: 1000 })];
+    this.room.broadcast("start-turn", { turn: this.state.turn });
+    return [new Wait().setPayload({ time: 4_000 })];
   }
 
   endPlanning = () => {

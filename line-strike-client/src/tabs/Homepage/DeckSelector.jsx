@@ -21,6 +21,7 @@ export function DeckSelector() {
       {
         closable: true,
         id: `edit-deck-${index}`,
+        music: "deck"
       }
     );
   };

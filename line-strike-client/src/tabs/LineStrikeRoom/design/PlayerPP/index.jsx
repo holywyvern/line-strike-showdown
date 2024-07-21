@@ -15,7 +15,7 @@ export function PlayerPP({ value, top, max }) {
     <div className={className}>
       <div className={styles.wrapper}>
         <div className={styles.icon} />
-        <span className={styles.value}>{value}</span>
+        <span className={styles.value}>{Math.max(0, value)}</span>
       </div>
     </div>
   );

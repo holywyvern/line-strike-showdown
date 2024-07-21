@@ -373,7 +373,7 @@ Card.COLLECTION.push(
       },
       {
         id: 17,
-        title: "Harboror of Hatred",
+        title: "Harborer of Hatred",
         name: "Lavere",
         artwork: "lavere.webp",
         attack: 10,

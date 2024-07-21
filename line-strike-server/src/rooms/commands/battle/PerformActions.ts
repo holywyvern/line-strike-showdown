@@ -46,7 +46,7 @@ export class PerformActions extends Command<
           placeIndex,
           log: true,
         }),
-        new Wait().setPayload({ time: 500 })
+        new Wait().setPayload({ time: 1_000 })
       );
       placeIndex++;
     }

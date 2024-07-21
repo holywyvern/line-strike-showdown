@@ -17,5 +17,5 @@ export function BattleButton({ onClick, disabled }) {
 
 BattleButton.propTypes = {
   onClick: PropTypes.func,
-  disabled: false,
+  disabled: PropTypes.bool,
 };

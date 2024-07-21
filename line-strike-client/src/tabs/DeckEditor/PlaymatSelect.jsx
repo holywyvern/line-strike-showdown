@@ -18,5 +18,5 @@ export function PlaymatSelect(props) {
 PlaymatSelect.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.string,
+  onChange: PropTypes.func,
 };

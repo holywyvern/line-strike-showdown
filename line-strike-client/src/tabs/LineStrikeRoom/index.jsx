@@ -6,13 +6,16 @@ import { PhaseChecker } from "./components/PhaseChecker";
 import { HoveredContext } from "./context/HoveredCardContext";
 import { useState } from "react";
 import { ChatDrawer } from "./components/ChatDrawer";
+import { MessageListener } from "./components/MessageListener";
 
 export function LineStrikeRoom({ room, spectator, tabIndex }) {
   const hovered = useState(null);
   return (
     <HoveredContext.Provider value={hovered}>
       <LineStrikeRoomContext.Provider value={room}>
-        <PhaseChecker spectator={spectator} index={tabIndex} />
+        <MessageListener>
+          <PhaseChecker spectator={spectator} index={tabIndex} />
+        </MessageListener>
         <ChatDrawer />
       </LineStrikeRoomContext.Provider>
     </HoveredContext.Provider>

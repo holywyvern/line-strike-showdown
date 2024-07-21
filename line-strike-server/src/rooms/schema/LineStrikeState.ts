@@ -8,6 +8,7 @@ import { ChatLog } from "./ChatLog";
 export type LineStrikePhase =
   | "intro"
   | "firstDraw"
+  | "start"
   | "planning"
   | "battle"
   | "finished";

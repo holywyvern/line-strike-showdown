@@ -95,6 +95,7 @@ export function ProfileContext({ children }) {
     setDecks(saved.decks || {});
     setMusic(saved.music || false);
     api.setVolume(saved.volume || 0);
+    AudioManager.bgmVolume = saved.music ? 100 : 0;
     setStatus("loaded");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

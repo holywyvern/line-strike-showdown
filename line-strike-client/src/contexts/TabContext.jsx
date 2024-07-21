@@ -50,6 +50,9 @@ export function TabContext({ children }) {
           closable: options?.closable || false,
           warning: options?.warning || null,
         });
+        if (options?.music) {
+          AudioManager.playBgm({ name: options?.music, volume: 100 });
+        }
         setActive(tabs.length);
         return newTabs;
       });

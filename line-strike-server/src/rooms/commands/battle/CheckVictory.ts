@@ -11,6 +11,7 @@ export class CheckVictory extends Command<LineStrikeRoom> {
       finish = true;
       if (playerB.hp < format.deathHP) {
         this.state.chat.push(new ChatLog({ type: "draw" }));
+        this.room.broadcast("draw");
       } else {
         this.state.chat.push(
           new ChatLog({
@@ -19,6 +20,7 @@ export class CheckVictory extends Command<LineStrikeRoom> {
             name: playerB.name,
           })
         );
+        this.room.broadcast("win", { playerID: playerB.sessionID });
       }
     } else if (playerB.hp < format.deathHP) {
       finish = true;
@@ -29,6 +31,7 @@ export class CheckVictory extends Command<LineStrikeRoom> {
           name: playerA.name,
         })
       );
+      this.room.broadcast("win", { playerID: playerA.sessionID });
     }
     if (finish) {
       this.state.phase = "finished";

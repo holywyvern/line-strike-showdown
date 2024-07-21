@@ -7,6 +7,9 @@ import { SkillTag } from "./Skill";
 export class Lane extends Schema {
   player: Player;
 
+  @type("string")
+  playerID: string;
+
   @type([PlayedCard])
   cards: ArraySchema<PlayedCard>;
 
@@ -27,6 +30,7 @@ export class Lane extends Schema {
   constructor(player: Player, position: number) {
     super();
     this.player = player;
+    this.playerID = this.player.sessionID;
     this.position = position;
     const format = this.format;
     this.hp = format.laneHP;

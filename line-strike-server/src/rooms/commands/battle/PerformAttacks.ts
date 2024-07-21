@@ -49,7 +49,6 @@ export class PerformAttacks extends Command<LineStrikeRoom> {
     }
     if (attacks.length > 0) {
       this.state.chat.push(new ChatLog({ type: "battle" }));
-      attacks.push(new Wait().setPayload({ time: attacks.length * 200 }));
     }
     return [
       ...attacks,

@@ -8,6 +8,8 @@ import { GainPP } from "../user/GainPP";
 import { ResetPlays } from "./ResetPlays";
 import { DrawCard } from "./DrawCard";
 import { Wait } from "../utils/Wait";
+import { BroadcastStart } from "./BroadcastStart";
+import { StartBattle } from "./StartBattle";
 
 export interface StartTurnProps {
   draw?: boolean;
@@ -21,16 +23,20 @@ export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
       this.state.delayed.clear();
       this.state.delayed = null;
     }
+    const messages: Command[] = [];
     if (!draw) {
       this.state.musicName = "phase1";
     }
     const format = this.state.format;
-    const draws: DrawCard[] = [];
+    const draws: Command[] = [];
     if (draw) {
       draws.push(
         new DrawCard().setPayload({ player: this.state.playerA }),
         new DrawCard().setPayload({ player: this.state.playerB })
       );
+    }
+    if (!draw) {
+      messages.push(new StartBattle(), new BroadcastStart());
     }
     this.state.playerA.lastTurn.clear();
     this.state.playerB.lastTurn.clear();
@@ -48,6 +54,7 @@ export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
         player: this.state.playerB,
         pp: format.ppPerTurn,
       }),
+      ...messages,
       new IncrementTurnCounter(),
       ...draws,
     ];

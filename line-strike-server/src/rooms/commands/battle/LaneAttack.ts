@@ -3,6 +3,10 @@ import { Command } from "@colyseus/command";
 import { LineStrikeRoom } from "../../LineStrikeRoom";
 import { Lane } from "../../schema/Lane";
 import { ChatLog } from "../../schema/ChatLog";
+import { Wait } from "../utils/Wait";
+import { SendBreak } from "./SendBreak";
+import { SendAttacks } from "./SendAttacks";
+import { CheckBreak } from "./CheckBreak";
 
 export interface LaneAttackProps {
   attacker: Lane;
@@ -44,21 +48,17 @@ export class LaneAttack extends Command<LineStrikeRoom, LaneAttackProps> {
         lane: index,
       })
     );
-    if (damage < 1) return;
 
-    defender.hp = Math.max(0, defender.hp - damage);
-
-    if (defender.broken) {
-      this.state.musicName = "phase2";
-      attacker.victory = true;
-      this.state.chat.push(
-        new ChatLog({
-          type: "break",
-          playerID: attacker.player.sessionID,
-          name: attacker.player.name,
-          lane: index,
-        })
-      );
-    }
+    return [
+      new SendAttacks().setPayload({
+        attacker,
+        defender,
+        damage,
+        attacks,
+        blocks,
+        index,
+      }),
+      new CheckBreak().setPayload({ attacker, defender, index }),
+    ];
   }
 }
