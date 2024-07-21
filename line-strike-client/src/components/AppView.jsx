@@ -14,7 +14,7 @@ export function AppView() {
         return (
           <ModalContext key={tab.id} visible={visible}>
             <TabView hidden={!visible}>
-              {cloneElement(tab.element, { tabIndex: index })}
+              {cloneElement(tab.element, { tabIndex: index, tabActive: visible })}
             </TabView>
           </ModalContext>
         );

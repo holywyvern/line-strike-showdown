@@ -1,8 +1,10 @@
-import PropTypes from "prop-types";
-import { useBattleRoom, usePlayers } from "../context";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
 import { BattleMessage } from "../design/BattleMessage";
-import { AudioManager } from "../../../utils/AudioManager";
+
+import { useBattleRoom, usePlayers } from "../context";
+import { useTabAudio } from "../context/TabAudioContext";
 
 function useMessageDisplay() {
   const [style, setStyle] = useState("message");
@@ -35,6 +37,7 @@ function useMessageDisplay() {
 }
 
 export function MessageListener({ children }) {
+  const audio = useTabAudio();
   const { playing } = usePlayers();
   const [ready, setReady] = useState(false);
   const room = useBattleRoom();
@@ -46,36 +49,36 @@ export function MessageListener({ children }) {
     setReady(true);
     room.onMessage("battle-start", () => {
       showMessage("BATTLE START!");
-      AudioManager.playMe({ name: "start", volume: 100 });
+      audio.me("battle-start");
     });
     room.onMessage("start-turn", ({ turn }) => {
       showMessage(`TURN ${turn}`);
     });
     room.onMessage("card-open", () => {
       showMessage("CARD OPEN!");
-      AudioManager.playMe({ name: "card-open", volume: 100 });
+      audio.me("card-open");
     });
     room.onMessage("break", ({ playerID }) => {
       if (room.sessionId === playerID) {
         showMessage("BROKEN!", "break");
-        AudioManager.playMe({ name: "broken", volume: 100 });
+        audio.me("broken");
       } else {
         showMessage("BREAK!", "break");
-        AudioManager.playMe({ name: "break", volume: 100 });
+        audio.me("break");
       }
     });
     room.onMessage("win", ({ playerID }) => {
       if (room.sessionId === playerID) {
         showMessage("WIN!", "message");
-        AudioManager.playMe({ name: "win", volume: 100 });
+        audio.me("win");
       } else if (playing) {
         showMessage("LOSE!", "message");
-        AudioManager.playMe({ name: "lose", volume: 100 });
+        audio.me("lose");
       }
     });
     room.onMessage("draw", () => {
       console.log("draw...");
-      AudioManager.playMe({ name: "draw", volume: 100 });
+      audio.me("draw");
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room, ready, playing]);

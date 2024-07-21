@@ -36,7 +36,7 @@ export class PlayCard extends Command<LineStrikeRoom, PlayCardProps> {
 
     const currentCard = spot.card;
     if (currentCard) {
-      if (!newCard.canOverride(currentCard))
+      if (!newCard.canOverride(currentCard, spot.incapacitated))
         throw new Error("Unable to override card");
 
       const pp = this.calculateOverridePpCost(spot, newCard, currentCard);

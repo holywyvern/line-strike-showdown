@@ -50,7 +50,7 @@ function canPlaceCard(card, status, skills, cards, player, pp) {
   const skill = skills[oldCard.skill.id];
   if (!skill) return false;
 
-  return skill.tags.includes("wildcard");
+  return !status.incapacitated && skill.tags.includes("wildcard");
 }
 
 function useLanes(player) {

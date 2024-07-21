@@ -62,5 +62,5 @@ Message.propTypes = {
 BattleMessage.propTypes = {
   message: PropTypes.string,
   type: PropTypes.string,
-  messageKey: PropTypes.string,
+  messageKey: PropTypes.any,
 };

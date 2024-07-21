@@ -131,15 +131,15 @@ export class Card extends Schema {
     return this.skill?.tags.includes(tag);
   }
 
-  canOverride(card: Card) {
+  canOverride(card: Card, incapacitated = false) {
     if (this.ppCost <= card.ppCost) return false;
     if (card.element === this.element) return true;
 
-    return card.includes("wildcard");
+    return !incapacitated && card.includes("wildcard");
   }
 
-  canBeOverridenBy(card: Card) {
-    return card.canOverride(this);
+  canBeOverridenBy(card: Card, incapacitated = false) {
+    return card.canOverride(this, incapacitated);
   }
 }
 
