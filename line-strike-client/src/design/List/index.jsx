@@ -1,14 +1,22 @@
 import PropTypes from "prop-types";
 
 import styles from "./styles.module.css";
+import { forwardRef } from "react";
 
 function ListItem({ children }) {
   return <li>{children}</li>;
 }
 
-export function List({ children }) {
-  return <ul className={styles.list}>{children}</ul>;
+// eslint-disable-next-line react/prop-types
+function ListElement({ children }, ref) {
+  return (
+    <ul ref={ref} className={styles.list}>
+      {children}
+    </ul>
+  );
 }
+
+export const List = forwardRef(ListElement);
 
 List.Item = ListItem;
 

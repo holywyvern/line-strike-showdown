@@ -26,5 +26,5 @@ LaneCardContainer.propTypes = {
   top: PropTypes.bool,
   active: PropTypes.bool,
   disabled: PropTypes.bool,
-  onClick: PropTypes.bool,
+  onClick: PropTypes.func,
 };

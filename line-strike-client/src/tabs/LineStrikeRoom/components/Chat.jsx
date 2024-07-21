@@ -6,7 +6,7 @@ import { useHoveredCard } from "../context/HoveredCardContext";
 import { Name } from "./Name";
 import { Row } from "../../../design/Row";
 import { useArraySchema, useBattleRoom, useBattleRoomState } from "../context";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Box } from "../../../design/Box";
 import { List } from "../../../design/List";
 import { TextInput } from "../../../design/TextInput";
@@ -270,6 +270,7 @@ const WRAPPERS = {
 };
 
 export function Chat() {
+  const [list, setList] = useState(null);
   const room = useBattleRoom();
   const state = useBattleRoomState();
   const messages = useArraySchema(state.chat);
@@ -279,13 +280,18 @@ export function Chat() {
     room.send("chat", text);
     setText("");
   };
+  useEffect(() => {
+    if (!list) return;
+
+    list.scrollTop = list.scrollHeight;
+  }, [list, messages.length]);
   return (
     <Box stretch flex>
       <Box.Header>
         <h2>Chat</h2>
       </Box.Header>
       <Box.Body>
-        <List>
+        <List ref={setList}>
           {messages.map(({ type, timestamp, ...props }, index) => {
             const Component = COMPONENTS[type] || COMPONENTS.chat;
             const Wrapper = WRAPPERS[type] || Fragment;
