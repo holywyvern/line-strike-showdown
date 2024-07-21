@@ -14,7 +14,7 @@ module.exports = {
       name: "Line Strike Showdown - Client",
       cwd: "./line-strike-client",
       script: "npm",
-      args: "run dev",
+      args: "run preview",
       env: {
         NODE_ENV: "production",
       },
