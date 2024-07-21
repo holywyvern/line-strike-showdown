@@ -45,7 +45,10 @@ export function CardArea({ skill, card }) {
       {showArea &&
         card.displayArea.map((i, index) => {
           return (
-            <div key={index} className={styles.area}>
+            <div
+              key={index}
+              className={cx(styles.area, { [styles.highlight]: i })}
+            >
               {value(skill, i)}
             </div>
           );

@@ -80,8 +80,16 @@
   background-color: dodgerblue;
 }
 
+.support .highlight {
+  background-color:cornflowerblue;
+}
+
 .disrupt {
   background-color: lightcoral;
+}
+
+.disrupt .highlight {
+  background-color: coral;
 }
 
 .area {
@@ -89,4 +97,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-shadow: none;
+  font-weight: bolder;
 }
