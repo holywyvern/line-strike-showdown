@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styles from "./styles.module.css";
 
 // eslint-disable-next-line react/prop-types
-function Screen({ children, scale, width, height }, ref) {
+function Screen({ children, scale, width, height, opacity }, ref) {
   return (
     <div
       ref={ref}
@@ -15,6 +15,7 @@ function Screen({ children, scale, width, height }, ref) {
         "--height": height,
         "--scaled-width": width * scale,
         "--scaled-height": height * scale,
+        opacity,
       }}
     >
       <div className={styles.wrapper}>{children}</div>
@@ -29,4 +30,5 @@ LineStrikeScreen.propTypes = {
   scale: PropTypes.number,
   width: PropTypes.number,
   height: PropTypes.number,
+  opacity: PropTypes.number,
 };

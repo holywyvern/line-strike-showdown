@@ -30,7 +30,7 @@ export class CheckBreak extends Command<LineStrikeRoom, CheckBreakProps> {
     );
     return [
       new SendBreak().setPayload({ playerID: defender.player.sessionID }),
-      new Wait().setPayload({ time: 4_000 }),
+      new Wait().setPayload({ time: 3_500 }),
     ];
   }
 }
