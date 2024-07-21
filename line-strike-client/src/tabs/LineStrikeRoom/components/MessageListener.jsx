@@ -7,33 +7,27 @@ import { useBattleRoom, usePlayers } from "../context";
 import { useTabAudio } from "../context/TabAudioContext";
 
 function useMessageDisplay() {
-  const [style, setStyle] = useState("message");
-  const [display, setDisplay] = useState(null);
-  const [key, setKey] = useState(() => Date.now());
-  const [handle, setHandle] = useState(null);
+  const [messages, setMessages] = useState([]);
 
-  const showMessage = (message, style = "message") => {
-    setHandle((old) => {
-      if (old !== null) {
-        clearTimeout(old);
-      }
-      setStyle(style);
-      setDisplay(message);
-      setKey(Date.now());
-      const timeout = setTimeout(() => {
-        setHandle((old) => {
-          if (old === timeout) {
-            setDisplay(null);
-            clearTimeout(old);
-            return null;
-          }
-          return old;
+  const showMessage = (message, type = "message") => {
+    setMessages((messages) => {
+      const newMessages = [...messages];
+      const newMessage = { message, key: Date.now(), type };
+      newMessages.push(newMessage);
+      setTimeout(() => {
+        setMessages((messages) => {
+          const index = messages.indexOf(newMessage);
+          if (index < 0) return messages;
+
+          const newMessages = [...messages];
+          newMessages.splice(index, 1);
+          return newMessages;
         });
-      }, 1_500);
-      return timeout;
+      }, [1_500]);
+      return newMessages;
     });
   };
-  return { style, message: display, handle, showMessage, key };
+  return { messages, showMessage };
 }
 
 export function MessageListener({ children }) {
@@ -41,7 +35,7 @@ export function MessageListener({ children }) {
   const { playing } = usePlayers();
   const [ready, setReady] = useState(false);
   const room = useBattleRoom();
-  const { style, message, key, showMessage } = useMessageDisplay();
+  const { messages, showMessage } = useMessageDisplay();
   useEffect(() => {
     if (ready) return;
     if (!room) return;
@@ -85,7 +79,7 @@ export function MessageListener({ children }) {
   return (
     <>
       {children}
-      <BattleMessage message={message} type={style} messageKey={key} />
+      <BattleMessage messages={messages} />
     </>
   );
 }

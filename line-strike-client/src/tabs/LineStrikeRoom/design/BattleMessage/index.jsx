@@ -39,17 +39,19 @@ function Message({ message, type }) {
   );
 }
 
-export function BattleMessage({ message, type, messageKey }) {
-  const className = cx(styles.group, { [styles.visible]: message });
+export function BattleMessage({ messages }) {
+  const className = cx(styles.group, { [styles.visible]: messages.length > 0 });
   return (
     <TransitionGroup className={className} appear enter exit>
-      {message && (
-        <Message
-          key={`${message}-${type}-${messageKey}`}
-          message={message}
-          type={type}
-        />
-      )}
+      {messages.map(({ message, type, key }) => {
+        return (
+          <Message
+            key={`${message}-${type}-${key}`}
+            message={message}
+            type={type}
+          />
+        );
+      })}
     </TransitionGroup>
   );
 }
@@ -60,7 +62,5 @@ Message.propTypes = {
 };
 
 BattleMessage.propTypes = {
-  message: PropTypes.string,
-  type: PropTypes.string,
-  messageKey: PropTypes.any,
+  messages: PropTypes.arrayOf(PropTypes.any),
 };
