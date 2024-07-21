@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { BattleMessage } from "../design/BattleMessage";
@@ -11,8 +11,16 @@ function useMessageDisplay() {
 
   const showMessage = (message, type = "message") => {
     setMessages((messages) => {
+      if (messages.some((i) => i.message === message && i.type === type))
+        return messages;
+
       const newMessages = [...messages];
-      const newMessage = { message, key: Date.now(), type };
+      const newMessage = {
+        message,
+        key: Date.now(),
+        type,
+        nodeRef: createRef(),
+      };
       newMessages.push(newMessage);
       setTimeout(() => {
         setMessages((messages) => {
