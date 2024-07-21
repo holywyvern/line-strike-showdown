@@ -11,6 +11,17 @@ export default defineConfig({
         ws: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
+      "/colyseus": {
+        target: "http://localhost:2567",
+        changeOrigin: true,
+        ws: true,
+      },
+      "/playground": {
+        target: "http://localhost:2567",
+        changeOrigin: true,
+        ws: true,
+        rewrite: (path) => path.replace(/^\/playground/, ""),
+      },
     },
   },
   plugins: [react()],

@@ -1,10 +1,10 @@
 import { Command } from "@colyseus/command";
 
 import { LineStrikeRoom } from "../../LineStrikeRoom";
+
 import { Lane } from "../../schema/Lane";
 import { ChatLog } from "../../schema/ChatLog";
-import { Wait } from "../utils/Wait";
-import { SendBreak } from "./SendBreak";
+
 import { SendAttacks } from "./SendAttacks";
 import { CheckBreak } from "./CheckBreak";
 
@@ -58,7 +58,6 @@ export class LaneAttack extends Command<LineStrikeRoom, LaneAttackProps> {
         blocks,
         index,
       }),
-      new CheckBreak().setPayload({ attacker, defender, index }),
     ];
   }
 }
