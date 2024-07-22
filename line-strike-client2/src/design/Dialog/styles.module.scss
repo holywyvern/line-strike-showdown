@@ -1,0 +1,72 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  border: var(--border-size-md) solid var(--dialog-border-color);
+  overflow: hidden;
+  text-shadow: var(--dialog-text-shadow-color) 0px 0px 1px,
+    var(--dialog-text-shadow-color) 0px 0px 1px,
+    var(--dialog-text-shadow-color) 0px 0px 1px,
+    var(--dialog-text-shadow-color) 0px 0px 1px,
+    var(--dialog-text-shadow-color) 0px 0px 1px,
+    var(--dialog-text-shadow-color) 0px 0px 1px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.stretch {
+  align-self: stretch;
+}
+
+.flex {
+  flex: 1;
+}
+
+.header {
+  padding: 8px;
+  color: var(--dialog-font-color);
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  backdrop-filter: blur(11.1px);
+  -webkit-backdrop-filter: blur(11.1px);
+  background-image: linear-gradient(
+      45deg,
+      var(--dialog-header-color-gradient1) 0%,
+      var(--dialog-header-color-gradient2) 5%,
+      var(--dialog-header-color-gradient3) 10%,
+      var(--dialog-header-color-gradient3) 90%,
+      var(--dialog-header-color-gradient2) 95%,
+      var(--dialog-header-color-gradient1) 100%
+    ),
+    linear-gradient(var(--dialog-header-base-color1) 2px, transparent 4px),
+    linear-gradient(
+      to right,
+      var(--dialog-header-base-color1) 2px,
+      transparent 4px
+    );
+  background-size: 100% 100%, 6px 6px, 6px 6px;
+  background-color: var(--dialog-header-base-color2);
+}
+
+.header > h2, .header h3 {
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  text-transform: uppercase;
+}
+
+.body {
+  overflow: hidden;
+  flex: 1;
+  background: var(--dialog-body-background-color);
+  box-shadow: 0 4px 30px var(--dialog-body-shadow-color);
+  backdrop-filter: blur(11.1px);
+  -webkit-backdrop-filter: blur(11.1px);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--dialog-body-font-color);
+}

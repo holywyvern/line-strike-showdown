@@ -1,0 +1,6 @@
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  padding: var(--padding-md) 0;
+}

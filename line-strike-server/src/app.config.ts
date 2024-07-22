@@ -2,6 +2,8 @@ import config from "@colyseus/tools";
 import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 
+import type { Request, Response } from "express";
+
 /**
  * Import your Room files
  */
@@ -46,7 +48,7 @@ export default config({
   },
 
   initializeExpress: (app) => {
-    app.get("/cards", (req, res) => {
+    const handle = (req: Request, res: Response) => {
       const cards = Card.COLLECTION.map((card) => {
         if (!card) return null;
 
@@ -69,7 +71,9 @@ export default config({
         formats: Format.COLLECTION,
         standardFormatID: Format.STANDARD_ID,
       });
-    });
+    };
+    app.get("/cards", handle);
+    app.get("/database", handle);
 
     /**
      * Use @colyseus/playground

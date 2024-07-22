@@ -1,0 +1,43 @@
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+}
+
+.logo img {
+  max-width: 64px;
+}
+
+.logo h1 {
+  padding: 0;
+  margin: 0;
+  color: var(--logo-font-color);
+  font-size: var(--font-size-xl);
+}
+
+.logo h2 {
+  padding: 0;
+  margin: 0;
+  color: var(--logo-font-color);
+  font-size: var(--font-size-ml);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-sm);
+}
+
+.logo small {
+  font-size: var(--font-size-md);
+  padding: var(--padding-xs);
+  border-radius: var(--border-radius-xs);
+  background: var(--beta-background-color);
+  font-size: var(--font-size-xs);
+  border: var(--border-size-xs) solid var(--beta-border-color);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,34 @@
+{
+  "name": "line-strike-client2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "colyseus.js": "^0.15.25",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-modern-drawer": "^1.3.1",
+    "react-router-dom": "^6.25.1",
+    "react-transition-group": "^4.4.5",
+    "useismobile": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/react-transition-group": "^4.4.10",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "sass": "^1.77.8",
+    "vite": "^5.3.4"
+  }
+}

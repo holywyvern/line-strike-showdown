@@ -1,0 +1,6 @@
+.box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-md);
+  padding: var(--padding-md) 0;
+}
