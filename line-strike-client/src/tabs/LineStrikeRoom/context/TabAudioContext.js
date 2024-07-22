@@ -7,7 +7,7 @@ export const TabAudioContext = createContext();
 const playBgm = AudioManager.playBgm.bind(AudioManager);
 const playBgs = AudioManager.playBgs.bind(AudioManager);
 const playMe = AudioManager.playMe.bind(AudioManager);
-const playSe = AudioManager.playSe.bind(AudioManager);
+const playSe = AudioManager.playStaticSe.bind(AudioManager);
 
 function useMusicPlayer(player, active) {
   const [name, setName] = useState(null);
