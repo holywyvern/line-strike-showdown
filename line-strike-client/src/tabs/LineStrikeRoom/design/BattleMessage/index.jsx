@@ -8,31 +8,27 @@ import styles from "./styles.module.css";
 function Message({ message, type, nodeRef }) {
   const className = cx(styles.message, styles[type]);
   return (
-    <div ref={nodeRef} className={className}>
-      {message}
+    <div className={styles.group} ref={nodeRef}>
+      <div className={className}>{message}</div>
     </div>
   );
 }
 
 export function BattleMessage({ messages }) {
-  const className = cx(styles.group, { [styles.visible]: messages.length > 0 });
   return (
-    <TransitionGroup className={className} appear enter exit>
+    <TransitionGroup component={null} appear enter>
       {messages.map(({ message, type, key, nodeRef }) => {
         return (
           <CSSTransition
+            onEnter={() => console.log(message, "entered")}
+            onExit={() => console.log(message, "exited")}
             key={`${message}-${type}-${key}`}
             nodeRef={nodeRef}
-            timeout={1_000}
-            mountOnEnter
-            unmountOnExit
+            timeout={700}
             classNames={{
-              appear: styles.appear,
-              appearActive: styles["appear-active"],
-              appearDone: styles["appear-done"],
-              enter: styles["appear-active"],
-              enterActive: styles["appear-active"],
-              enterDone: styles["appear-done"],
+              enter: styles["enter-active"],
+              enterActive: styles["enter-active"],
+              enterDone: styles["enter-done"],
               exit: styles.exit,
               exitActive: styles["exit-active"],
               exitDone: styles["exit-done"],

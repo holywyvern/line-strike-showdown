@@ -23,6 +23,7 @@ import { useCards } from "../../../hooks/useCards";
 import { HoveredCard } from "./HoveredCard";
 import { useTabs } from "../../../hooks/useTabs";
 import { useEffect, useState } from "react";
+import { MessageListener } from "./MessageListener";
 
 export function PhaseChecker({ spectator, index }) {
   const tabs = useTabs();
@@ -74,18 +75,20 @@ export function PhaseChecker({ spectator, index }) {
 
   return (
     <BattleLayout>
-      <Viewport>
-        <LineStrikeGuide>
-          <HoveredCard />
-          <Board />
-          <CircularProgress rate={1 - rate} />
-          <BattleButton
-            onClick={onTurnLock}
-            disabled={Boolean(locked || phase !== "planning")}
-          />
-          {!spectator && <UndoActionButton />}
-        </LineStrikeGuide>
-      </Viewport>
+      <MessageListener>
+        <Viewport>
+          <LineStrikeGuide>
+            <HoveredCard />
+            <Board />
+            <CircularProgress rate={1 - rate} />
+            <BattleButton
+              onClick={onTurnLock}
+              disabled={Boolean(locked || phase !== "planning")}
+            />
+            {!spectator && <UndoActionButton />}
+          </LineStrikeGuide>
+        </Viewport>
+      </MessageListener>
     </BattleLayout>
   );
 }

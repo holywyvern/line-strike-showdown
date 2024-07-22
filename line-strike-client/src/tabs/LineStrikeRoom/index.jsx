@@ -6,7 +6,6 @@ import { PhaseChecker } from "./components/PhaseChecker";
 import { HoveredContext } from "./context/HoveredCardContext";
 import { useState } from "react";
 import { ChatDrawer } from "./components/ChatDrawer";
-import { MessageListener } from "./components/MessageListener";
 import { TabAudioContext } from "./context/TabAudioContext";
 
 export function LineStrikeRoom({ room, spectator, tabIndex, tabActive }) {
@@ -15,9 +14,7 @@ export function LineStrikeRoom({ room, spectator, tabIndex, tabActive }) {
     <TabAudioContext.Provider value={tabActive}>
       <HoveredContext.Provider value={hovered}>
         <LineStrikeRoomContext.Provider value={room}>
-          <MessageListener>
-            <PhaseChecker spectator={spectator} index={tabIndex} />
-          </MessageListener>
+          <PhaseChecker spectator={spectator} index={tabIndex} />
           <ChatDrawer />
         </LineStrikeRoomContext.Provider>
       </HoveredContext.Provider>
