@@ -25,6 +25,11 @@ export class StunCards extends Command<LineStrikeRoom, StunCardsProps> {
         this.state.chat.push(
           new ChatLog({ type: "stun", position: i, cardID: card.cardID })
         );
+        this.room.broadcast("animation", {
+          playerID: target.sessionID,
+          name: "stun",
+          position: i,
+        });
       }
     }
     return [

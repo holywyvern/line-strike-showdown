@@ -31,6 +31,7 @@ export function BattleLane({ index, lane, top, playing }) {
           card={card}
           top={top}
           playing={playing}
+          playerID={data.playerID}
           lane={index}
         />
       ))}

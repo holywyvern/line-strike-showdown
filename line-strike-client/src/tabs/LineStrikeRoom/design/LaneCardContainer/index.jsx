@@ -3,6 +3,10 @@ import cx from "classnames";
 
 import styles from "./styles.module.css";
 
+function LaneCardContainerCard({ children }) {
+  return <div className={styles.card}>{children}</div>;
+}
+
 export function LaneCardContainer({
   children,
   top,
@@ -20,6 +24,12 @@ export function LaneCardContainer({
     </button>
   );
 }
+
+LaneCardContainer.Card = LaneCardContainerCard;
+
+LaneCardContainerCard.propTypes = {
+  children: PropTypes.node,
+};
 
 LaneCardContainer.propTypes = {
   children: PropTypes.node,

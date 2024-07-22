@@ -73,18 +73,16 @@ export class Player extends Schema {
     mirrored = false
   ) {
     super();
+    this.sessionID = client.sessionId;
     this.state = state;
     this.client = client;
     this.mulligan = false;
     this.name = name;
     this.avatar = avatar;
-    this.turn = new Turn(this);
     this.deckIDs = new ArraySchema();
     this.handIDs = new ArraySchema();
     this.lastTurn = new ArraySchema();
-    this.board = new PlayerBoard(this);
     this.pp = this.state.format.startingPP;
-    this.sessionID = client.sessionId;
     this.mirrored = mirrored;
     this.selected = false;
     this.handSize = 0;
@@ -92,6 +90,8 @@ export class Player extends Schema {
     this.playmat = "blue_basic.webp";
     this.playmatOpacity = 1;
     this.deckSize = 0;
+    this.turn = new Turn(this);
+    this.board = new PlayerBoard(this);
   }
 
   get hand() {

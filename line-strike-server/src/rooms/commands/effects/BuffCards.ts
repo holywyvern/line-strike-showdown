@@ -30,6 +30,11 @@ export class BuffCards extends Command<LineStrikeRoom, BuffCardsProps> {
             damage: buff,
           })
         );
+        this.room.broadcast("animation", {
+          playerID: target.sessionID,
+          name: buff > 0 ? "buff" : "debuff",
+          position: i,
+        });
         if (targets[i] === card) continue;
         targets[i].buffs += buff;
       }

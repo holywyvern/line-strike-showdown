@@ -1,0 +1,57 @@
+.wrapper {
+  position: relative;
+  width: 144px;
+  height: 144px;
+}
+
+.animation {
+  position: absolute;
+  inset: 0;
+  z-index: 300;
+  opacity: 1;
+}
+
+.summon {
+  background-image: url("animations/summon.png");
+  animation: summon 300ms steps(5) forwards;
+  background-size: 600% 100%;
+  background-position: 0;
+}
+
+.buff {
+  background-image: url("animations/buff.png");
+  animation: summon 300ms steps(6) forwards;
+  background-size: 700% 100%;
+  background-position: 0;
+}
+
+.debuff {
+  background-image: url("animations/debuff.png");
+  animation: debuff 300ms steps(5) forwards;
+  background-size: 600% 100%;
+  background-position: 0;
+}
+
+.stun {
+  background-image: url("animations/stun.png");
+  animation: stun 300ms steps(4) forwards;
+  background-size: 500% 100%;
+  background-position: 0;
+}
+
+@keyframes summon {
+  to { background-position: -500% 0; opacity: 0; }
+}
+
+
+@keyframes buff {
+  to { background-position: -600% 0; opacity: 0; }
+}
+
+@keyframes debuff {
+  to { background-position: -500% 0; opacity: 0; }
+}
+
+@keyframes stun {
+  to { background-position: -400% 0; opacity: 0; }
+}

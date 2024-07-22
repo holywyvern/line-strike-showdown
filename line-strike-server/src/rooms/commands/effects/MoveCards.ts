@@ -31,6 +31,12 @@ export class MoveCards extends Command<LineStrikeRoom, MoveCardsProps> {
         if (targets[j].cardID === 0) {
           this.moveCard(targets, targets[i], targets[j]);
         }
+        this.room.broadcast("animation", {
+          playerID: target.sessionID,
+          name: "move",
+          position: i,
+          direction
+        });
         this.state.chat.push(
           new ChatLog({
             type: "move",

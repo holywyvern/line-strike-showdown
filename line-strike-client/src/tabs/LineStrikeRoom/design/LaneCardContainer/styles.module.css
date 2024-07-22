@@ -6,8 +6,17 @@
   background-image: url("lanes_bottom.png");
   background-size: 200% 100%;
   background-position: 0 0;
-  display: grid;
-  place-items: center;
+  position: relative;
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  top: 2px;
+  left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .holder:hover,

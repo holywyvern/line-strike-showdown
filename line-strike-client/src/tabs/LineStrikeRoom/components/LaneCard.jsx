@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import { useCards } from "../../../hooks/useCards";
@@ -5,14 +6,16 @@ import { useCards } from "../../../hooks/useCards";
 import { useBattleRoomState, useSchema } from "../context";
 
 import { LaneCardContainer } from "../design/LaneCardContainer";
-import { MiniCard } from "../design/MiniCard";
-import { useState } from "react";
 import { Modal } from "../../../design/Modal";
 import { Column } from "../../../design/Column";
-import { CardPlacer } from "./CardPlacer";
+import { MiniCard } from "../design/MiniCard";
+
 import { useHoveredCard } from "../context/HoveredCardContext";
 
-export function LaneCard({ card, top, playing, lane }) {
+import { CardPlacer } from "./CardPlacer";
+import { AnimationPlayer } from "./AnimationPlayer";
+
+export function LaneCard({ card, top, playing, lane, playerID }) {
   // eslint-disable-next-line no-unused-vars
   const [_, setHoveredCard] = useHoveredCard();
   const [open, setOpen] = useState(false);
@@ -36,6 +39,10 @@ export function LaneCard({ card, top, playing, lane }) {
   const onHover = () => {
     if (data) setHoveredCard(data);
   };
+  let position = card.position * 3 + lane;
+  if (top) {
+    position = card.position * 3 + 2 - lane;
+  }
   return (
     <>
       <LaneCardContainer
@@ -43,7 +50,12 @@ export function LaneCard({ card, top, playing, lane }) {
         disabled={!playing || phase !== "planning"}
         onClick={onPlaceCard}
       >
-        {cardID > 0 && <MiniCard card={processedCard} played onHover={onHover} />}
+        <LaneCardContainer.Card>
+          {cardID > 0 && (
+            <MiniCard card={processedCard} played onHover={onHover} />
+          )}
+        </LaneCardContainer.Card>
+        <AnimationPlayer playerID={playerID} position={position} />
       </LaneCardContainer>
       {playing && (
         <Modal open={open} title="Place Card" onClose={() => setOpen(false)}>
@@ -65,4 +77,5 @@ LaneCard.propTypes = {
   top: PropTypes.bool,
   playing: PropTypes.bool,
   lane: PropTypes.number,
+  playerID: PropTypes.any,
 };
