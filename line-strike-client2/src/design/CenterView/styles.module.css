@@ -1,0 +1,17 @@
+.view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--window-font-color);
+  text-shadow: var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px;
+  -webkit-font-smoothing: antialiased;
+  background: var(--window-background-color);
+}

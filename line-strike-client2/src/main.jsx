@@ -4,17 +4,17 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import "./index.scss";
 import "./perfect-scrollbars.scss";
-import 'react-modern-drawer/dist/index.css';
+import "react-modern-drawer/dist/index.css";
 
 import { Root } from "./layouts/Root";
 
 import { HomePage } from "./pages/HomePage";
 import { ErrorPage } from "./pages/ErrorPage";
 import { CollectionPage } from "./pages/CollectionPage";
-import { DeckEditorPage } from "./pages/DeckEditorPage";
-import { BattlePage } from "./pages/BattlePage";
 
 import { rootLoader } from "./loaders/rootLoader";
+
+import { PlayLayout } from "./layouts/PlayLayout";
 
 const router = createBrowserRouter([
   {
@@ -32,12 +32,13 @@ const router = createBrowserRouter([
         element: <CollectionPage />,
       },
       {
-        path: "/edit/:formatID/decks/:deckID",
-        element: <DeckEditorPage />,
-      },
-      {
-        path: "/battle/:roomID",
-        element: <BattlePage />,
+        path: "/play",
+        element: <PlayLayout />,
+        children: [
+          {
+            index: true,
+          },
+        ],
       },
     ],
   },

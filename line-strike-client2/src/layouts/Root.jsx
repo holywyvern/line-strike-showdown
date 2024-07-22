@@ -5,10 +5,7 @@ export function Root() {
   const { database } = useLoaderData();
   return (
     <DatabaseContext.Provider value={database}>
-      <div>
-        ROOT
-        <Outlet />
-      </div>
+      <Outlet />
     </DatabaseContext.Provider>
   );
 }
