@@ -10,7 +10,6 @@ export function DrawerFilters() {
   return (
     <CollectionDrawer>
       <form onSubmit={(e) => e.preventDefault()}>
-        <h2>Filters</h2>
         <NameFilter />
         <CostFilters />
         <ElementFilters />

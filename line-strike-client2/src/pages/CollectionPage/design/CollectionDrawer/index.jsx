@@ -20,7 +20,13 @@ export function CollectionDrawer({ children }) {
         direction="right"
         className={styles.drawer}
       >
-        {children}
+        <div className={styles.title}>
+          <h2>Filters</h2>
+          <button className={styles.close} type="button" onClick={toggleDrawer}>
+            &times;
+          </button>
+        </div>
+        <div className={styles.content}>{children}</div>
       </Drawer>
     </>
   );
