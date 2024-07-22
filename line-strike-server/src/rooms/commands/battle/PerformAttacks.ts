@@ -20,7 +20,6 @@ export class PerformAttacks extends Command<LineStrikeRoom> {
       if (laneA.attack === 0 && laneB.attack === 0) continue;
 
       if (laneA.attack === laneB.attack) {
-        console.log("THIS");
         const callback = () =>
           Promise.all([
             this.room.dispatcher.dispatch(new LaneAttack(), {

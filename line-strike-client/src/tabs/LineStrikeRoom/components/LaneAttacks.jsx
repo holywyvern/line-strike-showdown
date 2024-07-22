@@ -6,7 +6,7 @@ import { LaneAttackHolder } from "../design/LaneAttackHolder";
 import { AttackComparison } from "./AttackComparison";
 
 export function LaneAttacks({ top, bottom, playing }) {
-  const { lanes: lanesA } = useBoard(top, true, false);
+  const { lanes: lanesA } = useBoard(top, true, false, true);
   const { lanes: lanesB } = useBoard(bottom, false, playing);
   return (
     <LaneAttackHolder>

@@ -54,7 +54,10 @@ export function useBoard(player, mirror, playing) {
   const board = playing ? player.turn : player.board;
   const state = useSchema(board);
   if (mirror) {
-    state.lanes = [...state.lanes].reverse();
+    return {
+      ...state,
+      lanes: [...state.lanes].reverse(),
+    };
   }
   return state;
 }

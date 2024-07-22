@@ -6,7 +6,6 @@ import { Lane } from "../../schema/Lane";
 import { ChatLog } from "../../schema/ChatLog";
 
 import { SendAttacks } from "./SendAttacks";
-import { CheckBreak } from "./CheckBreak";
 
 export interface LaneAttackProps {
   attacker: Lane;

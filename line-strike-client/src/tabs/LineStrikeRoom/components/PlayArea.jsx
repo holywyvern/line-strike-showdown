@@ -1,21 +1,18 @@
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { PlayMat } from "../design/PlayMat";
 import { FaceDownHand } from "../design/FaceDownHand";
+import { StayingMessage } from "../design/StayingMessage";
 
 import { useBattleRoom, useBoard, useSchema } from "../context";
 
 import { PlayerHand } from "./PlayerHand";
 import { BattleLanes } from "./BattleLanes";
-import { useEffect, useState } from "react";
-import { StayingMessage } from "../design/StayingMessage";
 
-export function PlayArea({ player, mirror, playing }) {
+function Stay({ top, sessionID }) {
   const room = useBattleRoom();
   const [staying, setStaying] = useState(false);
-  const { sessionID, playmat, playmatOpacity, handSize, sleeve, ...data } =
-    useSchema(player);
-  const board = useBoard(data, mirror, playing);
   useEffect(() => {
     room.onMessage("stay", ({ playerID }) => {
       if (playerID !== sessionID) return;
@@ -26,6 +23,19 @@ export function PlayArea({ player, mirror, playing }) {
       }, 2000);
     });
   }, [room, sessionID]);
+  return <StayingMessage visible={staying} top={top} />;
+}
+
+Stay.propTypes = {
+  top: PropTypes.bool,
+  sessionID: PropTypes.any,
+};
+
+export function PlayArea({ player, mirror, playing }) {
+  const { sessionID, playmat, playmatOpacity, handSize, sleeve, ...data } =
+    useSchema(player);
+  const board = useBoard(data, mirror, playing);
+
   return (
     <>
       <PlayMat
@@ -34,7 +44,7 @@ export function PlayArea({ player, mirror, playing }) {
         opacity={(playmatOpacity || 0) / 100}
       />
       <BattleLanes lanes={board.lanes} top={mirror} playing={playing} />
-      <StayingMessage visible={staying} top={mirror} />
+      <Stay sessionID={sessionID} top={mirror} />
       {playing ? (
         <PlayerHand />
       ) : (
