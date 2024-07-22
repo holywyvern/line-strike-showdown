@@ -28,17 +28,18 @@ export class SwapCard extends Command<LineStrikeRoom, SwapCardsProps> {
       if (direction) {
         const j = this.getMovement(i, direction);
         this.swapCard(targets[i], targets[j]);
+        const d = reverse ? 10 - direction : direction;
         this.room.broadcast("animation", {
           playerID: target.sessionID,
           name: "move",
           position: targets[i].realPosition,
-          direction,
+          direction: d,
         });
         this.room.broadcast("animation", {
           playerID: target.sessionID,
           name: "move",
           position: targets[j].realPosition,
-          direction: 10 - direction,
+          direction: 10 - d,
         });
         this.state.chat.push(
           new ChatLog({

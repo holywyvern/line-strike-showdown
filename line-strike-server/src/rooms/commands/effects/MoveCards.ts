@@ -28,6 +28,7 @@ export class MoveCards extends Command<LineStrikeRoom, MoveCardsProps> {
     for (let i = 0; i < targets.length; ++i) {
       let direction = data.area[i];
       if (direction) {
+        const d = reverse ? 10 - direction : direction;
         const j = this.getMovement(i, direction);
         if (targets[j].cardID === 0) {
           this.moveCard(targets, targets[i], targets[j]);
@@ -36,7 +37,7 @@ export class MoveCards extends Command<LineStrikeRoom, MoveCardsProps> {
           playerID: target.sessionID,
           name: "move",
           position: targets[i].realPosition,
-          direction: direction,
+          direction: d,
         });
         this.state.chat.push(
           new ChatLog({
