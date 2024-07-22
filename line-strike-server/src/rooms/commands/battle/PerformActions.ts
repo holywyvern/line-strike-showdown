@@ -28,7 +28,8 @@ export class PerformActions extends Command<
           name: player.name,
         })
       );
-      return;
+      this.room.broadcast("stay", { playerID: player.sessionID });
+      return [new Wait().setPayload({ time: 2000 })];
     }
     player.lastTurn.clear();
     player.lastTurn.push(...player.turn.actions);

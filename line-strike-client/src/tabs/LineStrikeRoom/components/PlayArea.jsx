@@ -3,15 +3,29 @@ import PropTypes from "prop-types";
 import { PlayMat } from "../design/PlayMat";
 import { FaceDownHand } from "../design/FaceDownHand";
 
-import { useBoard, useSchema } from "../context";
+import { useBattleRoom, useBoard, useSchema } from "../context";
 
 import { PlayerHand } from "./PlayerHand";
 import { BattleLanes } from "./BattleLanes";
+import { useEffect, useState } from "react";
+import { StayingMessage } from "../design/StayingMessage";
 
 export function PlayArea({ player, mirror, playing }) {
-  const { playmat, playmatOpacity, handSize, sleeve, ...data } =
+  const room = useBattleRoom();
+  const [staying, setStaying] = useState(false);
+  const { sessionID, playmat, playmatOpacity, handSize, sleeve, ...data } =
     useSchema(player);
   const board = useBoard(data, mirror, playing);
+  useEffect(() => {
+    room.onMessage("stay", ({ playerID }) => {
+      if (playerID !== sessionID) return;
+
+      setStaying(true);
+      setTimeout(() => {
+        setStaying(false);
+      }, 2000);
+    });
+  }, [room, sessionID]);
   return (
     <>
       <PlayMat
@@ -20,6 +34,7 @@ export function PlayArea({ player, mirror, playing }) {
         opacity={(playmatOpacity || 0) / 100}
       />
       <BattleLanes lanes={board.lanes} top={mirror} playing={playing} />
+      <StayingMessage visible={staying} top={mirror} />
       {playing ? (
         <PlayerHand />
       ) : (

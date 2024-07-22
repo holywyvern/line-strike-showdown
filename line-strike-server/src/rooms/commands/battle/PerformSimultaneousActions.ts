@@ -23,6 +23,7 @@ export class PerformSimultaneousActions extends Command<LineStrikeRoom> {
           name: playerA.name,
         })
       );
+      this.room.broadcast("stay", { playerID: playerA.sessionID });
     }
     if (turnB.actions.length < 1) {
       this.state.chat.push(
@@ -32,6 +33,7 @@ export class PerformSimultaneousActions extends Command<LineStrikeRoom> {
           name: playerB.name,
         })
       );
+      this.room.broadcast("stay", { playerID: playerB.sessionID });
     }
     playerA.lastTurn.clear();
     playerA.lastTurn.push(...turnA.actions);
