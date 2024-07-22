@@ -19,32 +19,33 @@ export interface SwapCardsProps {
 
 export class SwapCard extends Command<LineStrikeRoom, SwapCardsProps> {
   async execute({ player, reverse, card }: SwapCardsProps) {
+    const data = card.card;
     const target = this.state.findTarget(player, reverse);
     const board = target.board;
     const targets = reverse ? board.reversedCards : board.cards;
     for (let i = 0; i < targets.length; ++i) {
-      const direction = card.card.area[i];
+      const direction = data.area[i];
       if (direction) {
         const j = this.getMovement(i, direction);
-        this.swapCard(targets, targets[i], targets[j]);
+        this.swapCard(targets[i], targets[j]);
         this.room.broadcast("animation", {
           playerID: target.sessionID,
           name: "move",
-          position: i,
-          direction
+          position: targets[i].realPosition,
+          direction,
         });
         this.room.broadcast("animation", {
           playerID: target.sessionID,
           name: "move",
-          position: j,
-          direction: 10 - direction
+          position: targets[j].realPosition,
+          direction: 10 - direction,
         });
         this.state.chat.push(
           new ChatLog({
             type: "swap",
             cardID: card.cardID,
-            position: i,
-            newPosition: j,
+            position: targets[i].realPosition,
+            newPosition: targets[j].realPosition,
           })
         );
       }
@@ -55,7 +56,7 @@ export class SwapCard extends Command<LineStrikeRoom, SwapCardsProps> {
     ];
   }
 
-  swapCard(targets: PlayedCard[], from: PlayedCard, to: PlayedCard) {
+  swapCard(from: PlayedCard, to: PlayedCard) {
     const copy = from.clone();
     from.buffs = to.buffs;
     from.baseBuster = to.baseBuster;

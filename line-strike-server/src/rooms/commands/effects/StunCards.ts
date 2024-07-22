@@ -28,7 +28,7 @@ export class StunCards extends Command<LineStrikeRoom, StunCardsProps> {
         this.room.broadcast("animation", {
           playerID: target.sessionID,
           name: "stun",
-          position: i,
+          position: targets[i].realPosition,
         });
       }
     }

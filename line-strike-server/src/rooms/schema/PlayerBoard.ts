@@ -18,6 +18,10 @@ export class PlayerBoard extends Schema {
     while (this.lanes.length < format.lanes) {
       this.lanes.push(new Lane(player, this.lanes.length));
     }
+    let i = 0;
+    for (const card of this.cards) {
+      card.realPosition = i++;
+    }
   }
 
   get format() {

@@ -25,7 +25,7 @@ export class BuffCards extends Command<LineStrikeRoom, BuffCardsProps> {
         this.state.chat.push(
           new ChatLog({
             type: "buff",
-            position: reverse ? 8 - i : i,
+            position: targets[i].realPosition,
             cardID: card.cardID,
             damage: buff,
           })
@@ -33,7 +33,7 @@ export class BuffCards extends Command<LineStrikeRoom, BuffCardsProps> {
         this.room.broadcast("animation", {
           playerID: target.sessionID,
           name: buff > 0 ? "buff" : "debuff",
-          position: i,
+          position: targets[i].realPosition,
         });
         if (targets[i] === card) continue;
         targets[i].buffs += buff;

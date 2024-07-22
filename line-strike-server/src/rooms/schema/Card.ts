@@ -754,15 +754,15 @@ Card.COLLECTION.push(
         skillId: 10,
         // prettier-ignore
         area: [
-          0,  0, 0,
+          0,  0,    0,
           0,  0, LEFT,
-          0,  0, 0,
+          0,  0,    0,
         ],
         // prettier-ignore
         displayArea: [
-          0,  0, 0,
+          0,      0,    0,
           0,  RIGHT, LEFT,
-          0,  0, 0,
+          0,      0,    0,
         ],
         element: "wind",
         set: "Version 1",
@@ -777,9 +777,9 @@ Card.COLLECTION.push(
         skillId: 9,
         // prettier-ignore
         area: [
-          0,  0, 0,
-          0,  0, LEFT,
-          RIGHT,  0, 0,
+              0,  0,     0,
+              0,  0,  LEFT,
+          RIGHT,  0,     0,
         ],
         element: "wind",
         set: "Version 1",
@@ -794,9 +794,9 @@ Card.COLLECTION.push(
         skillId: 9,
         // prettier-ignore
         area: [
-          0,  0, 0,
+          0,  0,    0,
           0,  0, LEFT,
-          0,  0, 0,
+          0,  0,    0,
         ],
         element: "wind",
         set: "Version 1",
@@ -1048,7 +1048,7 @@ Card.COLLECTION.push(
         artwork: "clerk.webp",
         attack: 14,
         ppCost: 3,
-        skillId: 9,
+        skillId: 4,
         // prettier-ignore
         area: [
           0,  1, 0,
@@ -1068,9 +1068,9 @@ Card.COLLECTION.push(
         skillId: 9,
         // prettier-ignore
         area: [
-          0,  0, LEFT,
-          0,  RIGHT, 0,
-          0,  0, 0,
+          0,      0, LEFT,
+          0,  RIGHT,    0,
+          0,      0,    0,
         ],
         element: "lightning",
         set: "Version 1",

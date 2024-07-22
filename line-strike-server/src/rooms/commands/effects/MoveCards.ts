@@ -21,11 +21,12 @@ export interface MoveCardsProps {
 
 export class MoveCards extends Command<LineStrikeRoom, MoveCardsProps> {
   async execute({ player, reverse, card }: MoveCardsProps) {
+    const data = card.card;
     const target = this.state.findTarget(player, reverse);
     const board = target.board;
     const targets = reverse ? board.reversedCards : board.cards;
     for (let i = 0; i < targets.length; ++i) {
-      const direction = card.card.area[i];
+      let direction = data.area[i];
       if (direction) {
         const j = this.getMovement(i, direction);
         if (targets[j].cardID === 0) {
@@ -34,15 +35,15 @@ export class MoveCards extends Command<LineStrikeRoom, MoveCardsProps> {
         this.room.broadcast("animation", {
           playerID: target.sessionID,
           name: "move",
-          position: i,
-          direction
+          position: targets[i].realPosition,
+          direction: direction,
         });
         this.state.chat.push(
           new ChatLog({
             type: "move",
             cardID: card.cardID,
-            position: i,
-            newPosition: j,
+            position: targets[i].realPosition,
+            newPosition: targets[j].realPosition,
           })
         );
       }

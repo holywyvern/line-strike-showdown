@@ -21,8 +21,15 @@ export function LaneCard({ card, top, playing, lane, playerID }) {
   const [open, setOpen] = useState(false);
   const { phase } = useBattleRoomState();
   const { cards } = useCards();
-  const { cardID, incapacitated, stunned, attack, baseBuster, baseGuard } =
-    useSchema(card);
+  const {
+    realPosition,
+    cardID,
+    incapacitated,
+    stunned,
+    attack,
+    baseBuster,
+    baseGuard,
+  } = useSchema(card);
   const data = cards[cardID] || {};
   const processedCard = {
     ...data,
@@ -39,10 +46,6 @@ export function LaneCard({ card, top, playing, lane, playerID }) {
   const onHover = () => {
     if (data) setHoveredCard(data);
   };
-  let position = card.position * 3 + lane;
-  if (top) {
-    position = card.position * 3 + 2 - lane;
-  }
   return (
     <>
       <LaneCardContainer
@@ -55,7 +58,11 @@ export function LaneCard({ card, top, playing, lane, playerID }) {
             <MiniCard card={processedCard} played onHover={onHover} />
           )}
         </LaneCardContainer.Card>
-        <AnimationPlayer playerID={playerID} position={position} />
+        <AnimationPlayer
+          playerID={playerID}
+          position={realPosition}
+          top={top}
+        />
       </LaneCardContainer>
       {playing && (
         <Modal open={open} title="Place Card" onClose={() => setOpen(false)}>

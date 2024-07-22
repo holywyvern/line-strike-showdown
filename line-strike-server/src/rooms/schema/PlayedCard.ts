@@ -40,7 +40,11 @@ export class PlayedCard extends Schema {
   @type("boolean")
   justPlaced: boolean;
 
+  @type("uint8")
+  realPosition: number;
+
   placeIndex: number;
+
 
   constructor(player: Player, lane: Lane, position: number) {
     super();
@@ -57,6 +61,7 @@ export class PlayedCard extends Schema {
     this.position = position;
     this.placeIndex = 0;
     this.unitedFront = 0;
+    this.realPosition = 0;
   }
 
   get cardIndex() {

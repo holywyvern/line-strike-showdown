@@ -5,7 +5,7 @@ import { useBattleRoom } from "../context";
 
 import { Animation } from "../design/Animation";
 
-export function AnimationPlayer({ playerID, position }) {
+export function AnimationPlayer({ playerID, position, top }) {
   const [ready, setReady] = useState(false);
   const [animation, setAnimation] = useState(null);
 
@@ -18,18 +18,25 @@ export function AnimationPlayer({ playerID, position }) {
       if (animation.playerID !== playerID) return;
       if (animation.position !== position) return;
 
-      console.log("YES", playerID, position, animation);
-      setAnimation(animation.name);
+      if (animation.name === "move") {
+        const d = top ? 10 - animation.direction : animation.direction;
+        const name = `${animation.name}${d}`;
+        setAnimation(name);
+      } else {
+        setAnimation(animation.name);
+      }
+
       setTimeout(() => {
         setAnimation(null);
       }, 1000);
     });
     setReady(true);
-  }, [room, playerID, position, ready]);
+  }, [room, playerID, position, ready, top]);
   return <Animation name={animation} />;
 }
 
 AnimationPlayer.propTypes = {
   playerID: PropTypes.any,
   position: PropTypes.number,
+  top: PropTypes.bool,
 };

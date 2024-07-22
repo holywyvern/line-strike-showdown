@@ -9,6 +9,7 @@ import { BuffCards } from "../effects/BuffCards";
 import { MoveCards } from "../effects/MoveCards";
 import { StunCards } from "../effects/StunCards";
 import { Wait } from "../utils/Wait";
+import { SwapCard } from "../effects/SwapCards";
 
 export interface ActivateSkillProps {
   player: Player;
@@ -89,7 +90,7 @@ export class ActivateSkill extends Command<LineStrikeRoom, ActivateSkillProps> {
     }
     if (skill.tags.includes("swapAlly")) {
       actions.push(
-        new MoveCards().setPayload({
+        new SwapCard().setPayload({
           player,
           reverse: false,
           card: action.spot,
@@ -98,7 +99,7 @@ export class ActivateSkill extends Command<LineStrikeRoom, ActivateSkillProps> {
     }
     if (skill.tags.includes("swapEnemy")) {
       actions.push(
-        new MoveCards().setPayload({
+        new SwapCard().setPayload({
           player,
           reverse: true,
           card: action.spot,

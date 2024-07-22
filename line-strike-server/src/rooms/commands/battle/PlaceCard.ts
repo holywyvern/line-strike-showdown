@@ -41,7 +41,7 @@ export class PlaceCard extends Command<LineStrikeRoom, PlaceCardProps> {
       player.client.send("animation", {
         playerID: player.sessionID,
         name: "summon",
-        position,
+        position: spot.realPosition,
       });
     } else {
       const otherClients = this.room.clients.filter(
@@ -51,7 +51,7 @@ export class PlaceCard extends Command<LineStrikeRoom, PlaceCardProps> {
         c.send("animation", {
           playerID: player.sessionID,
           name: "summon",
-          position,
+          position: spot.realPosition,
         });
       }
     }
