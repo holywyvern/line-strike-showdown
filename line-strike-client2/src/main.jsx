@@ -17,6 +17,8 @@ import { rootLoader } from "./loaders/rootLoader";
 import { PlayLayout } from "./layouts/PlayLayout";
 import { PlayHome } from "./pages/PlayHome";
 import { CollectionPlayPage } from "./pages/CollectionPlayPage";
+import { DeckBuilderHome } from "./pages/DeckBuilderHome";
+import { DeckBuilderLayout } from "./layouts/DeckBuilderLayout";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,16 @@ const router = createBrowserRouter([
           {
             path: "cards",
             element: <CollectionPlayPage />,
+          },
+          {
+            path: "decks",
+            element: <DeckBuilderLayout />,
+            children: [
+              {
+                index: true,
+                element: <DeckBuilderHome />,
+              },
+            ],
           },
         ],
       },

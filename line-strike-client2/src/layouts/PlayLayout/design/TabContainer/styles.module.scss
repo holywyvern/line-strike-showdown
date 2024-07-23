@@ -36,3 +36,12 @@
   background: var(--dialog-header-base-color1);
   padding-bottom: 0;
 }
+
+.close {
+  appearance: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}

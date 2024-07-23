@@ -4,7 +4,7 @@ import { faHome, faBook } from '@fortawesome/free-solid-svg-icons'
 export const DEFAULT_TABS = [
   {
     id: "home",
-    name: "home",
+    name: "Home",
     icon: faHome,
     closable: false,
     href: "/play",
