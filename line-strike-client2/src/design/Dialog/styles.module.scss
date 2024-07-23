@@ -70,3 +70,12 @@
   gap: 2px;
   color: var(--dialog-body-font-color);
 }
+
+.grow {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.center {
+  justify-content: center;
+}

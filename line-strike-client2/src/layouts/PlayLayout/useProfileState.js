@@ -122,6 +122,8 @@ function useDecks(name) {
 }
 
 export function useProfileState() {
+  const { standardFormatID } = useDatabase();
+  const [formatID, setFormatID] = useState(standardFormatID);
   const { name, setName, isLoading: nameLoading } = useProfileName();
   const music = useMusic(name);
   const { decks, isLoading: deckLoading } = useDecks(name);
@@ -130,6 +132,8 @@ export function useProfileState() {
     name,
     music,
     decks,
+    formatID,
+    setFormatID,
     isLoading: nameLoading || deckLoading,
     signIn(name) {
       setName(name);

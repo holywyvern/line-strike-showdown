@@ -1,0 +1,12 @@
+.page {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-md);
+  padding: var(--padding-md);
+  overflow: auto;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 820px;
+  margin: auto;
+}

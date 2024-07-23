@@ -1,0 +1,13 @@
+.grid {
+  display: grid;
+  font-size: var(--font-size-md);
+  grid-template-columns: auto 1fr;
+  align-items: end;
+  gap: var(--gap-xs) var(--gap-xl);
+}
+
+.info {
+  min-width: 100px;
+  display: flex;
+  justify-content: flex-end;
+}
