@@ -15,6 +15,8 @@ import { CollectionPage } from "./pages/CollectionPage";
 import { rootLoader } from "./loaders/rootLoader";
 
 import { PlayLayout } from "./layouts/PlayLayout";
+import { PlayHome } from "./pages/PlayHome";
+import { CollectionPlayPage } from "./pages/CollectionPlayPage";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            element: <PlayHome />,
+          },
+          {
+            path: "cards",
+            element: <CollectionPlayPage />,
           },
         ],
       },

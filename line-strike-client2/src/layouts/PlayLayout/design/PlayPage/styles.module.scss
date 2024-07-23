@@ -1,0 +1,15 @@
+.page {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  gap: var(--gap-md);
+}

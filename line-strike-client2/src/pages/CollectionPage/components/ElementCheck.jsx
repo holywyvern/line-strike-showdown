@@ -14,7 +14,7 @@ export function ElementCheck({ element, visibleElements }) {
         }
       }}
     >
-      <img src={`elements/${element}.webp`} /> Cards
+      <img src={`/elements/${element}.webp`} /> Cards
     </Checkbox>
   );
 }

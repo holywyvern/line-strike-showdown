@@ -1,4 +1,5 @@
 .logo {
+  user-select: none;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,4 +41,26 @@
 .text {
   display: flex;
   flex-direction: column;
+}
+
+.logo.small {
+  gap: var(--gap-xs);
+
+  img {
+    max-width: 32px;
+  }
+
+  h1 {
+    font-size: var(--font-size-md);
+  }
+
+  h2 {
+    font-size: var(--font-size-xs);
+  }
+
+  small {
+    font-size: var(--font-size-xs);
+    transform: scale(0.75);
+    transform-origin: top left;
+  }
 }

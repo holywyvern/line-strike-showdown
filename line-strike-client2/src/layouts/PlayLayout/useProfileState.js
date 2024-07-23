@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { WebAudio } from "../../utils/WebAudio";
 import { AudioManager } from "../../utils/AudioManager";
 import { useDatabase } from "../../contexts/DatabaseContext";
@@ -8,42 +8,87 @@ const DEFAULT_DECKS = {};
 const LAST_NAME_KEY = "line-strike.lastPlayer";
 const LOCAL_STORAGE_KEY = "line-strike.profile.decks";
 
-function useMusic() {
-  const [playMusic, setPlayMusic] = useState(false);
-  const [musicVolume, setMusicVolume] = useState(0);
-  const music = useMemo(
-    () => ({
-      play: playMusic,
-      get volume() {
-        return musicVolume;
-      },
-      set volume(value) {
-        const v = value / 100;
-        WebAudio.masterVolume = v * v;
-        setMusicVolume(value);
-      },
-      toggle() {
-        setPlayMusic((v) => {
-          if (v) {
-            AudioManager.generalVolume = 0;
-          } else {
-            AudioManager.generalVolume = 100;
-          }
-          return !v;
-        });
-      },
-    }),
-    [musicVolume, playMusic]
-  );
-  return { music, setPlayMusic, setMusicVolume };
+function useProfileName() {
+  const [ready, setReady] = useState(false);
+  const [name, setName] = useState(null);
+  useEffect(() => {
+    if (ready) return;
+
+    setReady(true);
+    const last = localStorage.getItem(LAST_NAME_KEY);
+    if (!last) return;
+
+    setName(last);
+  }, [ready]);
+
+  useEffect(() => {
+    if (!name) return;
+
+    localStorage.setItem(LAST_NAME_KEY, name);
+  }, [name]);
+
+  return { name, setName, isLoading: !ready };
 }
 
-function useDecks(status) {
+function useMusic(name) {
+  const [muted, setMuted] = useState(false);
+  const [bgm, setBGM] = useState(50);
+  const [sfx, setSFX] = useState(50);
+  const [notifications, setNotifications] = useState(50);
+  useEffect(() => {
+    if (!name) return;
+
+    localStorage.setItem(
+      `${LOCAL_STORAGE_KEY}.${name}.music`,
+      JSON.stringify({ bgm, sfx, notifications, muted })
+    );
+  }, [bgm, muted, name, notifications, sfx]);
+  useEffect(() => {
+    try {
+      const str =
+        localStorage.getItem(`${LOCAL_STORAGE_KEY}.${name}.music`) || "{}";
+      const saved = JSON.parse(str);
+      setMuted(saved.muted || false);
+      setBGM(saved.bgm || 0);
+      setSFX(saved.sfx || 0);
+      setNotifications(saved.notifications || 0);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [name]);
+  useEffect(() => {
+    AudioManager.bgmVolume = bgm;
+  }, [bgm]);
+  useEffect(() => {
+    AudioManager.seVolume = sfx;
+  }, [sfx]);
+  useEffect(() => {
+    AudioManager.meVolume = notifications;
+  }, [notifications]);
+  useEffect(() => {
+    if (muted) {
+      WebAudio.masterVolume = 0;
+    } else {
+      WebAudio.masterVolume = 1;
+    }
+  }, [muted]);
+  return {
+    muted,
+    toggle: () => setMuted((v) => !v),
+    bgm,
+    setBGM,
+    sfx,
+    setSFX,
+    notifications,
+    setNotifications,
+  };
+}
+
+function useDecks(name) {
   const [deckStatus, setDeckStatus] = useState("formatting");
   const db = useDatabase();
   const [decks, setDecks] = useState(DEFAULT_DECKS);
   useEffect(() => {
-    if (status !== "loaded") return;
     if (deckStatus !== "formatting") return;
 
     setDecks((decks) => {
@@ -68,88 +113,24 @@ function useDecks(status) {
       return newDecks;
     });
     setDeckStatus("formatted");
-  }, [decks, deckStatus, status, db.isLoaded, db.formats]);
-  return [decks, setDecks];
-}
-
-function useProfileLoader(
-  setDecks,
-  setMusicVolume,
-  setPlayMusic,
-  setName,
-  setStatus,
-  setError
-) {
-  const [ready, setReady] = useState(false);
-
+  }, [decks, deckStatus, db.formats, name]);
   useEffect(() => {
-    if (ready) return;
-
-    setReady(true);
-    setStatus("loaded");
-    const last = localStorage.getItem(LAST_NAME_KEY);
-    if (!last) return;
-
-    try {
-      setName(last);
-      const data = JSON.parse(
-        localStorage.getItem(`${LOCAL_STORAGE_KEY}.${last}`) || "{}"
-      );
-      setDecks(data.decks || {});
-      setPlayMusic(data.music || false);
-      const v = data.volume || 0;
-      setMusicVolume(v);
-      WebAudio.masterVolume = v * v;
-      AudioManager.generalVolume = data.music ? 100 : 0;
-    } catch (error) {
-      console.error(error);
-      setStatus("error");
-      setError(error);
-    }
-  }, [
-    ready,
-    setDecks,
-    setError,
-    setMusicVolume,
-    setName,
-    setPlayMusic,
-    setStatus,
-  ]);
-}
-
-function useProfileSaver(name, decks, status, music) {
-  useEffect(() => {
-    if (status !== "loaded") return;
-    if (!name) return;
-
-    localStorage.setItem(LAST_NAME_KEY, name);
-    localStorage.setItem(
-      `${LOCAL_STORAGE_KEY}.${name}`,
-      JSON.stringify({ name, decks, music: music.play, volume: music.volume })
-    );
-  }, [name, decks, status, music.play, music.volume]);
+    setDeckStatus("formatting");
+  }, [name]);
+  useEffect(() => {}, [name, decks]);
+  return { decks, isLoading: deckStatus === "formatting" };
 }
 
 export function useProfileState() {
-  const { standardFormatID } = useDatabase();
-  const [formatID, setFormatID] = useState(standardFormatID);
-  const [status, setStatus] = useState("pending");
-  const [name, setName] = useState(null);
-  const [decks, setDecks] = useDecks(status);
-  const [error, setError] = useState(null);
-  const { music, setPlayMusic, setMusicVolume } = useMusic();
-  const api = {
+  const { name, setName, isLoading: nameLoading } = useProfileName();
+  const music = useMusic(name);
+  const { decks, isLoading: deckLoading } = useDecks(name);
+
+  return {
     name,
-    decks,
-    error,
     music,
-    formatID,
-    isLoading: status === "pending",
-    isError: status === "error",
-    isSignedIn: status === "logged-in",
-    changeFormat(id) {
-      setFormatID(id);
-    },
+    decks,
+    isLoading: nameLoading || deckLoading,
     signIn(name) {
       setName(name);
     },
@@ -157,14 +138,4 @@ export function useProfileState() {
       setName(null);
     },
   };
-  useProfileLoader(
-    setDecks,
-    setMusicVolume,
-    setPlayMusic,
-    setName,
-    setStatus,
-    setError
-  );
-  useProfileSaver(name, decks, status, music);
-  return api;
 }

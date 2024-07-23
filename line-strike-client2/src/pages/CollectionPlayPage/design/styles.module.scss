@@ -1,0 +1,19 @@
+.wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+.layout {
+  position: absolute;
+  inset: 0;
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  overflow: auto;
+}

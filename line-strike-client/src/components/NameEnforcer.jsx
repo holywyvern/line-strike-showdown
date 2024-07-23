@@ -24,7 +24,7 @@ function NameForm() {
           <Box.Body>
             <Row center>
               <img
-                src="logo.png"
+                src="/logo.png"
                 alt="Line Strike Logo"
                 style={{ maxWidth: "64px", alignSelf: "center" }}
               />

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-import { useProfile } from "../../contexts/ProfileContext";
+import { useProfile } from "../../../contexts/ProfileContext";
 
-import { ProfileForm } from "./ProfileForm";
+import { ProfileForm } from "../ProfileForm";
 
 export function ProfileEnforcer({ children }) {
   const profile = useProfile();

@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 export function Card({ card, scale = 1, children, hiddenInfo, noHover }) {
   return (
     <div className={styles.card} style={{ "--card-scale": scale }}>
-      <img src={`cards/${card.artwork}`} />
+      <img src={`/cards/${card.artwork}`} />
       <div className={styles.main}>
         {!hiddenInfo && card.title && (
           <span className={styles.title}>{card.title}</span>

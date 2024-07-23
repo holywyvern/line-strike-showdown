@@ -1,0 +1,8 @@
+.nav {
+  align-self: stretch;
+  display: flex;
+  background-color: var(--dialog-body-background-color);
+  padding: var(--padding-xs) 0;
+  border-bottom: var(--border-size-xs) solid var(--dialog-border-color);
+}
+
