@@ -12,20 +12,22 @@ export function useLobbyState() {
   const profile = useProfile();
   const [room, setRoom] = useState(null);
   useEffect(() => {
-    if (profile.isLoading) return;
     if (!profile.name) return;
 
-    let newRoom = null;
+    ColyseusService.joinLobby(profile.name).then((room) => setRoom(room));
+  }, [profile.name]);
 
-    ColyseusService.joinLobby(profile.name).then((room) => {
-      newRoom = room;
-      setRoom(room);
-    });
+  useEffect(() => {
+    if (!room) return;
+
     return () => {
-      newRoom?.leave?.();
-      setRoom(null);
-    };
-  }, [profile.name, profile.isLoading]);
+      room.leave();
+      setRoom((old) => {
+        if (old === room) return null;
 
+        return old;
+      });
+    };
+  }, [room]);
   return room;
 }

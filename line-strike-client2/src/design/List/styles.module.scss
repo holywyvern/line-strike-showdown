@@ -1,0 +1,18 @@
+.list {
+  flex: 1;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: var(--padding-sm);
+  border: var(--border-size-xs) solid var(--dialog-border-color);
+  gap: var(--gap-md);
+  font-size: var(--font-size-md);
+  align-self: stretch;
+  margin: 0;
+}
+
+.list > li {
+  display: flex;
+  font-size: inherit;
+}

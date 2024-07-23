@@ -28,13 +28,13 @@
   overflow: hidden;
 }
 
-.button {
+.close {
   margin-left: auto;
   font-weight: bolder;
   appearance: none;
   background: transparent;
   border: 0;
-  font-size: 1em;
+  font-size: var(--font-size-xl);
   color: inherit;
   text-shadow: inherit;
   cursor: pointer;

@@ -1,0 +1,22 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  border: var(--border-size-sm) solid var(--box-light-border-color);
+  overflow: hidden;
+  text-shadow: var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px,
+    var(--window-text-shadow-color) 0px 0px 1px;
+  -webkit-font-smoothing: antialiased;
+  padding: var(--padding-md);
+}
+
+.stretch {
+  align-self: stretch;
+}
+
+.flex {
+  flex: 1;
+}

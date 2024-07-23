@@ -7,12 +7,22 @@ import styles from "./styles.module.scss";
 
 import { Context } from "./context";
 
+function ModalClose({ onClick }) {
+  return (
+    <button className={styles.close} onClick={onClick}>
+      &times;
+    </button>
+  );
+}
+
 export function Modal({ open, onClose, children, fake }) {
   const node = useContext(Context);
   const className = cx(styles.modal, {
     [styles.open]: open,
     [styles.fake]: fake,
   });
+  if (!node) return null;
+
   return createPortal(
     <div className={className} onClick={onClose}>
       <div className={styles.window} onClick={(e) => e.stopPropagation()}>
@@ -22,6 +32,12 @@ export function Modal({ open, onClose, children, fake }) {
     node
   );
 }
+
+Modal.Close = ModalClose;
+
+ModalClose.propTypes = {
+  onClick: PropTypes.func,
+};
 
 Modal.propTypes = {
   open: PropTypes.bool,

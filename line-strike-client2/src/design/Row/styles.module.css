@@ -1,0 +1,32 @@
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.flex {
+  flex: 1;
+}
+
+.center {
+  align-self: center;
+}
+
+.center-children {
+  justify-content: center;
+}
+
+.end {
+  align-self: flex-end;
+}
+
+.end-items {
+  justify-content: flex-end;
+}
+
+.space-items {
+  justify-content: space-between;
+}
+
+.stretch-self {
+  justify-self: stretch;
+}
