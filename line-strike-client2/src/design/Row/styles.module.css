@@ -11,6 +11,11 @@
   align-self: center;
 }
 
+.center-vertically {
+  align-items: center;
+}
+
+
 .center-children {
   justify-content: center;
 }

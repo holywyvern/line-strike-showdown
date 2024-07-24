@@ -19,6 +19,7 @@ import { PlayHome } from "./pages/PlayHome";
 import { CollectionPlayPage } from "./pages/CollectionPlayPage";
 import { DeckBuilderHome } from "./pages/DeckBuilderHome";
 import { DeckBuilderLayout } from "./layouts/DeckBuilderLayout";
+import { DeckBuilderPage } from "./pages/DeckBuilderPage";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,19 @@ const router = createBrowserRouter([
               {
                 index: true,
                 element: <DeckBuilderHome />,
+              },
+              {
+                path: ":format",
+                children: [
+                  {
+                    index: true,
+                    element: <DeckBuilderHome />,
+                  },
+                  {
+                    path: ":deckIndex",
+                    element: <DeckBuilderPage />
+                  }
+                ],
               },
             ],
           },

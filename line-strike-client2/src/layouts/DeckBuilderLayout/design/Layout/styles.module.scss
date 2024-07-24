@@ -1,0 +1,14 @@
+.layout {
+  flex: 1;
+  display: flex;
+  gap: var(--gap-md);
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}

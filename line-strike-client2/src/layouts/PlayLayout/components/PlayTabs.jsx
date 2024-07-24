@@ -11,6 +11,9 @@ export function PlayTabs() {
   return (
     <TabContainer>
       {tabs.map((tab) => {
+        const active = tab.match
+          ? tab.match.test(location.pathname)
+          : location.pathname === tab.href;
         const onClose = tab.closable ? () => close(tab.id) : undefined;
         const onClick = () => {
           navigate(tab.href);
@@ -20,7 +23,7 @@ export function PlayTabs() {
             key={tab.id}
             name={tab.name}
             icon={tab.icon}
-            active={location.pathname === tab.href}
+            active={active}
             onClose={onClose}
             onClick={onClick}
           />

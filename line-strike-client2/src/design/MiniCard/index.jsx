@@ -36,21 +36,21 @@ export function MiniCard({
         style={{
           "--top": card.miniTop,
           "--left": card.miniLeft,
-          "--img": `url('cards/${card.artwork}')`,
+          "--img": `url('/cards/${card.artwork}')`,
         }}
       />
       <div className={styles.border} />
       <div className={styles.pp}>
-        <img src="pp_small.png" />
+        <img src="/pp_small.png" />
       </div>
       <div className={styles.atk}>
-        <img src="attack_small.png" />
+        <img src="/attack_small.png" />
       </div>
       <div className={styles.ppv}>{card.ppCost}</div>
       <div className={styles.atkv}>{card.attack}</div>
       <div className={styles.icons}>
-        {card.baseGuard && <img src="flags/base_guard.webp" />}
-        {card.baseBuster && <img src="flags/base_buster.webp" />}
+        {card.baseGuard && <img src="/flags/base_guard.webp" />}
+        {card.baseBuster && <img src="/flags/base_buster.webp" />}
       </div>
     </div>
   );

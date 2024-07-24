@@ -1,14 +1,14 @@
 import { createContext, useState } from "react";
 
-import { useProfile } from "../../hooks/useProfile";
-import { useCards } from "../../hooks/useCards";
+import { useDatabase } from "../../../contexts/DatabaseContext";
+import { useProfile } from "../../../contexts/ProfileContext";
 
-import { isAllowedInFormat } from "../../utils/isAllowedInFormat";
+import { isAllowedInFormat } from "../../../utils/isAllowedInFormat";
 
 export const Context = createContext();
 
 export function useDeckEditorState({ formatID, deck, index }) {
-  const db = useCards();
+  const db = useDatabase();
   const { changeDeck } = useProfile();
   const [defaultDeck, setDefaultDeck] = useState(deck);
   const [noChanges, setNoChanges] = useState(true);

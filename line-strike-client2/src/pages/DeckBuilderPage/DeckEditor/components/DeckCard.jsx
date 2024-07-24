@@ -20,7 +20,7 @@ export function DeckCard({ id, onRemove }) {
   return (
     <>
       <div style={{ position: "relative", inset: 0 }}>
-        <img src={`cards/${card.artwork}`} style={{ width: "100%" }} />
+        <img src={`/cards/${card.artwork}`} style={{ width: "100%" }} />
         <CardCollectionActions
           onDetails={() => setDetails(true)}
           onRemove={onRemove}

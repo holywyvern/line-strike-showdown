@@ -151,7 +151,7 @@ export class Format extends Schema {
     super();
     this.id = id;
     this.name = name;
-    this.slug = slugify(name);
+    this.slug = slugify(name, { lower: true, strict: true });
     this.description = description;
     this.sets = new ArraySchema(...sets);
     this.maxElements = maxElements || 6;

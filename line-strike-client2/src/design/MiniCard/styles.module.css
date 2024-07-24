@@ -44,27 +44,27 @@
 }
 
 .fire .border {
-  background: url("minis/fire.png");
+  background: url("/minis/fire.png");
 }
 
 .ice .border {
-  background: url("minis/ice.png");
+  background: url("/minis/ice.png");
 }
 
 .wind .border {
-  background: url("minis/wind.png");
+  background: url("/minis/wind.png");
 }
 
 .lightning .border {
-  background: url("minis/lightning.png");
+  background: url("/minis/lightning.png");
 }
 
 .light .border {
-  background: url("minis/light.png");
+  background: url("/minis/light.png");
 }
 
 .darkness .border {
-  background: url("minis/darkness.png");
+  background: url("/minis/darkness.png");
 }
 
 .art {

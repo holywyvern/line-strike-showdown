@@ -12,6 +12,7 @@ export function Row({
   end,
   endItems,
   flex,
+  centerVertically,
 }) {
   const className = cx(styles.row, {
     [styles.center]: center,
@@ -21,6 +22,7 @@ export function Row({
     [styles.flex]: flex,
     [styles["stretch-self"]]: stetchSelf,
     [styles["end-items"]]: endItems,
+    [styles["center-vertically"]]: centerVertically,
   });
   return <div className={className}>{children}</div>;
 }
@@ -34,4 +36,5 @@ Row.propTypes = {
   flex: PropTypes.bool,
   stetchSelf: PropTypes.bool,
   endItems: PropTypes.bool,
+  centerVertically: PropTypes.bool,
 };

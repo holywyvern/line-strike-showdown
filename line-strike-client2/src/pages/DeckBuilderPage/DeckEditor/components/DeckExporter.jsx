@@ -82,28 +82,35 @@ function Importer() {
     <>
       <Button onClick={() => setVisible(true)}>Import Deck</Button>
       <Modal open={visible} onClose={() => setVisible(false)}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            const deck = importDeck(code);
-            setName(deck.name);
-            setSleeve(deck.sleeve);
-            setPlaymat(deck.playmat);
-            setPlaymatOpacity(deck.playmatOpacity);
-            setCards(deck.cards);
-            setCode("");
-            setVisible(false);
-            setNoChanges(false);
-          }}
-        >
-          <TextArea
-            name="import_code"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            placeholder="Set deck code here..."
-          />
-          <Button type="submit">Import Deck</Button>
-        </form>
+        <Dialog>
+          <Dialog.Header>
+            <h2>Import code</h2>
+          </Dialog.Header>
+          <Dialog.Body>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const deck = importDeck(code);
+                setName(deck.name);
+                setSleeve(deck.sleeve);
+                setPlaymat(deck.playmat);
+                setPlaymatOpacity(deck.playmatOpacity);
+                setCards(deck.cards);
+                setCode("");
+                setVisible(false);
+                setNoChanges(false);
+              }}
+            >
+              <TextArea
+                name="import_code"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="Set deck code here..."
+              />
+              <Button type="submit">Import Deck</Button>
+            </form>
+          </Dialog.Body>
+        </Dialog>
       </Modal>
     </>
   );

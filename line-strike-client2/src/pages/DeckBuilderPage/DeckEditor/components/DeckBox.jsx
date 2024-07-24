@@ -6,7 +6,7 @@ import { Context } from "../context";
 
 import { Dialog } from "../../../../design/Dialog";
 import { Button } from "../../../../design/Button";
-import { Row } from "../../../../design/Button";
+import { Row } from "../../../../design/Row";
 import { CardListing } from "../design/CardListing";
 
 import { DeckCard } from "./DeckCard";

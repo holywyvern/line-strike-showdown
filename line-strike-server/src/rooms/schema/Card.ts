@@ -869,7 +869,7 @@ Card.COLLECTION.push(
         title: "Geologist",
         name: "Rogio",
         artwork: "logio.webp",
-        attack: 11,
+        attack: 1,
         ppCost: 1,
         skillId: 6,
         // prettier-ignore

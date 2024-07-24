@@ -62,7 +62,7 @@
 }
 
 .body {
-  overflow: hidden;
+  overflow: auto;
   flex: 1;
   background: var(--dialog-body-background-color);
   box-shadow: 0 4px 30px var(--dialog-body-shadow-color);
@@ -73,6 +73,7 @@
   flex-direction: column;
   gap: 2px;
   color: var(--dialog-body-font-color);
+  font-size: var(--font-size-md);
 }
 
 .grow {

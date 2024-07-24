@@ -40,11 +40,8 @@ function useMusic(name) {
     if (!ready) return;
     if (!name) return;
 
-    const str = JSON.stringify({ bgm, sfx, notifications, muted })
-    localStorage.setItem(
-      `${LOCAL_STORAGE_KEY}.${name}.music`,
-      str
-    );
+    const str = JSON.stringify({ bgm, sfx, notifications, muted });
+    localStorage.setItem(`${LOCAL_STORAGE_KEY}.${name}.music`, str);
   }, [bgm, muted, name, notifications, sfx, ready]);
   useEffect(() => {
     if (!name) return;
@@ -124,7 +121,7 @@ function useDecks(name) {
     setDeckStatus("formatting");
   }, [name]);
   useEffect(() => {}, [name, decks]);
-  return { decks, isLoading: deckStatus === "formatting" };
+  return { decks, isLoading: deckStatus === "formatting", setDecks };
 }
 
 export function useProfileState() {
@@ -132,7 +129,7 @@ export function useProfileState() {
   const [formatID, setFormatID] = useState(standardFormatID);
   const { name, setName, isLoading: nameLoading } = useProfileName();
   const music = useMusic(name);
-  const { decks, isLoading: deckLoading } = useDecks(name);
+  const { decks, isLoading: deckLoading, setDecks } = useDecks(name);
 
   return {
     name,
@@ -146,6 +143,14 @@ export function useProfileState() {
     },
     signOut() {
       setName(null);
+    },
+    changeDeck(formatID, index, deck) {
+      setDecks((decks) => {
+        const copy = { ...decks };
+        copy[formatID] = [...(copy[formatID] || [])];
+        copy[formatID][index] = deck;
+        return copy;
+      });
     },
   };
 }

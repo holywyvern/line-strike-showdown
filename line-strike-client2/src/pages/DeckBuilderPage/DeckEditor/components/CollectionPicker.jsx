@@ -58,7 +58,7 @@ export function CollectionPicker() {
               active={i === element}
               onClick={() => setElement(i)}
             >
-              <img src={`elements/${i}.webp`} />
+              <img src={`/elements/${i}.webp`} />
             </Tabs.Tab>
           ))}
         </Tabs>

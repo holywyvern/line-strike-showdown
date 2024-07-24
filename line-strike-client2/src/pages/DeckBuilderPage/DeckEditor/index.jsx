@@ -4,12 +4,12 @@ import { DeckBuildLayout } from "./design/DeckBuildLayout";
 
 import { Context, useDeckEditorState } from "./context";
 
-import { PropertiesBox } from "./PropertiesBox";
-import { CollectionPicker } from "./CollectionPicker";
-import { DeckBox } from "./DeckBox";
-import { DeckExporter } from "./DeckExporter";
-
 import { Column } from "../../../design/Column";
+
+import { PropertiesBox } from "./components/PropertiesBox";
+import { DeckExporter } from "./components/DeckExporter";
+import { CollectionPicker } from "./components/CollectionPicker";
+import { DeckBox } from "./components/DeckBox";
 
 export function DeckEditor({ formatID, deck, index }) {
   const api = useDeckEditorState({ formatID, deck, index });

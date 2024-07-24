@@ -11,6 +11,8 @@
     var(--window-text-shadow-color) 0px 0px 1px;
   -webkit-font-smoothing: antialiased;
   padding: var(--padding-md);
+  font-size: var(--font-size-md);
+  color: var(--dialog-font-color);
 }
 
 .stretch {

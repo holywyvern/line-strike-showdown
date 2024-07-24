@@ -4,6 +4,7 @@ import { Button } from "../Button";
 
 import styles from "./styles.module.css";
 import { Modal } from "../Modal";
+import { Dialog } from "../Dialog";
 import { useState } from "react";
 
 export function ImageSelect({
@@ -27,24 +28,31 @@ export function ImageSelect({
       />
       <div className={styles.select}>
         <div className={styles.preview}>
-          <img src={`${folder}/${value}`} />
+          <img src={`/${folder}/${value}`} />
         </div>
         <Button onClick={openModal}>Change...</Button>
       </div>
-      <Modal title={title} onClose={onClose} open={open}>
-        <div className={styles.grid}>
-          {collection.map((item) => (
-            <Button
-              key={item}
-              onClick={() => {
-                onChange(item);
-                onClose();
-              }}
-            >
-              <img src={`${folder}/${item}`} className={styles.option} />
-            </Button>
-          ))}
-        </div>
+      <Modal onClose={onClose} open={open}>
+        <Dialog>
+          <Dialog.Header>
+            <h3>{title}</h3>
+          </Dialog.Header>
+          <Dialog.Body>
+            <div className={styles.grid}>
+              {collection.map((item) => (
+                <Button
+                  key={item}
+                  onClick={() => {
+                    onChange(item);
+                    onClose();
+                  }}
+                >
+                  <img src={`/${folder}/${item}`} className={styles.option} />
+                </Button>
+              ))}
+            </div>
+          </Dialog.Body>
+        </Dialog>
       </Modal>
     </>
   );

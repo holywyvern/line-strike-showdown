@@ -1,9 +1,18 @@
 .page {
-  flex: 1;
+  position: absolute;
+  inset: 0;
   display: flex;
   overflow: hidden;
   align-items: flex-start;
   justify-content: center;
   gap: 12px;
   padding: 8px;
+
+}
+
+.wrapper {
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
 }

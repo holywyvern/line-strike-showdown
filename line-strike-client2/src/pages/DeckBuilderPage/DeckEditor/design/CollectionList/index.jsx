@@ -104,9 +104,10 @@ function CollectionListItem({
           <CardArea skill={skill} card={card} />
           <div>
             <div className={styles.title}>
-              <img src={`elements/${card.element}.webp`} />
+              <img src={`/elements/${card.element}.webp`} />
               <h3>
-                {card.title} {card.name} {isIllegal && <Badge>ILLEGAL</Badge>}
+                <small>{card.title}</small>
+                {` ${card.name}`} {isIllegal && <Badge>ILLEGAL</Badge>}
                 {isLimited && <Badge>LIMITED TO {maxRepeats}</Badge>}
               </h3>
             </div>
