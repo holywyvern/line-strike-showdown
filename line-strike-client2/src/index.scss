@@ -130,3 +130,9 @@ head::after {
     transform: rotate(360deg) scale(18) translateX(20px);
   }
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}

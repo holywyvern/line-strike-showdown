@@ -8,7 +8,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const DECK_BUILDER_TAB = {
   id: "decks",
-  name: "Deck Builder",
+  name: "Decks",
   icon: faEdit,
   closable: true,
   href: "/play/decks",

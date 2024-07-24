@@ -1,0 +1,9 @@
+.drawer {
+  background-color: var(--dialog-body-background-color) !important;
+  display: flex;
+  flex-direction: column;
+  color: var(--dialog-body-font-color);
+  font-size: var(--font-size-md);
+  padding: var(--padding-md);
+  gap: var(--gap-md);
+}

@@ -31,19 +31,24 @@ function useProfileName() {
 }
 
 function useMusic(name) {
+  const [ready, setReady] = useState(false);
   const [muted, setMuted] = useState(false);
   const [bgm, setBGM] = useState(50);
   const [sfx, setSFX] = useState(50);
   const [notifications, setNotifications] = useState(50);
   useEffect(() => {
+    if (!ready) return;
     if (!name) return;
 
+    const str = JSON.stringify({ bgm, sfx, notifications, muted })
     localStorage.setItem(
       `${LOCAL_STORAGE_KEY}.${name}.music`,
-      JSON.stringify({ bgm, sfx, notifications, muted })
+      str
     );
-  }, [bgm, muted, name, notifications, sfx]);
+  }, [bgm, muted, name, notifications, sfx, ready]);
   useEffect(() => {
+    if (!name) return;
+
     try {
       const str =
         localStorage.getItem(`${LOCAL_STORAGE_KEY}.${name}.music`) || "{}";
@@ -52,6 +57,7 @@ function useMusic(name) {
       setBGM(saved.bgm || 0);
       setSFX(saved.sfx || 0);
       setNotifications(saved.notifications || 0);
+      setReady(true);
     } catch (error) {
       console.error(error);
     }

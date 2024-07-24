@@ -2,23 +2,28 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 
 import styles from "./styles.module.scss";
+import { forwardRef } from "react";
 
 function ButtonGroup({ children }) {
   return <div className={styles.group}>{children}</div>;
 }
 
-export function Button({
-  onClick,
-  onFocus,
-  onBlur,
-  onMouseEnter,
-  onMouseLeave,
-  disabled,
-  type = "button",
-  children,
-  flex,
-  size = "md",
-}) {
+/* eslint-disable react/prop-types */
+function ButtonComponent(
+  {
+    onClick,
+    onFocus,
+    onBlur,
+    onMouseEnter,
+    onMouseLeave,
+    disabled,
+    type = "button",
+    children,
+    flex,
+    size = "md",
+  },
+  ref
+) {
   const className = cx(
     styles.button,
     {
@@ -28,6 +33,7 @@ export function Button({
   );
   return (
     <button
+      ref={ref}
       className={className}
       onClick={onClick}
       onFocus={onFocus}
@@ -41,6 +47,9 @@ export function Button({
     </button>
   );
 }
+/* eslint-enable react/prop-types */
+
+export const Button = forwardRef(ButtonComponent);
 
 Button.Group = ButtonGroup;
 

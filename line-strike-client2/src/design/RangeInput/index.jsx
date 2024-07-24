@@ -21,6 +21,7 @@ export function RangeInput({
         value={value}
         onChange={onChange}
         disabled={disabled}
+        className={styles.input}
       />
       {showValue && <div className={styles.value}>{value}</div>}
     </div>

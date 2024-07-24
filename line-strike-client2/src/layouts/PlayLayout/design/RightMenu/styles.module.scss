@@ -1,0 +1,10 @@
+.menu {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: var(--padding-xl);
+  color: var(--dialog-font-color);
+  font-size: var(--font-size-md);
+  gap: var(--gap-md);
+}

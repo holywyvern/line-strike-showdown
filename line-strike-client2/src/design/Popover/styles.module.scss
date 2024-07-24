@@ -1,0 +1,10 @@
+.content {
+  background: var(--dialog-background-color);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-md);
+  font-size: var(--font-size-md);
+  transform: translateX(16px);
+}
+

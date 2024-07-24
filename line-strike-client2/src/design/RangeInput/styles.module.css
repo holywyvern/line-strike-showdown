@@ -12,3 +12,67 @@
   padding: 4px;
   border: 1px solid var(--component-border-color);
 }
+
+/*********** Baseline, reset styles ***********/
+.input {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Removes default focus */
+.input:focus {
+  outline: none;
+}
+
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+.input::-webkit-slider-runnable-track {
+  background-color: var(--dialog-header-base-color1);
+  border-radius: 0px;
+  height: var(--padding-sm);
+}
+
+/* slider thumb */
+.input::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: calc(var(--padding-sm) * -2); /* Centers thumb on the track */
+  background-color: var(--button-active-border-color);
+  border-radius: 0rem;
+  height: var(--font-size-ml);
+  width: var(--padding-md);
+}
+
+.input:focus::-webkit-slider-thumb {
+  outline: 3px solid var(--button-active-border-color);
+  outline-offset: 0.125rem;
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+.input::-moz-range-track {
+  background-color: var(--dialog-header-base-color1);
+  border-radius: 0px;
+  height: 5px;
+}
+
+/* slider thumb */
+.input::-moz-range-thumb {
+  background-color: var(--button-active-border-color);
+  border: none; /*Removes extra border that FF applies*/
+  border-radius: 0rem;
+  height: 20px;
+  width: 10px;
+}
+
+.input:focus::-moz-range-thumb{
+  outline: 3px solid var(--button-active-border-color);
+  outline-offset: 0.125rem;
+}
+
+.input:disabled {
+  opacity: 0.5;
+}
