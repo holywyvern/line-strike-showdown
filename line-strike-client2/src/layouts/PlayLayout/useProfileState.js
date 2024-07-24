@@ -93,9 +93,13 @@ function useDecks(name) {
   const [decks, setDecks] = useState(DEFAULT_DECKS);
   useEffect(() => {
     if (deckStatus !== "formatting") return;
+    if (!name) return;
 
     setDecks((decks) => {
-      const newDecks = { ...decks };
+      const oldDecks = JSON.parse(
+        localStorage.getItem(`${LOCAL_STORAGE_KEY}.${name}.decks`) || "{}"
+      );
+      const newDecks = { ...decks, ...oldDecks };
       for (const format of db.formats.filter(Boolean)) {
         const formatDecks = [...(newDecks[format.id] || [])];
         newDecks[format.id] = formatDecks;
@@ -120,7 +124,15 @@ function useDecks(name) {
   useEffect(() => {
     setDeckStatus("formatting");
   }, [name]);
-  useEffect(() => {}, [name, decks]);
+  useEffect(() => {
+    if (!decks) return;
+    if (deckStatus !== "formatted") return;
+
+    localStorage.setItem(
+      `${LOCAL_STORAGE_KEY}.${name}.decks`,
+      JSON.stringify(decks)
+    );
+  }, [name, decks, deckStatus]);
   return { decks, isLoading: deckStatus === "formatting", setDecks };
 }
 
