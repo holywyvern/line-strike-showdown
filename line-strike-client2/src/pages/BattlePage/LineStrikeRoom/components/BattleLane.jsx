@@ -16,7 +16,6 @@ export function BattleLane({ index, lane, top, playing }) {
       if (playerID !== data.playerID) return;
       if (data.position !== index) return;
 
-      console.log("It's me", blocked);
     });
   }, [room, data.playerID, data.position]);
   let { cards } = data;

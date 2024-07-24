@@ -21,6 +21,7 @@ const DECK_BUILDER_TAB = {
   closable: true,
   href: "/play/decks",
   match: /^\/play\/decks(.*?)*$/iu,
+  music: "deck",
 };
 
 export function DeckBuilderLayout() {

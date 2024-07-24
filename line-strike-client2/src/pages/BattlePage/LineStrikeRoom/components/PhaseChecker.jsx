@@ -97,5 +97,5 @@ export function PhaseChecker({ spectator, index }) {
 
 PhaseChecker.propTypes = {
   spectator: PropTypes.bool,
-  index: PropTypes.number,
+  index: PropTypes.any,
 };

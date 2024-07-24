@@ -21,6 +21,7 @@ import { DeckBuilderHome } from "./pages/DeckBuilderHome";
 import { DeckBuilderLayout } from "./layouts/DeckBuilderLayout";
 import { DeckBuilderPage } from "./pages/DeckBuilderPage";
 import { BattlePage } from "./pages/BattlePage";
+import { WebAudio } from "./utils/WebAudio";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,8 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+console.log("Initializing web audio...", WebAudio.initialize());
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

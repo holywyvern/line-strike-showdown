@@ -14,7 +14,7 @@ export const AudioManager = {
   _seBuffers: [],
   _staticBuffers: [],
   _replayFadeTime: 0.5,
-  _path: "",
+  _path: "/",
 
   get generalVolume() {
     return this._bgmVolume;

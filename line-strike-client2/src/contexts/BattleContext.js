@@ -33,8 +33,21 @@ export function useBattleRoomState() {
   const [rooms, setRooms] = useState({});
   const [nextRoom, setNextRoom] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!lobby) return;
+
+    function setRoomState(id, status) {
+      setRooms((rooms) => {
+        const room = rooms[id];
+        if (!room) return rooms;
+        if (room.status === status) return rooms;
+
+        const newRooms = { ...rooms };
+        newRooms[id] = { ...room, status };
+        return newRooms;
+      }, []);
+    }
 
     lobby.onMessage("battle-error", (roomId) => {
       setRooms((rooms) => ({ ...rooms, [roomId]: ERROR_ROOM }));
@@ -58,6 +71,9 @@ export function useBattleRoomState() {
         } (${BATTLE_TYPES[type] || "Free Battle"}) [${formats[formatID].name}]`;
         const handle = await ColyseusService.joinBattle(seat);
         const data = { handle, spectator, title, status: "ready" };
+        handle.onStateChange(() => {
+          setRoomState(handle.sessionId, handle.state.phase);
+        });
         setRooms((rooms) => ({ ...rooms, [handle.sessionId]: data }));
         setNextRoom(handle.sessionId);
       }

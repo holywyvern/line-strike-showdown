@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 import { faChess } from "@fortawesome/free-solid-svg-icons";
@@ -15,14 +15,19 @@ export function BattlePage() {
   const location = useLocation();
   const id = `battles-${battleID}`;
   const href = `/play/battles/${battleID}`;
-  useEffect(() => {
-    tabs.ensure({
+  const tab = useMemo(
+    () => ({
       id,
       name: room.title,
       icon: faChess,
-      closable: room.status !== "loading",
+      closable: room.status === "finished",
       href,
-    });
+      music: tabs.activeTab?.music,
+    }),
+    [room.title, room.status, href, id, tabs.activeTab?.music]
+  );
+  useEffect(() => {
+    tabs.ensure(tab);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, room, href]);
   if (room.state === "loading") {
@@ -33,7 +38,7 @@ export function BattlePage() {
   }
   const { handle, spectator } = room;
   if (!handle) return <div>Loading...</div>;
-  
+
   return (
     <LineStrikeRoom
       room={handle}

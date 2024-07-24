@@ -20,8 +20,6 @@ export function BattleMessage({ messages }) {
       {messages.map(({ message, type, key, nodeRef }) => {
         return (
           <CSSTransition
-            onEnter={() => console.log(message, "entered")}
-            onExit={() => console.log(message, "exited")}
             key={`${message}-${type}-${key}`}
             nodeRef={nodeRef}
             timeout={700}

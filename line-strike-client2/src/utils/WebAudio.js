@@ -321,7 +321,6 @@ export class WebAudio {
   }
 
   _onError() {
-    console.log("FAILED");
     if (this._sourceNodes.length > 0) {
       this._stopSourceNode();
     }

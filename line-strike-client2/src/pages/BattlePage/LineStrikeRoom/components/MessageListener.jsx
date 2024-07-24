@@ -79,7 +79,6 @@ export function MessageListener({ children }) {
       }
     });
     room.onMessage("draw", () => {
-      console.log("draw...");
       audio.se("draw");
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

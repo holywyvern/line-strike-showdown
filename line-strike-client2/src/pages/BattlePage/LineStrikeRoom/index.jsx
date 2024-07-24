@@ -25,6 +25,6 @@ export function LineStrikeRoom({ room, spectator, tabIndex, tabActive }) {
 LineStrikeRoom.propTypes = {
   room: PropTypes.any,
   spectator: PropTypes.bool,
-  tabIndex: PropTypes.number,
+  tabIndex: PropTypes.any,
   tabActive: PropTypes.bool,
 };
