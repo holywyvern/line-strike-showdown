@@ -1,5 +1,7 @@
 import { Schema, ArraySchema, MapSchema, type } from "@colyseus/schema";
 
+import slugify from "slugify";
+
 import { Card, CardElement, CardSet } from "./Card";
 
 export interface FormatProps {
@@ -116,6 +118,9 @@ export class Format extends Schema {
   @type("boolean")
   showMulligan: boolean;
 
+  @type("string")
+  slug: string;
+
   constructor({
     id,
     name,
@@ -146,6 +151,7 @@ export class Format extends Schema {
     super();
     this.id = id;
     this.name = name;
+    this.slug = slugify(name);
     this.description = description;
     this.sets = new ArraySchema(...sets);
     this.maxElements = maxElements || 6;

@@ -1,0 +1,102 @@
+.wrapper {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.list {
+  border: 1px solid var(--component-border-color);
+  flex: 1;
+  display: flex;
+  overflow-y: scroll;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 12px;
+  gap: 8px;
+}
+
+.list > li {
+  border: 1px solid var(--component-border-color);
+  padding: 4px;
+  gap: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.title h3 {
+  margin: 0;
+  font-size: 1em;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.mini {
+  appearance: none;
+  background: transparent;
+  cursor: help;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  max-height: 64px;
+  max-width: 64px;
+}
+
+.mini img {
+  width: 100%;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 4px;
+}
+
+.grid {
+  display: grid;
+  width: 63px;
+  height: 63px;
+  grid-template-columns: repeat(3, 21px);
+  grid-template-rows: repeat(3, 21px);
+  font-size: 12px;
+}
+
+.support {
+  background-color: dodgerblue;
+}
+
+.support .highlight {
+  background-color:cornflowerblue;
+}
+
+.disrupt {
+  background-color: lightcoral;
+}
+
+.disrupt .highlight {
+  background-color: coral;
+}
+
+.area {
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: none;
+  font-weight: bolder;
+}
