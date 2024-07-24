@@ -8,7 +8,7 @@ export function PlayPage({ children }) {
   return (
     <div className={styles.page}>
       <PlayNav />
-      <div className={styles.content}>{children}</div>
+      <div className={styles['play-content']}>{children}</div>
     </div>
   );
 }

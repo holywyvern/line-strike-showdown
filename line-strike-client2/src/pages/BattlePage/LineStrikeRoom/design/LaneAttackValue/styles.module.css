@@ -1,0 +1,23 @@
+.value {
+  font-size: 36px;
+  font-weight: bold;
+  color: dodgerblue;
+  transform: translateY(8px);
+  transition: all 0.3s ease-in-out;
+}
+
+.top {
+  color: lightcoral;
+  transform: translateY(-8px);
+}
+
+.won {
+  font-weight: bolder;
+  font-size: 38px;
+}
+
+.lost {
+  font-size: 34px;
+  font-weight: normal;
+  color: lightgray;
+}

@@ -1,0 +1,46 @@
+.group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  inset: 0;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+  right: -200%;
+  animation: show-group 700ms 100ms ease-in forwards;
+  overflow: hidden;
+}
+
+@keyframes show-group {
+  0% {
+    opacity: 0;
+    right: -200%;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+.message {
+  position: relative;
+  font-size: 48px;
+  color: inherit;
+}
+
+.exit {
+  opacity: 1;
+  left: 0;
+}
+
+.exit-active {
+  opacity: 0;
+  left: -200%;
+  transition: opacity 300ms ease-in, left 500ms ease-in;
+}
+

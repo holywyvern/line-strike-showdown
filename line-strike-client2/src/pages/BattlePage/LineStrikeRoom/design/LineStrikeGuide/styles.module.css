@@ -1,0 +1,12 @@
+.guide {
+  position: absolute;
+  overflow: hidden;
+  width: calc(var(--width) * 1px);
+  height: calc(var(--height) * 1px);
+  transform: scale(var(--scale), var(--scale));
+  transform-origin: top left;
+  background: url("/bg.png");
+  background-size: contain;
+  font-size: 2em;
+  inset: 0;
+}

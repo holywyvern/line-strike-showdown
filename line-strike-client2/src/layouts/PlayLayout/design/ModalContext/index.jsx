@@ -10,7 +10,7 @@ export function ModalContext({ children }) {
   return (
     <Context.Provider value={ref}>
       <>
-        <div className={styles.wrapper}>
+        <div className={styles['modal-wrapper']}>
           <div className={styles.content}>{children}</div>
           <div ref={setRef} className={styles.modal} />
         </div>

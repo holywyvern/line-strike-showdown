@@ -1,0 +1,22 @@
+.screen {
+  flex: 1;
+  align-self: stretch;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--scaled-width) * 1px);
+  height: calc(var(--scaled-height) * 1px);
+  max-width: calc(var(--scaled-width) * 1px);
+  max-height: calc(var(--scaled-height) * 1px);
+}

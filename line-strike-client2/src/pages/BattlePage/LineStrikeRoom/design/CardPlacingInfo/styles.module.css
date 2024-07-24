@@ -1,0 +1,44 @@
+.mini {
+  width: 64px;
+  height: 64px;
+}
+
+.area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.details h3 {
+  font-size: 1em;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
+.details h4 {
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
+.details h5 {
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}

@@ -1,4 +1,4 @@
-.wrapper {
+.modal-wrapper {
   flex: 1;
   position: relative;
   display: flex;
@@ -14,5 +14,8 @@
 }
 
 .modal {
+  flex: 1;
   color: white;
+  align-self: stretch;
+  display: flex;
 }

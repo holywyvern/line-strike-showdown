@@ -1,0 +1,29 @@
+.hand {
+  position: absolute;
+  left: 1400px;
+  top: 900px;
+}
+
+.card {
+  width: 120px;
+  position: absolute;
+  left: calc(var(--index, 0) * (50 - 25 * (var(--size, 0) / 15)) * 1px);
+}
+
+.count {
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+}
+
+.shadow {
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mirror {
+  top: 10px;
+}

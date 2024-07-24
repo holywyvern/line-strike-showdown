@@ -20,6 +20,7 @@ import { CollectionPlayPage } from "./pages/CollectionPlayPage";
 import { DeckBuilderHome } from "./pages/DeckBuilderHome";
 import { DeckBuilderLayout } from "./layouts/DeckBuilderLayout";
 import { DeckBuilderPage } from "./pages/DeckBuilderPage";
+import { BattlePage } from "./pages/BattlePage";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             element: <CollectionPlayPage />,
           },
           {
+            path: "battles/:battleID",
+            element: <BattlePage />,
+          },
+          {
             path: "decks",
             element: <DeckBuilderLayout />,
             children: [
@@ -65,8 +70,8 @@ const router = createBrowserRouter([
                   },
                   {
                     path: ":deckIndex",
-                    element: <DeckBuilderPage />
-                  }
+                    element: <DeckBuilderPage />,
+                  },
                 ],
               },
             ],

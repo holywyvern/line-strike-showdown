@@ -1,0 +1,22 @@
+.page {
+  flex: 1;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  font-size: var(--font-size-md);
+  color: var(--dialog-font-color);
+}
+
+.contents {
+  position: absolute;
+  inset: 0;
+  flex: 1;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: var(--gap-xl);
+  overflow: hidden;
+  padding: var(--padding-md);
+}

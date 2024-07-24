@@ -164,16 +164,21 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     const player = this.state.players.get(client.sessionId);
     if (!player) return;
 
-    const seat = await matchMaker.joinById(roomId, {
-      name: player.name,
-      id: player.sessionID,
-    });
-    const room = await matchMaker.getRoomById(roomId);
-    client.send("battle", {
-      ...room.metadata,
-      seat,
-      spectator: true,
-    });
+    try {
+      const seat = await matchMaker.joinById(roomId, {
+        name: player.name,
+        id: player.sessionID,
+      });
+      const room = await matchMaker.getRoomById(roomId);
+      client.send("battle", {
+        ...room.metadata,
+        seat,
+        spectator: true,
+      });
+    } catch (error) {
+      console.error(error);
+      client.send("battle-error", roomId);
+    }
   };
 
   async onDispose() {}

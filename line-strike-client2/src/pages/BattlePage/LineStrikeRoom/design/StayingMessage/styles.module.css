@@ -1,0 +1,30 @@
+.message {
+  position: absolute;
+  top: 745px;
+  left: 650px;
+  width: 540px;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  animation: blink 1s ease-in infinite;
+  z-index: 400;
+}
+
+.top {
+  top: 220px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

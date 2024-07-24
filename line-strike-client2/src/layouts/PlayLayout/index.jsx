@@ -18,6 +18,10 @@ import {
 } from "../../contexts/MatchmakeContext";
 import { LobbyContext, useLobbyState } from "../../contexts/LobbyContext";
 import { ModalContext } from "./design/ModalContext";
+import {
+  BattleContext,
+  useBattleRoomState,
+} from "../../contexts/BattleContext";
 
 function Profile({ children }) {
   const profile = useProfileState();
@@ -66,6 +70,17 @@ Matchmaker.propTypes = {
   children: PropTypes.node,
 };
 
+function Battle({ children }) {
+  const battle = useBattleRoomState();
+  return (
+    <BattleContext.Provider value={battle}>{children}</BattleContext.Provider>
+  );
+}
+
+Battle.propTypes = {
+  children: PropTypes.node,
+};
+
 export function PlayLayout() {
   return (
     <Profile>
@@ -73,11 +88,13 @@ export function PlayLayout() {
         <Tabs>
           <Lobby>
             <Matchmaker>
-              <PlayPage>
-                <ModalContext>
-                  <Outlet />
-                </ModalContext>
-              </PlayPage>
+              <Battle>
+                <PlayPage>
+                  <ModalContext>
+                    <Outlet />
+                  </ModalContext>
+                </PlayPage>
+              </Battle>
             </Matchmaker>
           </Lobby>
         </Tabs>

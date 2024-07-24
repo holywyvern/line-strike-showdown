@@ -11,10 +11,13 @@ export function useTabState() {
     tabs,
     ensure(tab) {
       setTabs((tabs) => {
-        if (tabs.find((i) => i.id === tab.id)) return tabs;
-
+        const index = tabs.findIndex((i) => i.id === tab.id);
         const newTabs = [...tabs];
-        newTabs.push(tab);
+        if (index < 0) {
+          newTabs.push(tab);
+        } else {
+          newTabs[index] = tab;
+        }
         return newTabs;
       });
     },
@@ -32,5 +35,6 @@ export function useTabState() {
         return newTabs;
       });
     },
+    changeMusic(_music) {},
   };
 }
