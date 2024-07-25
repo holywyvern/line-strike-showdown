@@ -93,7 +93,6 @@ function useDecks(name) {
   const [decks, setDecks] = useState(DEFAULT_DECKS);
   useEffect(() => {
     if (deckStatus !== "formatting") return;
-    if (!name) return;
 
     setDecks((decks) => {
       const oldDecks = JSON.parse(
