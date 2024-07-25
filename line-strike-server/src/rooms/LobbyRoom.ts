@@ -244,6 +244,11 @@ export class LobbyRoom extends Room<LobbyRoomState> {
       }),
     ]);
     const client = this.clients.getById(id1);
+    const client2 = this.clients.getById(id2);
+    if (type !== "free") {
+      client.send("remove-queue");
+      client2.send("remove-queue");
+    }
     client.send("battle", {
       seat: a,
       opponent: challenger.name,
@@ -251,7 +256,6 @@ export class LobbyRoom extends Room<LobbyRoomState> {
       formatID,
       specatator: false,
     });
-    const client2 = this.clients.getById(id2);
     client2.send("battle", {
       seat: b,
       opponent: challenged.name,
@@ -259,10 +263,6 @@ export class LobbyRoom extends Room<LobbyRoomState> {
       formatID,
       spectator: false,
     });
-    if (type !== "free") {
-      client.send("queue", null);
-      client2.send("queue", null);
-    }
   }
 
   onCancelQueue(playerID: string) {
@@ -274,6 +274,6 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     const client = this.clients.getById(player.sessionID);
 
     if (!client) return;
-    client.send("queue", null);
+    client.send("remove-queue");
   }
 }

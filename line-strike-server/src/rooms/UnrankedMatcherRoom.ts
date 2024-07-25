@@ -62,5 +62,12 @@ export class UnrankedMatcherRoom extends Room {
       "onMatchmakeFound",
       [playerA.playerID, playerB.playerID, this.format.id, "unranked"]
     );
+    const clients = [
+      this.clients.getById(key1),
+      this.clients.getById(key2),
+    ].filter(Boolean);
+    for (const client of clients) {
+      client.leave();
+    }
   }
 }

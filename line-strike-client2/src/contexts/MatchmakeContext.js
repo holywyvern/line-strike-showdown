@@ -15,22 +15,29 @@ export function useMatchmakeState() {
   const [type, setType] = useState(null);
   const [room, setRoom] = useState(null);
   const [start, setStart] = useState(null);
-  const matching = Boolean(room);
+  const matching = Boolean(room && start && type);
   useEffect(() => {
     if (!lobby) return;
 
+    const clear = () => {
+      setRoom(() => null);
+      setStart(() => null);
+      setType(() => null);
+    };
+
+    lobby.onMessage("remove-queue", clear);
+
     lobby.onMessage("queue", async (queue) => {
       if (!queue) {
-        setRoom(null);
-        setStart(null);
-        setType(null);
+        clear();
         return;
       }
       const { seat, since, type } = queue;
       const room = await ColyseusService.queue(seat);
-      setType(type);
-      setStart(since);
-      setRoom(room);
+      room.onLeave(clear);
+      setType(() => type);
+      setStart(() => since);
+      setRoom(() => room);
     });
   }, [lobby]);
   return {
