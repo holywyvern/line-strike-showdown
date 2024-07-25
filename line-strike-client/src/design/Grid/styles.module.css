@@ -1,5 +1,0 @@
-.grid {
-  display: grid;
-  gap: 4px;
-  grid-template-columns: var(--column-format, repeat(var(--columns, 2), 1fr));
-}

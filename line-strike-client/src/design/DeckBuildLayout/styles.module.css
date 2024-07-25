@@ -1,9 +1,0 @@
-.page {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 12px;
-  padding: 8px;
-}
