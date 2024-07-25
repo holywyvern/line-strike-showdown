@@ -9,9 +9,9 @@
   overflow: hidden;
   flex-direction: column;
   overflow: auto;
-  color: var(--dialog-font-color);
+  color: var(--dialog-font-color) !important;
   padding: 0;
-  background: var(--dialog-background-color);
+  background: var(--dialog-background-color) !important;
   border-right: var(--border-size-xs) solid var(--dialog-border-color);
   width: 0;
 }

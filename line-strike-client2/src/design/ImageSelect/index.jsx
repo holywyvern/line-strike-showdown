@@ -1,4 +1,7 @@
 import PropTypes from "prop-types";
+import cx from "classnames";
+
+import useIsMobile from "useismobile";
 
 import { Button } from "../Button";
 
@@ -6,6 +9,7 @@ import styles from "./styles.module.css";
 import { Modal } from "../Modal";
 import { Dialog } from "../Dialog";
 import { useState } from "react";
+
 
 export function ImageSelect({
   name,
@@ -18,6 +22,7 @@ export function ImageSelect({
   const [open, setOpen] = useState(false);
   const onClose = () => setOpen(false);
   const openModal = () => setOpen(true);
+  const isMobile = useIsMobile();
   return (
     <>
       <input
@@ -38,7 +43,7 @@ export function ImageSelect({
             <h3>{title}</h3>
           </Dialog.Header>
           <Dialog.Body>
-            <div className={styles.grid}>
+            <div className={cx(styles.grid, { [styles.mobile]: isMobile})}>
               {collection.map((item) => (
                 <Button
                   key={item}

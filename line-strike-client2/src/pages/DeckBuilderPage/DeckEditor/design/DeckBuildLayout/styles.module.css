@@ -16,3 +16,9 @@
   position: relative;
   overflow: hidden;
 }
+
+.mobile .page {
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+}

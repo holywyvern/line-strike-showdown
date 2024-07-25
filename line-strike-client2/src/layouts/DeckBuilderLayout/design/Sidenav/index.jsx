@@ -1,4 +1,6 @@
 import { useState } from "react";
+import useIsMobile from "useismobile";
+import Drawer from "react-modern-drawer";
 import {
   faChevronLeft,
   faChevronRight,
@@ -10,12 +12,34 @@ import cx from "classnames";
 
 import styles from "./styles.module.scss";
 
+function MobileDrawer({ open, children, toggle }) {
+  return (
+    <Drawer
+      direction="left"
+      className={cx(styles.nav, styles.open)}
+      open={open}
+      onClose={toggle}
+      lockBackgroundScroll
+    >
+      {children}
+    </Drawer>
+  );
+}
+
 export function Sidenav({ children }) {
+  const isMobile = useIsMobile();
   const [open, setOpen] = useState(true);
+  const toggle = () => setOpen((v) => !v);
   const className = cx(styles.nav, { [styles.open]: open });
   return (
     <div className={styles.wrapper}>
-      <nav className={className}>{children}</nav>
+      {isMobile ? (
+        <MobileDrawer open={open} toggle={toggle}>
+          {children}
+        </MobileDrawer>
+      ) : (
+        <nav className={className}>{children}</nav>
+      )}
       <button
         type="button"
         className={styles.toggle}
@@ -26,6 +50,12 @@ export function Sidenav({ children }) {
     </div>
   );
 }
+
+MobileDrawer.propTypes = {
+  open: PropTypes.bool,
+  children: PropTypes.node,
+  toggle: PropTypes.func,
+};
 
 Sidenav.propTypes = {
   children: PropTypes.node,

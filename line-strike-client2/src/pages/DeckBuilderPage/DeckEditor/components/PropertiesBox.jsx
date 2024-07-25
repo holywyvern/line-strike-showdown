@@ -1,5 +1,7 @@
 import { useContext } from "react";
 
+import useIsMobile from "useismobile";
+
 import { SleeveSelect } from "./SleeveSelect";
 import { PlaymatSelect } from "./PlaymatSelect";
 
@@ -25,8 +27,9 @@ export function PropertiesBox() {
     onSave,
     isValid,
   } = useContext(Context);
+  const isMobile = useIsMobile();
   return (
-    <Dialog>
+    <Dialog stretch={isMobile}>
       <Dialog.Header>
         <h2>Deck Properties</h2>
       </Dialog.Header>

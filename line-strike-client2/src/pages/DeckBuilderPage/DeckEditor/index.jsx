@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
+import useIsMobile from "useismobile";
+
 import { DeckBuildLayout } from "./design/DeckBuildLayout";
 
 import { Context, useDeckEditorState } from "./context";
@@ -11,12 +13,14 @@ import { DeckExporter } from "./components/DeckExporter";
 import { CollectionPicker } from "./components/CollectionPicker";
 import { DeckBox } from "./components/DeckBox";
 
+
 export function DeckEditor({ formatID, deck, index }) {
   const api = useDeckEditorState({ formatID, deck, index });
+  const isMobile = useIsMobile();
   return (
     <Context.Provider value={api}>
       <DeckBuildLayout>
-        <Column>
+        <Column stretch={isMobile}>
           <PropertiesBox />
           <DeckExporter />
         </Column>

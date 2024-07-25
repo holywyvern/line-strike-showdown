@@ -1,4 +1,5 @@
 import { useContext, useMemo, useState } from "react";
+import useIsMobile from "useismobile";
 
 import { Context } from "../context";
 
@@ -25,6 +26,7 @@ export function CollectionPicker() {
   const db = useDatabase();
   const [element, setElement] = useState("all");
   const [name, setName] = useState("");
+  const isMobile = useIsMobile();
   function countCard(id) {
     return cards.filter((i) => i === id).length;
   }
@@ -46,59 +48,59 @@ export function CollectionPicker() {
     return cards;
   }, [element, name, db.collection, db.cards]);
   return (
-    <Dialog flex stretch>
+    <Dialog flex={!isMobile} stretch>
       <Dialog.Header>
         <h2>Card Collection</h2>
       </Dialog.Header>
       <Dialog.Body>
-        <Tabs>
-          {ELEMENTS.map((i) => (
-            <Tabs.Tab
-              key={i}
-              active={i === element}
-              onClick={() => setElement(i)}
-            >
-              <img src={`/elements/${i}.webp`} />
-            </Tabs.Tab>
-          ))}
-        </Tabs>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <TextInput
-            name="name"
-            placeholder="Name Contains..."
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </form>
-        <CollectionList>
-          {visibleCards.map((card) => {
-            const onAdd = () => {
-              setCards((cards) => {
-                const newCards = [...cards];
-                newCards.push(card.id);
-                setNoChanges(false);
-                return newCards;
-              });
-            };
-            const onRemove = () => {
-              const index = cards.indexOf(card.id);
-              removeCard(index);
-            };
-            return (
-              <CollectionList.Item
-                key={card.id}
-                card={card}
-                count={countCard(card.id)}
-                deckElements={cardElements}
-                size={cards.length}
-                format={format}
-                onAdd={onAdd}
-                onRemove={onRemove}
-                skills={db.skills}
-              />
-            );
-          })}
-        </CollectionList>
+          <Tabs>
+            {ELEMENTS.map((i) => (
+              <Tabs.Tab
+                key={i}
+                active={i === element}
+                onClick={() => setElement(i)}
+              >
+                <img src={`/elements/${i}.webp`} />
+              </Tabs.Tab>
+            ))}
+          </Tabs>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <TextInput
+              name="name"
+              placeholder="Name Contains..."
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </form>
+          <CollectionList>
+            {visibleCards.map((card) => {
+              const onAdd = () => {
+                setCards((cards) => {
+                  const newCards = [...cards];
+                  newCards.push(card.id);
+                  setNoChanges(false);
+                  return newCards;
+                });
+              };
+              const onRemove = () => {
+                const index = cards.indexOf(card.id);
+                removeCard(index);
+              };
+              return (
+                <CollectionList.Item
+                  key={card.id}
+                  card={card}
+                  count={countCard(card.id)}
+                  deckElements={cardElements}
+                  size={cards.length}
+                  format={format}
+                  onAdd={onAdd}
+                  onRemove={onRemove}
+                  skills={db.skills}
+                />
+              );
+            })}
+          </CollectionList>
       </Dialog.Body>
     </Dialog>
   );
