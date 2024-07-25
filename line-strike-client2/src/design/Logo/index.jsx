@@ -5,12 +5,9 @@ import cx from "classnames";
 
 import styles from "./styles.module.scss";
 
-export function Logo({ small }) {
+export function Logo({ small, to = "/" }) {
   return (
-    <Link
-      to="/"
-      className={cx(styles.logo, { [styles.small]: small })}
-    >
+    <Link to={to} className={cx(styles.logo, { [styles.small]: small })}>
       <img src="/logo.png" alt="Line Strike Logo" />
       <div className={styles.text}>
         <h1>LINE STRIKE</h1>
@@ -24,4 +21,5 @@ export function Logo({ small }) {
 
 Logo.propTypes = {
   small: PropTypes.bool,
+  to: PropTypes.string,
 };

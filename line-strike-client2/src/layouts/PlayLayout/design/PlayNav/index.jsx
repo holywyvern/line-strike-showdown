@@ -11,7 +11,7 @@ export function PlayNav() {
   const isMobile = useIsMobile(1024);
   return (
     <nav className={styles.nav}>
-      <Logo small />
+      <Logo small to="/play" />
       {isMobile ? <MobileMenu /> : <DesktopMenu />}
     </nav>
   );
