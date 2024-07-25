@@ -12,7 +12,7 @@ module.exports = {
     },
     {
       name: "Line Strike Showdown - Client",
-      cwd: "./line-strike-client",
+      cwd: "./line-strike-client2",
       script: "npm",
       args: "run dev",
       env: {
