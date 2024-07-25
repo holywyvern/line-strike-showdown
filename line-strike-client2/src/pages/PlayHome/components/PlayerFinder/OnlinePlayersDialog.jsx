@@ -1,19 +1,19 @@
+import { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 
 import { Dialog } from "../../../../design/Dialog";
 import { List } from "../../../../design/List";
 import { Modal } from "../../../../design/Modal";
 
-// import { useLobby } from "../../../../contexts/LobbyContext";
-
 import { Player } from "./Player";
 import { useLobbyPlayers } from "../hooks/useLobbyPlayers";
-import { Separator } from "../../../../design/Separator";
+
+
 import { TextInput } from "../../../../design/TextInput";
-import { useMemo, useState } from "react";
+
+
 
 export function OnlinePlayersDialog({ onClose }) {
-  // const room = useLobby();
   const [filter, setFilter] = useState("");
   const players = useLobbyPlayers();
 
@@ -25,9 +25,6 @@ export function OnlinePlayersDialog({ onClose }) {
     );
   }, [players, filter]);
 
-  // const challengePlayer = (clientId, formatID, message) => {
-  //   room.send("challenge", { clientId, formatID, message });
-  // };
   return (
     <>
       <Dialog>
@@ -42,7 +39,7 @@ export function OnlinePlayersDialog({ onClose }) {
             onChange={(e) => setFilter(e.target.value)}
             placeholder="Filter players by name..."
           />
-          <Separator />
+         <br />
           <List>
             {filteredPlayers.map((player, index) => (
               <Player key={index} player={player} />

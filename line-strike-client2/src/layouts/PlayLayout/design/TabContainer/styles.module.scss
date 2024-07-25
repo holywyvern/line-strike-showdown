@@ -45,3 +45,21 @@
   color: inherit;
   cursor: pointer;
 }
+
+.blink {
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0% {
+    background-color: transparent;
+  }
+
+  50% {
+    background-color: var(--dialog-header-base-color1);
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}

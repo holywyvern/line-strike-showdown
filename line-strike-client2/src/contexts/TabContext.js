@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { faHome, faBook } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faBook, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 export const DEFAULT_TABS = [
   {
@@ -14,8 +14,15 @@ export const DEFAULT_TABS = [
     name: "Cards",
     icon: faBook,
     closable: false,
-    href: "/play/cards"
-  }
+    href: "/play/cards",
+  },
+  {
+    id: "requests",
+    name: "Requests",
+    icon: faEnvelope,
+    closable: false,
+    href: "/play/requests",
+  },
 ];
 
 export const TabContext = createContext({ tabs: DEFAULT_TABS });

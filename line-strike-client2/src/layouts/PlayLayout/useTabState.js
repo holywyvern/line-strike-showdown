@@ -18,21 +18,35 @@ function findActiveTab(tabs, path) {
 export function useTabState() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [notifications, setNotifications] = useState(() => new Set());
   const [tabs, setTabs] = useState(DEFAULT_TABS);
   const activeTab = findActiveTab(tabs, location.pathname);
+
   useEffect(() => {
     if (!activeTab) return;
 
     if (activeTab.music) {
       AudioManager.playBgm({ name: activeTab.music, volume: 100 });
     } else {
-      console.log("Stopping music");
       AudioManager.stopBgm();
     }
   }, [activeTab, location.pathname]);
+  useEffect(() => {
+    if (!activeTab) return;
+    
+    const { id } = activeTab;
+    setNotifications((notifications) => {
+      if (!notifications.has(id)) return notifications;
+
+      const newNotifications = new Set(notifications);
+      newNotifications.delete(id);
+      return newNotifications;
+    });
+  }, [notifications, activeTab]);
   return {
     tabs,
     activeTab,
+    notifications,
     ensure(tab) {
       setTabs((tabs) => {
         const index = tabs.findIndex((i) => i.id === tab.id);
@@ -75,5 +89,12 @@ export function useTabState() {
       });
     },
     removeWarning() {},
+    notify(id) {
+      setNotifications((notifications) => {
+        if (notifications.has(id)) return notifications;
+
+        return new Set([...notifications, id]);
+      });
+    },
   };
 }

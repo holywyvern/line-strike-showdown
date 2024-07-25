@@ -6,7 +6,7 @@ import { TabContainer } from "../design/TabContainer";
 
 export function PlayTabs() {
   const navigate = useNavigate();
-  const { tabs, close } = useTabs();
+  const { tabs, close, notifications } = useTabs();
   const location = useLocation();
   return (
     <TabContainer>
@@ -24,6 +24,7 @@ export function PlayTabs() {
             name={tab.name}
             icon={tab.icon}
             active={active}
+            notify={notifications?.has(tab.id)}
             onClose={onClose}
             onClick={onClick}
           />

@@ -19,8 +19,8 @@ export function Match({ battle }) {
   return (
     <List.Item>
       <Box flex>
-        <Row spaceItems>
-          <span>
+        <Row spaceItems centerChildren>
+          <span style={{ display: "flex", alignItems: "center" }}>
             <strong>{metadata.challenger.name}</strong>
             &nbsp;
             <span>VS</span>

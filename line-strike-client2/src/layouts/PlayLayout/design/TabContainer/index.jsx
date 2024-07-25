@@ -5,9 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "./styles.module.scss";
 
-function Tab({ name, icon, active, onClose, onClick }) {
+function Tab({ name, icon, active, onClose, onClick, notify }) {
   return (
-    <div className={cx(styles.tab, { [styles.active]: active })}>
+    <div
+      className={cx(styles.tab, {
+        [styles.active]: active,
+        [styles.blink]: notify,
+      })}
+    >
       <button
         className={styles.button}
         type="button"
@@ -35,6 +40,7 @@ export function TabContainer({ children }) {
 TabContainer.Tab = Tab;
 
 Tab.propTypes = {
+  notify: PropTypes.any,
   name: PropTypes.string,
   icon: PropTypes.any,
   active: PropTypes.bool,

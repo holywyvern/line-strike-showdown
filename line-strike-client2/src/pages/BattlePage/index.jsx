@@ -18,13 +18,20 @@ export function BattlePage() {
   const tab = useMemo(
     () => ({
       id,
-      name: room.title,
+      name: room?.title,
       icon: faChess,
-      closable: room.status === "finished",
+      closable: room?.spectator || room?.status === "finished",
       href,
       music: tabs.activeTab?.music,
     }),
-    [room.title, room.status, href, id, tabs.activeTab?.music]
+    [
+      room?.spectator,
+      room?.title,
+      room?.status,
+      href,
+      id,
+      tabs.activeTab?.music,
+    ]
   );
   useEffect(() => {
     tabs.ensure(tab);

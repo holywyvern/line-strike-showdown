@@ -130,6 +130,7 @@ export class LobbyRoom extends Room<LobbyRoomState> {
         options?.message || "Want to play a match of Line Strike?"
       )
     );
+    this.clients.getById(challenged.sessionID)?.send("new-challenge")
   };
 
   onChallengeAccepted = async (client: Client, clientId: any) => {

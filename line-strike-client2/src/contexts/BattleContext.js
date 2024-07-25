@@ -6,6 +6,7 @@ import { useLobby } from "./LobbyContext";
 import { ColyseusService } from "../services/colyseus";
 
 import { useDatabase } from "./DatabaseContext";
+import { useTabs } from "./TabContext";
 
 export const BattleContext = createContext({ rooms: {} });
 
@@ -27,12 +28,22 @@ const ERROR_ROOM = {
   status: "error",
 };
 
+const MESSAGE_TYPES = [
+  "card-open",
+  "draw",
+  "win",
+  "break",
+  "battle-start",
+  "start-turn",
+];
+
 export function useBattleRoomState() {
   const { formats } = useDatabase();
   const lobby = useLobby();
   const [rooms, setRooms] = useState({});
   const [nextRoom, setNextRoom] = useState(null);
   const navigate = useNavigate();
+  const { notify } = useTabs();
 
   useEffect(() => {
     if (!lobby) return;
@@ -72,12 +83,20 @@ export function useBattleRoomState() {
         const handle = await ColyseusService.joinBattle(seat);
         const data = { handle, spectator, title, status: "ready" };
         handle.onStateChange(() => {
-          setRoomState(handle.sessionId, handle.state.phase);
+          setRoomState(handle.roomId, handle.state.phase);
         });
-        setRooms((rooms) => ({ ...rooms, [handle.sessionId]: data }));
-        setNextRoom(handle.sessionId);
+        const onNotify = () => {
+          const id = `battles-${handle.roomId}`;
+          notify(id);
+        };
+        for (const type of MESSAGE_TYPES) {
+          handle.onMessage(type, onNotify);
+        }
+        setRooms((rooms) => ({ ...rooms, [handle.roomId]: data }));
+        setNextRoom(handle.roomId);
       }
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lobby, formats]);
   useEffect(() => {
     if (!nextRoom) return;

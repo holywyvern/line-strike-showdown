@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useProfile } from "./ProfileContext";
 import { ColyseusService } from "../services/colyseus";
+import { useTabs } from "./TabContext";
 
 export const LobbyContext = createContext(null);
 
@@ -11,6 +12,8 @@ export function useLobby() {
 export function useLobbyState() {
   const profile = useProfile();
   const [room, setRoom] = useState(null);
+  const tabs = useTabs();
+
   useEffect(() => {
     if (!profile.name) return;
 
@@ -20,6 +23,10 @@ export function useLobbyState() {
   useEffect(() => {
     if (!room) return;
 
+    room.onMessage("new-challenge", () => {
+      tabs.notify("requests");
+    });
+
     return () => {
       room.leave();
       setRoom((old) => {
@@ -28,6 +35,7 @@ export function useLobbyState() {
         return old;
       });
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
   return room;
 }

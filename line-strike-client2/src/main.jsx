@@ -47,6 +47,10 @@ const router = createBrowserRouter([
             element: <PlayHome />,
           },
           {
+            path: "requests",
+            element: <div />
+          },
+          {
             path: "cards",
             element: <CollectionPlayPage />,
           },
