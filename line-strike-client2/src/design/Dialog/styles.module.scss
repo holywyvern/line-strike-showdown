@@ -76,6 +76,11 @@
   font-size: var(--font-size-md);
 }
 
+.no-overflow {
+  flex: 0;
+  overflow: visible;
+}
+
 .grow {
   flex-grow: 1;
   flex-shrink: 0;

@@ -8,7 +8,7 @@ export function MobileHeight({ children, height }) {
     return (
       <div
         style={{
-          minHeight: height,
+          maxHeight: height,
           display: "flex",
           flexDirection: "column",
           gap: "var(--gap-md)",

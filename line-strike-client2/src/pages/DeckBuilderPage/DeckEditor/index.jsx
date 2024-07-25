@@ -12,7 +12,7 @@ import { PropertiesBox } from "./components/PropertiesBox";
 import { DeckExporter } from "./components/DeckExporter";
 import { CollectionPicker } from "./components/CollectionPicker";
 import { DeckBox } from "./components/DeckBox";
-
+import { MobilePreview } from "./components/MobilePreview";
 
 export function DeckEditor({ formatID, deck, index }) {
   const api = useDeckEditorState({ formatID, deck, index });
@@ -24,8 +24,16 @@ export function DeckEditor({ formatID, deck, index }) {
           <PropertiesBox />
           <DeckExporter />
         </Column>
-        <CollectionPicker />
-        <DeckBox />
+        {isMobile ? (
+          <>
+            <MobilePreview />
+          </>
+        ) : (
+          <>
+            <CollectionPicker />
+            <DeckBox />
+          </>
+        )}
       </DeckBuildLayout>
     </Context.Provider>
   );

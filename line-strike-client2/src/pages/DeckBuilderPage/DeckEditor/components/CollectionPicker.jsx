@@ -9,6 +9,7 @@ import { Dialog } from "../../../../design/Dialog";
 import { Tabs } from "../../../../design/Tabs";
 import { TextInput } from "../../../../design/TextInput";
 import { CollectionList } from "../design/CollectionList";
+import { MobileHeight } from "../design/MobileHeight";
 
 const ELEMENTS = [
   "all",
@@ -53,6 +54,7 @@ export function CollectionPicker() {
         <h2>Card Collection</h2>
       </Dialog.Header>
       <Dialog.Body>
+        {!isMobile && (
           <Tabs>
             {ELEMENTS.map((i) => (
               <Tabs.Tab
@@ -64,14 +66,16 @@ export function CollectionPicker() {
               </Tabs.Tab>
             ))}
           </Tabs>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <TextInput
-              name="name"
-              placeholder="Name Contains..."
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </form>
+        )}
+        <form onSubmit={(e) => e.preventDefault()}>
+          <TextInput
+            name="name"
+            placeholder="Name Contains..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </form>
+        <MobileHeight height={350}>
           <CollectionList>
             {visibleCards.map((card) => {
               const onAdd = () => {
@@ -101,6 +105,7 @@ export function CollectionPicker() {
               );
             })}
           </CollectionList>
+        </MobileHeight>
       </Dialog.Body>
     </Dialog>
   );

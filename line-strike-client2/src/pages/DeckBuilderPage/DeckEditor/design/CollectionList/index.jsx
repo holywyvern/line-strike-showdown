@@ -2,6 +2,8 @@ import { useState } from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
 
+import useIsMobile from "useismobile";
+
 import styles from "./styles.module.css";
 
 import { isAllowedInFormat } from "../../../../../utils/isAllowedInFormat";
@@ -89,6 +91,7 @@ function CollectionListItem({
   const isLimited = maxRepeats < format.maxRepeats && maxRepeats > 0;
   const allowRepeat = count >= maxRepeats;
   const disabled = incorrectElement || isIllegal || allowRepeat || isDeckFull;
+  const isMobile = useIsMobile();
 
   return (
     <>
@@ -101,12 +104,12 @@ function CollectionListItem({
           >
             <MiniCard played card={card} scale={0.5} />
           </button>
-          <CardArea skill={skill} card={card} />
+          {!isMobile && <CardArea skill={skill} card={card} />}
           <div>
             <div className={styles.title}>
               <img src={`/elements/${card.element}.webp`} />
               <h3>
-                <small>{card.title}</small>
+                {!isMobile && <small>{card.title}</small>}
                 {` ${card.name}`} {isIllegal && <Badge>ILLEGAL</Badge>}
                 {isLimited && <Badge>LIMITED TO {maxRepeats}</Badge>}
               </h3>

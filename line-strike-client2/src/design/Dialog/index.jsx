@@ -7,8 +7,11 @@ export function DialogHeader({ children }) {
   return <div className={styles.header}>{children}</div>;
 }
 
-export function DialogBody({ children, center }) {
-  const className = cx(styles.body, { [styles.center]: center });
+export function DialogBody({ children, center, noOverflow }) {
+  const className = cx(styles.body, {
+    [styles.center]: center,
+    [styles["no-overflow"]]: noOverflow,
+  });
   return <div className={className}>{children}</div>;
 }
 
@@ -31,6 +34,7 @@ DialogHeader.propTypes = {
 DialogBody.propTypes = {
   center: PropTypes.bool,
   children: PropTypes.node,
+  noOverflow: PropTypes.bool,
 };
 
 Dialog.propTypes = {
