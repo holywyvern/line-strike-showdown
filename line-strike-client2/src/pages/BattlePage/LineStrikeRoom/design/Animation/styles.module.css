@@ -1,5 +1,6 @@
 .wrapper {
   position: relative;
+  overflow: visible;
   width: 144px;
   height: 144px;
 }
@@ -13,31 +14,49 @@
 
 .summon {
   background-image: url("/animations/summon.png");
-  animation: summon 500ms steps(5) forwards;
+  animation: summon 500ms steps(5) forwards, transparency 800ms linear forwards;
   background-size: 600% 100%;
   background-position: 0;
 }
 
 .buff {
   background-image: url("/animations/buff.png");
-  animation: buff 500ms steps(6) forwards;
+  animation: buff 500ms steps(6) forwards, transparency 800ms linear forwards;
   background-size: 700% 100%;
   background-position: 0;
 }
 
 .debuff {
   background-image: url("/animations/debuff.png");
-  animation: debuff 500ms steps(5) forwards;
+  animation: debuff 500ms steps(5) forwards, transparency 800ms linear forwards;
   background-size: 600% 100%;
   background-position: 0;
 }
 
 .stun {
   background-image: url("/animations/stun.png");
-  animation: stun 500ms steps(4) forwards;
+  animation: stun 500ms steps(4) forwards, transparency 800ms linear forwards;
   background-size: 500% 100%;
   background-position: 0;
 }
+
+.block-top,
+.block-bottom {
+  z-index: 500;
+  background-image: url("/animations/block.png");
+  animation: block 500ms steps(5) infinite;
+  background-size: 600% 100%;
+  background-position: 0;
+}
+
+.block-top {
+  transform: translateY(-48px);
+}
+
+.block-bottom {
+  transform: translateY(348px);
+}
+
 
 .attack-top,
 .attack-bottom {
@@ -63,7 +82,7 @@
 .move6,
 .move8 {
   background-image: url("/animations/move.png");
-  animation: move 500ms steps(6) forwards;
+  animation: move 500ms steps(6) forwards, transparency 800ms linear forwards;
   background-size: 700% 100%;
   background-position: 0;
   transform-origin: center;
@@ -85,31 +104,42 @@
   transform: rotate(270deg);
 }
 
+@keyframes transparency {
+  70% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes summon {
   to {
     background-position: -500% 0;
-    opacity: 0;
   }
 }
 
 @keyframes buff {
   to {
     background-position: -600% 0;
-    opacity: 0;
   }
 }
 
 @keyframes debuff {
   to {
     background-position: -500% 0;
-    opacity: 0;
   }
 }
 
 @keyframes stun {
   to {
     background-position: -400% 0;
-    opacity: 0;
+  }
+}
+
+@keyframes block {
+  to {
+    background-position: -500% 0;
   }
 }
 

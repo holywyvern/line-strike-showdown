@@ -12,6 +12,7 @@ export function BattleLane({ index, lane, top, playing }) {
   const room = useBattleRoom();
   const data = useSchema(lane);
   const [attack, setAttack] = useState(null);
+  const [block, setBlock] = useState(null);
 
   useEffect(() => {
     const clear = room.onMessage("attack", ({ playerID, index, blocked }) => {
@@ -22,6 +23,14 @@ export function BattleLane({ index, lane, top, playing }) {
       setTimeout(() => {
         setAttack(null);
       }, 800);
+      if (blocked) {
+        setTimeout(() => {
+          setBlock(`block-${top ? "top" : "bottom"}`);
+        }, 250);
+        setTimeout(() => {
+          setBlock(null);
+        }, 600);
+      }
     });
     return () => {
       clear?.();
@@ -47,6 +56,9 @@ export function BattleLane({ index, lane, top, playing }) {
       </LaneContainer>
       <LaneContainer top={top} index={index} animation>
         {attack && <Animation name={attack} />}
+      </LaneContainer>
+      <LaneContainer top={top} index={index} animation>
+        {block && <Animation name={block} />}
       </LaneContainer>
     </>
   );
