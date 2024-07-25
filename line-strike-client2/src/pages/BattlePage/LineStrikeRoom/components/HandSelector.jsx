@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useIsMobile from "useismobile";
 
 import {
   useArraySchema,
@@ -28,6 +29,7 @@ export function HandSelector() {
 
   const [selected, setSelected] = useState(false);
   const format = formats[formatID];
+  const isMobile = useIsMobile(1024);
 
   return (
     <Modal open title="FIRST HAND" fake>
@@ -37,25 +39,27 @@ export function HandSelector() {
         </Dialog.Header>
         <Dialog.Body>
           <Column>
-            <Row center>
-              <p style={{ margin: 0, padding: 0 }}>
-                This is your hand.
-                <br />
-                You can keep it or swap the cards once.
-                <br />
-                If you don&apos;t select anything within{" "}
-                {format.mulliganSeconds} seconds,
-                <br />
-                you will keep the hand.
-              </p>
-            </Row>
+            {!isMobile && (
+              <Row center>
+                <p style={{ margin: 0, padding: 0 }}>
+                  This is your hand.
+                  <br />
+                  You can keep it or swap the cards once.
+                  <br />
+                  If you don&apos;t select anything within{" "}
+                  {format.mulliganSeconds} seconds,
+                  <br />
+                  you will keep the hand.
+                </p>
+              </Row>
+            )}
             <Row center>
               {hand.filter(Boolean).map((card, index) => (
                 <div
                   key={index}
                   style={{ maxWidth: "185px", maxHeight: "266px", flex: 0 }}
                 >
-                  <Card card={card} scale={0.5} />
+                  <Card card={card} scale={isMobile ? 0.25 : 0.5} />
                 </div>
               ))}
             </Row>

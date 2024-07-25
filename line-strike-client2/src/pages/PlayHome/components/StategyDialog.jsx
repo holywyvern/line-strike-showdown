@@ -5,7 +5,7 @@ import { Button } from "../../../design/Button";
 import { Dialog } from "../../../design/Dialog";
 
 export function StategyDialog() {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(1024);
   const navigate = useNavigate();
 
   if (isMobile) return null;
