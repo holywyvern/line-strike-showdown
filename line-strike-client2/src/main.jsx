@@ -22,6 +22,7 @@ import { DeckBuilderLayout } from "./layouts/DeckBuilderLayout";
 import { DeckBuilderPage } from "./pages/DeckBuilderPage";
 import { BattlePage } from "./pages/BattlePage";
 import { WebAudio } from "./utils/WebAudio";
+import { BattleRequestsPage } from "./pages/BattleRequestsPage";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
           },
           {
             path: "requests",
-            element: <div />
+            element: <BattleRequestsPage />
           },
           {
             path: "cards",

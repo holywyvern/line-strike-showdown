@@ -78,3 +78,29 @@ export function useArraySchema(array) {
   }, [array]);
   return state;
 }
+
+export function useMapSchema(schema) {
+  const [state, setState] = useState({});
+  useEffect(() => {
+    if (!schema) return;
+
+    setState((state) => {
+      return {
+        ...state,
+        ...Object.fromEntries([...schema.keys()].map((k) => [k, schema[k]])),
+      };
+    });
+
+    schema.onAdd((item, k) => {
+      setState((state) => ({ ...state, [k]: item }));
+    });
+    schema.onRemove((_, k) => {
+      setState((state) => {
+        const newState = { ...state };
+        delete newState[k];
+        return newState;
+      });
+    });
+  }, [schema]);
+  return state;
+}
