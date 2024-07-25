@@ -62,6 +62,14 @@ export function MobileMenu() {
         >
           Deck Builder
         </Button>
+        <Button
+          onClick={() => {
+            navigate("/play/requests");
+            setOpen(false);
+          }}
+        >
+          Notifications
+        </Button>
         <Separator />
         <AudioSettingsForm />
         <Separator />
