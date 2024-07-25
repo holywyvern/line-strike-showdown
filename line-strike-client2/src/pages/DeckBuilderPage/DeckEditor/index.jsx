@@ -16,7 +16,7 @@ import { MobilePreview } from "./components/MobilePreview";
 
 export function DeckEditor({ formatID, deck, index }) {
   const api = useDeckEditorState({ formatID, deck, index });
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(1024);
   return (
     <Context.Provider value={api}>
       <DeckBuildLayout>

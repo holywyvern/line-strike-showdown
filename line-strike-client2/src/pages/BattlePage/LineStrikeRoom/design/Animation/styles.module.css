@@ -39,6 +39,25 @@
   background-position: 0;
 }
 
+.attack-top,
+.attack-bottom {
+  background-image: url("/animations/attack.png");
+  background-size: 300% 100%;
+  background-position: 0;
+  opacity: 1;
+  transform-origin: center;
+}
+
+.attack-top {
+  transform: rotate(-90deg) translateX(-320px);
+  animation: attack 100ms steps(2) infinite, attack-top 300ms linear forwards;
+}
+
+.attack-bottom {
+  animation: attack 100ms steps(2) infinite, attack-bottom 300ms linear forwards;
+  transform: rotate(90deg) translateX(0);
+}
+
 .move2,
 .move4,
 .move6,
@@ -98,5 +117,31 @@
   to {
     background-position: -600% 0;
     opacity: 0;
+  }
+}
+
+@keyframes attack {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes attack-top {
+  70% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: rotate(-90deg) translateX(0);
+  }
+}
+
+@keyframes attack-bottom {
+  70% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: rotate(90deg) translateX(320px);
   }
 }

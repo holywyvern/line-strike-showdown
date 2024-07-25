@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { LaneContainer } from "../design/LaneContainer";
@@ -6,35 +6,49 @@ import { LaneContainer } from "../design/LaneContainer";
 import { useBattleRoom, useSchema } from "../context";
 
 import { LaneCard } from "./LaneCard";
+import { Animation } from "../design/Animation";
 
 export function BattleLane({ index, lane, top, playing }) {
   const room = useBattleRoom();
   const data = useSchema(lane);
+  const [attack, setAttack] = useState(null);
 
   useEffect(() => {
-    room.onMessage("attack", ({ playerID, index, blocked }) => {
+    const clear = room.onMessage("attack", ({ playerID, index, blocked }) => {
       if (playerID !== data.playerID) return;
       if (data.position !== index) return;
 
+      setAttack(`attack-${top ? "top" : "bottom"}`);
+      setTimeout(() => {
+        setAttack(null);
+      }, 800);
     });
-  }, [room, data.playerID, data.position]);
+    return () => {
+      clear?.();
+    };
+  }, [room, data.playerID, data.position, top]);
   let { cards } = data;
   if (top) {
     cards = [...cards].reverse();
   }
   return (
-    <LaneContainer top={top} index={index}>
-      {cards.map((card, cardIndex) => (
-        <LaneCard
-          key={cardIndex}
-          card={card}
-          top={top}
-          playing={playing}
-          playerID={data.playerID}
-          lane={index}
-        />
-      ))}
-    </LaneContainer>
+    <>
+      <LaneContainer top={top} index={index}>
+        {cards.map((card, cardIndex) => (
+          <LaneCard
+            key={cardIndex}
+            card={card}
+            top={top}
+            playing={playing}
+            playerID={data.playerID}
+            lane={index}
+          />
+        ))}
+      </LaneContainer>
+      <LaneContainer top={top} index={index} animation>
+        {attack && <Animation name={attack} />}
+      </LaneContainer>
+    </>
   );
 }
 

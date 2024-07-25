@@ -71,7 +71,7 @@ export function LaneCard({ card, top, playing, lane, playerID }) {
           <Dialog>
             <Dialog.Header>
               <h3>Place Card</h3>
-              <Modal.Close onClose={() => setOpen(false)} />
+              <Modal.Close onClick={() => setOpen(false)} />
             </Dialog.Header>
             <Dialog.Body>
               <Column>

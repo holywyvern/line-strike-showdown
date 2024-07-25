@@ -1,4 +1,4 @@
-.container {
+.lane-container {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -8,4 +8,11 @@
 
 .top {
   top: 70px;
+}
+
+.animation {
+  width: 144px;
+  height: 432px;
+  pointer-events: none;
+  overflow: visible;
 }
