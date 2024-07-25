@@ -8,7 +8,7 @@ import useIsMobile from "useismobile";
 import styles from "./styles.module.scss";
 
 export function PlayNav() {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(1024);
   return (
     <nav className={styles.nav}>
       <Logo small />
