@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import useIsMobile from "useismobile";
 
 export function MobileHeight({ children, height }) {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(1024);
   if (isMobile) {
     return (
       <div
@@ -12,6 +12,7 @@ export function MobileHeight({ children, height }) {
           display: "flex",
           flexDirection: "column",
           gap: "var(--gap-md)",
+          border: "var(--border-size-xs) solid var(--dialog-border-color)"
         }}
       >
         {children}

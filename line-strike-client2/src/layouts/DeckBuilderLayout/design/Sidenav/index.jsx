@@ -27,8 +27,8 @@ function MobileDrawer({ open, children, toggle }) {
 }
 
 export function Sidenav({ children }) {
-  const isMobile = useIsMobile();
-  const [open, setOpen] = useState(true);
+  const isMobile = useIsMobile(1024);
+  const [open, setOpen] = useState(!isMobile);
   const toggle = () => setOpen((v) => !v);
   const className = cx(styles.nav, { [styles.open]: open });
   return (

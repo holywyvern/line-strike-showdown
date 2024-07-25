@@ -10,6 +10,8 @@ import { Tabs } from "../../../../design/Tabs";
 import { TextInput } from "../../../../design/TextInput";
 import { CollectionList } from "../design/CollectionList";
 import { MobileHeight } from "../design/MobileHeight";
+import { Select } from "../../../../design/Select";
+import { Separator } from "../../../../design/Separator";
 
 const ELEMENTS = [
   "all",
@@ -54,7 +56,23 @@ export function CollectionPicker() {
         <h2>Card Collection</h2>
       </Dialog.Header>
       <Dialog.Body>
-        {!isMobile && (
+        {isMobile ? (
+          <>
+            <span>Filter by element</span>
+            <Select
+              name="element"
+              value={element}
+              onChange={(e) => setElement(e.target.value)}
+            >
+              {ELEMENTS.map((i) => (
+                <Select.Option key={i} value={i}>
+                  {String(i).toLocaleUpperCase()}
+                  {i === "all" ? "CARDS" : " CARDS ONLY"}
+                </Select.Option>
+              ))}
+            </Select>
+          </>
+        ) : (
           <Tabs>
             {ELEMENTS.map((i) => (
               <Tabs.Tab
@@ -68,6 +86,7 @@ export function CollectionPicker() {
           </Tabs>
         )}
         <form onSubmit={(e) => e.preventDefault()}>
+          {isMobile && <span>Filter by name</span>}
           <TextInput
             name="name"
             placeholder="Name Contains..."
@@ -75,6 +94,7 @@ export function CollectionPicker() {
             onChange={(e) => setName(e.target.value)}
           />
         </form>
+        <Separator />
         <MobileHeight height={350}>
           <CollectionList>
             {visibleCards.map((card) => {
