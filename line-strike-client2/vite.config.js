@@ -3,7 +3,10 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 const manifestForPlugIn = {
-  registerType: "prompt",
+  registerType: "autoUpdate",
+  devOptions: {
+    enabled: true
+  },
   includeAssests: ["icon.webp"],
   manifest: {
     name: "Line Strike Showdown",
