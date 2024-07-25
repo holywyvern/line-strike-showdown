@@ -15,9 +15,6 @@ module.exports = {
       cwd: "./line-strike-client2",
       script: "npm",
       args: "run dev",
-      env: {
-        NODE_ENV: "production",
-      },
       interpreter: "node@18.12.0",
     },
   ],
