@@ -35,11 +35,9 @@ SendEmail.on("error", (err) => {
 });
 
 worker.on("completed", (job) => {
-  if (process.env.NODE_ENV === "production") return;
-
-  console.log(`${job.id} has completed!`);
+  console.log(`${job.id} has completed and sent an email!`);
 });
 
 worker.on("failed", (job, err) => {
-  console.log(`${job.id} has failed with ${err.message}`);
+  console.log(`email sending ${job.id} has failed with ${err.message}`);
 });
