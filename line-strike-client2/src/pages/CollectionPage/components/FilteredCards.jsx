@@ -24,6 +24,10 @@ function Preview() {
   );
 }
 
+const PLAYER_TAGS = ["buff", "moveAlly", "swapAlly"];
+
+const ENEMY_TAGS = ["debuff", "moveEnemy", "swapEnemy", "stun"];
+
 function Heatmaps() {
   const { skills } = useDatabase();
   const { cards } = useFilteredCollection();
@@ -68,7 +72,7 @@ function Heatmaps() {
     const result = new Array(9).fill(0);
     for (const card of cards) {
       const skill = skills[card.skillID];
-      if (skill.tags.includes("debuff")) {
+      if (PLAYER_TAGS.some((i) => skill.tags.includes(i))) {
         for (let i = 0; i < 9; ++i) {
           if (card.displayArea[i]) {
             result[i] += 1;
@@ -83,7 +87,7 @@ function Heatmaps() {
     const result = new Array(9).fill(0);
     for (const card of cards) {
       const skill = skills[card.skillID];
-      if (skill.tags.includes("debuff")) {
+      if (ENEMY_TAGS.some((i) => skill.tags.includes(i))) {
         for (let i = 0; i < 9; ++i) {
           if (card.displayArea[i]) {
             result[i] += 1;
