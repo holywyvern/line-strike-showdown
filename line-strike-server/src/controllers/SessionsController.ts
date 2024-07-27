@@ -38,7 +38,7 @@ export class SessionsController extends ApplicationController {
         where: { accountID: account.id, value: name },
       });
       if (!field) {
-        tx.name.create({ data: { accountID: account.id, value: name } });
+        await tx.name.create({ data: { accountID: account.id, value: name } });
       }
     });
 

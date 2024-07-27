@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { WebAudio } from "../../utils/WebAudio";
 import { AudioManager } from "../../utils/AudioManager";
 import { useDatabase } from "../../contexts/DatabaseContext";
+import { useLink } from "../../contexts/LinkContext";
 
 const DEFAULT_DECKS = {};
 
@@ -9,6 +10,7 @@ const LAST_NAME_KEY = "line-strike.lastPlayer";
 const LOCAL_STORAGE_KEY = "line-strike.profile.decks";
 
 function useProfileName() {
+  const { updateName, account } = useLink();
   const [ready, setReady] = useState(false);
   const [name, setName] = useState(null);
   useEffect(() => {
@@ -23,9 +25,12 @@ function useProfileName() {
 
   useEffect(() => {
     if (!name) return;
+    if (!account) return;
 
     localStorage.setItem(LAST_NAME_KEY, name);
-  }, [name]);
+
+    updateName(name);
+  }, [name, updateName, account]);
 
   return { name, setName, isLoading: !ready };
 }

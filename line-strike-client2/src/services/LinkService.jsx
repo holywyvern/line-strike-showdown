@@ -61,4 +61,11 @@ export const LinkService = {
       throw response.data;
     }
   },
+
+  async updateName(name) {
+    const response = await api.post("/accounts/new-name", { name });
+    if (!response.ok) {
+      throw response.data;
+    }
+  }
 };

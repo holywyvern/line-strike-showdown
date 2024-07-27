@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { LinkService } from "../services/LinkService";
 
 const DEFAULT_STATE = {
@@ -42,6 +48,15 @@ export function useLinkState() {
       }
     );
   }, [ready]);
+  const updateName = useCallback(
+    async (name) => {
+      if (!account) return;
+      if (!name) return;
+
+      await LinkService.updateName(name);
+    },
+    [account]
+  );
   return {
     status,
     token,
@@ -111,5 +126,6 @@ export function useLinkState() {
       }
       setIsBusy(false);
     },
+    updateName,
   };
 }
