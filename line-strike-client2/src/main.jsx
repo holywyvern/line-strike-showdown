@@ -23,6 +23,7 @@ import { DeckBuilderPage } from "./pages/DeckBuilderPage";
 import { BattlePage } from "./pages/BattlePage";
 import { WebAudio } from "./utils/WebAudio";
 import { BattleRequestsPage } from "./pages/BattleRequestsPage";
+import { LinkingTerms } from "./pages/LinkingTerms";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <LinkingTerms />,
       },
       {
         path: "/cards",
@@ -49,7 +54,7 @@ const router = createBrowserRouter([
           },
           {
             path: "requests",
-            element: <BattleRequestsPage />
+            element: <BattleRequestsPage />,
           },
           {
             path: "cards",

@@ -14,6 +14,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "apisauce": "^3.0.1",
     "classnames": "^2.5.1",
     "colyseus.js": "^0.15.25",
     "react": "^18.3.1",

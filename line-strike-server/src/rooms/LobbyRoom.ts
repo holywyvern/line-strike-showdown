@@ -1,4 +1,5 @@
 import { Schema, MapSchema, type, filter } from "@colyseus/schema";
+import { StatusCodes } from "http-status-codes"
 
 import {
   Client,
@@ -186,9 +187,9 @@ export class LobbyRoom extends Room<LobbyRoomState> {
 
   async onAuth(client: Client, options: any) {
     if (typeof options?.name !== "string")
-      throw new ServerError(422, "Must have a name to join");
+      throw new ServerError(StatusCodes.UNAUTHORIZED, "Must have a name to join");
     if (options.name.length < 1)
-      throw new ServerError(422, "Must have a name to join");
+      throw new ServerError(StatusCodes.UNAUTHORIZED, "Must have a name to join");
 
     return options.name;
   }

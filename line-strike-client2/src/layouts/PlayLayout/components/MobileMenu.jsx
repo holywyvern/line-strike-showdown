@@ -15,6 +15,8 @@ import { Logo } from "../../../design/Logo";
 import { Modal } from "../../../design/Modal";
 
 import { useProfile } from "../../../contexts/ProfileContext";
+import { LinkForm } from "./LinkForm";
+import { Column } from "../../../design/Column";
 
 export function MobileMenu() {
   const profile = useProfile();
@@ -73,6 +75,10 @@ export function MobileMenu() {
         <Separator />
         <AudioSettingsForm />
         <Separator />
+        <Column>
+          <h3>Link Settings</h3>
+          <LinkForm />
+        </Column>
       </FullscreenDrawer>
     </>
   );

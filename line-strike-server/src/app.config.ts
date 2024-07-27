@@ -1,3 +1,7 @@
+import "dotenv/config";
+
+import "./big-int";
+
 import config from "@colyseus/tools";
 import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
@@ -8,34 +12,15 @@ import type { Request, Response } from "express";
  * Import your Room files
  */
 import { LineStrikeRoom } from "./rooms/LineStrikeRoom";
-import { Card, CardElement } from "./rooms/schema/Card";
 import { LobbyRoom } from "./rooms/LobbyRoom";
-import { matchMaker, LobbyRoom as ColyseusLobbyRoom } from "colyseus";
-import { SECRET_LOBBY_KEY } from "./utils/keys";
-import { Skill } from "./rooms/schema/Skill";
-import { Format } from "./rooms/schema/Format";
 import { UnrankedMatcherRoom } from "./rooms/UnrankedMatcherRoom";
 
-interface Comparable {
-  name: string;
-  element: CardElement;
-  ppCost: number;
-}
+import { matchMaker, LobbyRoom as ColyseusLobbyRoom } from "colyseus";
 
-const ELEMENT_SCORE: { [K in CardElement]: number } = {
-  fire: 100_000_000,
-  ice: 200_000_000,
-  wind: 300_000_000,
-  lightning: 400_000_000,
-  light: 500_000_000,
-  darkness: 600_000_000,
-};
+import { SECRET_LOBBY_KEY } from "./utils/keys";
 
-function cardScore(self: Comparable, other: Comparable): number {
-  const names = (1 + self.name.localeCompare(other.name)) * 100_000;
-  const pp = self.ppCost * 1_000_000;
-  return pp + ELEMENT_SCORE[self.element] + names;
-}
+import { createApi } from "./api";
+import { database } from "./database";
 
 export default config({
   initializeGameServer: (gameServer) => {
@@ -48,32 +33,7 @@ export default config({
   },
 
   initializeExpress: (app) => {
-    const handle = (req: Request, res: Response) => {
-      const cards = Card.COLLECTION.map((card) => {
-        if (!card) return null;
-
-        return {
-          ...card,
-          skill: {
-            id: card.skill.id,
-            name: card.skill.name,
-            description: card.skill.description,
-          },
-        };
-      });
-      const collection = cards.filter(Boolean);
-      collection.sort((b: any, a: any) => cardScore(b, a) - cardScore(a, b));
-
-      res.json({
-        cards,
-        collection: collection.map((i) => i.id),
-        skills: Skill.COLLECTION,
-        formats: Format.COLLECTION,
-        standardFormatID: Format.STANDARD_ID,
-      });
-    };
-    app.get("/cards", handle);
-    app.get("/database", handle);
+    app.use(createApi());
 
     /**
      * Use @colyseus/playground
@@ -92,6 +52,7 @@ export default config({
   },
 
   async beforeListen() {
+    await database.$connect();
     LobbyRoom.instance = await matchMaker.createRoom("showdown_lobby", {
       __secret_lobby_key__: SECRET_LOBBY_KEY,
     });

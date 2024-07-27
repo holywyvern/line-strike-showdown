@@ -52,11 +52,13 @@ const manifestForPlugIn = {
 export default defineConfig({
   plugins: [react(), VitePWA(manifestForPlugIn)],
   server: {
+    cors: false,
     proxy: {
       "/api": {
         target: "http://localhost:2567",
         changeOrigin: true,
         ws: true,
+        rewriteHost: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },

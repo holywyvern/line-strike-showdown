@@ -13,12 +13,13 @@ export function TextInput({
   maxLength,
   required,
   flex,
+  type = "text",
 }) {
   const className = cx(styles.input, { [styles.flex]: flex });
   return (
     <input
       className={className}
-      type="text"
+      type={type}
       name={name}
       required={required}
       placeholder={placeholder}
@@ -43,4 +44,5 @@ TextInput.propTypes = {
   minLength: PropTypes.number,
   maxLength: PropTypes.number,
   flex: PropTypes.bool,
+  type: PropTypes.string,
 };

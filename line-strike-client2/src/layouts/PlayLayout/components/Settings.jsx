@@ -1,16 +1,13 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
-
 import { Button } from "../../../design/Button";
+
 import { AudioSettingsButton } from "./AudioSettingsButton";
+import { OtherSettingsButton } from "./OtherSettingsButton";
 
 export function Settings() {
   return (
     <Button.Group>
       <AudioSettingsButton />
-      <Button disabled>
-        <FontAwesomeIcon icon={faCog} />
-      </Button>
+      <OtherSettingsButton />
     </Button.Group>
   );
 }

@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   font-size: var(--font-size-md);
+  align-items: center;
+  justify-content: center;
   appearance: none;
   border: 0;
   background: var(--button-background-color);
