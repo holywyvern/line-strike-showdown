@@ -57,6 +57,10 @@
   --hyper-link-color: cyan;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 form {
   display: flex;
   flex-direction: column;

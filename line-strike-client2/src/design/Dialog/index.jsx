@@ -15,13 +15,17 @@ export function DialogBody({ children, center, noOverflow }) {
   return <div className={className}>{children}</div>;
 }
 
-export function Dialog({ flex, stretch, children, grow }) {
+export function Dialog({ flex, stretch, children, grow, style }) {
   const className = cx(styles.box, {
     [styles.flex]: flex,
     [styles.stretch]: stretch,
     [styles.grow]: grow,
   });
-  return <div className={className}>{children}</div>;
+  return (
+    <div className={className} style={style}>
+      {children}
+    </div>
+  );
 }
 
 Dialog.Header = DialogHeader;
@@ -42,4 +46,5 @@ Dialog.propTypes = {
   flex: PropTypes.bool,
   stretch: PropTypes.bool,
   children: PropTypes.node,
+  style: PropTypes.any,
 };

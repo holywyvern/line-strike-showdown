@@ -22,6 +22,7 @@ export function createApi() {
   api.get("/cards", action(DatabaseController, "index"));
   api.get("/database", action(DatabaseController, "index"));
 
+  api.get("/accounts", action(AccountsController, "index"));
   api.post("/accounts/new-name", action(AccountNamesController, "create"));
   api.post("/accounts/sign-in", action(SessionsController, "create"));
   api.post("/accounts/refresh", action(SessionsController, "refresh"));

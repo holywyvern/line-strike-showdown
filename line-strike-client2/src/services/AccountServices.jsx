@@ -1,6 +1,13 @@
 import { api } from "./api";
 
 export const AccountService = {
+  async search(name) {
+    const response = await api.get(`/accounts`, { name });
+    if (response.ok) {
+      return response.data;
+    }
+    return null;
+  },
   async show(id) {
     const response = await api.get(`/accounts/${id}`);
     if (response.ok) {

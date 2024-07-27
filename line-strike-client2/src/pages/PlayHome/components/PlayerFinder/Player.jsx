@@ -35,19 +35,21 @@ export function Player({ player }) {
       <List.Item>
         <Row flex spaceItems centerVertically>
           {name}
-          <Button
-            type="button"
-            disabled={!accountID}
-            onClick={() => navigate(`/play/accounts/${accountID}`)}
-          >
-            Profile
-          </Button>
-          <Button
-            disabled={sessionID === lobby.sessionId}
-            onClick={() => setOpen(true)}
-          >
-            Challenge
-          </Button>
+          <Row>
+            <Button
+              type="button"
+              disabled={!accountID}
+              onClick={() => navigate(`/play/accounts/${accountID}`)}
+            >
+              Profile
+            </Button>
+            <Button
+              disabled={!sessionID || sessionID === lobby.sessionId}
+              onClick={() => setOpen(true)}
+            >
+              Challenge
+            </Button>
+          </Row>
         </Row>
       </List.Item>
       <Modal open={open} onClose={onClose}>
@@ -71,7 +73,9 @@ export function Player({ player }) {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-              <Button type="submit">Challenge {player.name}</Button>
+              <Button type="submit">
+                Challenge {player.name}
+              </Button>
             </form>
           </Dialog.Body>
         </Dialog>
