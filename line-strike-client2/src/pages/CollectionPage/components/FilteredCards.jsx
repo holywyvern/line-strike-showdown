@@ -109,6 +109,7 @@ function Heatmaps() {
           gridTemplateColumns: "1fr 1fr",
           alignItems: "center",
           justifyContent: "center",
+          overflow: "auto",
         }}
       >
         <Column center>
