@@ -12,10 +12,10 @@ export const LinkService = {
     if (!response.ok) {
       throw response.data;
     }
-    const token = response.headers.authorization;
-    localStorage.setItem(JWT_KEY, token);
-    api.setHeader("Authorization", token);
-    return { token, account: response.data };
+    const [bearer, token] = response.headers.authorization.split(" ");
+    localStorage.setItem(JWT_KEY, response.headers.authorization);
+    api.setHeader("Authorization", response.headers.authorization);
+    return { bearer, token, account: response.data };
   },
   async signIn(email, password, name) {
     const response = await api.post("accounts/sign-in", {
@@ -26,10 +26,10 @@ export const LinkService = {
     if (!response.ok) {
       throw response.data;
     }
-    const token = response.headers.authorization;
-    localStorage.setItem(JWT_KEY, token);
-    api.setHeader("Authorization", token);
-    return { token, account: response.data };
+    const [bearer, token] = response.headers.authorization.split(" ");
+    localStorage.setItem(JWT_KEY, response.headers.authorization);
+    api.setHeader("Authorization", response.headers.authorization);
+    return { bearer, token, account: response.data };
   },
   async signOut() {
     api.deleteHeader("Authorization");
@@ -44,10 +44,11 @@ export const LinkService = {
       api.deleteHeader("Authorization");
       return null;
     }
-    token = response.headers.authorization;
-    localStorage.setItem(JWT_KEY, token);
-    api.setHeader("Authorization", token);
-    return { token, account: response.data };
+    const [bearer, newToken] = response.headers.authorization.split(" ");
+    token = newToken;
+    localStorage.setItem(JWT_KEY, response.headers.authorization);
+    api.setHeader("Authorization", response.headers.authorization);
+    return { bearer, token, account: response.data };
   },
   async verify(token) {
     const response = await api.get(`/email/verifications/${token}`);
@@ -67,5 +68,5 @@ export const LinkService = {
     if (!response.ok) {
       throw response.data;
     }
-  }
+  },
 };

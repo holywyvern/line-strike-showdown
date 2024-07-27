@@ -66,3 +66,13 @@ form {
 a {
   color: var(--hyper-link-color);
 }
+
+h4 {
+  margin: var(--padding-xs);
+  padding: 0;
+}
+
+html,
+body {
+  color: var(--button-font-color);
+}

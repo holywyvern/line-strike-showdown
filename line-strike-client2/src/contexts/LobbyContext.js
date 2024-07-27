@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useProfile } from "./ProfileContext";
 import { ColyseusService } from "../services/colyseus";
 import { useTabs } from "./TabContext";
+import { useLink } from "./LinkContext";
 
 export const LobbyContext = createContext(null);
 
@@ -10,6 +11,7 @@ export function useLobby() {
 }
 
 export function useLobbyState() {
+  const { token } = useLink();
   const profile = useProfile();
   const [room, setRoom] = useState(null);
   const tabs = useTabs();
@@ -17,8 +19,10 @@ export function useLobbyState() {
   useEffect(() => {
     if (!profile.name) return;
 
-    ColyseusService.joinLobby(profile.name).then((room) => setRoom(room));
-  }, [profile.name]);
+    ColyseusService.joinLobby(profile.name, token).then((room) =>
+      setRoom(room)
+    );
+  }, [profile.name, token]);
 
   useEffect(() => {
     if (!room) return;
@@ -35,7 +39,7 @@ export function useLobbyState() {
         return old;
       });
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
   return room;
 }

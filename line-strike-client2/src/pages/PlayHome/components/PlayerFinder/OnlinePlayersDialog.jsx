@@ -8,10 +8,8 @@ import { Modal } from "../../../../design/Modal";
 import { Player } from "./Player";
 import { useLobbyPlayers } from "../hooks/useLobbyPlayers";
 
-
 import { TextInput } from "../../../../design/TextInput";
-
-
+import { Button } from "../../../../design/Button";
 
 export function OnlinePlayersDialog({ onClose }) {
   const [filter, setFilter] = useState("");
@@ -25,11 +23,13 @@ export function OnlinePlayersDialog({ onClose }) {
     );
   }, [players, filter]);
 
+  const findOffline = () => {};
+
   return (
     <>
       <Dialog>
         <Dialog.Header>
-          <h3>Online Players ({players.length})</h3>
+          <h3>Player Finder</h3>
           <Modal.Close onClick={onClose} />
         </Dialog.Header>
         <Dialog.Body>
@@ -37,9 +37,13 @@ export function OnlinePlayersDialog({ onClose }) {
             name="filter"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            placeholder="Filter players by name..."
+            placeholder="Find players by name..."
           />
-         <br />
+          <Button onClick={findOffline} disabled={filter.length < 1}>
+            Find offline players
+          </Button>
+          <br />
+          <h4>Online Players ({players.length})</h4>
           <List>
             {filteredPlayers.map((player, index) => (
               <Player key={index} player={player} />

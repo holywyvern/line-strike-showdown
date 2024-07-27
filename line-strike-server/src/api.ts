@@ -26,6 +26,7 @@ export function createApi() {
   api.post("/accounts/sign-in", action(SessionsController, "create"));
   api.post("/accounts/refresh", action(SessionsController, "refresh"));
   api.post("/accounts", action(AccountsController, "create"));
+  api.get("/accounts/:accountID", action(AccountsController, "show"));
 
   api.post("/email/verifications", action(VerificationController, "create"));
   api.get(

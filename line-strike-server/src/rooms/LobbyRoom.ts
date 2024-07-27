@@ -1,5 +1,5 @@
 import { Schema, MapSchema, type, filter } from "@colyseus/schema";
-import { StatusCodes } from "http-status-codes"
+import { StatusCodes } from "http-status-codes";
 
 import {
   Client,
@@ -10,6 +10,7 @@ import {
 } from "colyseus";
 import { SECRET_LINE_STRIKE_KEY, SECRET_LOBBY_KEY } from "../utils/keys";
 import { Format } from "./schema/Format";
+import { AuthToken } from "../services/AuthToken";
 
 const OnlySeenByOwner = (player: LobbyPlayer, client: Client) =>
   client.sessionId === player.sessionID;
@@ -38,6 +39,9 @@ class LineStrikeChallenger extends Schema {
 
 class LobbyPlayer extends Schema {
   @type("string")
+  accountID: string | null;
+
+  @type("string")
   sessionID: string;
 
   @type("string")
@@ -56,12 +60,21 @@ class LobbyPlayer extends Schema {
   @type("uint64")
   matchingSince: number;
 
-  constructor(sessionID: string, name: string) {
+  @type("boolean")
+  hasProfile: boolean;
+
+  constructor(
+    sessionID: string,
+    name: string,
+    accountID: string | null = null
+  ) {
     super();
+    this.accountID = accountID && String(accountID);
     this.sessionID = sessionID;
     this.challenges = new MapSchema();
     this.matching = false;
     this.matchingSince = 0;
+    this.hasProfile = Boolean(accountID);
     this.name = name;
     this.room = null;
   }
@@ -131,7 +144,7 @@ export class LobbyRoom extends Room<LobbyRoomState> {
         options?.message || "Want to play a match of Line Strike?"
       )
     );
-    this.clients.getById(challenged.sessionID)?.send("new-challenge")
+    this.clients.getById(challenged.sessionID)?.send("new-challenge");
   };
 
   onChallengeAccepted = async (client: Client, clientId: any) => {
@@ -187,17 +200,32 @@ export class LobbyRoom extends Room<LobbyRoomState> {
 
   async onAuth(client: Client, options: any) {
     if (typeof options?.name !== "string")
-      throw new ServerError(StatusCodes.UNAUTHORIZED, "Must have a name to join");
+      throw new ServerError(
+        StatusCodes.UNAUTHORIZED,
+        "Must have a name to join"
+      );
     if (options.name.length < 1)
-      throw new ServerError(StatusCodes.UNAUTHORIZED, "Must have a name to join");
+      throw new ServerError(
+        StatusCodes.UNAUTHORIZED,
+        "Must have a name to join"
+      );
 
-    return options.name;
+    if (options.token) {
+      try {
+        const { id } = await AuthToken.verify(options.token);
+        return { id };
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    return { name: options.name };
   }
 
-  async onJoin(client: Client, options: JoinOptions) {
+  async onJoin(client: Client, options: JoinOptions, auth: any) {
     this.state.players.set(
       client.sessionId,
-      new LobbyPlayer(client.sessionId, options.name)
+      new LobbyPlayer(client.sessionId, options.name, auth?.id)
     );
   }
 

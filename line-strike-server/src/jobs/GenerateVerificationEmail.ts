@@ -59,9 +59,13 @@ GenerateVerificationEmail.on("error", (err) => {
 });
 
 worker.on("completed", (job) => {
+  if (process.env.NODE_ENV === "production") return;
+
   console.log(`${job.id} has completed sending verification email!`);
 });
 
 worker.on("failed", (job, err) => {
+  if (process.env.NODE_ENV === "production") return;
+  
   console.log(`${job.id} has failed sending verification email with ${err.message}`);
 });

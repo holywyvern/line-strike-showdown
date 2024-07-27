@@ -24,6 +24,8 @@ import { BattlePage } from "./pages/BattlePage";
 import { WebAudio } from "./utils/WebAudio";
 import { BattleRequestsPage } from "./pages/BattleRequestsPage";
 import { LinkingTerms } from "./pages/LinkingTerms";
+import { accountLoader } from "./loaders/accountLoader";
+import { AccountPage } from "./pages/AccountPage";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +67,11 @@ const router = createBrowserRouter([
             element: <BattlePage />,
           },
           {
+            path: "accounts/:accountID",
+            loader: accountLoader,
+            element: <AccountPage />,
+          },
+          {
             path: "decks",
             element: <DeckBuilderLayout />,
             children: [
@@ -93,7 +100,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-console.log("Initializing web audio...", WebAudio.initialize());
+WebAudio.initialize();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

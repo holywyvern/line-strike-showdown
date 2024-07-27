@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useLink } from "../../../contexts/LinkContext";
 import { useProfile } from "../../../contexts/ProfileContext";
@@ -125,12 +125,16 @@ function RecoverPassword() {
 
 function Unlink() {
   const { account, signOut } = useLink();
+  const navigate = useNavigate();
   return (
     <Box>
       <Column>
         <span>
           Linked as: <strong>{account.email}</strong>.
         </span>
+        <Button onClick={() => navigate(`/play/accounts/${account.id}`)}>
+          Profile
+        </Button>
         <Button onClick={signOut}>Unlink</Button>
       </Column>
     </Box>

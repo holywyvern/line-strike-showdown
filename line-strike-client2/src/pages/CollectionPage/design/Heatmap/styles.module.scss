@@ -1,0 +1,25 @@
+.area {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(3, 64px);
+  background: var(--player2-color);
+}
+
+.enemy {
+  background: var(--player1-color);
+}
+
+.item {
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  --hue: calc((1 - var(--intensity)) * 90 + 150);
+  color: hsl(var(--hue), 100%, 50%);
+}
+
+.wrapper {
+  padding: var(--padding-md);
+  background: rgba(0, 0, 0, 0.8);
+}

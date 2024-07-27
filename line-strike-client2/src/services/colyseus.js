@@ -10,8 +10,8 @@ export const ColyseusService = {
   listToBattleRooms() {
     return client.joinOrCreate("lobby");
   },
-  async joinLobby(name) {
-    const room = await client.join("showdown_lobby", { name });
+  async joinLobby(name, token = null) {
+    const room = await client.join("showdown_lobby", { name, token });
     return new Promise((resolve) => {
       room.onStateChange.once(() => resolve(room));
     });

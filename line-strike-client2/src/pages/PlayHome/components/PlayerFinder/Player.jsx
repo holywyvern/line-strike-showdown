@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { List } from "../../../../design/List";
@@ -15,12 +16,13 @@ import { useDatabase } from "../../../../contexts/DatabaseContext";
 import { FormatPicker } from "../../../../components/FormatPicker";
 
 export function Player({ player }) {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { standardFormatID } = useDatabase();
   const [formatID, setFormatID] = useState(standardFormatID);
   const [message, setMessage] = useState("");
   const lobby = useLobby();
-  const { sessionID, name } = player;
+  const { sessionID, name, accountID } = player;
   const onChallenge = (e) => {
     e.preventDefault();
     const { sessionID } = player;
@@ -33,6 +35,13 @@ export function Player({ player }) {
       <List.Item>
         <Row flex spaceItems centerVertically>
           {name}
+          <Button
+            type="button"
+            disabled={!accountID}
+            onClick={() => navigate(`/play/accounts/${accountID}`)}
+          >
+            Profile
+          </Button>
           <Button
             disabled={sessionID === lobby.sessionId}
             onClick={() => setOpen(true)}

@@ -21,7 +21,6 @@ function usePlayer() {
 
 function useRequests() {
   const player = usePlayer();
-  console.log(player);
   const battles = useMapSchema(player?.challenges);
   return { battles };
 }
