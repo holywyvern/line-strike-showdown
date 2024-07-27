@@ -1,7 +1,14 @@
 .area {
   display: grid;
-  grid-template-columns: repeat(3, 64px);
-  grid-template-rows: repeat(3, 64px);
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(3, 48px);
+  background: var(--player2-color);
+}
+
+.fake {
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: 8px;
   background: var(--player2-color);
 }
 
@@ -20,6 +27,16 @@
 }
 
 .wrapper {
-  padding: var(--padding-md);
+  padding: var(--padding-xs);
   background: rgba(0, 0, 0, 0.8);
+}
+
+.ref {
+  border: 1px solid white;
+  border-bottom: 0;
+}
+
+.enemy .ref {
+  border-bottom: 1px solid white;
+  border-top: 0;
 }
