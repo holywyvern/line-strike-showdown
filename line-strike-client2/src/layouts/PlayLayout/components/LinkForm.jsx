@@ -111,7 +111,13 @@ function RecoverPassword() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <Button type="submit">Recover password</Button>
+        <Button disabled type="submit">
+          Recover password
+        </Button>
+        <p>
+          Sorry, this feature is disabled at the moment. Please contact Rex to
+          reset your password.
+        </p>
       </form>
     </Box>
   );
@@ -122,7 +128,9 @@ function Unlink() {
   return (
     <Box>
       <Column>
-        <span>Linked as: <strong>{account.email}</strong>.</span>
+        <span>
+          Linked as: <strong>{account.email}</strong>.
+        </span>
         <Button onClick={signOut}>Unlink</Button>
       </Column>
     </Box>
