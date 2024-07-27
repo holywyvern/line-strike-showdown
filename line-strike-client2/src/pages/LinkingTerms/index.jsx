@@ -87,6 +87,13 @@ export function LinkingTerms() {
             purposes and falls under fair use.
           </p>
           <p>
+            This website is not affialiated or assoaciated in SEGA in any shape
+            or form.
+            <br />
+            This project is made as a derived work LINE STRIKE, and by no means
+            intents to replace the official version available in game.
+          </p>
+          <p>
             This website is free and open source, under the GPL license, you can
             download and read the code available anytime at{" "}
             <HyperLink
