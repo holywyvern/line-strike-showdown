@@ -27,8 +27,8 @@ const worker = new Worker<Params>(
     if (account.emailVerified) return;
 
     const now = new Date();
-    const hours = differenceInHours(account.verificationSentAt, now);
-    const minutes = differenceInMinutes(account.verificationSentAt, now);
+    const hours = Math.abs(differenceInHours(account.verificationSentAt, now));
+    const minutes = Math.abs(differenceInMinutes(account.verificationSentAt, now));
     if (hours >= 24 || account.emailVerificationToken === null) {
       const emailVerificationToken = crypto.randomBytes(64).toString("hex");
       job.log(`Generating new verification token... ${emailVerificationToken}`)
@@ -43,6 +43,12 @@ const worker = new Worker<Params>(
     if (process.env.NODE_ENV !== "production" || minutes >= 5) {
       job.log("Sending verification email...");
       await mailer.verification(account);
+      account = await database.account.update({
+        where: { id },
+        data: {
+          verificationSentAt: new Date(),
+        },
+      });
     }
   },
   { connection }
