@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
 
 export function Heatmap({ area, enemy, flip, swap }) {
-  const top = swap ? enemy : !enemy;
+  const top = swap ? !enemy : enemy;
   const className = cx(styles.area, { [styles.enemy]: top });
   const min = Math.min(...area);
   const max = Math.max(...area);
