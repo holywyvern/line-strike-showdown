@@ -3,14 +3,15 @@ import useIsMobile from "useismobile";
 
 import { useFilteredCollection } from "../context";
 
+import { useDatabase } from "../../../contexts/DatabaseContext";
+
 import { Card } from "../design/Card";
 import { CardList } from "../design/CardList";
 import { Column } from "../design/Column";
 import { Tabs } from "../../../design/Tabs";
 import { Separator } from "../../../design/Separator";
-import { Row } from "../../../design/Row";
-import { useDatabase } from "../../../contexts/DatabaseContext";
 import { Heatmap } from "../design/Heatmap";
+import { Checkbox } from "../../../design/Checkbox";
 
 function Preview() {
   const isMobile = useIsMobile();
@@ -29,6 +30,7 @@ const PLAYER_TAGS = ["buff", "moveAlly", "swapAlly"];
 const ENEMY_TAGS = ["debuff", "moveEnemy", "swapEnemy", "stun"];
 
 function Heatmaps() {
+  const [swap, setSwap] = useState(false);
   const { skills } = useDatabase();
   const { cards } = useFilteredCollection();
 
@@ -100,6 +102,10 @@ function Heatmaps() {
 
   return (
     <>
+      <Checkbox checked={swap} onChange={(e) => setSwap(e.target.checked)}>
+        Swap Perspective to enemy
+      </Checkbox>
+      <Separator />
       <div style={{ padding: "var(--padding-md)" }}>
         <p>
           These are the heatmaps for the selected {cards.length} card
@@ -118,19 +124,19 @@ function Heatmaps() {
       >
         <Column center>
           <h3>Average Buff</h3>
-          <Heatmap area={averageBuff()} />
+          <Heatmap area={averageBuff()} swap={swap} />
         </Column>
         <Column center>
           <h3>Average Debuff</h3>
-          <Heatmap area={averageDebuff()} enemy flip />
+          <Heatmap area={averageDebuff()} enemy flip swap={swap} />
         </Column>
         <Column center>
           <h3>Times your area is affected</h3>
-          <Heatmap area={affectedPlayerAreas()} />
+          <Heatmap area={affectedPlayerAreas()} swap={swap} />
         </Column>
         <Column center>
           <h3>Times an enemy area is affected</h3>
-          <Heatmap area={affectedEnemyAreas()} enemy />
+          <Heatmap area={affectedEnemyAreas()} enemy swap={swap} />
         </Column>
       </div>
     </>
