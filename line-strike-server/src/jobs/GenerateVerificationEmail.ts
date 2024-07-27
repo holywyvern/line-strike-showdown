@@ -40,7 +40,7 @@ const worker = new Worker<Params>(
         },
       });
     }
-    if (process.env.NODE_ENV !== "production" || minutes >= 30) {
+    if (process.env.NODE_ENV !== "production" || minutes >= 5) {
       job.log("Sending verification email...");
       await mailer.verification(account);
     }
