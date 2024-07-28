@@ -16,7 +16,10 @@ export const ColyseusService = {
     if (lastName === name && lastToken === token) {
       return lastRoom;
     }
-    const room = await client.join("showdown_lobby", { name, token });
+    lastRoom = new Promise((resolve, reject) => {
+      client.join("showdown_lobby", { name, token }).then(resolve, reject);
+    });
+    const room = await lastRoom;
     lastRoom = room;
     lastName = name;
     lastToken = token;
