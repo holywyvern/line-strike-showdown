@@ -37,7 +37,7 @@ export class UpdateMatchCount extends Command<
         data: {
           accountID,
           formatID,
-          wins: player.victory ? 0 : 1,
+          wins: player.victory ? 1 : 0,
           total: 1,
           type,
         },
