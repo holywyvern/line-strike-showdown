@@ -16,13 +16,13 @@ export const ColyseusService = {
     if (lastName === name && lastToken === token) {
       return lastRoom;
     }
+    lastName = name;
+    lastToken = token;
     lastRoom = new Promise((resolve, reject) => {
       client.join("showdown_lobby", { name, token }).then(resolve, reject);
     });
     const room = await lastRoom;
     lastRoom = room;
-    lastName = name;
-    lastToken = token;
     return new Promise((resolve) => {
       room.onStateChange.once(() => resolve(room));
     });
