@@ -18,6 +18,7 @@ import { KeepCards } from "./commands/mulligan/KeepCards";
 import { PlayCard } from "./commands/turn/PlayCard";
 import { UndoAction } from "./commands/turn/UndoAction";
 import { LockTurn } from "./commands/turn/LockTurn";
+import { RecordMatch } from "./commands/record/RecordMatch";
 
 export class LineStrikeRoom extends Room<LineStrikeState> {
   dispatcher = new SafeDispatcher(this);
@@ -31,7 +32,7 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
     if (!format) {
       throw new Error("Invalid Line strike format");
     }
-    this.setState(new LineStrikeState(options.formatID));
+    this.setState(new LineStrikeState(options.formatID, String(options.type)));
     this.clock.start();
 
     this.onMessage("deck", this.onDeckSelect);
@@ -52,6 +53,7 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
       );
     }, 1000);
     const { challenged, challenger, type } = options || {};
+    console.log(`Creating line strike room of type ${type}`);
     await this.setMetadata({
       challenged,
       challenger,
@@ -120,5 +122,9 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
       players: [...this.state.spectators.values()].map((i) => i.id),
     });
     updateLobby(this);
+  }
+
+  async onDispose() {
+    this.dispatcher.dispatch(new RecordMatch());
   }
 }

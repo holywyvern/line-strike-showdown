@@ -34,7 +34,7 @@ export function TextInput({
 }
 
 TextInput.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.any,
   defaultValue: PropTypes.any,

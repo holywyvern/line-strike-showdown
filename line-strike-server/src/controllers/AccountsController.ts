@@ -53,7 +53,7 @@ export class AccountsController extends ApplicationController {
 
     const account = await database.account.findUnique({
       where: { id: BigInt(accountID) },
-      include: { names: true },
+      include: { names: true, formatELOs: true, matchCounts: true },
     });
 
     if (!account) {
@@ -62,7 +62,23 @@ export class AccountsController extends ApplicationController {
         `Couldn't find account with id: ${accountID}`
       );
     }
-    const { id, names } = account;
-    this.json({ id, names: names.map((i) => i.value) });
+    const { id, names, formatELOs, matchCounts } = account;
+    this.json({
+      id,
+      names: names.map((i) => i.value),
+      elo: formatELOs
+        .map(({ formatID, value, matches }) => ({
+          formatID,
+          value: matches < 10 ? "(Pending)" : value / Math.max(1, matches),
+        }))
+        .sort((a, b) => a.formatID - b.formatID),
+      rates: matchCounts.map(({ formatID, type, wins, total }) => ({
+        formatID,
+        wins,
+        type,
+        total,
+        rate: (wins * 100n) / BigInt(Math.max(1, Number(total))),
+      })),
+    });
   }
 }

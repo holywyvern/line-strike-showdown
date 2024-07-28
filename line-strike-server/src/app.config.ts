@@ -21,6 +21,7 @@ import { SECRET_LOBBY_KEY } from "./utils/keys";
 
 import { createApi } from "./api";
 import { database } from "./database";
+import { RankedMatcherRoom } from "./rooms/RankedMatcherRoom";
 
 export default config({
   initializeGameServer: (gameServer) => {
@@ -29,6 +30,7 @@ export default config({
       .define("free_line_strike", LineStrikeRoom)
       .enableRealtimeListing();
     gameServer.define("showdown_lobby", LobbyRoom);
+    gameServer.define("ranked", RankedMatcherRoom).filterBy(["formatID"]);
     gameServer.define("unranked", UnrankedMatcherRoom).filterBy(["formatID"]);
   },
 

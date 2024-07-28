@@ -13,7 +13,7 @@ export function OtherSettingsButton() {
     <>
       <DesktopDrawer open={open} onClose={toggle}>
         <h3>Link Settings</h3>
-        <LinkForm />
+        <LinkForm onNavigate={() => setOpen(false)} />
       </DesktopDrawer>
       <Button onClick={toggle}>
         <FontAwesomeIcon icon={faCog} />

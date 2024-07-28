@@ -3,6 +3,7 @@ import { Command } from "@colyseus/command";
 
 import { LineStrikeRoom } from "../../LineStrikeRoom";
 import { ChatLog } from "../../schema/ChatLog";
+import { RecordMatch } from "../record/RecordMatch";
 
 export interface LeaveProps {
   client: Client;
@@ -41,5 +42,7 @@ export class Leave extends Command<LineStrikeRoom, LeaveProps> {
         name: winner.name,
       })
     );
+    winner.victory = true;
+    return [new RecordMatch()];
   }
 }

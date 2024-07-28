@@ -1,4 +1,5 @@
 import { Command } from "@colyseus/command";
+import { ArraySchema } from "@colyseus/schema"
 
 import { LineStrikeRoom } from "../../LineStrikeRoom";
 
@@ -25,6 +26,10 @@ export class StartTurn extends Command<LineStrikeRoom, StartTurnProps> {
     }
     const messages: Command[] = [];
     if (!draw) {
+      this.state.playerA.initialHandIDs = new ArraySchema(...this.state.playerA.handIDs);
+      this.state.playerA.initialDeckIDs = new ArraySchema(...this.state.playerA.deckIDs);
+      this.state.playerB.initialHandIDs = new ArraySchema(...this.state.playerB.handIDs);
+      this.state.playerB.initialDeckIDs = new ArraySchema(...this.state.playerB.deckIDs);
       this.state.musicName = "phase1";
     }
     const format = this.state.format;

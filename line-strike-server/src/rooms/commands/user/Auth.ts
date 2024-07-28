@@ -1,10 +1,9 @@
 import { Client, ServerError } from "colyseus";
-import { StatusCodes } from "http-status-codes"
+import { StatusCodes } from "http-status-codes";
 
 import { Command } from "@colyseus/command";
 
 import { LineStrikeRoom } from "../../LineStrikeRoom";
-
 
 export interface AuthProps {
   client: Client;

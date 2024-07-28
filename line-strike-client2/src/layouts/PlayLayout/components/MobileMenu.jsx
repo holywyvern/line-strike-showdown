@@ -77,7 +77,7 @@ export function MobileMenu() {
         <Separator />
         <Column>
           <h3>Link Settings</h3>
-          <LinkForm />
+          <LinkForm onNavigate={() => setOpen(false)} />
         </Column>
       </FullscreenDrawer>
     </>

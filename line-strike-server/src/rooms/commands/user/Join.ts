@@ -9,7 +9,7 @@ import { Player } from "../../schema/Player";
 export interface JoinProps {
   client: Client;
   options: any;
-} 
+}
 
 export class Join extends Command<LineStrikeRoom, JoinProps> {
   async execute({ client, options }: JoinProps) {
@@ -26,7 +26,14 @@ export class Join extends Command<LineStrikeRoom, JoinProps> {
       })
     );
     if (!this.state.playerA) {
-      this.state.playerA = new Player(this.state, client, options.name, "");
+      this.state.playerA = new Player(
+        this.state,
+        client,
+        options.name,
+        "",
+        false,
+        options.accountID
+      );
       return;
     }
     if (!this.state.playerB) {
@@ -35,7 +42,8 @@ export class Join extends Command<LineStrikeRoom, JoinProps> {
         client,
         options.name,
         "",
-        true
+        true,
+        options.accountID
       );
       await this.room.setPrivate(false);
     }

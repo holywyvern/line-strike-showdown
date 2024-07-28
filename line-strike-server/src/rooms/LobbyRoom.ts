@@ -104,6 +104,7 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     this.autoDispose = false;
     this.setState(new LobbyRoomState());
 
+    this.onMessage("ranked", this.onRanked);
     this.onMessage("unranked", this.onUnranked);
     this.onMessage("challenge", this.onChallenge);
     this.onMessage("accept", this.onChallengeAccepted);
@@ -111,6 +112,25 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     this.onMessage("name", this.onNameChange);
     this.onMessage("spectate", this.onSpectate);
   }
+
+  onRanked = async (client: Client, formatID: any) => {
+    const player = this.state.players.get(client.sessionId);
+    if (!player) return;
+    if (player.matching) return;
+    if (!Format.COLLECTION[formatID]) return;
+    if (!player.accountID) return;
+
+    player.matching = true;
+    const seat = await matchMaker.joinOrCreate("ranked", {
+      formatID,
+      name: player.name,
+      playerID: player.sessionID,
+      accountID: player.accountID,
+      __secret_lobby_key__: SECRET_LOBBY_KEY,
+    });
+    const since = Date.now();
+    client.send("queue", { seat, since, type: "Ranked" });
+  };
 
   onUnranked = async (client: Client, formatID: any) => {
     const player = this.state.players.get(client.sessionId);
@@ -123,6 +143,7 @@ export class LobbyRoom extends Room<LobbyRoomState> {
       formatID,
       name: player.name,
       playerID: player.sessionID,
+      accountID: player.accountID,
       __secret_lobby_key__: SECRET_LOBBY_KEY,
     });
     const since = Date.now();
@@ -183,6 +204,7 @@ export class LobbyRoom extends Room<LobbyRoomState> {
       const seat = await matchMaker.joinById(roomId, {
         name: player.name,
         id: player.sessionID,
+        accountID: player.accountID,
       });
       const room = await matchMaker.getRoomById(roomId);
       client.send("battle", {
@@ -213,6 +235,7 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     if (options.token) {
       try {
         const { id } = await AuthToken.verify(options.token);
+        console.log("Account ", id, "logged as ", options.name);
         return { id };
       } catch (error) {
         console.log(error);
@@ -223,10 +246,8 @@ export class LobbyRoom extends Room<LobbyRoomState> {
   }
 
   async onJoin(client: Client, options: JoinOptions, auth: any) {
-    this.state.players.set(
-      client.sessionId,
-      new LobbyPlayer(client.sessionId, options.name, auth?.id)
-    );
+    const player = new LobbyPlayer(client.sessionId, options.name, auth?.id);
+    this.state.players.set(client.sessionId, player);
   }
 
   async onLeave(client: Client, consented: boolean) {
@@ -266,10 +287,12 @@ export class LobbyRoom extends Room<LobbyRoomState> {
       matchMaker.joinById(room.roomId, {
         name: challenged.name,
         id: challenged.sessionID,
+        accountID: challenged.accountID,
       }),
       matchMaker.joinById(room.roomId, {
         name: challenger.name,
         id: challenger.sessionID,
+        accountID: challenger.accountID,
       }),
     ]);
     const client = this.clients.getById(id1);

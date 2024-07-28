@@ -2,6 +2,7 @@ import { Command } from "@colyseus/command";
 import { LineStrikeRoom } from "../../LineStrikeRoom";
 import { StartTurn } from "../turn/StartTurn";
 import { ChatLog } from "../../schema/ChatLog";
+import { RecordMatch } from "../record/RecordMatch";
 
 export class CheckVictory extends Command<LineStrikeRoom> {
   async execute() {
@@ -21,6 +22,7 @@ export class CheckVictory extends Command<LineStrikeRoom> {
           })
         );
         this.room.broadcast("win", { playerID: playerB.sessionID });
+        playerB.victory = true;
       }
     } else if (playerB.hp < format.deathHP) {
       finish = true;
@@ -32,11 +34,12 @@ export class CheckVictory extends Command<LineStrikeRoom> {
         })
       );
       this.room.broadcast("win", { playerID: playerA.sessionID });
+      playerA.victory = true;
     }
     if (finish) {
       this.state.phase = "finished";
       this.state.musicName = "begin";
-      return;
+      return [new RecordMatch()];
     }
     return [new StartTurn().setPayload({ draw: true })];
   }

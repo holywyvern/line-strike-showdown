@@ -1,0 +1,28 @@
+.table {
+  width: 100%;
+  border: var(--border-size-md) solid var(--dialog-border-color);
+  border-collapse: collapse;
+}
+
+.table td,
+.table th {
+  border: var(--border-size-xs) solid var(--dialog-border-color);
+  padding: var(--padding-md);
+}
+
+.table th {
+  font-weight: bolder;
+}
+
+.table td {
+  text-align: end;
+}
+
+.table thead {
+  padding: var(--padding-xs);
+  background: var(--dialog-header-base-color1);
+}
+
+.table tbody th {
+  background: var(--dialog-header-base-color2);
+}

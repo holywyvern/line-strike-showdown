@@ -4,9 +4,10 @@ import { LineStrikeRoom } from "../../LineStrikeRoom";
 
 import { Player } from "../../schema/Player";
 import { PlayerBoard } from "../../schema/PlayerBoard";
+import { ChatLog } from "../../schema/ChatLog";
+
 import { CalculateUnitedFront } from "../turn/CalculateUnitedFront";
 import { CalculateLaneAttack } from "../turn/CalculateLaneAttack";
-import { ChatLog } from "../../schema/ChatLog";
 
 export interface PlaceCardProps {
   player: Player;
@@ -62,6 +63,7 @@ export class PlaceCard extends Command<LineStrikeRoom, PlaceCardProps> {
           playerID: player.sessionID,
           name: player.name,
           cardID: spot.cardID,
+          handIndex,
           position,
         })
       );

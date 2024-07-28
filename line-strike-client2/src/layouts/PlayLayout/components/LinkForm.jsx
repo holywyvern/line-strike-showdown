@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { useLink } from "../../../contexts/LinkContext";
 import { useProfile } from "../../../contexts/ProfileContext";
@@ -123,7 +124,7 @@ function RecoverPassword() {
   );
 }
 
-function Unlink() {
+function Unlink({ onNavigate }) {
   const { account, signOut } = useLink();
   const navigate = useNavigate();
   return (
@@ -132,7 +133,12 @@ function Unlink() {
         <span>
           Linked as: <strong>{account.email}</strong>.
         </span>
-        <Button onClick={() => navigate(`/play/accounts/${account.id}`)}>
+        <Button
+          onClick={() => {
+            navigate(`/play/accounts/${account.id}`);
+            onNavigate?.();
+          }}
+        >
           Profile
         </Button>
         <Button onClick={signOut}>Unlink</Button>
@@ -140,6 +146,10 @@ function Unlink() {
     </Box>
   );
 }
+
+Unlink.propTypes = {
+  onNavigate: PropTypes.func,
+};
 
 function VerificationForm() {
   const [code, setCode] = useState("");
@@ -177,7 +187,7 @@ function VerificationForm() {
   );
 }
 
-export function LinkForm() {
+export function LinkForm({ onNavigate }) {
   const { isLoading, isLinked } = useLink();
 
   const [type, setType] = useState(0);
@@ -189,7 +199,7 @@ export function LinkForm() {
   if (isLinked) {
     return (
       <>
-        <Unlink />
+        <Unlink onNavigate={onNavigate} />
         <VerificationForm />
       </>
     );
@@ -220,3 +230,7 @@ export function LinkForm() {
     </Column>
   );
 }
+
+LinkForm.propTypes = {
+  onNavigate: PropTypes.func,
+};

@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useLobby } from "./LobbyContext";
 import { useProfile } from "./ProfileContext";
 import { ColyseusService } from "../services/colyseus";
+import { useLink } from "./LinkContext";
 
 export const MatchmakeContext = createContext();
 
@@ -11,6 +12,7 @@ export function useMatchmake() {
 
 export function useMatchmakeState() {
   const lobby = useLobby();
+  const { account } = useLink();
   const { formatID } = useProfile();
   const [type, setType] = useState(null);
   const [room, setRoom] = useState(null);
@@ -44,6 +46,12 @@ export function useMatchmakeState() {
     matching,
     type,
     start,
+    ranked() {
+      if (matching) return;
+      if (!account) return;
+
+      lobby.send("ranked", formatID);
+    },
     unranked() {
       if (matching) return;
 

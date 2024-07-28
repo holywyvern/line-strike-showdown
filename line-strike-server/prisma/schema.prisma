@@ -23,7 +23,9 @@ model Account {
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 
-  names Name[] @relation("account_name")
+  names       Name[]       @relation("account_name")
+  matchCounts MatchCount[] @relation("account_match")
+  formatELOs  AccountELO[] @relation("account_elo")
 }
 
 model Name {
@@ -36,4 +38,38 @@ model Name {
   account Account @relation("account_name", fields: [accountID], references: [id])
 
   @@unique([accountID, value])
+}
+
+enum MatchType {
+  UNRANKED
+  RANKED
+}
+
+model MatchCount {
+  id        BigInt    @id @default(autoincrement())
+  formatID  Int
+  wins      BigInt    @default(0)
+  total     BigInt    @default(0)
+  type      MatchType
+  accountID BigInt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  account Account @relation("account_match", fields: [accountID], references: [id])
+
+  @@unique([formatID, accountID, type])
+}
+
+model AccountELO {
+  id        BigInt   @id @default(autoincrement())
+  formatID  Int
+  value     Int      @default(1500)
+  accountID BigInt
+  matches   Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  account Account @relation("account_elo", fields: [accountID], references: [id])
+
+  @@unique([accountID, formatID])
 }

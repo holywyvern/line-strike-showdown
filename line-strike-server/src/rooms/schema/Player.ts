@@ -15,6 +15,8 @@ export class Player extends Schema {
   @type("string")
   sessionID: string;
 
+  accountID: bigint;
+
   client: Client;
 
   deckIDs: ArraySchema<number>;
@@ -65,12 +67,18 @@ export class Player extends Schema {
 
   mirrored: boolean;
 
+  initialHandIDs: ArraySchema<number>;
+  initialDeckIDs: ArraySchema<number>;
+
+  victory: boolean;
+
   constructor(
     state: LineStrikeState,
     client: Client,
     name: string,
     avatar: string,
-    mirrored = false
+    mirrored = false,
+    accountID: string = null
   ) {
     super();
     this.sessionID = client.sessionId;
@@ -92,6 +100,10 @@ export class Player extends Schema {
     this.deckSize = 0;
     this.turn = new Turn(this);
     this.board = new PlayerBoard(this);
+    this.initialHandIDs = new ArraySchema();
+    this.initialDeckIDs = new ArraySchema();
+    this.victory = false;
+    this.accountID = accountID && BigInt(accountID);
   }
 
   get hand() {

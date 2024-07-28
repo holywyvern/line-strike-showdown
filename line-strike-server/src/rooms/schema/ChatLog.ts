@@ -71,6 +71,8 @@ export class ChatLog extends Schema {
   @type("uint8")
   lane: number;
 
+  handIndex: number;
+
   constructor(data: ChatLogProps) {
     super();
     Object.assign(this, data);

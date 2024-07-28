@@ -14,6 +14,8 @@ export type LineStrikePhase =
   | "finished";
 
 export class LineStrikeState extends Schema {
+  rankType: string;
+
   @type(Player)
   playerA: Player | null;
 
@@ -47,8 +49,11 @@ export class LineStrikeState extends Schema {
 
   delayed: Delayed | null;
 
-  constructor(formatID: number) {
+  recorded: boolean;
+
+  constructor(formatID: number, rankType: string) {
     super();
+    this.rankType = rankType;
     this.formatID = formatID;
     this.format = Format.COLLECTION[formatID];
     this.spectators = new MapSchema();
@@ -61,6 +66,7 @@ export class LineStrikeState extends Schema {
     this.turnTimeLeft = 0;
     this.turnTimestamp = Date.now();
     this.chat = new ArraySchema();
+    this.recorded = false;
   }
 
   get players() {
