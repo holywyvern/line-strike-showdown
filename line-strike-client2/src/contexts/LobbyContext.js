@@ -19,9 +19,15 @@ export function useLobbyState() {
   useEffect(() => {
     if (!profile.name) return;
 
-    ColyseusService.joinLobby(profile.name, token).then((room) =>
-      setRoom(room)
-    );
+    let old;
+
+    ColyseusService.joinLobby(profile.name, token).then((room) => {
+      setRoom(room);
+      old = room;
+    });
+    return () => {
+      old?.leave();
+    };
   }, [profile.name, token]);
 
   useEffect(() => {
