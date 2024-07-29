@@ -26,7 +26,7 @@ export class MoveCards extends Command<LineStrikeRoom, MoveCardsProps> {
     const board = target.board;
     const targets = reverse ? board.reversedCards : board.cards;
     for (let i = 0; i < targets.length; ++i) {
-      let direction = data.area[i];
+      let direction = data?.area[i];
       if (direction) {
         const d = reverse ? 10 - direction : direction;
         const j = this.getMovement(i, direction);

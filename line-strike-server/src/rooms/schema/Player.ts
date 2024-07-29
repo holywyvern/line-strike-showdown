@@ -81,7 +81,7 @@ export class Player extends Schema {
     accountID: string = null
   ) {
     super();
-    this.sessionID = client.sessionId;
+    this.sessionID = client?.sessionId;
     this.state = state;
     this.client = client;
     this.mulligan = false;

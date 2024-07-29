@@ -23,9 +23,11 @@ model Account {
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 
-  names       Name[]       @relation("account_name")
-  matchCounts MatchCount[] @relation("account_match")
-  formatELOs  AccountELO[] @relation("account_elo")
+  names       Name[]        @relation("account_name")
+  matchCounts MatchCount[]  @relation("account_match")
+  formatELOs  AccountELO[]  @relation("account_elo")
+  matchesA    MatchRecord[] @relation("account_a")
+  matchesB    MatchRecord[] @relation("account_b")
 }
 
 model Name {
@@ -72,4 +74,69 @@ model AccountELO {
   account Account @relation("account_elo", fields: [accountID], references: [id])
 
   @@unique([accountID, formatID])
+}
+
+enum MatchRecordResult {
+  VICTORY_A
+  VICTORY_B
+  DRAW
+}
+
+model MatchRecord {
+  id         BigInt            @id @default(autoincrement())
+  playerAID  BigInt
+  playerBID  BigInt
+  formatID   Int               @default(1)
+  type       MatchType         @default(UNRANKED)
+  accountAID BigInt?
+  accountBID BigInt?
+  result     MatchRecordResult @default(DRAW)
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  accountA Account? @relation(name: "account_a", fields: [accountAID], references: [id])
+  accountB Account? @relation(name: "account_b", fields: [accountBID], references: [id])
+
+  playerA MatchRecordPlayer @relation(name: "player_a_record", fields: [playerAID], references: [id])
+  playerB MatchRecordPlayer @relation(name: "player_b_record", fields: [playerBID], references: [id])
+  chats   ChatRecord[]      @relation("match_record")
+}
+
+model MatchRecordPlayer {
+  id              BigInt   @id @default(autoincrement())
+  name            String
+  sessionID       String
+  startingHandIDs Int[]
+  startingDeckIDs Int[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  recordA MatchRecord[] @relation("player_a_record")
+  recordB MatchRecord[] @relation("player_b_record")
+}
+
+model ChatRecord {
+  id BigInt @id @default(autoincrement())
+
+  timestamp     BigInt
+  matchRecordID BigInt
+  type          String
+
+  playerID String?
+  name     String?
+
+  message     String?
+  turn        Int?
+  position    Int?
+  newPosition Int?
+  cardID      Int?
+  blocks      Int?
+  damage      Int?
+  busters     Int?
+  lane        Int?
+  handIndex   Int?
+  oldValue    Int?
+  newValue    Int?
+
+  matchRecord MatchRecord @relation("match_record", fields: [matchRecordID], references: [id])
 }

@@ -1,9 +1,9 @@
 import { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import { useHoveredCard } from "../context/HoveredCardContext";
 import { Name } from "./Name";
-
 
 import { useArraySchema, useBattleRoom, useBattleRoomState } from "../context";
 
@@ -224,6 +224,28 @@ const COMPONENTS = {
       </i>
     );
   },
+  elo({ playerID, name, oldValue, newValue }) {
+    let diff = newValue - oldValue;
+    if (diff >= 0) return `+${diff}`;
+    return (
+      <i>
+        <Name id={playerID} name={name} />
+        &apos; ELO rating goes from <strong>{oldValue}</strong> to{" "}
+        <strong>{newValue}</strong> (<strong>{diff}</strong>).
+      </i>
+    );
+  },
+  recording() {
+    return <i>Recording battle, please wait...</i>;
+  },
+  recorded({ message }) {
+    const url = `https://linestrike.ar/play/replays/${message}`;
+    return (
+      <i>
+        Battle recorded at <Link to={`/play/replays/${message}`}>{url}</Link>!
+      </i>
+    );
+  },
 };
 
 function Section({ children }) {
@@ -323,6 +345,7 @@ export function Chat() {
               onChange={(e) => setText(e.target.value)}
               placeholder="Type some chat message..."
               required
+              maxLength={200}
             />
             <Button type="submit" disabled={text.length < 1}>
               Send

@@ -6,7 +6,7 @@ import { VitePWA } from "vite-plugin-pwa";
 const manifestForPlugIn = {
   registerType: "autoUpdate",
   devOptions: {
-    enabled: true,
+    enabled: false,
   },
   includeAssests: ["icon.webp"],
   manifest: {

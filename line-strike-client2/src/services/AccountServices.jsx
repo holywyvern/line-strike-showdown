@@ -15,4 +15,11 @@ export const AccountService = {
     }
     return null;
   },
+  async matches(id, page = 0) {
+    const response = await api.get(`/accounts/${id}/matches`, { page });
+    if (response.ok) {
+      return response.data;
+    }
+    return [];
+  },
 };

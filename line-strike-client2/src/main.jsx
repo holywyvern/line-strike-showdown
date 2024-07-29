@@ -8,24 +8,17 @@ import "react-modern-drawer/dist/index.css";
 
 import { Root } from "./layouts/Root";
 
+import { rootLoader } from "./loaders/rootLoader";
+import { accountLoader } from "./loaders/accountLoader";
+import { matchLoader } from "./loaders/matchLoader";
+
+import { WebAudio } from "./utils/WebAudio";
+
 import { HomePage } from "./pages/HomePage";
 import { ErrorPage } from "./pages/ErrorPage";
-import { CollectionPage } from "./pages/CollectionPage";
-
-import { rootLoader } from "./loaders/rootLoader";
-
-import { PlayLayout } from "./layouts/PlayLayout";
-import { PlayHome } from "./pages/PlayHome";
-import { CollectionPlayPage } from "./pages/CollectionPlayPage";
-import { DeckBuilderHome } from "./pages/DeckBuilderHome";
-import { DeckBuilderLayout } from "./layouts/DeckBuilderLayout";
-import { DeckBuilderPage } from "./pages/DeckBuilderPage";
-import { BattlePage } from "./pages/BattlePage";
-import { WebAudio } from "./utils/WebAudio";
-import { BattleRequestsPage } from "./pages/BattleRequestsPage";
 import { LinkingTerms } from "./pages/LinkingTerms";
-import { accountLoader } from "./loaders/accountLoader";
-import { AccountPage } from "./pages/AccountPage";
+
+import { DeckBuilderLayout } from "./layouts/DeckBuilderLayout";
 
 const router = createBrowserRouter([
   {
@@ -44,32 +37,86 @@ const router = createBrowserRouter([
       },
       {
         path: "/cards",
-        element: <CollectionPage />,
+        async lazy() {
+          const { CollectionPage: Component } = await import(
+            "./pages/CollectionPage"
+          );
+          return { Component };
+        },
       },
       {
         path: "/play",
-        element: <PlayLayout />,
+        async lazy() {
+          const { PlayLayout: Component } = await import(
+            "./layouts/PlayLayout"
+          );
+          return { Component };
+        },
         children: [
           {
             index: true,
-            element: <PlayHome />,
+            async lazy() {
+              const { PlayHome: Component } = await import("./pages/PlayHome");
+              return { Component };
+            },
           },
           {
             path: "requests",
-            element: <BattleRequestsPage />,
+            async lazy() {
+              const { BattleRequestsPage: Component } = await import(
+                "./pages/BattleRequestsPage"
+              );
+              return { Component };
+            },
           },
           {
             path: "cards",
-            element: <CollectionPlayPage />,
+            async lazy() {
+              const { CollectionPlayPage: Component } = await import(
+                "./pages/CollectionPlayPage"
+              );
+              return { Component };
+            },
           },
           {
             path: "battles/:battleID",
-            element: <BattlePage />,
+            async lazy() {
+              const { BattlePage: Component } = await import(
+                "./pages/BattlePage"
+              );
+              return { Component };
+            },
           },
           {
             path: "accounts/:accountID",
-            loader: accountLoader,
-            element: <AccountPage />,
+            async lazy() {
+              const { AccountLayout: Component } = await import(
+                "./layouts/AccountLayout"
+              );
+              return { Component };
+            },
+            children: [
+              {
+                index: true,
+                loader: accountLoader,
+                async lazy() {
+                  const { AccountPage: Component } = await import(
+                    "./pages/AccountPage"
+                  );
+                  return { Component };
+                },
+              },
+              {
+                path: "matches",
+                loader: matchLoader,
+                async lazy() {
+                  const { AccountMatchesPage: Component } = await import(
+                    "./pages/AccountMatchesPage"
+                  );
+                  return { Component };
+                },
+              },
+            ],
           },
           {
             path: "decks",
@@ -77,18 +124,33 @@ const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <DeckBuilderHome />,
+                async lazy() {
+                  const { DeckBuilderHome: Component } = await import(
+                    "./pages/DeckBuilderHome"
+                  );
+                  return { Component };
+                },
               },
               {
                 path: ":format",
                 children: [
                   {
                     index: true,
-                    element: <DeckBuilderHome />,
+                    async lazy() {
+                      const { DeckBuilderHome: Component } = await import(
+                        "./pages/DeckBuilderHome"
+                      );
+                      return { Component };
+                    },
                   },
                   {
                     path: ":deckIndex",
-                    element: <DeckBuilderPage />,
+                    async lazy() {
+                      const { DeckBuilderPage: Component } = await import(
+                        "./pages/DeckBuilderPage"
+                      );
+                      return { Component };
+                    },
                   },
                 ],
               },
@@ -102,7 +164,13 @@ const router = createBrowserRouter([
 
 WebAudio.initialize();
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const root = document.getElementById("root");
+
+while (root.lastChild) {
+  root.removeChild(root.lastChild);
+}
+
+ReactDOM.createRoot(root).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>

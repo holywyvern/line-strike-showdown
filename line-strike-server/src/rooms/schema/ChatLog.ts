@@ -25,7 +25,10 @@ export type ChatLogType =
   | "buff"
   | "stun"
   | "move"
-  | "swap";
+  | "swap"
+  | "elo"
+  | "recording"
+  | "recorded";
 
 export type ChatLogProps = Partial<ChatLog> & {
   type: ChatLogType;
@@ -72,6 +75,12 @@ export class ChatLog extends Schema {
   lane: number;
 
   handIndex: number;
+
+  @type("int64")
+  oldValue: number;
+
+  @type("int64")
+  newValue: number;
 
   constructor(data: ChatLogProps) {
     super();

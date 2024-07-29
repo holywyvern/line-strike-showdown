@@ -5,7 +5,6 @@ import { CenterView } from "../../design/CenterView";
 import { Button } from "../../design/Button";
 import { HyperLink } from "../../design/HyperLink";
 import { Logo } from "../../design/Logo";
-import { LineStrikeBackground } from "../../design/LineStrikeBackground";
 
 export function ErrorPage() {
   const error = useRouteError();
@@ -14,7 +13,6 @@ export function ErrorPage() {
 
   return (
     <>
-    <LineStrikeBackground />
     <CenterView>
       <Dialog>
         <Dialog.Header>

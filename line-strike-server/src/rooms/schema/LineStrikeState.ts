@@ -1,6 +1,8 @@
-import { Schema, MapSchema, ArraySchema, type } from "@colyseus/schema";
-import { Player } from "./Player";
 import { Client, Delayed } from "colyseus";
+import { Schema, MapSchema, ArraySchema, type } from "@colyseus/schema";
+import { ChatRecord, MatchRecord, MatchRecordPlayer } from "@prisma/client";
+
+import { Player } from "./Player";
 import { Format } from "./Format";
 import { Spectator } from "./Spectator";
 import { ChatLog } from "./ChatLog";
@@ -45,14 +47,26 @@ export class LineStrikeState extends Schema {
   @type("string")
   musicName: string;
 
+  @type("boolean")
+  replay: boolean;
+
   turnTimestamp: number;
 
   delayed: Delayed | null;
 
   recorded: boolean;
+  paused: boolean;
+
+  match?: MatchRecord & {
+    playerA: MatchRecordPlayer;
+    playerB: MatchRecordPlayer;
+    chats: ChatRecord[];
+  };
 
   constructor(formatID: number, rankType: string) {
     super();
+    this.replay = false;
+    this.paused = false;
     this.rankType = rankType;
     this.formatID = formatID;
     this.format = Format.COLLECTION[formatID];

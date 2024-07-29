@@ -6,6 +6,7 @@ import { Player } from "../../schema/Player";
 
 import { database } from "../../../database";
 import { AccountELO } from "@prisma/client";
+import { ChatLog } from "../../schema/ChatLog";
 
 export class UpdateELO extends Command<LineStrikeRoom> {
   async execute() {
@@ -16,7 +17,7 @@ export class UpdateELO extends Command<LineStrikeRoom> {
       this.findELO(playerA),
       this.findELO(playerB),
     ]);
-    await database.$transaction([
+    const [a2, b2] = await database.$transaction([
       database.accountELO.update({
         where: { id: a.id },
         data: {
@@ -32,12 +33,34 @@ export class UpdateELO extends Command<LineStrikeRoom> {
         },
       }),
     ]);
+    if (a2.matches >= 10) {
+      this.state.chat.push(
+        new ChatLog({
+          type: "elo",
+          playerID: playerA.sessionID,
+          name: playerA.name,
+          oldValue: Math.max(100, Math.floor(a.value / a.matches)),
+          newValue: Math.max(100, Math.floor(a2.value / b.matches)),
+        })
+      );
+    }
+    if (b2.matches >= 10) {
+      this.state.chat.push(
+        new ChatLog({
+          type: "elo",
+          playerID: playerB.sessionID,
+          name: playerB.name,
+          oldValue: Math.floor(b.value / b.matches),
+          newValue: Math.floor(b2.value / b2.matches),
+        })
+      );
+    }
   }
 
   calculate(a: AccountELO, b: AccountELO, victory: boolean) {
     const addition = victory ? 400 : -400;
-    const value = b.matches < 10 ? 1500 : b.value;
-    return a.value + addition + value;
+    const value = b.matches < 10 ? 1500 : Math.max(100, b.value / b.matches);
+    return a.value + addition + Math.round(value);
   }
 
   async findELO(player: Player) {

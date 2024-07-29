@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 
 import { useProfileState } from "./useProfileState";
 
@@ -22,6 +22,7 @@ import {
   BattleContext,
   useBattleRoomState,
 } from "../../contexts/BattleContext";
+import { Loader } from "../../components/Loader";
 
 function Profile({ children }) {
   const profile = useProfileState();
@@ -82,6 +83,7 @@ Battle.propTypes = {
 };
 
 export function PlayLayout() {
+  const { state } = useNavigation();
   return (
     <Profile>
       <ProfileEnforcer>
@@ -91,7 +93,7 @@ export function PlayLayout() {
               <Battle>
                 <PlayPage>
                   <ModalContext>
-                    <Outlet />
+                    {state === "loading" ? <Loader /> : <Outlet />}
                   </ModalContext>
                 </PlayPage>
               </Battle>

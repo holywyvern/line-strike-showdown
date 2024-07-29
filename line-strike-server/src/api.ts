@@ -14,6 +14,7 @@ import { AccountsController } from "./controllers/AccountsController";
 import { SessionsController } from "./controllers/SessionsController";
 import { VerificationController } from "./controllers/VerificationsController";
 import { AccountNamesController } from "./controllers/AccountNamesController";
+import { MatchRecordsController } from "./controllers/MatchRecordsController";
 
 export function createApi() {
   const api = Router();
@@ -28,6 +29,10 @@ export function createApi() {
   api.post("/accounts/refresh", action(SessionsController, "refresh"));
   api.post("/accounts", action(AccountsController, "create"));
   api.get("/accounts/:accountID", action(AccountsController, "show"));
+  api.get(
+    "/accounts/:accountID/matches",
+    action(MatchRecordsController, "index")
+  );
 
   api.post("/email/verifications", action(VerificationController, "create"));
   api.get(
