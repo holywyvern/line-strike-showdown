@@ -33,8 +33,8 @@ function Match({ data }) {
           <span>{new Date(data.createdAt).toLocaleString()}</span>
         </Column>
         <Column>
-          <Button>Watch from their perspective</Button>
-          <Button>Watch from your perspective</Button>
+          <Button disabled>Watch from their perspective</Button>
+          <Button disabled>Watch from your perspective</Button>
         </Column>
       </Row>
     </Box>
