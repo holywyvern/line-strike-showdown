@@ -55,6 +55,8 @@ export class LineStrikeState extends Schema {
   delayed: Delayed | null;
 
   recorded: boolean;
+
+  @type("boolean")
   paused: boolean;
 
   match?: MatchRecord & {

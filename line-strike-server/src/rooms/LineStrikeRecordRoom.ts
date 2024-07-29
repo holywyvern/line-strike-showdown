@@ -17,10 +17,12 @@ export class LineStrikeRecordRoom extends LineStrikeRoom {
     if (typeof options.matchID !== "string") {
       throw new ServerError(StatusCodes.NOT_FOUND, "Match not found");
     }
+    console.log("Finding match...");
     this.state.match = await database.matchRecord.findUniqueOrThrow({
       where: { id: BigInt(options.matchID) },
       include: { playerA: true, playerB: true, chats: true },
     });
+    console.log("Match found!");
     const [a, b] = options.invert
       ? [this.state.match.playerB, this.state.match.playerA]
       : [this.state.match.playerA, this.state.match.playerB];
@@ -55,6 +57,11 @@ export class LineStrikeRecordRoom extends LineStrikeRoom {
     player.sessionID = data.sessionID;
     player.handIDs.push(...data.startingHandIDs);
     player.deckIDs.push(...data.startingDeckIDs);
+    player.sleeve = data.sleeve;
+    player.playmat = data.playmat;
+    player.playmatOpacity = data.playmatOpacity;
+    player.handSize = player.handIDs.length;
+    player.deckSize = player.deckIDs.length;
     return player;
   }
 

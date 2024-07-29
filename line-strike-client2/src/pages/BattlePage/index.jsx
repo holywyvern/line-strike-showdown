@@ -7,6 +7,7 @@ import { useBattleRoomData } from "../../contexts/BattleContext";
 import { useTabs } from "../../contexts/TabContext";
 
 import { LineStrikeRoom } from "./LineStrikeRoom";
+import { Loader } from "../../components/Loader";
 
 export function BattlePage() {
   const { battleID } = useParams();
@@ -38,13 +39,13 @@ export function BattlePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, room, href]);
   if (room.state === "loading") {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   if (room.state === "error") {
     return <div>Error...</div>;
   }
   const { handle, spectator } = room;
-  if (!handle) return <div>Loading...</div>;
+  if (!handle) return <Loader />;
 
   return (
     <LineStrikeRoom

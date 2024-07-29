@@ -27,7 +27,7 @@ export class SwapCard extends Command<LineStrikeRoom, SwapCardsProps> {
       const direction = data.area[i];
       if (direction) {
         const j = this.getMovement(i, direction);
-        this.swapCard(targets[i], targets[j]);
+        this.swapCard(target, targets[i], targets[j]);
         const d = reverse ? 10 - direction : direction;
         this.room.broadcast("animation", {
           playerID: target.sessionID,
@@ -57,7 +57,7 @@ export class SwapCard extends Command<LineStrikeRoom, SwapCardsProps> {
     ];
   }
 
-  swapCard(from: PlayedCard, to: PlayedCard) {
+  swapCard(player: Player, from: PlayedCard, to: PlayedCard) {
     const copy = from.clone();
     from.buffs = to.buffs;
     from.baseBuster = to.baseBuster;
@@ -78,6 +78,13 @@ export class SwapCard extends Command<LineStrikeRoom, SwapCardsProps> {
     to.stunned = copy.stunned;
     to.justPlaced = copy.justPlaced;
     to.unitedFront = copy.unitedFront;
+    for (const action of player.lastTurn) {
+      if (action.spot === to) {
+        action.position = from.cardIndex;
+      } else if (action.spot === from) {
+        action.position = to.cardIndex;
+      }
+    }
   }
 
   getMovement(index: number, direction: CardAreaDirection) {

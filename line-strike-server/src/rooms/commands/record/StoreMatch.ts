@@ -54,6 +54,9 @@ export class StoreMatch extends Command<LineStrikeRoom> {
       create: {
         name: player.name,
         sessionID: player.sessionID,
+        playmat: player.playmat,
+        playmatOpacity: player.playmatOpacity,
+        sleeve: player.sleeve,
         startingHandIDs: [...player.initialHandIDs],
         startingDeckIDs: [...player.initialDeckIDs],
       },

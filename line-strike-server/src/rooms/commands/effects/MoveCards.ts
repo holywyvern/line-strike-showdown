@@ -31,7 +31,7 @@ export class MoveCards extends Command<LineStrikeRoom, MoveCardsProps> {
         const d = reverse ? 10 - direction : direction;
         const j = this.getMovement(i, direction);
         if (targets[j].cardID === 0) {
-          this.moveCard(targets, targets[i], targets[j]);
+          this.moveCard(targets, player, targets[i], targets[j]);
         }
         this.room.broadcast("animation", {
           playerID: target.sessionID,
@@ -55,7 +55,7 @@ export class MoveCards extends Command<LineStrikeRoom, MoveCardsProps> {
     ];
   }
 
-  moveCard(targets: PlayedCard[], from: PlayedCard, to: PlayedCard) {
+  moveCard(targets: PlayedCard[], player: Player, from: PlayedCard, to: PlayedCard) {
     const copy = from.clone();
     from.buffs = 0;
     from.baseBuster = false;
@@ -76,6 +76,11 @@ export class MoveCards extends Command<LineStrikeRoom, MoveCardsProps> {
     to.stunned = copy.stunned;
     to.justPlaced = copy.justPlaced;
     to.unitedFront = copy.unitedFront;
+    for (const action of player.lastTurn) {
+      if (action.spot === from) {
+        action.position = to.cardIndex;
+      }
+    }
   }
 
   getMovement(index: number, direction: CardAreaDirection) {

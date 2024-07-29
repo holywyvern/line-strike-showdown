@@ -106,6 +106,9 @@ model MatchRecordPlayer {
   id              BigInt   @id @default(autoincrement())
   name            String
   sessionID       String
+  playmat         String   @default("blue_basic.webp")
+  sleeve          String   @default("blue_basic.webp")
+  playmatOpacity  Int      @default(0)
   startingHandIDs Int[]
   startingDeckIDs Int[]
   createdAt       DateTime @default(now())

@@ -7,6 +7,7 @@ import { HoveredContext } from "./context/HoveredCardContext";
 import { useState } from "react";
 import { ChatDrawer } from "./components/ChatDrawer";
 import { TabAudioContext } from "./context/TabAudioContext";
+import { ReplayChecker } from "./components/ReplayChecker";
 
 export function LineStrikeRoom({ room, spectator, tabIndex, tabActive }) {
   const hovered = useState(null);
@@ -16,6 +17,7 @@ export function LineStrikeRoom({ room, spectator, tabIndex, tabActive }) {
         <LineStrikeRoomContext.Provider value={room}>
           <PhaseChecker spectator={spectator} index={tabIndex} />
           <ChatDrawer />
+          <ReplayChecker />
         </LineStrikeRoomContext.Provider>
       </HoveredContext.Provider>
     </TabAudioContext.Provider>

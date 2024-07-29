@@ -18,3 +18,7 @@
 .flex {
   flex: 1;
 }
+
+.input:disabled {
+  opacity: 0.5;
+}

@@ -85,7 +85,7 @@ export function PhaseChecker({ spectator, index }) {
             <CircularProgress rate={1 - rate} />
             <BattleButton
               onClick={onTurnLock}
-              disabled={Boolean(locked || phase !== "planning")}
+              disabled={Boolean(spectator || locked || phase !== "planning")}
             />
             {!spectator && <UndoActionButton />}
           </LineStrikeGuide>

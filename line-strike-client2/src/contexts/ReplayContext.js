@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useLobby } from "./LobbyContext";
 
@@ -27,6 +27,7 @@ const ERROR_ROOM = {
 
 export function useReplayRoomState() {
   const { formats } = useDatabase();
+  const { pathname } = useLocation();
   const lobby = useLobby();
   const [rooms, setRooms] = useState({});
   const [nextRoom, setNextRoom] = useState(null);
@@ -47,21 +48,21 @@ export function useReplayRoomState() {
       }, []);
     }
 
-    lobby.onMessage("battle-error", (roomId) => {
+    lobby.onMessage("replay-error", (roomId) => {
       setRooms((rooms) => ({ ...rooms, [roomId]: ERROR_ROOM }));
     });
 
     lobby.onMessage(
       "replay",
-      async ({ challenged, challenger, seat, formatID }) => {
+      async ({ challenged, challenger, seat, formatID, id }) => {
         const title = `${challenger.name} vs ${challenged.name} (Replay) [${formats[formatID].name}]`;
         const handle = await ColyseusService.joinBattle(seat);
         const data = { handle, spectator: true, title, status: "ready" };
         handle.onStateChange(() => {
           setRoomState(handle.roomId, handle.state.phase);
         });
-        setRooms((rooms) => ({ ...rooms, [handle.roomId]: data }));
-        setNextRoom(handle.roomId);
+        setRooms((rooms) => ({ ...rooms, [id]: data }));
+        setNextRoom(id);
       }
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -69,10 +70,13 @@ export function useReplayRoomState() {
   useEffect(() => {
     if (!nextRoom) return;
 
-    navigate(`/play/replays/${nextRoom}`);
     setNextRoom(null);
+    const path = `/play/replays/${nextRoom}`;
+    if (pathname === path) return;
+
+    navigate(path);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nextRoom]);
+  }, [nextRoom, pathname]);
   return {
     rooms,
     addRoom(id, data) {
@@ -94,17 +98,15 @@ export function useReplayRoomState() {
   };
 }
 
-export function useReplayRoomData(id) {
+export function useReplayRoomData(id, invert) {
   const lobby = useLobby();
-  const { rooms, addRoom } = useReplayRooms();
+  const { rooms } = useReplayRooms();
   const room = rooms[id];
   useEffect(() => {
     if (!lobby) return;
-    if (room) return;
 
-    addRoom(id, EMPTY_ROOM);
-    lobby.send("replay", id);
+    lobby.send("replay", { id, invert });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [room, id, lobby]);
+  }, [id, lobby, invert]);
   return room || EMPTY_ROOM;
 }

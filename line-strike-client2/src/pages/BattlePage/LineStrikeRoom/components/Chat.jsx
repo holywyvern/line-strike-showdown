@@ -346,8 +346,12 @@ export function Chat() {
               placeholder="Type some chat message..."
               required
               maxLength={200}
+              disabled={state.replay}
             />
-            <Button type="submit" disabled={text.length < 1}>
+            <Button
+              type="submit"
+              disabled={state.replay || text.length < 1}
+            >
               Send
             </Button>
           </Row>

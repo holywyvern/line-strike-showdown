@@ -38,10 +38,10 @@ function Match({ data }) {
           <span>{new Date(data.createdAt).toLocaleString()}</span>
         </Column>
         <Column>
-          <Button disabled onClick={() => onWatch(!data.invert)}>
+          <Button onClick={() => onWatch(!data.invert)}>
             Watch from their perspective
           </Button>
-          <Button disabled onClick={() => onWatch(data.invert)}>
+          <Button onClick={() => onWatch(data.invert)}>
             Watch from your perspective
           </Button>
         </Column>

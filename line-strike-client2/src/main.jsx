@@ -88,6 +88,15 @@ const router = createBrowserRouter([
             },
           },
           {
+            path: "replays/:battleID",
+            async lazy() {
+              const { ReplayPage: Component } = await import(
+                "./pages/ReplayPage"
+              );
+              return { Component };
+            },
+          },
+          {
             path: "accounts/:accountID",
             async lazy() {
               const { AccountLayout: Component } = await import(

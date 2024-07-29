@@ -11,6 +11,7 @@ import {
 import { SECRET_LINE_STRIKE_KEY, SECRET_LOBBY_KEY } from "../utils/keys";
 import { Format } from "./schema/Format";
 import { AuthToken } from "../services/AuthToken";
+import { database } from "../database";
 
 const OnlySeenByOwner = (player: LobbyPlayer, client: Client) =>
   client.sessionId === player.sessionID;
@@ -111,6 +112,7 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     this.onMessage("reject", this.onChallengeRejected);
     this.onMessage("name", this.onNameChange);
     this.onMessage("spectate", this.onSpectate);
+    this.onMessage("replay", this.onReplay);
   }
 
   onRanked = async (client: Client, formatID: any) => {
@@ -215,6 +217,56 @@ export class LobbyRoom extends Room<LobbyRoomState> {
     } catch (error) {
       console.error(error);
       client.send("battle-error", roomId);
+    }
+  };
+
+  onReplay = async (client: Client, options: any) => {
+    const player = this.state.players.get(client.sessionId);
+    if (!player) return;
+    try {
+      const { id, invert } = options || {};
+
+      const match = await database.matchRecord.findUniqueOrThrow({
+        where: { id: BigInt(id) },
+        select: {
+          formatID: true,
+          playerA: { select: { name: true, sessionID: true } },
+          playerB: { select: { name: true, sessionID: true } },
+        },
+      });
+      const { formatID, playerA, playerB } = match;
+      const challenger = invert ? playerB : playerA;
+      const challenged = invert ? playerA : playerB;
+      const room = await matchMaker.createRoom("replay", {
+        __secret_line_strike_key__: SECRET_LINE_STRIKE_KEY,
+        formatID,
+        challenger: {
+          name: challenger.name,
+          id: `replay-${challenged.sessionID}`,
+        },
+        challenged: {
+          name: challenged.name,
+          id: `replay-${challenged.sessionID}`,
+        },
+        type: "replay",
+        invert,
+        matchID: String(id),
+      });
+      const seat = await matchMaker.reserveSeatFor(room, {
+        name: player.name,
+        id: player.sessionID,
+        accountID: player.accountID,
+      });
+      client.send("replay", {
+        seat,
+        formatID,
+        challenged,
+        challenger,
+        id: options.id,
+      });
+    } catch (error) {
+      console.error(error);
+      client.send("replay-error", options?.id);
     }
   };
 
