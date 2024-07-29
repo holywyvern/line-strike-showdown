@@ -1,19 +1,24 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroller";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 
 import { Dialog } from "../../design/Dialog";
 import { Box } from "../../design/Box";
 import { Row } from "../../design/Row";
 import { Button } from "../../design/Button";
+import { Column } from "../../design/Column";
 
 import { AccountService } from "../../services/AccountServices";
-import { Column } from "../../design/Column";
+
 import { useDatabase } from "../../contexts/DatabaseContext";
 
 function Match({ data }) {
+  const navigate = useNavigate();
   const { formats } = useDatabase();
+  const onWatch = (invert) => {
+    navigate(`/play/replays/${data.id}?invert=${invert ? 1 : 0}`);
+  };
   return (
     <Box>
       <Row spaceItems centerVertically>
@@ -33,8 +38,12 @@ function Match({ data }) {
           <span>{new Date(data.createdAt).toLocaleString()}</span>
         </Column>
         <Column>
-          <Button disabled>Watch from their perspective</Button>
-          <Button disabled>Watch from your perspective</Button>
+          <Button disabled onClick={() => onWatch(!data.invert)}>
+            Watch from their perspective
+          </Button>
+          <Button disabled onClick={() => onWatch(data.invert)}>
+            Watch from your perspective
+          </Button>
         </Column>
       </Row>
     </Box>

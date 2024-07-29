@@ -23,6 +23,7 @@ import {
   useBattleRoomState,
 } from "../../contexts/BattleContext";
 import { Loader } from "../../components/Loader";
+import { ReplayContext, useReplayRoomState } from "../../contexts/ReplayContext";
 
 function Profile({ children }) {
   const profile = useProfileState();
@@ -82,6 +83,17 @@ Battle.propTypes = {
   children: PropTypes.node,
 };
 
+function Replays({ children }) {
+  const battle = useReplayRoomState();
+  return (
+    <ReplayContext.Provider value={battle}>{children}</ReplayContext.Provider>
+  );
+}
+
+Replays.propTypes = {
+  children: PropTypes.node,
+};
+
 export function PlayLayout() {
   const { state } = useNavigation();
   return (
@@ -91,11 +103,13 @@ export function PlayLayout() {
           <Lobby>
             <Matchmaker>
               <Battle>
-                <PlayPage>
-                  <ModalContext>
-                    {state === "loading" ? <Loader /> : <Outlet />}
-                  </ModalContext>
-                </PlayPage>
+                <Replays>
+                  <PlayPage>
+                    <ModalContext>
+                      {state === "loading" ? <Loader /> : <Outlet />}
+                    </ModalContext>
+                  </PlayPage>
+                </Replays>
               </Battle>
             </Matchmaker>
           </Lobby>
