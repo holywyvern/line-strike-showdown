@@ -70,11 +70,12 @@ export function LinkingTerms() {
           </h3>
 
           <p>
-            This website is designed for education purposes, as a way to play
-            and plan strategies for the card game LINE STRIKE, available to play
-            for free on{" "}
+            The aim of this website is to provide educational insight and
+            develop strategies around the official LINE STRIKE game, as a way to
+            play and plan strategies for said card game, available to play for
+            free on{" "}
             <HyperLink external to="https://pso2.com/">
-              Official Phantasy Star Online 2 New Genesis Version 1 Website
+              Official Phantasy Star Online 2 New Genesis Version 2 Website
             </HyperLink>
             .
           </p>
@@ -87,10 +88,6 @@ export function LinkingTerms() {
             <br />
             We do not claim ownership of any character related to Phantasy Star
             Online 2 New genesis, or other Phantasy Star related material.
-            <br />
-            <br />
-            Our usage of the assets on this website is only for educational
-            purposes and falls under fair use.
           </p>
           <p>
             This website is free and open source, under the GPL license, you can
