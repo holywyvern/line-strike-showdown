@@ -14,10 +14,12 @@ export class IncrementTurnCounter extends Command<LineStrikeRoom> {
     this.state.turn++;
     this.state.phase = "planning";
     this.state.chat.push(new ChatLog({ type: "turn", turn: this.state.turn }));
-    this.state.delayed = this.clock.setTimeout(
-      this.endPlanning,
-      this.state.format.turnSeconds * 1_000
-    );
+    if (!this.state.replay) {
+      this.state.delayed = this.clock.setTimeout(
+        this.endPlanning,
+        this.state.format.turnSeconds * 1_000
+      );
+    }
     this.state.turnTimestamp = Date.now();
     this.state.turnTimeLeft = (1 + this.state.format.turnSeconds) * 1_000;
     if (this.state.turn !== 1) {

@@ -8,10 +8,12 @@ import { JoinReplay } from "./commands/user/JoinReplay";
 import { database } from "../database";
 import { Play } from "./commands/replay/Play";
 import { Pause } from "./commands/replay/Pause";
-import { MatchRecordPlayer } from "@prisma/client";
+import { ChatRecord, MatchRecordPlayer } from "@prisma/client";
 import { Player } from "./schema/Player";
 
 export class LineStrikeRecordRoom extends LineStrikeRoom {
+  queue: ChatRecord[];
+
   async onCreate(options: any) {
     await super.onCreate(options);
     if (typeof options.matchID !== "string") {
@@ -52,9 +54,9 @@ export class LineStrikeRecordRoom extends LineStrikeRoom {
       data.name,
       "",
       mirrored,
-      id ? String(id) : null
+      id ? String(id) : null,
+      data.sessionID
     );
-    player.sessionID = data.sessionID;
     player.handIDs.push(...data.startingHandIDs);
     player.deckIDs.push(...data.startingDeckIDs);
     player.sleeve = data.sleeve;

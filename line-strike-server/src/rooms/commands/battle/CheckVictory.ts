@@ -6,6 +6,8 @@ import { RecordMatch } from "../record/RecordMatch";
 
 export class CheckVictory extends Command<LineStrikeRoom> {
   async execute() {
+    if (this.state.replay) return;
+
     const { format, playerA, playerB } = this.state;
     let finish = false;
     if (playerA.hp < format.deathHP) {

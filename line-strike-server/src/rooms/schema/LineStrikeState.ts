@@ -56,6 +56,8 @@ export class LineStrikeState extends Schema {
 
   recorded: boolean;
 
+  queue: ChatRecord[];
+
   @type("boolean")
   paused: boolean;
 
@@ -83,6 +85,7 @@ export class LineStrikeState extends Schema {
     this.turnTimestamp = Date.now();
     this.chat = new ArraySchema();
     this.recorded = false;
+    this.queue = [];
   }
 
   get players() {

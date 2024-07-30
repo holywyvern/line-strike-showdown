@@ -78,10 +78,11 @@ export class Player extends Schema {
     name: string,
     avatar: string,
     mirrored = false,
-    accountID: string = null
+    accountID: string = null,
+    sessionID: string = null
   ) {
     super();
-    this.sessionID = client?.sessionId;
+    this.sessionID = sessionID || client?.sessionId;
     this.state = state;
     this.client = client;
     this.mulligan = false;

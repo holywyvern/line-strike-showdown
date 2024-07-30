@@ -45,6 +45,7 @@ export class LineStrikeRoom extends Room<LineStrikeState> {
     this.onMessage("ready", this.onTurnDone);
     this.onMessage("chat", this.onChat);
     this.clock.setInterval(() => {
+      if (this.state.replay) return;
       if (this.state.turnTimeLeft <= 0) return;
 
       this.state.turnTimeLeft = Math.max(

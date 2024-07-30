@@ -39,21 +39,26 @@ export class PlaceCard extends Command<LineStrikeRoom, PlaceCardProps> {
     spot.justPlaced = true;
     spot.placeIndex = placeIndex;
     if (board === player.turn) {
-      player.client.send("animation", {
+      player.client?.send("animation", {
         playerID: player.sessionID,
         name: "summon",
         position: spot.realPosition,
       });
     } else {
-      const otherClients = this.room.clients.filter(
-        (i) => i.sessionId !== player.sessionID
-      );
-      for (const c of otherClients) {
-        c.send("animation", {
-          playerID: player.sessionID,
-          name: "summon",
-          position: spot.realPosition,
-        });
+      const animation = {
+        playerID: player.sessionID,
+        name: "summon",
+        position: spot.realPosition,
+      };
+      if (this.state.replay) {
+        this.room.broadcast("animation", animation);
+      } else {
+        const otherClients = this.room.clients.filter(
+          (i) => i.sessionId !== player.sessionID
+        );
+        for (const c of otherClients) {
+          c.send("animation", animation);
+        }
       }
     }
     if (log) {
