@@ -79,19 +79,18 @@ export function LinkingTerms() {
             .
           </p>
           <p>
-            All characters, pictures and game design are property of SEGA.
-            Otherwise specified.
+            All characters, pictures and game design are property of SEGA inc.
+            and SEGA of America inc.
+            <br />
+            LINE STRIKE SHOWDOWN! is a fan project and is not affiliated nor
+            edorsed by any of the aforementioned entities.
+            <br />
+            We do not claim ownership of any character related to Phantasy Star
+            Online 2 New genesis, or other Phantasy Star related material.
             <br />
             <br />
             Our usage of the assets on this website is only for educational
             purposes and falls under fair use.
-          </p>
-          <p>
-            This website is not affialiated or assoaciated in SEGA in any shape
-            or form.
-            <br />
-            This project is made as a derived work LINE STRIKE, and by no means
-            intents to replace the official version available in game.
           </p>
           <p>
             This website is free and open source, under the GPL license, you can
